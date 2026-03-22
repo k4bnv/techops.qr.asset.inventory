@@ -110,12 +110,12 @@ export const WeeklyScheduleForm = ({
 
         // Validate open time
         if (!dayState.openTime) {
-          errors[`${dayNumber}`] = "Open time is required";
+          errors[`${dayNumber}`] = "Starttijd is vereist";
         }
 
         // Validate close time
         if (!dayState.closeTime) {
-          errors[`${dayNumber}`] = "Close time is required";
+          errors[`${dayNumber}`] = "Eindtijd is vereist";
         }
 
         // Validate time logic
@@ -131,7 +131,7 @@ export const WeeklyScheduleForm = ({
           const closeTotalMinutes = closeHours * 60 + closeMinutes;
 
           if (openTotalMinutes >= closeTotalMinutes) {
-            errors[`${dayNumber}`] = "Close time must be after open time";
+            errors[`${dayNumber}`] = "Eindtijd moet na de starttijd zijn";
           }
         }
       }
@@ -139,7 +139,7 @@ export const WeeklyScheduleForm = ({
 
     // Check if at least one day is open
     if (!hasOpenDay) {
-      errors.general = "At least one day must be marked as open";
+      errors.general = "Er moet minimaal één dag als open zijn gemarkeerd";
     }
 
     setValidationErrors(errors);
@@ -164,10 +164,10 @@ export const WeeklyScheduleForm = ({
       >
         <input type="hidden" name="intent" value="updateSchedule" />
         <div className="mb-4 border-b pb-4">
-          <h3 className="text-text-lg font-semibold">Weekly Schedule</h3>
+          <h3 className="text-text-lg font-semibold">Wekelijks schema</h3>
           <p className="text-sm text-gray-600">
-            Set your working hours for each day of the week. Times will be
-            displayed in your local format.
+            Stel uw werktijden in voor elke dag van de week. Tijden worden
+            weergegeven in uw lokale formaat.
           </p>
 
           {validationErrors.general && (
@@ -215,8 +215,8 @@ export const WeeklyScheduleForm = ({
                             handleTimeChange(dayNumber, "openTime", time)
                           }
                           disabled={disabled}
-                          placeholder="Select opening time"
-                          aria-label={`${dayName} opening time`}
+                          placeholder="Selecteer starttijd"
+                          aria-label={`${dayName} starttijd`}
                           required={dayState.isOpen}
                         />
                         <div> - </div>
@@ -227,8 +227,8 @@ export const WeeklyScheduleForm = ({
                             handleTimeChange(dayNumber, "closeTime", time)
                           }
                           disabled={disabled}
-                          placeholder="Select closing time"
-                          aria-label={`${dayName} closing time`}
+                          placeholder="Selecteer eindtijd"
+                          aria-label={`${dayName} eindtijd`}
                           required={dayState.isOpen}
                         />
                       </div>
@@ -268,7 +268,7 @@ export const WeeklyScheduleForm = ({
 
         <div className="mt-6 text-right">
           <Button type="submit" disabled={disabled}>
-            {disabled ? <Spinner /> : "Save Schedule"}
+            {disabled ? <Spinner /> : "Schema opslaan"}
           </Button>
         </div>
       </fetcher.Form>

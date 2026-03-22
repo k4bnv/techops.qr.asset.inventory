@@ -61,12 +61,12 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     ]);
 
     const header: HeaderData = {
-      title: `Settings - Manage Team Members`,
+      title: `Instellingen - Teamleden beheren`,
     };
 
     const modelName = {
-      singular: "non-registered member",
-      plural: "non-registered members",
+      singular: "niet-geregistreerd lid",
+      plural: "niet-geregistreerde leden",
     };
 
     return payload({
@@ -175,8 +175,8 @@ export default function NrmSettings() {
   return (
     <div>
       <p className="mb-6 text-xs text-gray-600">
-        Non-registered members can be given custody of an asset. If you want
-        them to get reminders, invite them via email.
+        Niet-geregistreerde leden kunnen het beheer van een asset krijgen. Als u wilt
+        dat ze herinneringen ontvangen, nodig ze dan uit via e-mail.
       </p>
 
       <ListContentWrapper>
@@ -190,7 +190,7 @@ export default function NrmSettings() {
               to="add-member"
               className="mt-2 w-full md:mt-0 md:w-max"
             >
-              <span className=" whitespace-nowrap">Add NRM</span>
+              <span className=" whitespace-nowrap">Voeg NRM toe</span>
             </Button>
           </div>
         </Filters>
@@ -202,18 +202,18 @@ export default function NrmSettings() {
           className="overflow-x-visible md:overflow-x-auto"
           ItemComponent={TeamMemberRow}
           customEmptyStateContent={{
-            title: "No team members on database",
-            text: "What are you waiting for? Add your first team member now!",
+            title: "Geen teamleden in de database",
+            text: "Waar wacht u op? Voeg nu uw eerste teamlid toe!",
             newButtonRoute: "add-member",
-            newButtonContent: "Add NRM",
+            newButtonContent: "Voeg NRM toe",
           }}
           hideFirstHeaderColumn
           headerChildren={
             <>
               <Th>ID</Th>
-              <Th>Name</Th>
-              <Th>Custodies</Th>
-              <Th>Actions</Th>
+              <Th>Naam</Th>
+              <Th>Beheerd</Th>
+              <Th>Acties</Th>
             </>
           }
         />

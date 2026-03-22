@@ -60,27 +60,27 @@ export function TimeSettings({
       <div>
         <Form ref={zo.ref} method="post">
           <FormRow
-            rowLabel={`Minimum advance notice (hours)`}
+            rowLabel={`Minimale voorafgaande kennisgeving (uren)`}
             subHeading={
               <div>
-                Users must book at least this many hours ahead of their booking
-                start time. Enter 0 to allow immediate bookings. This limitation
-                is only valid for <strong>Self service</strong> &{" "}
-                <strong>Base</strong> users.
+                Gebruikers moeten ten minste dit aantal uren voor de starttijd van hun reservering
+                boeken. Voer 0 in om onmiddellijke reserveringen toe te staan. Deze beperking is
+                alleen geldig voor <strong>Self service</strong> &{" "}
+                <strong>Basis</strong> gebruikers.
               </div>
             }
             className="border-b-0 pb-[10px] pt-0"
             required
           >
             <Input
-              label="Minimum advance notice (hours)"
+              label="Minimale voorafgaande kennisgeving (uren)"
               hideLabel
               type="number"
               name={zo.fields.bufferStartTime()}
               disabled={disabled}
               defaultValue={defaultBufferValue}
               required
-              title={"Minimum advance notice (hours)"}
+              title={"Minimale voorafgaande kennisgeving (uren)"}
               min={0}
               max={168}
               step={1}
@@ -93,25 +93,25 @@ export function TimeSettings({
           </FormRow>
 
           <FormRow
-            rowLabel={`Maximum booking length (hours)`}
+            rowLabel={`Maximale reserveringsduur (uren)`}
             subHeading={
               <div>
-                Set the maximum duration for a single booking. Leave empty for
-                no limit. This helps prevent excessively long bookings.
+                Stel de maximale duur in voor een enkele reservering. Laat leeg voor geen
+                limiet. Dit helpt overmatig lange reserveringen te voorkomen.
               </div>
             }
             className="border-b-0 pb-[10px]"
           >
             <div className="flex flex-col">
               <Input
-                label="Maximum booking length (hours)"
+                label="Maximale reserveringsduur (uren)"
                 hideLabel
                 type="number"
                 name={zo.fields.maxBookingLength()}
                 disabled={disabled}
                 defaultValue={defaultMaxLengthValue || ""}
-                placeholder="No limit"
-                title={"Maximum booking length (hours)"}
+                placeholder="Geen limiet"
+                title={"Maximale reserveringsduur (uren)"}
                 min={1}
                 max={8760}
                 step={1}
@@ -124,7 +124,7 @@ export function TimeSettings({
               <div className="mt-2 flex items-center gap-2">
                 <Input
                   id="maxBookingLengthSkipClosedDays"
-                  label="Skip closed days"
+                  label="Gesloten dagen overslaan"
                   hideLabel
                   type="checkbox"
                   name={zo.fields.maxBookingLengthSkipClosedDays()}
@@ -132,7 +132,7 @@ export function TimeSettings({
                   defaultChecked={
                     defaultMaxBookingLengthSkipClosedDays || false
                   }
-                  title={"Skip closed days"}
+                  title={"Gesloten dagen overslaan"}
                   error={
                     validationErrors?.maxBookingLengthSkipClosedDays?.message ||
                     zo.errors.maxBookingLengthSkipClosedDays()?.message
@@ -156,11 +156,11 @@ export function TimeSettings({
                   })}
                   className="cursor-default"
                 >
-                  Skip closed days
+                  Gesloten dagen overslaan
                 </span>
               </div>
               <p className="mt-1 text-sm text-gray-500">
-                Closed days will not be considered for calculations.
+                Gesloten dagen worden niet meegenomen in de berekeningen.
               </p>
             </div>
           </FormRow>
@@ -172,7 +172,7 @@ export function TimeSettings({
               value="updateTimeSettings"
               name="intent"
             >
-              {disabled ? <Spinner /> : "Save settings"}
+              {disabled ? <Spinner /> : "Instellingen opslaan"}
             </Button>
           </div>
         </Form>

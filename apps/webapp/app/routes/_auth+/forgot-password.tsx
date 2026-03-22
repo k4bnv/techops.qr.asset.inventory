@@ -35,24 +35,24 @@ const ForgotPasswordSchema = z.object({
     .string()
     .transform((email) => email.toLowerCase())
     .refine(validEmail, () => ({
-      message: "Please enter a valid email",
+      message: "Vul alstublieft een geldig e-mailadres in",
     })),
 });
 
 const OtpSchema = z
   .object({
-    otp: z.string().min(6, "OTP is required."),
+    otp: z.string().min(6, "OTP is vereist."),
     email: z.string().transform((email) => email.toLowerCase()),
-    password: z.string().min(8, "Password is too short. Minimum 8 characters."),
+    password: z.string().min(8, "Wachtwoord is te kort. Minimaal 8 tekens."),
     confirmPassword: z
       .string()
-      .min(8, "Password is too short. Minimum 8 characters."),
+      .min(8, "Wachtwoord is te kort. Minimaal 8 tekens."),
   })
   .superRefine(({ password, confirmPassword, otp, email }, ctx) => {
     if (password !== confirmPassword) {
       return ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Password and confirm password must match",
+        message: "Wachtwoord en bevestig wachtwoord moeten overeenkomen",
         path: ["confirmPassword"],
       });
     }
@@ -63,11 +63,11 @@ const OtpSchema = z
 export function loader({ context, request }: LoaderFunctionArgs) {
   const searchParams = getCurrentSearchParams(request);
 
-  const title = "Forgot password?";
+  const title = "Wachtwoord vergeten?";
   const subHeading =
     searchParams.has("email") && searchParams.get("email") !== ""
-      ? "Step 2 of 2: Enter OTP and your new password"
-      : "Step 1 of 2: Enter your email";
+      ? "Stap 2 van 2: Voer OTP en uw nieuwe wachtwoord in"
+      : "Stap 1 van 2: Voer uw e-mailadres in";
 
   if (context.isAuthenticated) {
     return redirect("/assets");
@@ -83,7 +83,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
       z.object({ intent: z.enum(["request-otp", "confirm-otp"]) }),
       {
         message:
-          "Invalid request. Please try again. If the issue persists, contact support.",
+          "Ongeldige aanvraag. Probeer het opnieuw. Neem contact op met ondersteuning als het probleem aanhoudt.",
         shouldBeCaptured: false,
       }
     );
@@ -111,7 +111,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
           throw new ShelfError({
             cause: null,
             message:
-              "The user with this email is not confirmed yet, so you cannot reset it's password. Please confirm your user before continuing",
+              "De gebruiker met dit e-mailadres is nog niet bevestigd, dus u kunt het wachtwoord niet herstellen. Bevestig uw gebruiker voordat u doorgaat",
             additionalData: { email },
             shouldBeCaptured: false,
             label: "Auth",
@@ -122,7 +122,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
           throw new ShelfError({
             cause: null,
             message:
-              "This user is an SSO user and cannot reset password using email.",
+              "Deze gebruiker is een SSO-gebruiker en kan zijn wachtwoord niet via e-mail herstellen.",
             additionalData: { email },
             shouldBeCaptured: false,
             label: "Auth",
@@ -151,7 +151,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
         if (verifyError || !otpData.user || !otpData.session) {
           throw new ShelfError({
             cause: verifyError,
-            message: "Invalid or expired verification code",
+            message: "Ongeldige of verlopen verificatiecode",
             additionalData: { email, otp },
             label: "Auth",
             shouldBeCaptured: false,
@@ -193,14 +193,13 @@ export default function ForgotPassword() {
         {actionData?.error || !email || email === "" ? (
           <div>
             <p className="mb-4 text-center">
-              Enter your email address and we'll send you a one-time code to
-              reset your password.
+              Voer uw e-mailadres in en we sturen u een eenmalige code om uw wachtwoord te herstellen.
             </p>
             <Form ref={zo.ref} method="post" className="space-y-2" replace>
               <input type="hidden" name="intent" value="request-otp" />
               <div>
                 <Input
-                  label="Email address"
+                  label="E-mailadres"
                   data-test-id="email"
                   name={zo.fields.email()}
                   type="email"
@@ -218,24 +217,23 @@ export default function ForgotPassword() {
                 type="submit"
                 disabled={disabled}
               >
-                {!disabled ? "Reset password" : "Sending code..."}
+                {!disabled ? "Wachtwoord herstellen" : "Code verzenden..."}
               </Button>
             </Form>
             <p className="mt-2 text-center text-gray-500">
-              Tip: Check your spam folder if you don't see the email within a
-              few minutes.
+              Tip: Controleer uw spambox als u de e-mail niet binnen een paar minuten ziet.
             </p>
           </div>
         ) : (
           <>
             <p className="mb-2">
-              We've sent a 6-digit code to{" "}
+              We hebben een 6-cijferige code gestuurd naar{" "}
               <span className="font-semibold">{email}</span>.
             </p>
             <ol className="mb-4 list-inside list-decimal">
-              <li>Enter the code from your email</li>
-              <li>Enter your new password</li>
-              <li>Confirm your new password</li>
+              <li>Voer de code uit uw e-mail in</li>
+              <li>Voer uw nieuwe wachtwoord in</li>
+              <li>Bevestig uw nieuwe wachtwoord</li>
             </ol>
             <PasswordResetForm email={email} />
           </>
@@ -243,11 +241,11 @@ export default function ForgotPassword() {
         <div className="pt-4 text-center">
           {email ? (
             <Button variant="link" to={"/forgot-password"}>
-              Request new code
+              Nieuwe code aanvragen
             </Button>
           ) : (
             <Button variant="link" to={"/login"}>
-              Back to login
+              Terug naar inloggen
             </Button>
           )}
         </div>
@@ -261,13 +259,13 @@ function PasswordResetForm({ email }: { email: string }) {
   const disabled = useDisabled();
   const actionData = useActionData<typeof action>();
   return !email || email === "" || actionData?.error ? (
-    <div>Something went wrong. Please refresh the page and try again.</div>
+    <div>Er is iets misgegaan. Vernieuw de pagina en probeer het opnieuw.</div>
   ) : (
     <Form method="post" ref={zoReset.ref} className="space-y-2">
       <ShelfOTP error={zoReset.errors.otp()?.message} />
 
       <PasswordInput
-        label="New password"
+        label="Nieuw wachtwoord"
         data-test-id="password"
         name={zoReset.fields.password()}
         type="password"
@@ -278,7 +276,7 @@ function PasswordResetForm({ email }: { email: string }) {
         required
       />
       <PasswordInput
-        label="Confirm new password"
+        label="Bevestig nieuw wachtwoord"
         data-test-id="confirmPassword"
         name={zoReset.fields.confirmPassword()}
         type="password"
@@ -298,7 +296,7 @@ function PasswordResetForm({ email }: { email: string }) {
         className="w-full "
         disabled={disabled}
       >
-        Confirm password reset
+        Wachtwoordherstel bevestigen
       </Button>
     </Form>
   );

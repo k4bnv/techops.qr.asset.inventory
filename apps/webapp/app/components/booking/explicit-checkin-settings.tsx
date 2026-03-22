@@ -49,11 +49,11 @@ export function ExplicitCheckinSettings({
           }}
         >
           <FormRow
-            rowLabel="Require explicit check-in for Admins"
+            rowLabel="Vereis expliciete check-in voor beheerders"
             subHeading={
               <div>
-                When enabled, administrators must use the scanner-based explicit
-                check-in flow instead of the one-click quick check-in.
+                Indien ingeschakeld, moeten beheerders de op een scanner gebaseerde expliciete
+                check-instroom gebruiken in plaats van de snelle check-in met één klik.
               </div>
             }
             className="border-b-0 pb-[10px] pt-0"
@@ -63,22 +63,22 @@ export function ExplicitCheckinSettings({
                 name={zo.fields.requireExplicitCheckinForAdmin()}
                 disabled={!isOwner}
                 defaultChecked={defaultValues.requireExplicitCheckinForAdmin}
-                title="Require explicit check-in for Admins"
+                title="Vereis expliciete check-in voor beheerders"
               />
               <label
                 htmlFor={`requireExplicitCheckinForAdmin-${zo.fields.requireExplicitCheckinForAdmin()}`}
                 className="hidden text-gray-500"
               >
-                Require explicit check-in for Admins
+                Vereis expliciete check-in voor beheerders
               </label>
             </div>
           </FormRow>
           <FormRow
-            rowLabel="Require explicit check-in for Self Service"
+            rowLabel="Vereis expliciete check-in voor Self Service"
             subHeading={
               <div>
-                When enabled, self-service users must use the scanner-based
-                explicit check-in flow instead of the one-click quick check-in.
+                Indien ingeschakeld, moeten self-service gebruikers de op een scanner gebaseerde
+                expliciete check-instroom gebruiken in plaats van de snelle check-in met één klik.
               </div>
             }
             className="mt-4 border-b-0 pb-[10px] pt-0"
@@ -90,19 +90,19 @@ export function ExplicitCheckinSettings({
                 defaultChecked={
                   defaultValues.requireExplicitCheckinForSelfService
                 }
-                title="Require explicit check-in for Self Service"
+                title="Vereis expliciete check-in voor Self Service"
               />
               <label
                 htmlFor={`requireExplicitCheckinForSelfService-${zo.fields.requireExplicitCheckinForSelfService()}`}
                 className="hidden text-gray-500"
               >
-                Require explicit check-in for Self Service
+                Vereis expliciete check-in voor Self Service
               </label>
             </div>
           </FormRow>
           {!isOwner && (
             <p className="text-sm text-gray-500">
-              Only the workspace owner can change this setting.
+              Alleen de werkruimte-eigenaar kan deze instelling wijzigen.
             </p>
           )}
           <input type="hidden" value="updateExplicitCheckin" name="intent" />

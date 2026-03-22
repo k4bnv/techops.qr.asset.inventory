@@ -122,7 +122,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     ]);
 
     const header: HeaderData = {
-      title: "General",
+      title: "Algemeen",
     };
 
     const canHideBranding = canHideShelfBranding(tierLimit);
@@ -164,7 +164,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 }
 
 export const handle = {
-  breadcrumb: () => "General",
+  breadcrumb: () => "Algemeen",
 };
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => [
@@ -451,16 +451,13 @@ export default function GeneralPage() {
       />
 
       <Card className={tw("mb-0")}>
-        <h4 className="text-text-lg font-semibold">Asset backup</h4>
+        <h4 className="text-text-lg font-semibold">Asset back-up</h4>
         <p className=" text-sm text-gray-600">
-          Download a backup of your assets. If you want to restore a backup,
-          please get in touch with support.
+          Download een back-up van uw assets. Neem contact op met support als u een back-up wilt herstellen.
         </p>
         <p className=" font-italic mb-2 text-sm text-gray-600">
-          IMPORTANT NOTE: QR codes will not be included in the export. Due to
-          the nature of how TechOps's QR codes work, they currently cannot be
-          exported with assets because they have unique ids. <br />
-          Importing a backup will just create a new QR code for each asset.
+          BELANGRIJKE OPMERKING: QR-codes worden niet opgenomen in de export. Vanwege de werking van de QR-codes van TechOps kunnen deze momenteel niet met assets worden geëxporteerd omdat ze unieke ID's hebben. <br />
+          Bij het importeren van een back-up wordt er gewoon een nieuwe QR-code voor elke asset aangemaakt.
         </p>
         <ExportBackupButton canExportAssets={canExportAssets} />
       </Card>

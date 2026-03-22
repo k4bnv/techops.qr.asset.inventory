@@ -18,7 +18,7 @@ export const SendOtpSchema = z.object({
     .string()
     .transform((email) => email.toLowerCase())
     .refine(validEmail, () => ({
-      message: "Please enter a valid email",
+      message: "Vul alstublieft een geldig e-mailadres in",
     })),
   mode: z.enum(["login", "signup", "confirm_signup"]).optional(),
 });
@@ -30,16 +30,16 @@ export function ContinueWithEmailForm({ mode }: { mode: "login" | "signup" }) {
 
   const isLoading = state === "submitting" || state === "loading";
   const buttontext =
-    mode === "login" ? "Continue with OTP" : "Sign up with OTP";
+    mode === "login" ? "Doorgaan met OTP" : "Aanmelden met OTP";
   const buttonLabel = isLoading
-    ? "Sending you a one time password..."
+    ? "We sturen u een eenmalig wachtwoord..."
     : buttontext;
 
   return (
     <sendOTP.Form method="post" action="/send-otp" ref={zo.ref}>
       <input type="hidden" name="mode" value={mode} />
       <Input
-        label="Email"
+        label="E-mailadres"
         hideLabel={true}
         type="email"
         name="email"
@@ -59,7 +59,7 @@ export function ContinueWithEmailForm({ mode }: { mode: "login" | "signup" }) {
         variant="secondary"
         className="mt-3"
         data-test-id="continueWithOtpButton"
-        title="One Time Password (OTP) is the most secure way to login. We will send you a code to your email."
+        title="Een Eenmalig Wachtwoord (OTP) is de meest veilige manier om in te loggen. We sturen u een code naar uw e-mailadres."
       >
         {buttonLabel}
       </Button>

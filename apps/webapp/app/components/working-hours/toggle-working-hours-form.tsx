@@ -29,9 +29,9 @@ export function EnableWorkingHoursForm({
           onChange={(e) => fetcher.submit(e.currentTarget)}
         >
           <FormRow
-            rowLabel={`Enable working hours`}
+            rowLabel={`Werktijden inschakelen`}
             subHeading={
-              <div>Working hours will be enabled for your workspace.</div>
+              <div>Werktijden worden ingeschakeld voor uw werkruimte.</div>
             }
             className="border-b-0 pb-[10px] pt-0"
           >
@@ -41,13 +41,13 @@ export function EnableWorkingHoursForm({
                 disabled={disabled} // Disable for self service users
                 defaultChecked={enabled}
                 required
-                title={"Toggle working hours"}
+                title={"Werktijden in-/uitschakelen"}
               />
               <label
                 htmlFor={`enableWorkingHours-${zo.fields.enableWorkingHours()}`}
                 className=" hidden text-gray-500"
               >
-                Enable working hours
+                Werktijden inschakelen
               </label>
             </div>
             <input type="hidden" value="toggle" name="intent" />

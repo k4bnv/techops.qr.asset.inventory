@@ -72,11 +72,11 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     const totalPages = Math.ceil(totalCustomFields / perPageParam);
 
     const header: HeaderData = {
-      title: "Custom Fields",
+      title: "Aangepaste velden",
     };
     const modelName = {
-      singular: "custom fields",
-      plural: "custom Fields",
+      singular: "aangepast veld",
+      plural: "aangepaste velden",
     };
 
     return data(
@@ -111,7 +111,7 @@ export default function CustomFieldsIndexPage() {
   return (
     <>
       <div className="mb-2.5 flex items-center justify-between bg-white md:rounded md:border md:border-gray-200 md:px-6 md:py-5">
-        <h2 className=" text-lg text-gray-900">Custom Fields</h2>
+        <h2 className=" text-lg text-gray-900">Aangepaste velden</h2>
         <Button
           to="new"
           role="link"
@@ -122,12 +122,12 @@ export default function CustomFieldsIndexPage() {
             !canCreateMoreCustomFields
               ? {
                   reason:
-                    "You are not able to create more active custom fields within your current plan.",
+                    "U kunt niet meer actieve aangepaste velden maken binnen uw huidige abonnement.",
                 }
               : false
           }
         >
-          New custom field
+          Nieuw aangepast veld
         </Button>
       </div>
       <List
@@ -135,11 +135,11 @@ export default function CustomFieldsIndexPage() {
         ItemComponent={CustomFieldRow}
         headerChildren={
           <>
-            <Th>Categories</Th>
-            <Th>Required</Th>
+            <Th>Categorieën</Th>
+            <Th>Vereist</Th>
             <Th>Status</Th>
-            <Th>Used on</Th>
-            <Th>Actions</Th>
+            <Th>Gebruikt in</Th>
+            <Th>Acties</Th>
           </>
         }
       />
@@ -173,7 +173,7 @@ function CustomFieldRow({
       <Td>
         <ItemsWithViewMore
           items={item.categories}
-          emptyMessage={<GrayBadge>All</GrayBadge>}
+          emptyMessage={<GrayBadge>Alle</GrayBadge>}
           renderItem={(category) => (
             <CategoryBadge
               category={category}
@@ -185,17 +185,17 @@ function CustomFieldRow({
       </Td>
       <Td>
         <span className="text-text-sm font-medium capitalize text-gray-600">
-          {item.required ? "Yes" : "No"}
+          {item.required ? "Ja" : "Nee"}
         </span>
       </Td>
       <Td>
         {!item.active ? (
           <Badge color="#dc2626" withDot={false}>
-            Inactive
+            Inactief
           </Badge>
         ) : (
           <Badge color="#059669" withDot={false}>
-            Active
+            Actief
           </Badge>
         )}
       </Td>

@@ -37,11 +37,11 @@ export function TagsRequiredSettings({
           onChange={(e) => void fetcher.submit(e.currentTarget)}
         >
           <FormRow
-            rowLabel="Require tags for bookings"
+            rowLabel="Vereis tags voor reserveringen"
             subHeading={
               <div>
-                When enabled, users must add at least one tag to their bookings.
-                This helps with categorization and organization of bookings.
+                Indien ingeschakeld, moeten gebruikers ten minste één tag aan hun reserveringen toevoegen.
+                Dit helpt bij de categorisering en organisatie van reserveringen.
               </div>
             }
             className="border-b-0 pb-[10px] pt-0"
@@ -51,13 +51,13 @@ export function TagsRequiredSettings({
                 name={zo.fields.tagsRequired()}
                 disabled={disabled}
                 defaultChecked={defaultValue}
-                title="Require tags for bookings"
+                title="Vereis tags voor reserveringen"
               />
               <label
                 htmlFor={`tagsRequired-${zo.fields.tagsRequired()}`}
                 className=" hidden text-gray-500"
               >
-                Require tags for bookings
+                Vereis tags voor reserveringen
               </label>
             </div>
           </FormRow>

@@ -61,15 +61,15 @@ type TransferOwnershipCardProps = {
 };
 
 export const TransferOwnershipSchema = z.object({
-  newOwner: z.string().min(1, "New owner is required"),
+  newOwner: z.string().min(1, "Nieuwe eigenaar is vereist"),
   agreeConditions: z
     .string({
-      required_error: "You must agree to changing the owner of the workspace",
+      required_error: "U moet akkoord gaan met het wijzigen van de eigenaar van de werkruimte",
     })
     .transform((value) => value === "on")
     .pipe(
       z.boolean().refine((value) => value, {
-        message: "You must agree to changing the owner of the workspace",
+        message: "U moet akkoord gaan met het wijzigen van de eigenaar van de werkruimte",
       })
     ),
   transferSubscription: z
@@ -127,11 +127,10 @@ export default function TransferOwnershipCard({
   return (
     <Card className={tw(className)}>
       <h4 className="mb-1 text-text-lg font-semibold">
-        Transfer workspace ownership
+        Eigendom van werkruimte overdragen
       </h4>
       <p className="mb-2 text-sm text-gray-600">
-        Transfer workspace to another user. To transfer the workspace, the new
-        owner must be already be part of the workspace as an admin.
+        Draag de werkruimte over aan een andere gebruiker. Om de werkruimte over te dragen, moet de nieuwe eigenaar al deel uitmaken van de werkruimte als beheerder.
       </p>
 
       <When
@@ -141,27 +140,25 @@ export default function TransferOwnershipCard({
             type="button"
             disabled={{
               reason:
-                "No admins found in this workspace. Please add an admin before transferring ownership.",
+                "Geen beheerders gevonden in deze werkruimte. Voeg een beheerder toe voordat u het eigendom overdraagt.",
             }}
           >
-            Transfer Ownership
+            Eigendom overdragen
           </Button>
         }
       >
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button type="button" variant="secondary">
-              Transfer Ownership
+              Eigendom overdragen
             </Button>
           </AlertDialogTrigger>
 
-          <AlertDialogContent aria-describedby="Transfer ownership">
+          <AlertDialogContent aria-describedby="Eigendom overdragen">
             <AlertDialogHeader>
-              <AlertDialogTitle>Transfer Workspace Ownership</AlertDialogTitle>
+              <AlertDialogTitle>Eigendom van werkruimte overdragen</AlertDialogTitle>
               <AlertDialogDescription>
-                Transfer workspace to another user. To transfer the workspace,
-                the new owner must be already be part of the workspace as an
-                admin.
+                Draag de werkruimte over aan een andere gebruiker. Om de werkruimte over te dragen, moet de nieuwe eigenaar al deel uitmaken van de werkruimte als beheerder.
               </AlertDialogDescription>
             </AlertDialogHeader>
 
@@ -178,7 +175,7 @@ export default function TransferOwnershipCard({
                 <p className="mb-4 text-sm text-error-500">{serverError}</p>
               </When>
 
-              <InnerLabel>New owner</InnerLabel>
+              <InnerLabel>Nieuwe eigenaar</InnerLabel>
               <Select
                 name={zo.fields.newOwner()}
                 onValueChange={(value) => {
@@ -189,7 +186,7 @@ export default function TransferOwnershipCard({
                 }}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Select new owner" />
+                  <SelectValue placeholder="Selecteer nieuwe eigenaar" />
                 </SelectTrigger>
 
                 <SelectContent>
@@ -221,13 +218,13 @@ export default function TransferOwnershipCard({
                   <div className="mt-4 rounded-md border border-gray-200 bg-gray-50 p-4">
                     <div className="flex items-center gap-2 font-medium">
                       <Icon icon="coins" />
-                      <span>Subscription Information</span>
+                      <span>Abonnementsinformatie</span>
                     </div>
                     <p className="mt-2 text-sm text-gray-600">
-                      You have the following active{" "}
+                      U heeft de volgende actieve{" "}
                       {subscriptionCount === 1
-                        ? "subscription"
-                        : "subscriptions"}
+                        ? "abonnement"
+                        : "abonnementen"}
                       :
                     </p>
                     <ul className="mt-1 list-inside list-disc text-sm text-gray-600">
@@ -259,20 +256,20 @@ export default function TransferOwnershipCard({
                             htmlFor="transferSubscription"
                             className="font-medium"
                           >
-                            Transfer my{" "}
+                            Draag mijn{" "}
                             {subscriptionCount === 1
-                              ? "subscription"
-                              : "subscriptions"}{" "}
-                            to the new owner
+                              ? "abonnement"
+                              : "abonnementen"}{" "}
+                            over aan de nieuwe eigenaar
                           </label>
                           <p
                             id="transferSubscription-description"
                             className="mt-1 text-gray-500"
                           >
-                            The new owner will continue with the current billing{" "}
-                            {subscriptionCount === 1 ? "cycle" : "cycles"}. They
-                            will need to add their own payment method before the
-                            next billing date.
+                            De nieuwe eigenaar gaat door met de huidige facturerings
+                            {subscriptionCount === 1 ? "cyclus" : "cycli"}. Ze
+                            moeten hun eigen betaalmethode toevoegen voor de
+                            volgende factuurdatum.
                           </p>
                         </div>
                       </div>
@@ -287,42 +284,41 @@ export default function TransferOwnershipCard({
                   >
                     <WarningBox className="mt-3">
                       <span className="font-semibold">
-                        Multiple workspaces affected
+                        Meerdere werkruimtes beïnvloed
                       </span>
                       <p className="mt-1 text-sm">
-                        You own {ownerOtherTeamWorkspacesCount} other team{" "}
+                        U bezit {ownerOtherTeamWorkspacesCount} andere team{" "}
                         {ownerOtherTeamWorkspacesCount === 1
-                          ? "workspace"
-                          : "workspaces"}
-                        . If you transfer your subscription, those workspaces
-                        will lose premium features until you subscribe again.
+                          ? "werkruimte"
+                          : "werkruimtes"}
+                        . Als u uw abonnement overdraagt, verliezen die werkruimtes premiumfuncties totdat u zich opnieuw abonneert.
                       </p>
                     </WarningBox>
                   </When>
                 </When>
 
                 <p className="mb-2 mt-4">
-                  You are about to transfer ownership of this workspace to
+                  U staat op het punt het eigendom van deze werkruimte over te dragen aan
                   <span className="ml-1 font-semibold">
                     {resolveTeamMemberName(
                       { name: "", user: selectedOwner },
                       true
                     )}
                   </span>
-                  . This action cannot be undone.
+                  . Deze actie kan niet ongedaan worden gemaakt.
                 </p>
-                <p>Warning - You will:</p>
+                <p>Waarschuwing - U zult:</p>
                 <ul className="mb-2 list-inside list-disc">
-                  <li>Lose owner control of this workspace</li>
-                  <li>No longer be able to manage billing</li>
-                  <li>Become an admin member</li>
+                  <li>Eigendomsrechten van deze werkruimte verliezen</li>
+                  <li>Niet langer facturering kunnen beheren</li>
+                  <li>Een beheerderslid worden</li>
                   <When truthy={transferSubscription}>
                     <li>
-                      Transfer your{" "}
+                      Uw{" "}
                       {subscriptionCount === 1
-                        ? "subscription"
-                        : "subscriptions"}{" "}
-                      to{" "}
+                        ? "abonnement"
+                        : "abonnementen"}{" "}
+                      overdragen aan{" "}
                       {resolveTeamMemberName(
                         { name: "", user: selectedOwner },
                         true
@@ -333,19 +329,18 @@ export default function TransferOwnershipCard({
 
                 <div className="mb-2">
                   <p>
-                    To confirm this transfer, type the workspace name exactly as
-                    shown:
+                    Typ de werkruimtenaam exact zoals weergegeven om deze overdracht te bevestigen:
                   </p>
                   <Input
                     label=""
-                    placeholder="Enter workspace name to confirm"
+                    placeholder="Voer werkruimtenaam in om te bevestigen"
                     value={confirmationInput}
                     onChange={(event) => {
                       setConfirmationInput(event.target.value);
                     }}
                   />
                   <p className="text-sm text-gray-500">
-                    Expected input: {confirmationOrgName}
+                    Verwachte invoer: {confirmationOrgName}
                   </p>
                 </div>
 
@@ -363,7 +358,7 @@ export default function TransferOwnershipCard({
                       className="rounded-sm checked:bg-primary focus-within:ring-primary checked:hover:bg-primary checked:focus:bg-primary"
                     />
 
-                    <span>I understand this action cannot be undone.</span>
+                    <span>Ik begrijp dat deze actie niet ongedaan kan worden gemaakt.</span>
                   </label>
                   <When
                     truthy={
@@ -389,7 +384,7 @@ export default function TransferOwnershipCard({
                     variant="secondary"
                     type="button"
                   >
-                    Cancel
+                    Annuleren
                   </Button>
                 </AlertDialogCancel>
 
@@ -398,15 +393,15 @@ export default function TransferOwnershipCard({
                   className="flex-1"
                   disabled={
                     !selectedOwner
-                      ? { reason: "Please select a new owner." }
+                      ? { reason: "Selecteer een nieuwe eigenaar." }
                       : confirmationInput !== confirmationOrgName
                       ? {
-                          reason: "Please type the workspace name to confirm.",
+                          reason: "Typ de werkruimtenaam om te bevestigen.",
                         }
                       : disabled
                   }
                 >
-                  Transfer ownership
+                  Eigendom overdragen
                 </Button>
               </AlertDialogFooter>
             </Form>

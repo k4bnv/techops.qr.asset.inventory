@@ -41,7 +41,7 @@ export const EditGeneralWorkspaceSettingsFormSchema = (
     id: z.string(),
     name: personalOrg
       ? z.string().optional()
-      : z.string().min(2, "Name is required"),
+      : z.string().min(2, "Naam is vereist"),
     logo: z.any().optional(),
     currency: z.custom<Currency>(),
     qrIdDisplayPreference: z.custom<QrIdDisplayPreference>(),
@@ -113,20 +113,20 @@ const WorkspaceGeneralEditForms = ({
     >
       <Card className={tw("my-0", className)}>
         <div className="mb-6">
-          <h3 className="text-text-lg font-semibold">General</h3>
+          <h3 className="text-text-lg font-semibold">Algemeen</h3>
           <p className="text-sm text-gray-600">
-            Manage general workspace settings.
+            Beheer algemene werkruimte-instellingen.
           </p>
         </div>
         <input type="hidden" value={organization.id} name="id" />
 
         <FormRow
-          rowLabel={"Name"}
+          rowLabel={"Naam"}
           className="border-b-0 pb-[10px] pt-0"
           required={zodFieldIsRequired(schema.shape.name)}
         >
           <Input
-            label="Name"
+            label="Naam"
             hideLabel
             name={zo.fields.name()}
             disabled={isPersonalWorkspace || disabled}
@@ -140,10 +140,10 @@ const WorkspaceGeneralEditForms = ({
           />
         </FormRow>
 
-        <FormRow rowLabel={"Main image"} className="border-b-0">
+        <FormRow rowLabel={"Hoofdafbeelding"} className="border-b-0">
           <div>
             <p className="hidden lg:block">
-              Accepts PNG, JPG, JPEG, or WebP (max.4 MB)
+              Accepteert PNG, JPG, JPEG of WebP (max. 4 MB)
             </p>
             <Input
               // disabled={disabled}
@@ -151,25 +151,25 @@ const WorkspaceGeneralEditForms = ({
               name="image"
               type="file"
               onChange={validateFile}
-              label={"Main image"}
+              label={"Hoofdafbeelding"}
               hideLabel
               error={imageError}
               className="mt-2"
               inputClassName="border-0 shadow-none p-0 rounded-none"
             />
             <p className="mt-2 lg:hidden">
-              Accepts PNG, JPG, JPEG, or WebP (max.4 MB)
+              Accepteert PNG, JPG, JPEG of WebP (max. 4 MB)
             </p>
           </div>
         </FormRow>
 
         <div>
           <FormRow
-            rowLabel={"Currency"}
+            rowLabel={"Valuta"}
             className={"border-b-0"}
-            subHeading="Choose the currency for your workspace. All ISO 4217 currencies are supported."
+            subHeading="Kies de valuta voor uw werkruimte. Alle ISO 4217-valuta's worden ondersteund."
           >
-            <InnerLabel hideLg>Currency</InnerLabel>
+            <InnerLabel hideLg>Valuta</InnerLabel>
             <CurrencySelector
               defaultValue={currency || "USD"}
               name={zo.fields.currency()}
@@ -179,16 +179,15 @@ const WorkspaceGeneralEditForms = ({
 
         <div>
           <FormRow
-            rowLabel={"QR Code Display"}
+            rowLabel={"QR-code weergave"}
             className={"border-b-0"}
             subHeading={
               <p>
-                Choose which identifier is shown on QR code labels. You can
-                display either the QR code ID or the asset's SAM ID.
+                Kies welke ID wordt weergegeven op QR-codelabels. U kunt ofwel de QR-code-ID of de SAM-ID van de asset weergeven.
               </p>
             }
           >
-            <InnerLabel hideLg>QR Code Display</InnerLabel>
+            <InnerLabel hideLg>QR-code weergave</InnerLabel>
             <QrIdDisplayPreferenceSelector
               name={zo.fields.qrIdDisplayPreference()}
               defaultValue={qrIdDisplayPreference || "QR_ID"}
@@ -201,8 +200,7 @@ const WorkspaceGeneralEditForms = ({
           className={"border-b-0"}
           subHeading={
             <p>
-                Control whether the "Powered by TechOps" footer appears on QR
-                and barcode labels.
+                Beheer of de "Powered by TechOps"-voettekst op QR- en streepjescodelabels verschijnt.
               </p>
           }
         >
@@ -226,13 +224,13 @@ const WorkspaceGeneralEditForms = ({
                 htmlFor="showShelfBranding"
                 className="cursor-pointer text-[14px] font-medium text-gray-700"
               >
-                Display TechOps branding on labels
+                TechOps-branding op labels weergeven
               </label>
               <p
                 id="showShelfBranding-desc"
                 className="text-[14px] text-gray-600"
               >
-                Toggle TechOps branding on downloadable QR and barcode labels.
+                Schakel TechOps-branding in of uit op downloadbare QR- en streepjescodelabels.
               </p>
             </div>
           </div>
@@ -245,7 +243,7 @@ const WorkspaceGeneralEditForms = ({
             value="general"
             name="intent"
           >
-            {disabled ? <Spinner /> : "Save"}
+            {disabled ? <Spinner /> : "Opslaan"}
           </Button>
         </div>
       </Card>
@@ -285,22 +283,20 @@ const WorkspacePermissionsEditForm = ({ className }: Props) => {
     <fetcher.Form ref={zo.ref} method="post" className="flex flex-col gap-2">
       <Card className={tw("my-0 w-full", className)}>
         <div className="border-b pb-5">
-          <h3 className="text-text-lg font-semibold">Permissions</h3>
+          <h3 className="text-text-lg font-semibold">Machtigingen</h3>
           <p className="text-sm text-gray-600">
-            Adjust specific permissions for <b>Self Service</b> and <b>Base</b>{" "}
-            users.
+            Pas specifieke machtigingen aan voor <b>Self Service</b>- en <b>Basis</b>{" "}
+            gebruikers.
           </p>
         </div>
         <input type="hidden" value={organization.id} name="id" />
 
-        <h4 className="mt-5 text-text-md">Self service users</h4>
+        <h4 className="mt-5 text-text-md">Self service-gebruikers</h4>
         <FormRow
-          rowLabel={`View custody`}
+          rowLabel={`Bewaring bekijken`}
           subHeading={
             <div>
-              Allow <b>self service</b> users to <b>see</b> custody of assets
-              and kits which are not assigned to them. By default they can only
-              see custodian for assets that they are the custodian of.
+              Sta <b>self service</b>-gebruikers toe om de bewaring van assets en kits te <b>zien</b> die niet aan hen zijn toegewezen. Standaard kunnen ze alleen de beheerder zien voor assets waarvan zij de beheerder zijn.
             </div>
           }
           className="border-b-0 pb-[10px]"
@@ -317,18 +313,16 @@ const WorkspacePermissionsEditForm = ({ className }: Props) => {
               htmlFor={`selfServiceCustody`}
               className=" hidden text-gray-500"
             >
-              Allow
+              Toestaan
             </label>
           </div>
         </FormRow>
 
         <FormRow
-          rowLabel={`View bookings`}
+          rowLabel={`Reserveringen bekijken`}
           subHeading={
             <div>
-              Allow <b>self service</b> users to <b>see</b> bookings which are
-              not assigned to them. By default they can only see bookings that
-              they are the custodian of.
+              Sta <b>self service</b>-gebruikers toe om reserveringen te <b>zien</b> die niet aan hen zijn toegewezen. Standaard kunnen ze alleen reserveringen zien waarvan zij de beheerder zijn.
             </div>
           }
           className="border-b-0 pb-[10px]"
@@ -345,19 +339,17 @@ const WorkspacePermissionsEditForm = ({ className }: Props) => {
               htmlFor={`selfServiceBookings`}
               className=" hidden text-gray-500"
             >
-              Allow
+              Toestaan
             </label>
           </div>
         </FormRow>
 
-        <h4 className="border-t pt-5 text-text-md">Base users</h4>
+        <h4 className="border-t pt-5 text-text-md">Basis-gebruikers</h4>
         <FormRow
-          rowLabel={`View custody`}
+          rowLabel={`Bewaring bekijken`}
           subHeading={
             <div>
-              Allow <b>base</b> users to <b>see</b> custody of assets and kits
-              which are not assigned to them. By default they can only see
-              custodian for assets that they are the custodian of.
+              Sta <b>basis</b>-gebruikers toe om de bewaring van assets en kits te <b>zien</b> die niet aan hen zijn toegewezen. Standaard kunnen ze alleen de beheerder zien voor assets waarvan zij de beheerder zijn.
             </div>
           }
           className="border-b-0 pb-[10px]"
@@ -374,18 +366,16 @@ const WorkspacePermissionsEditForm = ({ className }: Props) => {
               htmlFor={`baseUserCustody`}
               className=" hidden text-gray-500"
             >
-              Allow
+              Toestaan
             </label>
           </div>
         </FormRow>
 
         <FormRow
-          rowLabel={`View bookings`}
+          rowLabel={`Reserveringen bekijken`}
           subHeading={
             <div>
-              Allow <b>base</b> users to <b>see</b> bookings which are not
-              assigned to them. By default they can only see bookings that they
-              are the custodian of.
+              Sta <b>basis</b>-gebruikers toe om reserveringen te <b>zien</b> die niet aan hen zijn toegewezen. Standaard kunnen ze alleen reserveringen zien waarvan zij de beheerder zijn.
             </div>
           }
           className="border-b-0 pb-[10px]"
@@ -402,7 +392,7 @@ const WorkspacePermissionsEditForm = ({ className }: Props) => {
               htmlFor={`baseUserBookings`}
               className=" hidden text-gray-500"
             >
-              Allow
+              Toestaan
             </label>
           </div>
         </FormRow>
@@ -414,7 +404,7 @@ const WorkspacePermissionsEditForm = ({ className }: Props) => {
             name="intent"
             value="permissions"
           >
-            {disabled ? <Spinner /> : "Save"}
+            {disabled ? <Spinner /> : "Opslaan"}
           </Button>
         </div>
       </Card>
@@ -426,13 +416,13 @@ export const EditWorkspaceSSOSettingsFormSchema = (sso: boolean = false) =>
   z.object({
     id: z.string(),
     selfServiceGroupId: sso
-      ? z.string().min(1, "Self service group id is required")
+      ? z.string().min(1, "Self service groep id is vereist")
       : z.string().optional(),
     baseUserGroupId: sso
-      ? z.string().min(1, "Base user group id is required")
+      ? z.string().min(1, "Basisgebruiker groep id is vereist")
       : z.string().optional(),
     adminGroupId: sso
-      ? z.string().min(1, "Administrator group id is required")
+      ? z.string().min(1, "Beheerder groep id is vereist")
       : z.string().optional(),
   });
 
@@ -448,23 +438,23 @@ const WorkspaceSSOEditForm = ({ className }: Props) => {
     <fetcher.Form ref={zo.ref} method="post" className="flex flex-col gap-2">
       <Card className={tw("my-0 ", className)}>
         <div className=" border-b pb-5">
-          <h2 className=" text-[18px] font-semibold">SSO details</h2>
+          <h2 className=" text-[18px] font-semibold">SSO-gegevens</h2>
           <p>
-            This workspace has SSO enabled so you can see your SSO settings.
+            Voor deze werkruimte is SSO ingeschakeld, dus u kunt uw SSO-instellingen bekijken.
           </p>
         </div>
         <input type="hidden" value={organization.id} name="id" />
 
         <FormRow
-          rowLabel={"SSO Domain"}
+          rowLabel={"SSO Domein"}
           className="border-b-0 pb-[10px]"
           subHeading={
-            "The domain that this workspace is linked to. If you want it changed, please contact support."
+            "Het domein waaraan deze werkruimte is gekoppeld. Neem contact op met support als u dit wilt wijzigen."
           }
           required
         >
           <Input
-            label="SSO Domain"
+            label="SSO Domein"
             hideLabel
             disabled={true}
             className="disabled w-full"
@@ -474,18 +464,17 @@ const WorkspaceSSOEditForm = ({ className }: Props) => {
         </FormRow>
 
         <FormRow
-          rowLabel={`Administrator role group id`}
+          rowLabel={`Groep-ID voor beheerdersrol`}
           subHeading={
             <div>
-              Place the Id of the group that should be mapped to the{" "}
-              <b>Administrator</b> role.
+              Plaats de ID van de groep die moet worden toegewezen aan de rol <b>Beheerder</b>.
             </div>
           }
           className="border-b-0 pb-[10px]"
           required
         >
           <Input
-            label={"Administrator role group id"}
+            label={"Groep-ID voor beheerdersrol"}
             hideLabel
             className="w-full"
             name={zo.fields.adminGroupId()}
@@ -496,18 +485,17 @@ const WorkspaceSSOEditForm = ({ className }: Props) => {
         </FormRow>
 
         <FormRow
-          rowLabel={`Self service role group id`}
+          rowLabel={`Groep-ID voor self service-rol`}
           subHeading={
             <div>
-              Place the Id of the group that should be mapped to the{" "}
-              <b>Self service</b> role.
+              Plaats de ID van de groep die moet worden toegewezen aan de rol <b>Self service</b>.
             </div>
           }
           className="border-b-0 pb-[10px]"
           required
         >
           <Input
-            label={"Self service role group id"}
+            label={"Groep-ID voor self service-rol"}
             hideLabel
             name={zo.fields.selfServiceGroupId()}
             error={zo.errors.selfServiceGroupId()?.message}
@@ -519,18 +507,17 @@ const WorkspaceSSOEditForm = ({ className }: Props) => {
           />
         </FormRow>
         <FormRow
-          rowLabel={`Base user role group id`}
+          rowLabel={`Groep-ID voor basisgebruikersrol`}
           subHeading={
             <div>
-              Place the Id of the group that should be mapped to the <b>Base</b>{" "}
-              role.
+               Plaats de ID van de groep die moet worden toegewezen aan de rol <b>Basis</b>.
             </div>
           }
           className="border-b-0 pb-[10px]"
           required
         >
           <Input
-            label={"Base user role group id"}
+            label={"Groep-ID voor basisgebruikersrol"}
             hideLabel
             name={zo.fields.baseUserGroupId()}
             error={zo.errors.baseUserGroupId()?.message}
@@ -541,7 +528,7 @@ const WorkspaceSSOEditForm = ({ className }: Props) => {
         </FormRow>
         <div className="text-right">
           <Button type="submit" disabled={disabled} name="intent" value="sso">
-            {disabled ? <Spinner /> : "Save"}
+            {disabled ? <Spinner /> : "Opslaan"}
           </Button>
         </div>
       </Card>

@@ -70,9 +70,9 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     if (currentOrganization.type === OrganizationType.PERSONAL) {
       throw new ShelfError({
         cause: null,
-        title: "Not allowed",
+        title: "Niet toegestaan",
         message:
-          "You are not allowed to access working hours in a personal workspace.",
+          "U heeft geen toegang tot werktijden in een persoonlijke werkruimte.",
         label: "Settings",
         shouldBeCaptured: false,
       });
@@ -84,7 +84,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     ]);
 
     const header: HeaderData = {
-      title: "Bookings settings",
+      title: "Reserveringsinstellingen",
     };
 
     return payload({
@@ -170,8 +170,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Settings updated",
-          message: "Booking time restrictions have been updated successfully",
+          title: "Instellingen bijgewerkt",
+          message: "Beperkingen voor reserveringstijd zijn succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -197,8 +197,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Settings updated",
-          message: "Tags requirement setting has been updated successfully",
+          title: "Instellingen bijgewerkt",
+          message: "Tags vereiste-instelling is succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -224,8 +224,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Settings updated",
-          message: "Auto-archive setting has been updated successfully",
+          title: "Instellingen bijgewerkt",
+          message: "Instelling voor automatisch archiveren is succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -247,8 +247,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Settings updated",
-          message: "Auto-archive days setting has been updated successfully",
+          title: "Instellingen bijgewerkt",
+          message: "Instelling voor automatisch archiveren (dagen) is succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -268,8 +268,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Workspace updated",
-          message: "Your workspace has been updated successfully",
+          title: "Werkruimte bijgewerkt",
+          message: "Uw werkruimte is succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -288,8 +288,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         if (!validation.success) {
           throw new ShelfError({
             cause: validation.error,
-            title: "Invalid Schedule",
-            message: "Please check your working hours schedule for errors",
+            title: "Ongeldig schema",
+            message: "Controleer uw werktijdenschema op fouten",
             additionalData: {
               userId,
               organizationId,
@@ -312,8 +312,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Schedule updated",
-          message: "Your weekly schedule has been updated successfully",
+          title: "Schema bijgewerkt",
+          message: "Uw wekelijkse schema is succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -337,8 +337,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Override created",
-          message: "Working hours override has been created successfully",
+          title: "Uitzondering gemaakt",
+          message: "Uitzondering op werktijden is succesvol gemaakt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -361,8 +361,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         await deleteWorkingHoursOverride(overrideId);
 
         sendNotification({
-          title: "Override deleted",
-          message: "Your working hours override has been deleted successfully",
+          title: "Uitzondering verwijderd",
+          message: "Uw uitzondering op werktijden is succesvol verwijderd",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -375,9 +375,9 @@ export async function action({ context, request }: ActionFunctionArgs) {
         if (role !== OrganizationRoles.OWNER) {
           throw new ShelfError({
             cause: null,
-            title: "Not allowed",
+            title: "Niet toegestaan",
             message:
-              "Only the workspace owner can change explicit check-in settings",
+              "Alleen de werkruimte-eigenaar kan instellingen voor expliciete check-in wijzigen",
             status: 403,
             label: "Booking Settings",
           });
@@ -401,8 +401,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Settings updated",
-          message: "Explicit check-in settings have been updated successfully",
+          title: "Instellingen bijgewerkt",
+          message: "Instellingen voor expliciete check-in zijn succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -432,9 +432,9 @@ export default function GeneralPage() {
       {/* Explicit check-in settings form */}
       <ExplicitCheckinSettings
         header={{
-          title: "Explicit check-in requirement",
+          title: "Expliciete check-in vereiste",
           subHeading:
-            "Control whether specific roles must use the scanner-based explicit check-in flow instead of the one-click quick check-in. Only workspace owners can change this setting.",
+            "Beheer of specifieke rollen de scanner-gebaseerde expliciete check-in stroom moeten gebruiken in plaats van de snelle check-in met één klik. Alleen werkruimte-eigenaren kunnen deze instelling wijzigen.",
         }}
         defaultValues={{
           requireExplicitCheckinForAdmin:
@@ -447,9 +447,9 @@ export default function GeneralPage() {
       {/* Tags required settings form */}
       <TagsRequiredSettings
         header={{
-          title: "Tags requirement",
+          title: "Tags vereiste",
           subHeading:
-            "Control whether users must add tags to their bookings. This helps with categorization and organization of bookings.",
+            "Beheer of gebruikers tags aan hun reserveringen moeten toevoegen. Dit helpt bij de categorisering en organisatie van reserveringen.",
         }}
         defaultValue={bookingSettings.tagsRequired}
       />
@@ -457,9 +457,9 @@ export default function GeneralPage() {
       {/* Auto-archive settings form */}
       <AutoArchiveSettings
         header={{
-          title: "Automation",
+          title: "Automatisering",
           subHeading:
-            "Configure automatic actions for completed bookings to keep your workspace clean.",
+            "Configureer automatische acties voor voltooide reserveringen om uw werkruimte netjes te houden.",
         }}
         defaultAutoArchiveBookings={bookingSettings.autoArchiveBookings}
         defaultAutoArchiveDays={bookingSettings.autoArchiveDays}
@@ -468,9 +468,9 @@ export default function GeneralPage() {
       {/* Time settings form */}
       <TimeSettings
         header={{
-          title: "Booking time restrictions",
+          title: "Beperkingen voor reserveringstijd",
           subHeading:
-            "Control booking timing constraints including minimum advance notice and maximum booking duration.",
+            "Beheer beperkingen voor reserveringstijden, waaronder de minimale voorafgaande kennisgeving en maximale reserveringsduur.",
         }}
         defaultBufferValue={bookingSettings.bufferStartTime}
         defaultMaxLengthValue={bookingSettings.maxBookingLength}
@@ -483,9 +483,9 @@ export default function GeneralPage() {
       <EnableWorkingHoursForm
         enabled={workingHours.enabled}
         header={{
-          title: "Working hours",
+          title: "Werktijden",
           subHeading:
-            "Manage your workspace's working hours. This will allow you to limit when bookings' start and end times and dates.",
+            "Beheer de werktijden van uw werkruimte. Hiermee kunt u beperken wanneer start- en eindtijden en -datums van reserveringen vallen.",
         }}
       />
       {/* New weekly schedule form - only show if working hours are enabled */}

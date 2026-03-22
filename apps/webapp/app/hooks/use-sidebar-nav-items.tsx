@@ -79,13 +79,13 @@ export function useSidebarNavItems() {
     return {
       reason: (
         <div>
-          <h5>Disabled</h5>
+          <h5>Uitgeschakeld</h5>
           <p>
-            Booking is a premium feature only available for Team workspaces.
+            Reserveren is een premium functie die alleen beschikbaar is voor Team-werkruimtes.
           </p>
 
           <When truthy={!!subscription} fallback={<UpgradeMessage />}>
-            <p>Please switch to your team workspace to access this feature.</p>
+            <p>Schakel over naar uw team-werkruimte om toegang te krijgen tot deze functie.</p>
           </When>
         </div>
       ),
@@ -232,18 +232,6 @@ export function useSidebarNavItems() {
       title: "QR Scanner",
       to: "/scanner",
       Icon: ScanBarcodeIcon,
-    },
-    {
-      type: "button",
-      title: "Updates",
-      Icon: BellIcon,
-      badge: {
-        show: (unreadUpdatesCount || 0) > 0,
-        variant: "unread" as const,
-      },
-      onClick: () => {
-        // This will be handled by the sidebar component with popover
-      },
     },
     {
       type: "button",

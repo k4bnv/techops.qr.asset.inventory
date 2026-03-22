@@ -32,14 +32,14 @@ const SSOLoginFormSchema = z.object({
     .string()
     .transform((email) => email.toLowerCase())
     .refine(isValidDomain, () => ({
-      message: "Please enter a valid domain name",
+      message: "Voer een geldige domeinnaam in",
     })),
   redirectTo: z.string().optional(),
 });
 
 export function loader({ context }: LoaderFunctionArgs) {
-  const title = "Log in with SSO";
-  const subHeading = "Enter your company's domain to login with SSO.";
+  const title = "Inloggen met SSO";
+  const subHeading = "Voer het domein van uw bedrijf in om in te loggen met SSO.";
   const { disableSSO } = config;
 
   try {
@@ -50,9 +50,9 @@ export function loader({ context }: LoaderFunctionArgs) {
     if (disableSSO) {
       throw new ShelfError({
         cause: null,
-        title: "SSO is disabled",
+        title: "SSO is uitgeschakeld",
         message:
-          "For more information, please contact your workspace administrator.",
+          "Neem voor meer informatie contact op met uw werkruimte-beheerder.",
         label: "User onboarding",
         status: 403,
         shouldBeCaptured: false,
@@ -106,7 +106,7 @@ export default function SSOLogin() {
           <div className="flex flex-col gap-3">
             <Input
               data-test-id="domain"
-              label="Company domain"
+              label="Bedrijfsdomein"
               placeholder="yourdomain.com"
               required
               autoFocus={true}
@@ -124,7 +124,7 @@ export default function SSOLogin() {
               disabled={disabled}
               width="full"
             >
-              Log In
+              Inloggen
             </Button>
           </div>
         </Form>
@@ -132,13 +132,13 @@ export default function SSOLogin() {
           <div className="text-sm text-error-500">{data.error.message}</div>
         )}
         <div>
-          Want to enable SSO for your organization?{" "}
+          Wilt u SSO inschakelen voor uw organisatie?{" "}
           <Button
             as="a"
             href="mailto:hello@shelf.nu?subject=SSO request"
             variant="link"
           >
-            Contact us
+            Neem contact op
           </Button>
         </div>
       </div>

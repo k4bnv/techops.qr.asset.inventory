@@ -87,7 +87,7 @@ export default function SidebarNav({
         case "button": {
           // Special handling for Updates button
           if (navItem.title === "Updates") {
-            return <UpdatesNavItem />;
+            return null;
           }
 
           // Special handling for Feedback button

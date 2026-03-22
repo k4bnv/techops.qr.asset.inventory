@@ -35,7 +35,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 ];
 
 export const handle = {
-  breadcrumb: () => <span>Edit</span>,
+  breadcrumb: () => <span>Bewerken</span>,
 };
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
@@ -70,7 +70,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     );
 
     const header: HeaderData = {
-      title: `Edit | ${customField.name}`,
+      title: `Bewerken | ${customField.name}`,
       subHeading: FIELD_TYPE_NAME[customField.type],
     };
 
@@ -133,8 +133,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Custom field updated",
-      message: "Your custom field  has been updated successfully",
+      title: "Aangepast veld bijgewerkt",
+      message: "Uw aangepaste veld is succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

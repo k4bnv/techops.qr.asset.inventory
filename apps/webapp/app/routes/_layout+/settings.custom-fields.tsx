@@ -18,7 +18,7 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 
 export const meta = () => [
-  { title: appendToMetaTitle("Custom fields settings") },
+  { title: appendToMetaTitle("Instellingen aangepaste velden") },
 ];
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
@@ -58,7 +58,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
         id: z.string(),
         confirmation: z
           .string()
-          .min(1, "Confirmation is required")
+          .min(1, "Bevestiging is vereist")
           .transform((value) => value.trim()),
       }),
       { additionalData: { userId } }
@@ -71,7 +71,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
       throw new ShelfError({
         cause: null,
         message:
-          "Confirmation text does not match the custom field name (case-insensitive).",
+          "De bevestigingstekst komt niet overeen met de naam van het aangepaste veld (hoofdletterongevoelig).",
         additionalData: {
           userId,
           customFieldId: id,
@@ -87,8 +87,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
     await softDeleteCustomField({ id, organizationId });
 
     sendNotification({
-      title: "Custom field deleted",
-      message: `The custom field "${customField.name}" has been deleted. You can now create a new field with the same name if needed.`,
+      title: "Aangepast veld verwijderd",
+      message: `Het aangepaste veld "${customField.name}" is verwijderd. U kunt nu indien nodig een nieuw veld met dezelfde naam maken.`,
       icon: { name: "success", variant: "success" },
       senderId: userId,
     });
@@ -101,7 +101,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
 }
 
 export const handle = {
-  breadcrumb: () => <Link to="/settings/custom-fields">Custom Fields</Link>,
+  breadcrumb: () => <Link to="/settings/custom-fields">Aangepaste velden</Link>,
 };
 
 // export const shouldRevalidate = () => false;

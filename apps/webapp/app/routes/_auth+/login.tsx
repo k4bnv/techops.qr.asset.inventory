@@ -47,8 +47,8 @@ import {
 import { validEmail } from "~/utils/misc";
 
 export function loader({ context }: LoaderFunctionArgs) {
-  const title = "Log in";
-  const subHeading = "Welcome back! Enter your details below to log in.";
+  const title = "Inloggen";
+  const subHeading = "Welkom terug! Vul uw gegevens hieronder in om in te loggen.";
   const { disableSignup, disableSSO } = config;
 
   if (context.isAuthenticated) {
@@ -63,9 +63,9 @@ const LoginFormSchema = z.object({
     .string()
     .transform((email) => email.toLowerCase())
     .refine(validEmail, () => ({
-      message: "Please enter a valid email",
+      message: "Vul alstublieft een geldig e-mailadres in",
     })),
-  password: z.string().min(8, "Password is too short. Minimum 8 characters."),
+  password: z.string().min(8, "Wachtwoord is te kort. Minimaal 8 tekens."),
   redirectTo: z.string().optional(),
 });
 
@@ -182,22 +182,20 @@ export default function IndexLoginForm() {
     <div className="w-full max-w-md">
       {acceptedInvite ? (
         <div className="mb-8 text-center text-success-600">
-          Successfully accepted workspace invite. Please login to see your new
-          workspace.
+          Succesvol geaccepteerde werkruimte-uitnodiging. Log in om uw nieuwe werkruimte te zien.
         </div>
       ) : null}
 
       {passwordReset ? (
         <div className="mb-8 text-center text-success-600">
-          You have successfully reset your password. You can now use your new
-          password to login.
+          U heeft succesvol uw wachtwoord hersteld. U kunt nu inloggen met uw nieuwe wachtwoord.
         </div>
       ) : null}
       <Form ref={zo.ref} method="post" replace className="flex flex-col gap-5">
         <div>
           <Input
             data-test-id="email"
-            label="Email address"
+            label="E-mailadres"
             placeholder="zaans@huisje.com"
             required
             autoFocus={true}
@@ -210,7 +208,7 @@ export default function IndexLoginForm() {
           />
         </div>
         <PasswordInput
-          label="Password"
+          label="Wachtwoord"
           placeholder="**********"
           data-test-id="password"
           name={zo.fields.password()}
@@ -226,11 +224,11 @@ export default function IndexLoginForm() {
           data-test-id="login"
           disabled={disabled}
         >
-          Log In
+          Inloggen
         </Button>
         <div className="flex flex-col items-center justify-center">
           <div className="text-center text-sm text-gray-500">
-            Don't remember your password?{" "}
+            Wachtwoord vergeten?{" "}
             <Button
               variant="link"
               to={{
@@ -238,7 +236,7 @@ export default function IndexLoginForm() {
                 search: searchParams.toString(),
               }}
             >
-              Reset password
+              Wachtwoord herstellen
             </Button>
           </div>
         </div>
@@ -246,7 +244,7 @@ export default function IndexLoginForm() {
       {!disableSSO && (
         <div className="mt-6 text-center">
           <Button variant="link" to="/sso-login">
-            Login with SSO
+            Inloggen met SSO
           </Button>
         </div>
       )}
@@ -258,9 +256,9 @@ export default function IndexLoginForm() {
           </div>
           <div className="relative flex justify-center text-sm">
             <span className="bg-white px-2 text-gray-500">
-              Or use a{" "}
-              <strong title="One Time Password (OTP) is the most secure way to login. We will send you a code to your email.">
-                One Time Password
+              Of gebruik een{" "}
+              <strong title="Eenmalig wachtwoord (OTP) is de meest veilige manier om in te loggen. We sturen u een code naar uw e-mailadres.">
+                Eenmalig Wachtwoord
               </strong>
             </span>
           </div>
@@ -268,21 +266,7 @@ export default function IndexLoginForm() {
         <div className="mt-6">
           <ContinueWithEmailForm mode="login" />
         </div>
-        {disableSignup ? null : (
-          <div className="mt-6 text-center text-sm text-gray-500">
-            Don't have an account?{" "}
-            <Button
-              variant="link"
-              data-test-id="signupButton"
-              to={{
-                pathname: "/join",
-                search: searchParams.toString(),
-              }}
-            >
-              Sign up
-            </Button>
-          </div>
-        )}
+        {/* Registration is disabled per user request */}
       </div>
     </div>
   );

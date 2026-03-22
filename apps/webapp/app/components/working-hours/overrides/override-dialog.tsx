@@ -39,7 +39,7 @@ export function NewOverrideDialog() {
         disabled={disabled}
         icon="plus"
       >
-        Add override
+        Uitzondering toevoegen
       </Button>
       <DialogPortal>
         <Dialog
@@ -48,9 +48,9 @@ export function NewOverrideDialog() {
           headerClassName="border-b"
           title={
             <div className="-mb-3 w-full pb-6">
-              <h3>Create new override</h3>
+              <h3>Nieuwe uitzondering aanmaken</h3>
               <p className="text-gray-600">
-                Create a new date override for your working hours.
+                Maak een nieuwe datumuitzondering aan voor uw werktijden.
               </p>
             </div>
           }
@@ -110,8 +110,8 @@ export const WorkingHoursOverrideForm = ({
 
         {/* Override Open/Closed Toggle */}
         <FormRow
-          rowLabel="Override Status"
-          subHeading="Choose whether this date should be open or closed"
+          rowLabel="Status uitzondering"
+          subHeading="Kies of deze datum open of gesloten moet zijn"
           className="border-b pb-4"
         >
           <div className="flex items-center gap-3">
@@ -121,7 +121,7 @@ export const WorkingHoursOverrideForm = ({
               disabled={disabled}
               defaultChecked={isOpen}
               onCheckedChange={handleIsOpenChange}
-              title="Toggle override status"
+              title="Uitzonderingsstatus in-/uitschakelen"
             />
             <label htmlFor="override-is-open" className="text-sm font-medium">
               Open
@@ -136,13 +136,13 @@ export const WorkingHoursOverrideForm = ({
 
         {/* Date Field */}
         <FormRow
-          rowLabel="Date"
-          subHeading="Select the date for this override"
+          rowLabel="Datum"
+          subHeading="Selecteer de datum voor deze uitzondering"
           className="border-b pb-4"
           required
         >
           <Input
-            label="Override Date"
+            label="Datum uitzondering"
             hideLabel
             type="date"
             name={zo.fields.date()}
@@ -157,8 +157,8 @@ export const WorkingHoursOverrideForm = ({
         {/* Time Fields - Only show when isOpen is true */}
         {isOpen && (
           <FormRow
-            rowLabel="Operating Hours"
-            subHeading="Set the open and close times for this date"
+            rowLabel="Openingstijden"
+            subHeading="Stel de start- en eindtijd in voor deze datum"
             className="border-b pb-4"
             required
           >
@@ -167,8 +167,8 @@ export const WorkingHoursOverrideForm = ({
                 <TimeSelect
                   name="openTime"
                   disabled={disabled}
-                  placeholder="Select opening time"
-                  aria-label="Override opening time"
+                  placeholder="Selecteer starttijd"
+                  aria-label="Starttijd uitzondering"
                   required={isOpen}
                   defaultValue="09:00"
                 />
@@ -176,8 +176,8 @@ export const WorkingHoursOverrideForm = ({
                 <TimeSelect
                   name="closeTime"
                   disabled={disabled}
-                  placeholder="Select closing time"
-                  aria-label="Override closing time"
+                  placeholder="Selecteer eindtijd"
+                  aria-label="Eindtijd uitzondering"
                   required={isOpen}
                   defaultValue="17:00"
                 />
@@ -195,19 +195,19 @@ export const WorkingHoursOverrideForm = ({
 
         {/* Reason Field */}
         <FormRow
-          rowLabel="Reason"
-          subHeading="Provide a reason for this override (e.g., Holiday, Maintenance, etc.)"
+          rowLabel="Reden"
+          subHeading="Geef een reden op voor deze uitzondering (bijv. feestdag, onderhoud, enz.)"
           className="border-b pb-4"
           required
         >
           <Input
-            label="Reason for Override"
+            label="Reden voor uitzondering"
             hideLabel
             type="text"
             name={zo.fields.reason()}
             disabled={disabled}
             required
-            placeholder="e.g., Public Holiday, Staff Training, etc."
+            placeholder="bijv. Nationale feestdag, Teamuitje, enz."
             maxLength={500}
             error={zo.errors.reason()?.message}
             className="w-full"
@@ -229,7 +229,7 @@ export const WorkingHoursOverrideForm = ({
                 onClick={onCancel}
                 disabled={disabled}
               >
-                Cancel
+                Annuleren
               </Button>
             )}
             <Button
@@ -237,7 +237,7 @@ export const WorkingHoursOverrideForm = ({
               disabled={disabled}
               className={"whitespace-nowrap"}
             >
-              {disabled ? <Spinner /> : "Create Override"}
+              {disabled ? <Spinner /> : "Uitzondering aanmaken"}
             </Button>
           </div>
         </div>

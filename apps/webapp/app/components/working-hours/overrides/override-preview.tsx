@@ -16,7 +16,7 @@ export function OverridePreview({ override }: OverridePreviewProps) {
   const disabled = useDisabled(deleteFetcher);
 
   const handleDelete = () => {
-    if (window.confirm("Are you sure you want to delete this override?")) {
+    if (window.confirm("Weet u zeker dat u deze uitzondering wilt verwijderen?")) {
       void deleteFetcher.submit(
         {
           intent: "deleteOverride",
@@ -55,7 +55,7 @@ export function OverridePreview({ override }: OverridePreviewProps) {
                 : "bg-red-100 text-red-800"
             )}
           >
-            {override.isOpen ? "Open" : "Closed"}
+            {override.isOpen ? "Open" : "Gesloten"}
           </span>
         </div>
         <div className="mt-1 flex items-center gap-4 text-sm text-gray-600">
@@ -65,7 +65,7 @@ export function OverridePreview({ override }: OverridePreviewProps) {
               closeTime={override.closeTime || undefined}
             />
           ) : (
-            <span>Closed all day</span>
+            <span>Hele dag gesloten</span>
           )}
           {override.reason && (
             <>
@@ -80,7 +80,7 @@ export function OverridePreview({ override }: OverridePreviewProps) {
         variant="secondary"
         disabled={disabled}
         onClick={handleDelete}
-        title="Delete override"
+        title="Uitzondering verwijderen"
       >
         <TrashIcon className="size-4" />
       </Button>

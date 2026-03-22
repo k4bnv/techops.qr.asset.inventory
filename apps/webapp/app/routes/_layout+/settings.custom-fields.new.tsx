@@ -23,7 +23,7 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 import { assertUserCanCreateMoreCustomFields } from "~/utils/subscription.server";
 
-const title = "New Custom Field";
+const title = "Nieuw aangepast veld";
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -111,8 +111,8 @@ export async function action({ context, request }: LoaderFunctionArgs) {
     });
 
     sendNotification({
-      title: "Custom Field created",
-      message: "Your Custom Field has been created successfully",
+      title: "Aangepast veld gemaakt",
+      message: "Uw aangepaste veld is succesvol gemaakt",
       icon: { name: "success", variant: "success" },
       senderId: userId,
     });
@@ -131,7 +131,7 @@ export default function NewCustomFieldPage() {
     <>
       <Header
         hideBreadcrumbs
-        title={title ? title : "Untitled custom field"}
+        title={title ? title : "Naamloos aangepast veld"}
         classNames="-mt-5"
       />
       <div>

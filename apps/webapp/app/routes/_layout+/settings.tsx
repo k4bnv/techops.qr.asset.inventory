@@ -17,7 +17,7 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 
 export const handle = {
-  breadcrumb: () => <Link to="/settings">Settings</Link>,
+  breadcrumb: () => <Link to="/settings">Instellingen</Link>,
 };
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
@@ -32,8 +32,8 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       action: PermissionAction.read,
     });
 
-    const title = "Settings";
-    const subHeading = "Manage your preferences here.";
+    const title = "Instellingen";
+    const subHeading = "Beheer hier uw voorkeuren.";
     const header = {
       title,
       subHeading,
@@ -58,10 +58,10 @@ export const shouldRevalidate = () => false;
 export default function SettingsPage() {
   const { _isPersonalOrg } = useLoaderData<typeof loader>();
   let items = [
-    { to: "general", content: "General" },
-    ...(!_isPersonalOrg ? [{ to: "bookings", content: "Bookings" }] : []),
-    ...(!_isPersonalOrg ? [{ to: "emails", content: "Emails" }] : []),
-    { to: "custom-fields", content: "Custom fields" },
+    { to: "general", content: "Algemeen" },
+    ...(!_isPersonalOrg ? [{ to: "bookings", content: "Reserveringen" }] : []),
+    ...(!_isPersonalOrg ? [{ to: "emails", content: "E-mails" }] : []),
+    { to: "custom-fields", content: "Aangepaste velden" },
     { to: "team", content: "Team" },
   ];
 

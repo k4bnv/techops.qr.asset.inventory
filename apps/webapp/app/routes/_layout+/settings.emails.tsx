@@ -47,8 +47,8 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     if (currentOrganization.type === OrganizationType.PERSONAL) {
       throw new ShelfError({
         cause: null,
-        title: "Not allowed",
-        message: "Email settings are not available for personal workspaces.",
+        title: "Niet toegestaan",
+        message: "E-mailinstellingen zijn niet beschikbaar voor persoonlijke werkruimtes.",
         label: "Settings",
         shouldBeCaptured: false,
         status: 403,
@@ -56,7 +56,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     }
 
     const header: HeaderData = {
-      title: "Email settings",
+      title: "E-mailinstellingen",
     };
 
     return payload({
@@ -125,8 +125,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Settings updated",
-      message: "Email footer has been updated successfully",
+      title: "Instellingen bijgewerkt",
+      message: "E-mailvoettekst is succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });
@@ -160,42 +160,34 @@ export default function EmailSettingsPage() {
       {/* Left column: Form */}
       <div className="flex flex-1 flex-col gap-4">
         <div>
-          <h3 className="text-text-lg font-semibold">Custom email footer</h3>
+          <h3 className="text-text-lg font-semibold">Aangepaste e-mailvoettekst</h3>
           <p className="text-sm text-gray-600">
-            Add a custom message that appears at the bottom of all workspace
-            emails sent to team members.
+            Voeg een aangepast bericht toe dat onderaan alle werkruimte-e-mails wordt weergegeven die naar teamleden worden verzonden.
           </p>
         </div>
 
         <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
           <p className="mb-2 text-sm font-medium text-gray-700">
-            This footer will appear on the following emails:
+            Deze voettekst verschijnt in de volgende e-mails:
           </p>
           <ul className="space-y-1 text-sm text-gray-600">
             <li>
-              <span className="font-medium">Bookings:</span> Reserved, checkout
-              reminder, check-in reminder, overdue, completed, extended,
-              cancelled, updated, deleted
+              <span className="font-medium">Reserveringen:</span> Gereserveerd, checkout-herinnering, check-in herinnering, te laat, voltooid, verlengd, geannuleerd, bijgewerkt, verwijderd
             </li>
             <li>
-              <span className="font-medium">Asset reminders:</span> Reminder
-              notifications
+              <span className="font-medium">Asset herinneringen:</span> Herinneringsmeldingen
             </li>
             <li>
-              <span className="font-medium">Invitations:</span> Workspace invite
-              emails
+              <span className="font-medium">Uitnodigingen:</span> Uitnodigingsmails voor werkruimte
             </li>
             <li>
-              <span className="font-medium">Access:</span> Access revocation
-              notices
+              <span className="font-medium">Toegang:</span> Kennisgevingen van intrekking van toegang
             </li>
             <li>
-              <span className="font-medium">Audits:</span> Assignment,
-              cancelled, completed, reminder, overdue notifications
+              <span className="font-medium">Audits:</span> Toewijzing, geannuleerd, voltooid, herinnering, te laat meldingen
             </li>
             <li>
-              <span className="font-medium">Role changes:</span> Role change
-              notifications
+              <span className="font-medium">Rolwijzigingen:</span> Meldingen van rolwijzigingen
             </li>
           </ul>
         </div>
@@ -206,7 +198,7 @@ export default function EmailSettingsPage() {
               htmlFor={zo.fields.customEmailFooter()}
               className="mb-1.5 block text-sm font-medium text-gray-700"
             >
-              Footer message
+              Voettekstbericht
             </label>
             <textarea
               id={zo.fields.customEmailFooter()}
@@ -216,7 +208,7 @@ export default function EmailSettingsPage() {
               maxLength={EMAIL_FOOTER_MAX_LENGTH}
               rows={10}
               className="w-full rounded-lg border border-gray-300 px-3.5 py-2.5 text-sm text-gray-900 placeholder:text-gray-500 focus:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-25 disabled:opacity-50"
-              placeholder="e.g., ACME Corp - support@acme.com - (555) 123-4567"
+              placeholder="bijv. ACME Corp - support@acme.com - (555) 123-4567"
               onChange={(e) => {
                 setCharCount(e.target.value.length);
                 setFooterPreview(e.target.value);
@@ -231,23 +223,21 @@ export default function EmailSettingsPage() {
             )}
             <div className="mt-1 flex items-center justify-between">
               <p className="text-xs text-gray-500">
-                Links are not allowed. Email addresses and phone numbers are
-                permitted.
+                Links zijn niet toegestaan. E-mailadressen en telefoonnummers zijn toegestaan.
               </p>
               <span className="text-xs text-gray-500">
-                {charCount} / {EMAIL_FOOTER_MAX_LENGTH} characters
+                {charCount} / {EMAIL_FOOTER_MAX_LENGTH} tekens
               </span>
             </div>
           </div>
 
           <p className="text-xs text-gray-500">
-            Note: Custom footers with certain content may affect email
-            deliverability and spam scores.
+            Opmerking: aangepaste voetteksten met bepaalde inhoud kunnen de afleverbaarheid van e-mail en spamscores beïnvloeden.
           </p>
 
           <div>
             <Button type="submit" disabled={disabled}>
-              {disabled ? "Saving..." : "Save"}
+              {disabled ? "Opslaan..." : "Opslaan"}
             </Button>
           </div>
         </Form>
@@ -256,11 +246,11 @@ export default function EmailSettingsPage() {
       {/* Right column: Email preview */}
       <div className="flex-1">
         <div className="mb-2 flex items-center justify-between">
-          <p className="text-sm font-medium text-gray-700">Preview</p>
+          <p className="text-sm font-medium text-gray-700">Voorbeeld</p>
           <ViewButtonGroup
             views={[
               { label: "Desktop", value: "desktop" },
-              { label: "Mobile", value: "mobile" },
+              { label: "Mobiel", value: "mobile" },
             ]}
             currentView={previewMode}
             onViewChange={(v) => setPreviewMode(v as "desktop" | "mobile")}
@@ -304,19 +294,19 @@ function EmailPreview({
       {/* Email header — From / To / Subject */}
       <div className="border-b border-gray-200 bg-gray-100 px-5 py-3 text-[13px] leading-relaxed text-gray-600">
         <p>
-          <span className="text-gray-400">From:</span>{" "}
+          <span className="text-gray-400">Van:</span>{" "}
           <span className="text-gray-700">
             TechOps &lt;notifications@shelf.nu&gt;
           </span>
         </p>
         <p>
-          <span className="text-gray-400">To:</span>{" "}
+          <span className="text-gray-400">Aan:</span>{" "}
           <span className="text-gray-700">jane@example.com</span>
         </p>
         <p>
-          <span className="text-gray-400">Subject:</span>{" "}
+          <span className="text-gray-400">Onderwerp:</span>{" "}
           <span className="text-gray-700">
-            ✅ Booking reserved (Office Equipment Booking) - shelf.nu
+            ✅ Reservering voor Jane Doe - shelf.nu
           </span>
         </p>
       </div>
@@ -366,7 +356,7 @@ function EmailPreview({
                   marginBottom: "16px",
                 }}
               >
-                Booking reservation for Jane Doe
+                Reservering voor Jane Doe
               </h1>
               <h2
                 style={{
@@ -376,22 +366,22 @@ function EmailPreview({
                   marginBottom: "16px",
                 }}
               >
-                Office Equipment Booking | 3 assets
+                Kantoorapparatuur reservering | 3 assets
               </h2>
               <p style={{ fontSize: "16px", color: "#344054" }}>
                 <span style={{ color: "#101828", fontWeight: "600" }}>
-                  Custodian:
+                  Beheerder:
                 </span>{" "}
                 Jane Doe
               </p>
               <p style={{ fontSize: "16px", color: "#344054" }}>
                 <span style={{ color: "#101828", fontWeight: "600" }}>
-                  From:
+                  Van:
                 </span>{" "}
                 01/15/26, 9:00 AM
               </p>
               <p style={{ fontSize: "16px", color: "#344054" }}>
-                <span style={{ color: "#101828", fontWeight: "600" }}>To:</span>{" "}
+                <span style={{ color: "#101828", fontWeight: "600" }}>Tot:</span>{" "}
                 01/17/26, 5:00 PM
               </p>
             </div>
@@ -409,7 +399,7 @@ function EmailPreview({
                 marginBottom: "32px",
               }}
             >
-              View booking in app
+              Bekijk reservering in app
             </div>
 
             {/* Custom footer - live preview */}
@@ -436,14 +426,12 @@ function EmailPreview({
                 color: "#344054",
               }}
             >
-              This email was sent to jane@example.com because it is part of the
-              workspace{" "}
+              Deze e-mail is naar jane@example.com verzonden omdat deze deel uitmaakt van de werkruimte{" "}
               <span style={{ color: "#101828", fontWeight: "600" }}>
                 &quot;{organizationName}&quot;
               </span>
               .
-              <br /> If you think you weren&apos;t supposed to have received
-              this email please contact the owner of the workspace.
+              <br /> Als u denkt dat u deze e-mail niet had mogen ontvangen, neem dan contact op met de eigenaar van de werkruimte.
             </p>
             <p
               style={{

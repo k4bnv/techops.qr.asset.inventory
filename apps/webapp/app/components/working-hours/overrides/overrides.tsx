@@ -13,9 +13,9 @@ export function Overrides({
     <Card className={tw("my-0")}>
       <div className="flex w-full items-start justify-between border-b pb-4">
         <div className="">
-          <h3 className="text-text-lg font-semibold">Date overrides</h3>
+          <h3 className="text-text-lg font-semibold">Uitzonderingen op data</h3>
           <p className="text-sm text-gray-600">
-            Add dates when working hours change from your daily hours.
+            Voeg datums toe waarop de werktijden afwijken van uw dagelijkse uren.
           </p>
         </div>
         <NewOverrideDialog />
@@ -25,9 +25,9 @@ export function Overrides({
       <div className="">
         {overrides.length === 0 ? (
           <div className="py-8 text-center text-gray-500">
-            <p>No date overrides configured.</p>
+            <p>Geen uitzonderingen op data geconfigureerd.</p>
             <p className="text-sm">
-              Click "Add override" to create your first one.
+              Klik op "Uitzondering toevoegen" om uw eerste aan te maken.
             </p>
           </div>
         ) : (

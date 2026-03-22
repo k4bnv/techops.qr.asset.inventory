@@ -14,44 +14,44 @@ export type OtpPageData = Record<
 
 export const OTP_PAGE_MAP: OtpPageData = {
   login: {
-    title: "Fill your code",
+    title: "Vul uw code in",
     SubHeading: ({ email }) => (
       <SubHeading className="-mt-4 text-center">
-        We have sent a code to{" "}
-        <span className="font-bold text-gray-900">{email}</span>. Fill the code
-        below to log in.
+        We hebben een code verzonden naar{" "}
+        <span className="font-bold text-gray-900">{email}</span>. Vul de onderstaande code
+        in om in te loggen.
       </SubHeading>
     ),
-    buttonTitle: "Log In",
+    buttonTitle: "Inloggen",
   },
   signup: {
-    title: "Create an account",
+    title: "Maak een account aan",
     SubHeading: () => (
       <SubHeading className="-mt-4 text-center">
-        Start your journey with TechOps.
+        Begin uw reis met TechOps.
       </SubHeading>
     ),
-    buttonTitle: "Create Account",
+    buttonTitle: "Account Aanmaken",
   },
   confirm_signup: {
-    title: "Confirm your email",
+    title: "Bevestig uw e-mailadres",
     SubHeading: ({ email }) => (
       <SubHeading className="-mt-4 text-center">
-        We have sent a code to{" "}
-        <span className="font-bold text-gray-900">{email}</span>. Fill the code
-        below to confirm you email.
+        We hebben een code verzonden naar{" "}
+        <span className="font-bold text-gray-900">{email}</span>. Vul de onderstaande code
+        in om uw e-mailadres te bevestigen.
       </SubHeading>
     ),
-    buttonTitle: "Confirm",
+    buttonTitle: "Bevestigen",
   },
 };
 
 export const DEFAULT_PAGE_DATA: OtpPageData["login"] = {
-  title: "One Time Password",
-  buttonTitle: "Continue",
+  title: "Eenmalig Wachtwoord",
+  buttonTitle: "Doorgaan",
   SubHeading: () => (
     <SubHeading className="-mt-4 text-center">
-      Please confirm your OTP to continue
+      Bevestig uw OTP om door te gaan
     </SubHeading>
   ),
 };

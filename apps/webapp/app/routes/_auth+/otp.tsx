@@ -48,12 +48,12 @@ export function loader({ context, request }: LoaderFunctionArgs) {
 }
 
 const OtpSchema = z.object({
-  otp: z.string().min(2, "Please enter the code sent to your email"),
+  otp: z.string().min(2, "Vul de code in die naar uw e-mailadres is verzonden"),
   email: z
     .string()
     .transform((email) => email.toLowerCase())
     .refine(validEmail, () => ({
-      message: "Please enter a valid email",
+      message: "Vul alstublieft een geldig e-mailadres in",
     })),
 });
 
@@ -174,7 +174,7 @@ export default function OtpPage() {
       });
     } catch {
       setMessage({
-        message: "Something went wrong. Please try again.",
+        message: "Er is iets misgegaan. Probeer het opnieuw.",
         type: "error",
       });
     }
@@ -190,7 +190,7 @@ export default function OtpPage() {
         });
       } else {
         setMessage({
-          message: "Email sent successfully. Please check your inbox.",
+          message: "E-mail succesvol verzonden. Controleer uw inbox.",
           type: "success",
         });
       }
@@ -242,9 +242,9 @@ export default function OtpPage() {
             className="mt-6 w-full text-center text-sm font-semibold"
             onClick={handleResendOtp}
           >
-            Did not receive a code?{" "}
+            Geen code ontvangen?{" "}
             <span className="text-primary-500">
-              {fetcherDisabled ? "Sending code..." : "Send again"}
+              {fetcherDisabled ? "Code verzenden..." : "Opnieuw verzenden"}
             </span>
           </button>
         </div>

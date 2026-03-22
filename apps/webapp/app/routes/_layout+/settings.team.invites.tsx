@@ -78,12 +78,12 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
       });
 
     const header: HeaderData = {
-      title: `Settings - ${organization.name}`,
+      title: `Instellingen - ${organization.name}`,
     };
 
     const modelName = {
-      singular: "pending invite",
-      plural: "pending invites",
+      singular: "openstaande uitnodiging",
+      plural: "openstaande uitnodigingen",
     };
 
     return payload({
@@ -153,14 +153,14 @@ export default function UserInvitesSetting() {
       <ContextualModal />
 
       <p className="mb-6 text-xs text-gray-600">
-        Users by default have a mail registered in shelf and can get reminders,
-        log in or perform other actions. Read more about our{" "}
+        Gebruikers hebben standaard een e-mail geregistreerd in shelf en kunnen herinneringen ontvangen,
+        inloggen of andere acties uitvoeren. Lees hier meer over onze{" "}
         <Link
           to="https://www.shelf.nu/knowledge-base/user-roles-and-their-permissions"
           target="_blank"
           className="underline"
         >
-          permissions here
+          rechten
         </Link>
         .
       </p>
@@ -174,7 +174,7 @@ export default function UserInvitesSetting() {
                 variant="primary"
                 className="mt-2 w-full md:mt-0 md:w-max"
               >
-                <span className=" whitespace-nowrap">Invite a user</span>
+                <span className=" whitespace-nowrap">Nodig een gebruiker uit</span>
               </Button>
             }
           />
@@ -187,14 +187,14 @@ export default function UserInvitesSetting() {
             <>
               <Th>
                 <div className="flex items-center gap-1 [&_svg]:size-[15px]">
-                  Custodies{" "}
-                  <InfoTooltip content="Custodies count includes only direct asset custodies and doesn't count any assets assigned via bookings." />
+                  Beheerd{" "}
+                  <InfoTooltip content="Het aantal beheerde items omvat alleen directe toewijzingen van assets en telt geen assets mee die via boekingen zijn toegewezen." />
                 </div>
               </Th>
-              <Th>Role</Th>
-              <Th>Message</Th>
+              <Th>Rol</Th>
+              <Th>Bericht</Th>
               <Th>Status</Th>
-              <Th>Actions</Th>
+              <Th>Acties</Th>
             </>
           }
         />
@@ -248,7 +248,7 @@ function InviteMessageCell({ message }: { message?: string | null }) {
           <MailIcon className="size-4" />
         </TooltipTrigger>
         <TooltipContent side="top" className="max-w-[300px]">
-          <h5 className="mb-1">Invite message</h5>
+          <h5 className="mb-1">Uitnodigingsbericht</h5>
           <p className="whitespace-pre-wrap text-sm text-gray-600">{message}</p>
         </TooltipContent>
       </Tooltip>
@@ -277,7 +277,15 @@ const InviteStatusBadge = ({ status }: { status: InviteStatuses }) => {
         colorClasses
       )}
     >
-      <span>{status}</span>
+      <span>
+        {status === "PENDING"
+          ? "IN AFWACHTING"
+          : status === "ACCEPTED"
+          ? "GEACCEPTEERD"
+          : status === "REJECTED"
+          ? "AFGEWEZEN"
+          : status}
+      </span>
     </span>
   );
 };

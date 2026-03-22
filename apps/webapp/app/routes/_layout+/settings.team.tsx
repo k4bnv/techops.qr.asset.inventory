@@ -19,7 +19,7 @@ export type UserFriendlyRoles =
   | "Owner"
   | "Base"
   | "Self service";
-export const meta = () => [{ title: appendToMetaTitle("Team settings") }];
+export const meta = () => [{ title: appendToMetaTitle("Teaminstellingen") }];
 
 export const loader = async ({ request, context }: LoaderFunctionArgs) => {
   const authSession = context.getSession();
@@ -42,10 +42,10 @@ export const loader = async ({ request, context }: LoaderFunctionArgs) => {
 };
 
 export const organizationRolesMap: Record<string, UserFriendlyRoles> = {
-  [OrganizationRoles.ADMIN]: "Administrator",
-  [OrganizationRoles.OWNER]: "Owner",
-  [OrganizationRoles.BASE]: "Base",
-  [OrganizationRoles.SELF_SERVICE]: "Self service",
+  [OrganizationRoles.ADMIN]: "Beheerder" as UserFriendlyRoles,
+  [OrganizationRoles.OWNER]: "Eigenaar" as UserFriendlyRoles,
+  [OrganizationRoles.BASE]: "Basis" as UserFriendlyRoles,
+  [OrganizationRoles.SELF_SERVICE]: "Self service" as UserFriendlyRoles,
 };
 
 export default function TeamSettings() {
@@ -54,11 +54,11 @@ export default function TeamSettings() {
   const TABS: Item[] = [
     ...(!isPersonalOrg
       ? [
-          { to: "users", content: "Users" },
-          { to: "invites", content: "Invites" },
+          { to: "users", content: "Gebruikers" },
+          { to: "invites", content: "Uitnodigingen" },
         ]
       : []),
-    { to: "nrm", content: "Non-registered members" },
+    { to: "nrm", content: "Niet-geregistreerde leden" },
   ];
 
   const params = useParams();
@@ -68,10 +68,10 @@ export default function TeamSettings() {
       <When truthy={!params.userId}>
         <div className="rounded border bg-white p-4 md:px-10 md:py-8">
           <h1 className="text-[18px] font-semibold">
-            {isPersonalOrg ? "Team" : `${orgName}’s team`}
+            {isPersonalOrg ? "Team" : `Team van ${orgName}`}
           </h1>
           <p className="mb-6 text-sm text-gray-600">
-            Manage your existing team and give team members custody to certain
+            Beheer uw bestaande team en geef teamleden de bewaring van bepaalde
             assets.
           </p>
           <HorizontalTabs items={TABS} />

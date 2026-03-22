@@ -73,11 +73,11 @@ export function AutoArchiveSettings({
           }}
         >
           <FormRow
-            rowLabel="Auto-archive completed bookings"
+            rowLabel="Voltooide reserveringen automatisch archiveren"
             subHeading={
               <div>
-                Automatically move completed bookings to Archived after they've
-                been completed for the specified number of days.
+                Verplaats voltooide reserveringen automatisch naar Gearchiveerd nadat ze
+                voor het opgegeven aantal dagen zijn voltooid.
               </div>
             }
             className="border-b-0 pb-[10px] pt-0"
@@ -87,8 +87,8 @@ export function AutoArchiveSettings({
                 name={toggleZo.fields.autoArchiveBookings()}
                 disabled={toggleDisabled}
                 defaultChecked={defaultAutoArchiveBookings}
-                aria-label="Auto-archive completed bookings"
-                title="Auto-archive completed bookings"
+                aria-label="Voltooide reserveringen automatisch archiveren"
+                title="Voltooide reserveringen automatisch archiveren"
               />
             </div>
           </FormRow>
@@ -99,25 +99,25 @@ export function AutoArchiveSettings({
         {isEnabled && (
           <Form ref={daysZo.ref} method="post">
             <FormRow
-              rowLabel="Days after completion"
+              rowLabel="Dagen na voltooiing"
               subHeading={
                 <div>
-                  Number of days to wait after a booking is completed before
-                  automatically archiving it.
+                  Aantal dagen om te wachten nadat een reservering is voltooid voordat
+                  deze automatisch wordt gearchiveerd.
                 </div>
               }
               className="border-b-0 pb-[10px]"
               required
             >
               <Input
-                label="Days after completion"
+                label="Dagen na voltooiing"
                 hideLabel
                 type="number"
                 name={daysZo.fields.autoArchiveDays()}
                 disabled={daysDisabled}
                 defaultValue={defaultAutoArchiveDays}
                 required
-                title="Days after completion"
+                title="Dagen na voltooiing"
                 min={1}
                 max={365}
                 step={1}
@@ -136,7 +136,7 @@ export function AutoArchiveSettings({
                 value="updateAutoArchiveDays"
                 name="intent"
               >
-                {daysDisabled ? <Spinner /> : "Save settings"}
+                {daysDisabled ? <Spinner /> : "Instellingen opslaan"}
               </Button>
             </div>
           </Form>
