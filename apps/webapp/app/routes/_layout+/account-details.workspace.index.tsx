@@ -126,22 +126,7 @@ export default function WorkspacePage() {
   } = useLoaderData<typeof loader>();
   const user = useUserData();
 
-  let upgradeMessage: string | ReactNode = (
-    <>
-      You are currently able to have a maximum of {tierLimit.maxOrganizations}{" "}
-      workspaces. If you want to create more than{" "}
-      {tierLimit.maxOrganizations - 1} Team workspaces, please get in touch with{" "}
-      <CrispButton variant="link">sales</CrispButton>.
-    </>
-  );
-  if (tier.id === TierId.free || tier.id === TierId.tier_1) {
-    upgradeMessage = (
-      <>
-        You cannot create a workspace on a {tier.name} subscription.{" "}
-        <UpgradeMessage />
-      </>
-    );
-  }
+  let upgradeMessage: string | ReactNode = null;
 
   return (
     <div>
@@ -155,13 +140,6 @@ export default function WorkspacePage() {
             aria-label="new workspace"
             data-test-id="createNewWorkspaceButton"
             variant="primary"
-            disabled={
-              !canCreateMoreOrganizations
-                ? {
-                    reason: upgradeMessage,
-                  }
-                : false
-            }
           >
             New workspace
           </Button>

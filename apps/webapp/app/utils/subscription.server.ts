@@ -284,10 +284,7 @@ export const canCreateMoreOrganizations = ({
   tierLimit: { maxOrganizations: number } | null | undefined;
   totalOrganizations: number;
 }) => {
-  if (!premiumIsEnabled) return true;
-  if (!tierLimit?.maxOrganizations) return false;
-
-  return totalOrganizations < tierLimit?.maxOrganizations;
+  return true;
 };
 /**
  * Fetches user and calls {@link canCreateMoreOrganizations};.
