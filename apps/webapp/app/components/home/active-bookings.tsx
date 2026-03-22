@@ -28,7 +28,7 @@ export default function ActiveBookings() {
     <div className="flex h-full flex-col rounded border border-gray-200 bg-white">
       <div className="flex items-center justify-between border-b px-4 py-3 md:px-6">
         <span className="text-[14px] font-semibold text-gray-900">
-          Active bookings
+          Actieve reserveringen
         </span>
         <div className="flex items-center gap-2">
           {canUseBookings && (
@@ -37,7 +37,7 @@ export default function ActiveBookings() {
               variant="block-link-gray"
               className="!mt-0 text-xs"
             >
-              View all
+              Bekijk alles
             </Button>
           )}
         </div>
@@ -45,8 +45,8 @@ export default function ActiveBookings() {
       {!canUseBookings ? (
         <div className="flex flex-1 items-center justify-center p-4">
           <PremiumFeatureTeaser
-            headline="See who has what, live"
-            description="Track every checked-out asset in real time and know exactly when it's coming back."
+            headline="Zie wie wat heeft, live"
+            description="Volg elke uitgecheckte asset in realtime en weet precies wanneer deze terugkomt."
           />
         </div>
       ) : activeBookings.length > 0 ? (
@@ -93,7 +93,7 @@ export default function ActiveBookings() {
                                 : ""
                             }
                           >
-                            Due{" "}
+                            Verwacht{" "}
                             <DateS
                               date={booking.to}
                               options={{ month: "short", day: "numeric" }}
@@ -111,8 +111,8 @@ export default function ActiveBookings() {
       ) : (
         <div className="flex flex-1 items-center justify-center p-4">
           <DashboardEmptyState
-            text="No active bookings"
-            subText="Checked-out bookings will appear here."
+            text="Geen actieve reserveringen"
+            subText="Uitgecheckte reserveringen verschijnen hier."
           />
         </div>
       )}

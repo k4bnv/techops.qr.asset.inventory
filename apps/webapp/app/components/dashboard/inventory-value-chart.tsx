@@ -14,7 +14,7 @@ export default function InventoryValueChart() {
     <div className="flex h-full flex-col rounded border border-gray-200 bg-white">
       <div className="flex items-center justify-between border-b px-4 py-3 md:px-6">
         <span className="text-[14px] font-semibold text-gray-900">
-          Inventory value
+          Voorraadwaarde
         </span>
       </div>
       <div className="flex flex-1 items-center justify-center p-6">
@@ -35,7 +35,7 @@ export default function InventoryValueChart() {
                     className="relative"
                   >
                     <span className="block text-center text-xs font-medium text-gray-600">
-                      Value Known <br />
+                      Waarde bekend <br />
                       <span className="block text-[14px] font-semibold leading-6 text-gray-900">
                         {valueKnownAssets}/{totalAssets} assets
                       </span>
@@ -48,7 +48,7 @@ export default function InventoryValueChart() {
               </ClientOnly>
               <div className="min-w-0 text-center md:text-right">
                 <Text className="mb-2 !text-[14px] font-medium text-gray-600">
-                  Inventory value
+                  Voorraadwaarde
                 </Text>
                 <Text className="mb-3 whitespace-nowrap !text-[22px] font-semibold text-gray-900 md:!text-[30px]">
                   {formatCurrency({
@@ -62,10 +62,10 @@ export default function InventoryValueChart() {
           </div>
         ) : (
           <DashboardEmptyState
-            text="No asset values yet"
-            subText="Add valuations to your assets to see your total inventory value here."
+            text="Nog geen assetwaarden"
+            subText="Voeg waarderingen toe aan uw assets om hier uw totale voorraadwaarde te zien."
             ctaTo="/assets"
-            ctaText="Go to assets"
+            ctaText="Ga naar assets"
           />
         )}
       </div>

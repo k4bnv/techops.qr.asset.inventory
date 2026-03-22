@@ -95,18 +95,18 @@ export function useSidebarNavItems() {
   const topMenuItems: NavItem[] = [
     {
       type: "child",
-      title: "Admin Dashboard",
+      title: "Beheerdersdashboard",
       to: "/admin-dashboard/users",
       Icon: ChartLineIcon,
       hidden: !isAdmin,
     },
     {
       type: "label",
-      title: "Asset management",
+      title: "Assetbeheer",
     },
     {
       type: "child",
-      title: "Home",
+      title: "Startpagina",
       to: "/home",
       Icon: HomeIcon,
       hidden: isBaseOrSelfService,
@@ -125,7 +125,7 @@ export function useSidebarNavItems() {
     },
     {
       type: "child",
-      title: "Categories",
+      title: "Categorieën",
       to: "/categories",
       Icon: BoxesIcon,
       hidden: isBaseOrSelfService,
@@ -140,7 +140,7 @@ export function useSidebarNavItems() {
     },
     {
       type: "child",
-      title: "Locations",
+      title: "Locaties",
       to: "/locations",
       Icon: MapPinIcon,
       hidden: isBaseOrSelfService,
@@ -153,17 +153,17 @@ export function useSidebarNavItems() {
     },
     {
       type: "parent",
-      title: "Bookings",
+      title: "Reserveringen",
       Icon: CalendarRangeIcon,
       disabled: bookingDisabled,
       children: [
         {
-          title: "View Bookings",
+          title: "Bekijk Reserveringen",
           to: "/bookings",
           disabled: bookingDisabled,
         },
         {
-          title: "Calendar",
+          title: "Kalender",
           to: "/calendar",
           disabled: bookingDisabled,
         },
@@ -171,14 +171,14 @@ export function useSidebarNavItems() {
     },
     {
       type: "child",
-      title: "Reminders",
+      title: "Herinneringen",
       Icon: AlarmClockIcon,
       hidden: isBaseOrSelfService,
       to: "/reminders",
     },
     {
       type: "label",
-      title: "Organization",
+      title: "Organisatie",
       hidden: isBaseOrSelfService,
     },
     {
@@ -188,38 +188,38 @@ export function useSidebarNavItems() {
       hidden: isBaseOrSelfService,
       children: [
         {
-          title: "Users",
+          title: "Gebruikers",
           to: "/settings/team/users",
           hidden: isPersonalOrganization,
         },
         {
-          title: "Pending invites",
+          title: "Uitnodigingen",
           to: "/settings/team/invites",
           hidden: isPersonalOrganization,
         },
         {
-          title: "Non-registered members",
+          title: "Niet-geregistreerde leden",
           to: "/settings/team/nrm",
         },
       ],
     },
     {
       type: "parent",
-      title: "Workspace settings",
+      title: "Werkruimte-instellingen",
       Icon: SettingsIcon,
       hidden: isBaseOrSelfService,
       children: [
         {
-          title: "General",
+          title: "Algemeen",
           to: "/settings/general",
         },
         {
-          title: "Bookings",
+          title: "Reserveringen",
           to: "/settings/bookings",
           hidden: isPersonalOrganization,
         },
         {
-          title: "Custom fields",
+          title: "Aangepaste velden",
           to: "/settings/custom-fields",
         },
       ],
@@ -247,7 +247,7 @@ export function useSidebarNavItems() {
     },
     {
       type: "button",
-      title: "Questions/Feedback",
+      title: "Vragen/Feedback",
       Icon: MessageCircleIcon,
       onClick: () => {
         // Handled by FeedbackNavItem in sidebar-nav.tsx

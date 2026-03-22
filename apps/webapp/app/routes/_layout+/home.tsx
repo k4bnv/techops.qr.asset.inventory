@@ -294,7 +294,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     const totalValuation = assetAggregation._sum.valuation ?? 0;
 
     const header: HeaderData = {
-      title: "Home",
+      title: "Startpagina",
     };
 
     return payload({
@@ -341,13 +341,13 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 }
 
 export const meta: MetaFunction<typeof loader> = () => [
-  { title: appendToMetaTitle("Home") },
+  { title: appendToMetaTitle("Startpagina") },
 ];
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export const handle = {
-  breadcrumb: () => <Link to="/home">Home</Link>,
+  breadcrumb: () => <Link to="/home">Startpagina</Link>,
 };
 
 export default function HomePage() {

@@ -30,14 +30,14 @@ import {
 } from "~/utils/http.server";
 import { tw } from "~/utils/tw";
 
-export const meta = () => [{ title: appendToMetaTitle("Contact owner") }];
+export const meta = () => [{ title: appendToMetaTitle("Neem contact op met de eigenaar") }];
 
 export const NewReportSchema = z.object({
   email: z
     .string()
-    .email("Please enter a valid Email address")
+    .email("Voer een geldig e-mailadres in")
     .transform((email) => email.toLowerCase()),
-  content: z.string().min(3, "Content is required"),
+  content: z.string().min(3, "Bericht is verplicht"),
 });
 
 export const QR_SELECT_FOR_REPORT = {
@@ -165,9 +165,9 @@ export default function ContactOwner() {
     <>
       <div className="flex-1 py-8">
         <div className="mb-8">
-          <h1 className="mb-2 text-[24px] font-semibold">Contact Owner</h1>
+          <h1 className="mb-2 text-[24px] font-semibold">Neem contact op</h1>
           <p className="text-gray-600">
-            Assist the owner by sharing your contact information.
+            Help de eigenaar door uw contactgegevens te delen.
           </p>
         </div>
         <Form
@@ -176,7 +176,7 @@ export default function ContactOwner() {
           className={tw("text-left", isReported ? "hidden" : "")}
         >
           <Input
-            label="Email"
+            label="E-mailadres"
             className="mb-3"
             type="email"
             autoComplete="email"
@@ -187,19 +187,18 @@ export default function ContactOwner() {
           />
           <div className="mb-8">
             <Input
-              label="Message"
+              label="Bericht"
               inputType="textarea"
               name={zo.fields.content()}
               error={zo.errors.content()?.message}
               disabled={disabled}
             />
             <p className="mt-2.5 text-center text-gray-600">
-              By leaving your contact information you agree that the owner of
-              the asset can contact you.
+              Door uw contactgegevens achter te laten, gaat u ermee akkoord dat de eigenaar van het object contact met u kan opnemen.
             </p>
           </div>
           <Button type="submit" width="full" disabled={disabled}>
-            Send
+            Versturen
           </Button>
         </Form>
         <div
@@ -210,7 +209,7 @@ export default function ContactOwner() {
         >
           <p className="inline-flex items-center gap-2 font-semibold leading-none text-success-700">
             <SuccessIcon />
-            Your message has been sent
+            Uw bericht is verzonden
           </p>
         </div>
       </div>

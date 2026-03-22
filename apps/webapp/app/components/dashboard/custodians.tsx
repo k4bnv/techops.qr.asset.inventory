@@ -30,7 +30,7 @@ export default function CustodiansList() {
     <div className="flex h-full flex-col rounded border border-gray-200 bg-white">
       <div className="flex items-center justify-between border-b px-4 py-3 md:px-6">
         <span className="text-[14px] font-semibold text-gray-900">
-          Top custodians
+          Top beheerders
         </span>
         <div className="flex items-center gap-2">
           {!isPersonal && (
@@ -39,7 +39,7 @@ export default function CustodiansList() {
               variant="block-link-gray"
               className="!mt-0 text-xs"
             >
-              View all
+              Bekijk alles
             </Button>
           )}
         </div>
@@ -48,11 +48,11 @@ export default function CustodiansList() {
       {isPersonal ? (
         <div className="flex flex-1 items-center justify-center p-4">
           <PremiumFeatureTeaser
-            headline="Track who has what"
-            description="Add non-registered members to assign asset custody, or create a Team workspace to invite users with full access."
-            ctaLabel="Add a member"
+            headline="Houd bij wie wat heeft"
+            description="Voeg niet-geregistreerde leden toe om assetbewaring toe te wijzen, of maak een Team-werkruimte aan om gebruikers met volledige toegang uit te nodigen."
+            ctaLabel="Voeg een lid toe"
             ctaTo="/settings/team/nrm"
-            secondaryLabel="Or create a Team workspace →"
+            secondaryLabel="Of maak een Team-werkruimte aan →"
             secondaryTo="/account-details/workspace"
           />
         </div>
@@ -94,10 +94,10 @@ export default function CustodiansList() {
       ) : (
         <div className="flex flex-1 items-center justify-center p-4">
           <DashboardEmptyState
-            text="No assets in custody"
-            subText="Assign custody of assets to team members to track who has what."
+            text="Geen assets in bewaring"
+            subText="Wijs de bewaring van assets toe aan teamleden om bij te houden wie wat heeft."
             ctaTo="/assets"
-            ctaText="Go to assets"
+            ctaText="Ga naar assets"
           />
         </div>
       )}

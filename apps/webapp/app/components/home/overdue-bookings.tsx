@@ -22,7 +22,7 @@ export default function OverdueBookings() {
     <div className="flex h-full flex-col rounded border border-gray-200 bg-white">
       <div className="flex items-center justify-between border-b px-4 py-3 md:px-6">
         <span className="text-[14px] font-semibold text-gray-900">
-          Overdue bookings
+          Te late reserveringen
         </span>
         <div className="flex items-center gap-2">
           {canUseBookings && overdueBookings.length > 0 && (
@@ -36,7 +36,7 @@ export default function OverdueBookings() {
               variant="block-link-gray"
               className="!mt-0 text-xs"
             >
-              View all
+              Bekijk alles
             </Button>
           )}
         </div>
@@ -44,8 +44,8 @@ export default function OverdueBookings() {
       {!canUseBookings ? (
         <div className="flex flex-1 items-center justify-center p-4">
           <PremiumFeatureTeaser
-            headline="Never lose track of returns"
-            description="Get instant visibility into overdue checkouts and keep your team accountable."
+            headline="Verlies nooit meer retouren uit het oog"
+            description="Krijg direct inzicht in te late check-outs en houd uw team verantwoordelijk."
           />
         </div>
       ) : overdueBookings.length > 0 ? (
@@ -84,7 +84,7 @@ export default function OverdueBookings() {
                             </>
                           )}
                           <span className="font-medium text-error-600">
-                            Due{" "}
+                            Verwacht{" "}
                             <DateS
                               date={booking.to}
                               options={{ month: "short", day: "numeric" }}
@@ -102,8 +102,8 @@ export default function OverdueBookings() {
       ) : (
         <div className="flex flex-1 items-center justify-center p-4">
           <DashboardEmptyState
-            text="No overdue bookings"
-            subText="All bookings are on track."
+            text="Geen te late reserveringen"
+            subText="Alle reserveringen lopen op schema."
           />
         </div>
       )}

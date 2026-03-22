@@ -22,7 +22,7 @@ export default function UpcomingBookings() {
     <div className="flex h-full flex-col rounded border border-gray-200 bg-white">
       <div className="flex items-center justify-between border-b px-4 py-3 md:px-6">
         <span className="text-[14px] font-semibold text-gray-900">
-          Upcoming bookings
+          Aankomende reserveringen
         </span>
         <div className="flex items-center gap-2">
           {canUseBookings && (
@@ -31,7 +31,7 @@ export default function UpcomingBookings() {
               variant="block-link-gray"
               className="!mt-0 text-xs"
             >
-              View all
+              Bekijk alles
             </Button>
           )}
         </div>
@@ -39,8 +39,8 @@ export default function UpcomingBookings() {
       {!canUseBookings ? (
         <div className="flex flex-1 items-center justify-center p-4">
           <PremiumFeatureTeaser
-            headline="Schedule & track checkouts"
-            description="Reserve assets ahead of time and never double-book equipment again."
+            headline="Plan & volg check-outs"
+            description="Reserveer assets van tevoren en voorkom dubbele boekingen."
           />
         </div>
       ) : upcomingBookings.length > 0 ? (
@@ -100,10 +100,10 @@ export default function UpcomingBookings() {
       ) : (
         <div className="flex flex-1 items-center justify-center p-4">
           <DashboardEmptyState
-            text="No planned bookings"
-            subText="Bookings with Reserved status will appear here."
+            text="Geen geplande reserveringen"
+            subText="Reserveringen met de status Gereserveerd verschijnen hier."
             ctaTo="/bookings/new"
-            ctaText="Create a booking"
+            ctaText="Maak een reservering aan"
           />
         </div>
       )}

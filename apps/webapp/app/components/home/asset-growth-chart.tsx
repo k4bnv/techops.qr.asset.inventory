@@ -22,10 +22,10 @@ export default function AssetGrowthChart() {
       <div className="flex items-center justify-between border-b px-4 py-3 md:px-6">
         <div className="flex items-center gap-3">
           <span className="text-[14px] font-semibold text-gray-900">
-            Asset growth
+            Assetgroei
           </span>
           <span className="rounded-full bg-primary-50 px-2 py-0.5 text-xs font-medium text-primary-600">
-            12 months
+            12 maanden
           </span>
         </div>
         <div className="flex items-center gap-2">
@@ -34,7 +34,7 @@ export default function AssetGrowthChart() {
             variant="block-link-gray"
             className="!mt-0 text-xs"
           >
-            View all
+            Bekijk alles
           </Button>
         </div>
       </div>
@@ -62,10 +62,10 @@ export default function AssetGrowthChart() {
           </ClientOnly>
         ) : (
           <DashboardEmptyState
-            text="No assets yet"
-            subText="Create assets to see your growth trend here."
+            text="Nog geen assets"
+            subText="Maak assets aan om hier uw groeitrend te zien."
             ctaTo="/assets/new"
-            ctaText="Create an asset"
+            ctaText="Maak een asset aan"
           />
         )}
       </div>
