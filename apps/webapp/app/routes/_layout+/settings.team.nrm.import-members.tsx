@@ -31,7 +31,7 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 import { assertUserCanImportNRM } from "~/utils/subscription.server";
 
-export const meta = () => [{ title: appendToMetaTitle("Import team members") }];
+export const meta = () => [{ title: appendToMetaTitle("Teamleden importeren") }];
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -110,19 +110,18 @@ export default function ImportNRMs() {
           <UserIcon />
         </div>
         <div className="mb-5">
-          <h4>Import team members</h4>
+          <h4>Teamleden importeren</h4>
           <p>
-            Team members just have 1 field and that is a name field. Importing
-            team members just requires you to upload a txt file with member
-            names separated by comas.
+            Teamleden hebben slechts 1 veld en dat is een naamveld. Het importeren van
+            teamleden vereist alleen het uploaden van een txt-bestand met lidnamen
+            gescheiden door komma's.
             <br />
             <ul className="list-inside list-disc pl-4">
-              <li>Names which are already in the system will be ignored.</li>
-              <li>Duplicates will be skipped.</li>
+              <li>Namen die al in het systeem staan, worden genegeerd.</li>
+              <li>Duplicaten worden overgeslagen.</li>
             </ul>
             <WarningBox className="my-2">
-              Import is final and cannot be reverted. If you want to later edit
-              team members, you can do so from the Team settings page.
+              De import is definitief en kan niet ongedaan worden gemaakt. Als u later teamleden wilt bewerken, kunt u dit doen via de pagina Teaminstellingen.
             </WarningBox>
           </p>
         </div>
@@ -133,12 +132,12 @@ export default function ImportNRMs() {
 }
 
 function ImportForm() {
-  const [agreed, setAgreed] = useState<"I AGREE" | "">("");
+  const [agreed, setAgreed] = useState<"IK GA AKKOORD" | "">("");
   const formRef = useRef<HTMLFormElement>(null);
   const fetcher = useFetcher<typeof action>();
 
   const { data, state } = fetcher;
-  const disabled = isFormProcessing(state) || agreed !== "I AGREE";
+  const disabled = isFormProcessing(state) || agreed !== "IK GA AKKOORD";
   const isSuccessful = data && !data.error && data.success;
 
   /** We use a controlled field for the file, because of the confirmation dialog we have.
@@ -161,7 +160,7 @@ function ImportForm() {
       <Input
         type="file"
         name="file"
-        label="Select a txt file"
+        label="Selecteer een txt-bestand"
         required
         onChange={handleFileSelect}
         accept=".txt"
@@ -171,34 +170,32 @@ function ImportForm() {
         <AlertDialogTrigger asChild>
           <Button
             type="button"
-            title={"Confirm NRM import"}
+            title={"Bevestig NRM-import"}
             disabled={!selectedFile}
             className="mt-4 w-full"
           >
-            Confirm Non-registered members import
+            Bevestig import van niet-geregistreerde leden
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Confirm Non-registered members import
+              Bevestig import van niet-geregistreerde leden
             </AlertDialogTitle>
             {!isSuccessful ? (
               <>
                 <AlertDialogDescription>
-                  You need to type: <b>"I AGREE"</b> in the field below to
-                  accept the import. By doing this you agree that you have read
-                  the requirements and you understand the limitations and
-                  consequences of using this feature.
+                  U moet: <b>"IK GA AKKOORD"</b> typen in het onderstaande veld om de
+                  import te accepteren. Hiermee gaat u akkoord dat u de vereisten heeft gelezen en de beperkingen en gevolgen van het gebruik van deze functie begrijpt.
                 </AlertDialogDescription>
                 <Input
                   type="text"
-                  label={"Confirmation"}
+                  label={"Bevestiging"}
                   name="agree"
                   value={agreed}
                   onChange={(e) => setAgreed(e.target.value as any)}
-                  placeholder="I AGREE"
-                  pattern="^I AGREE$" // We use a regex to make sure the user types the exact string
+                  placeholder="IK GA AKKOORD"
+                  pattern="^IK GA AKKOORD$" // We use a regex to make sure the user types the exact string
                   required
                 />
               </>
@@ -208,29 +205,29 @@ function ImportForm() {
             <div>
               <b className="text-red-500">{data.error.message}</b>
               <p>
-                Please fix your txt file and try again. If the issue persists,
-                don't hesitate to get in touch with us.
+                Corrigeer uw txt-bestand en probeer het opnieuw. Als het probleem
+                aanhoudt, aarzel dan niet om contact met ons op te nemen.
               </p>
             </div>
           ) : null}
 
           {isSuccessful ? (
             <div>
-              <b className="text-green-500">Success!</b>
-              <p>Your Non-registered members have been imported.</p>
+              <b className="text-green-500">Succes!</b>
+              <p>Uw niet-geregistreerde leden zijn geïmporteerd.</p>
             </div>
           ) : null}
 
           <AlertDialogFooter>
             {isSuccessful ? (
               <Button to="/settings/team/nrm" variant="secondary">
-                Close
+                Sluiten
               </Button>
             ) : (
               <>
                 <AlertDialogCancel asChild>
                   <Button type="button" variant="secondary">
-                    Cancel
+                    Annuleren
                   </Button>
                 </AlertDialogCancel>
                 <Button
@@ -241,7 +238,7 @@ function ImportForm() {
                   }}
                   disabled={disabled}
                 >
-                  {isFormProcessing(fetcher.state) ? "Importing..." : "Import"}
+                  {isFormProcessing(fetcher.state) ? "Importeren..." : "Importeren"}
                 </Button>
               </>
             )}

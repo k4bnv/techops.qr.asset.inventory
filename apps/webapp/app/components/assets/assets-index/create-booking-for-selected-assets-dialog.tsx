@@ -83,8 +83,8 @@ export default function CreateBookingForSelectedAssetsDialog() {
       ref={zo.ref}
       type="bookings"
       arrayFieldId="assetIds"
-      title="Create booking"
-      description={`Create a new booking with selected(${selectedAssets.length}) assets`}
+      title="Boeking maken"
+      description={`Maak een nieuwe boeking met geselecteerde (${selectedAssets.length}) assets`}
       actionUrl="/bookings/new"
       className="lg:w-[600px]"
     >
@@ -175,7 +175,7 @@ export default function CreateBookingForSelectedAssetsDialog() {
                 disabled={disabled}
                 onClick={handleCloseDialog}
               >
-                Cancel
+                Annuleren
               </Button>
               <Button
                 type="submit"
@@ -183,7 +183,7 @@ export default function CreateBookingForSelectedAssetsDialog() {
                 width="full"
                 disabled={disabled}
               >
-                Confirm
+                Bevestigen
               </Button>
             </div>
           </div>

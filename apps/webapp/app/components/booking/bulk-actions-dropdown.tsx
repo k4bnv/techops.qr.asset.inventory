@@ -32,7 +32,7 @@ export default function BulkActionsDropdown() {
     return (
       <Button variant="secondary" to="#">
         <span className="flex items-center gap-2">
-          Actions <ChevronRight className="chev rotate-90" />
+          Acties <ChevronRight className="chev rotate-90" />
         </span>
       </Button>
     );
@@ -124,7 +124,7 @@ function ConditionalDropdown() {
           disabled={disabled}
         >
           <Button type="button" variant="secondary">
-            <span className="flex items-center gap-2">Actions</span>
+            <span className="flex items-center gap-2">Acties</span>
           </Button>
         </DropdownMenuTrigger>
 
@@ -136,7 +136,7 @@ function ConditionalDropdown() {
           disabled={disabled}
           type="button"
         >
-          <span className="flex items-center gap-2">Actions</span>
+          <span className="flex items-center gap-2">Acties</span>
         </Button>
 
         {open && (
@@ -170,13 +170,13 @@ function ConditionalDropdown() {
             >
               <BulkUpdateDialogTrigger
                 type="cancel"
-                label="Cancel"
+                label="Annuleren"
                 onClick={closeMenu}
                 disabled={
                   cancelIsDisabled
                     ? {
                         reason:
-                          "Some of the selected bookings are not reserved or in progress. You can only cancel bookings that are reserved or in progress.",
+                          "Sommige van de geselecteerde boekingen zijn niet gereserveerd of in behandeling. U kunt alleen boekingen annuleren die gereserveerd of in behandeling zijn.",
                       }
                     : isLoading
                 }
@@ -191,12 +191,12 @@ function ConditionalDropdown() {
             >
               <BulkUpdateDialogTrigger
                 type="archive"
-                label="Archive"
+                label="Archiveren"
                 disabled={
                   archiveDisabled
                     ? {
                         reason:
-                          "Some of the selected bookings are not completed. You can only archive bookings that are completed.",
+                          "Sommige van de geselecteerde boekingen zijn niet voltooid. U kunt alleen boekingen archiveren die voltooid zijn.",
                       }
                     : isLoading
                 }
@@ -212,13 +212,13 @@ function ConditionalDropdown() {
             >
               <BulkUpdateDialogTrigger
                 type="trash"
-                label="Delete"
+                label="Verwijderen"
                 onClick={closeMenu}
                 disabled={
                   deleteDisabled
                     ? {
                         reason:
-                          "Some of the selected bookings are not in draft or you have self user permissions. You can only delete draft bookings.",
+                          "Sommige van de geselecteerde boekingen zijn geen concept of u heeft alleen zelfbedieningsrechten. U kunt alleen conceptboekingen verwijderen.",
                       }
                     : isLoading
                 }

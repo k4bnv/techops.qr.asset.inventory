@@ -69,7 +69,7 @@ export function DeleteCustomFieldDialog({
           }}
         >
           <span className="flex items-center gap-2">
-            <TrashIcon /> Delete
+            <TrashIcon /> Verwijderen
           </span>
         </DropdownMenuItem>
       </AlertDialogTrigger>
@@ -81,27 +81,25 @@ export function DeleteCustomFieldDialog({
             <div className="mx-auto mb-4 flex size-12 items-center justify-center rounded-full bg-error-50 p-2 text-error-600 md:mx-0">
               <TrashIcon />
             </div>
-            <AlertDialogTitle>
-              Delete "{customField.name}" custom field
-            </AlertDialogTitle>
+              Aangepast veld "{customField.name}" verwijderen
             <AlertDialogDescription className="space-y-2">
               <p>
-                <strong>This field will be deleted.</strong> The field and all
-                its values will be removed from your assets.
+                <strong>Dit veld wordt verwijderd.</strong> Het veld en alle
+                bijbehorende waarden worden verwijderd van uw assets.
               </p>
               <p>
-                <strong>Note:</strong> The field name will be available for
-                reuse after deleting.
+                <strong>Let op:</strong> de veldnaam is na verwijdering weer
+                beschikbaar voor hergebruik.
               </p>
             </AlertDialogDescription>
           </AlertDialogHeader>
 
           <div className="mt-4 space-y-2">
             <p className="text-sm text-gray-600">
-              To confirm, type the custom field name below.
+              Typ hieronder de naam van het aangepaste veld om te bevestigen.
             </p>
             <Input
-              label="Confirmation"
+              label="Bevestiging"
               name="confirmation"
               value={confirmation}
               onChange={(event) => {
@@ -111,7 +109,7 @@ export function DeleteCustomFieldDialog({
               required
             />
             <p className="text-sm text-gray-500">
-              Expected input: {expectedName}
+              Verwachte invoer: {expectedName}
             </p>
             {formError ? (
               <p className="text-sm text-error-500">{formError}</p>
@@ -121,7 +119,7 @@ export function DeleteCustomFieldDialog({
           <AlertDialogFooter className="mt-6 flex ">
             <AlertDialogCancel asChild>
               <Button type="button" variant="secondary" disabled={disabled}>
-                Cancel
+                Annuleren
               </Button>
             </AlertDialogCancel>
             <Button
@@ -131,7 +129,7 @@ export function DeleteCustomFieldDialog({
               name="intent"
               value="delete"
             >
-              {disabled ? "Deleting..." : "Delete"}
+              {disabled ? "Verwijderen..." : "Verwijderen"}
             </Button>
           </AlertDialogFooter>
         </fetcher.Form>

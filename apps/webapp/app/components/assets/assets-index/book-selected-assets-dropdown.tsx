@@ -33,7 +33,7 @@ export default function BookSelectedAssetsDropdown() {
     return (
       <Button type="button" variant="secondary">
         <span className="flex items-center gap-2">
-          Book <ChevronRightIcon className="chev size-4" />
+          Boeken <ChevronRightIcon className="chev size-4" />
         </span>
       </Button>
     );
@@ -55,11 +55,11 @@ function ConditionalActionsDropdown() {
   const { roles } = useUserRoleHelper();
 
   const allSelected = isSelectingAllItems(selectedAssets);
-  const buttonTitle = `Book selection ${
+  const buttonTitle = `Selectie boeken ${
     !selectedAssets.length
       ? ""
       : allSelected
-      ? "(All)"
+      ? "(Alle)"
       : `(${selectedAssets.length})`
   }`;
 
@@ -74,7 +74,7 @@ function ConditionalActionsDropdown() {
     if (someAssetsPartOfKit) {
       return {
         reason:
-          "Cannot book assets directly because some of the assets are part of a kit.",
+          "Kan assets niet direct boeken omdat sommige assets deel uitmaken van een set.",
       };
     }
 
@@ -83,12 +83,12 @@ function ConditionalActionsDropdown() {
       (asset) => !asset.availableToBook
     );
     if (someAssetsMarkedUnavailable) {
-      return { reason: "Some of the assets are marked as unavailable." };
+      return { reason: "Sommige assets zijn gemarkeerd als niet beschikbaar." };
     }
 
     /** If user has not selected any asset. */
     if (!selectedAssets.length) {
-      return { reason: "You must select at least 1 asset to book." };
+      return { reason: "U moet minstens 1 asset selecteren om te boeken." };
     }
 
     return false;
@@ -199,7 +199,7 @@ function ConditionalActionsDropdown() {
               <DropdownMenuItem className="py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
                   type="bookings"
-                  label="Create new booking"
+                  label="Nieuwe boeking maken"
                   onClick={closeMenu}
                   disabled={disabledReason}
                 />
@@ -215,7 +215,7 @@ function ConditionalActionsDropdown() {
               <DropdownMenuItem className="py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
                   type="booking-exist"
-                  label="Add to existing"
+                  label="Toevoegen aan bestaande"
                   onClick={closeMenu}
                   disabled={disabledReason}
                 />

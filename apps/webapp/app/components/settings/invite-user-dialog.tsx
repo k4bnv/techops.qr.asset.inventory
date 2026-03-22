@@ -39,7 +39,7 @@ export const InviteUserFormSchema = z.object({
     .string()
     .transform((email) => email.toLowerCase())
     .refine(validEmail, () => ({
-      message: "Please enter a valid email",
+      message: "Voer een geldig e-mailadres in",
     })),
   teamMemberId: z.string().optional(),
   role: z.preprocess(
@@ -50,16 +50,16 @@ export const InviteUserFormSchema = z.object({
         OrganizationRoles.BASE,
         OrganizationRoles.SELF_SERVICE,
       ],
-      { message: "Please select a role" }
+      { message: "Selecteer een rol" }
     )
   ),
   inviteMessage: z.string().max(1000).optional(),
 });
 
 const organizationRolesMap: Record<string, UserFriendlyRoles> = {
-  [OrganizationRoles.ADMIN]: "Administrator",
-  [OrganizationRoles.BASE]: "Base",
-  [OrganizationRoles.SELF_SERVICE]: "Self service",
+  [OrganizationRoles.ADMIN]: "Beheerder",
+  [OrganizationRoles.BASE]: "Basis",
+  [OrganizationRoles.SELF_SERVICE]: "Zelfbediening",
 };
 
 export default function InviteUserDialog({
@@ -128,10 +128,9 @@ export default function InviteUserDialog({
         >
           <div className="px-6 py-4">
             <div className="mb-5">
-              <h4>Invite team members</h4>
+              <h4>Teamleden uitnodigen</h4>
               <p>
-                Invite a user to this workspace. Make sure to give them the
-                proper role.
+                Nodig een gebruiker uit voor deze werkruimte. Zorg ervoor dat u hen de juiste rol geeft.
               </p>
             </div>
 
@@ -150,7 +149,7 @@ export default function InviteUserDialog({
               </When>
 
               <SelectGroup>
-                <SelectLabel className="pl-0">Workspace</SelectLabel>
+                <SelectLabel className="pl-0">Werkruimte</SelectLabel>
                 <Select name="organizationId" defaultValue={organization.id}>
                   <div className="flex h-10 w-full items-center justify-between truncate rounded-md border border-gray-300 bg-transparent px-3.5 py-3 text-[16px] text-gray-500 placeholder:text-gray-500 focus:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-25 focus:ring-offset-2 disabled:opacity-50  [&_span]:max-w-full [&_span]:truncate">
                     <SelectValue />
@@ -184,10 +183,10 @@ export default function InviteUserDialog({
               </SelectGroup>
 
               <SelectGroup>
-                <SelectLabel className="pl-0">Role</SelectLabel>
+                <SelectLabel className="pl-0">Rol</SelectLabel>
                 <Select name="role">
                   <SelectTrigger>
-                    <SelectValue placeholder="Select user role" />
+                    <SelectValue placeholder="Selecteer gebruikersrol" />
                   </SelectTrigger>
                   <SelectContent
                     position="popper"
@@ -232,7 +231,7 @@ export default function InviteUserDialog({
                     zo.errors.email()?.message
                   }
                   icon="mail"
-                  label={"Email address"}
+                  label={"E-mailadres"}
                   placeholder="zaans@huisje.com"
                   required
                 />
@@ -243,7 +242,7 @@ export default function InviteUserDialog({
                   htmlFor="inviteMessage"
                   className="mb-2 block text-sm font-medium text-gray-700"
                 >
-                  Personal Message (Optional)
+                  Persoonlijk bericht (optioneel)
                 </label>
                 <textarea
                   id="inviteMessage"
@@ -253,12 +252,12 @@ export default function InviteUserDialog({
                   disabled={disabled}
                   aria-describedby="inviteMessage-helper"
                   className="block w-full rounded-md border border-gray-300 px-3.5 py-2 text-sm text-gray-900 placeholder:text-gray-500 focus:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-25 focus:ring-offset-2 disabled:opacity-50"
-                  placeholder="Add a personal note to help them understand why you're inviting them to this workspace..."
+                  placeholder="Voeg een persoonlijke notitie toe om hen te helpen begrijpen waarom u hen uitnodigt voor deze werkruimte..."
                   onChange={(e) => setMessageCharCount(e.target.value.length)}
                 />
                 <div id="inviteMessage-helper" className="mt-1">
                   <span className="text-xs text-gray-500">
-                    {messageCharCount} / 1000 characters
+                    {messageCharCount} / 1000 tekens
                   </span>
                   <When
                     truthy={
@@ -291,7 +290,7 @@ export default function InviteUserDialog({
                   disabled={disabled}
                   onClick={closeDialog}
                 >
-                  Cancel
+                  Annuleren
                 </Button>
                 <Button
                   type="submit"
@@ -299,7 +298,7 @@ export default function InviteUserDialog({
                   width="full"
                   disabled={disabled}
                 >
-                  Send Invite
+                  Uitnodiging versturen
                 </Button>
               </div>
             </fetcher.Form>

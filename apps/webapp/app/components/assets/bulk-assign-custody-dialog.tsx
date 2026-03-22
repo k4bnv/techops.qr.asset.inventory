@@ -25,9 +25,9 @@ export default function BulkAssignCustodyDialog() {
     <BulkUpdateDialogContent
       ref={zo.ref}
       type="assign-custody"
-      title={`${isSelfService ? "Take" : "Assign"} custody of assets`}
-      description={`These assets are currently available. You're about to assign custody to ${
-        isSelfService ? "yourself" : "one of your team members"
+      title={`${isSelfService ? "Beheer overnemen" : "Beheerder toewijzen"} van assets`}
+      description={`Deze assets zijn momenteel beschikbaar. U staat op het punt de verantwoordelijkheid toe te wijzen aan ${
+        isSelfService ? "uzelf" : "een van uw teamleden"
       }.`}
       actionUrl="/api/assets/bulk-assign-custody"
       arrayFieldId="assetIds"
@@ -53,10 +53,10 @@ export default function BulkAssignCustodyDialog() {
                   deletedAt: null,
                 }}
                 fieldName="custodian"
-                contentLabel="Team members"
+                contentLabel="Teamleden"
                 initialDataKey="teamMembers"
                 countKey="totalTeamMembers"
-                placeholder="Select a team member"
+                placeholder="Selecteer een teamlid"
                 allowClear
                 closeOnSelect
                 transformItem={(item) => ({
@@ -91,7 +91,7 @@ export default function BulkAssignCustodyDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -99,7 +99,7 @@ export default function BulkAssignCustodyDialog() {
               width="full"
               disabled={disabled}
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </div>

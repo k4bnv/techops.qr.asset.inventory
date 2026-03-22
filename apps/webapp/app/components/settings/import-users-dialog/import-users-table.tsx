@@ -31,10 +31,10 @@ export default function ImportUsersTable({
         <thead className="bg-gray-50 text-xs uppercase">
           <tr>
             <th scope="col" className="px-6 py-3">
-              Email
+              E-mail
             </th>
             <th scope="col" className="px-6 py-3">
-              Role
+              Rol
             </th>
           </tr>
         </thead>

@@ -16,15 +16,15 @@ export const ImportNrmButton = ({
         ? {
             reason: (
               <>
-                Importing is not available on the free tier of shelf.{" "}
+                Importeren is niet beschikbaar in de gratis versie van TechOps.{" "}
                 <UpgradeMessage />
               </>
             ),
           }
         : false
     }
-    title="Import"
+    title="Importeren"
   >
-    Import NRM
+    NRM importeren
   </Button>
 );

@@ -59,11 +59,11 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     const totalPages = Math.ceil(totalLocations / perPage);
 
     const header: HeaderData = {
-      title: "Locations",
+      title: "Locaties",
     };
     const modelName = {
-      singular: "location",
-      plural: "locations",
+      singular: "locatie",
+      plural: "locaties",
     };
 
     return data(
@@ -104,7 +104,7 @@ export default function LocationsIndexPage() {
           aria-label={`new location`}
           data-test-id="createNewLocation"
         >
-          New location
+          Nieuwe locatie
         </Button>
       </Header>
       <ListContentWrapper>
@@ -114,20 +114,20 @@ export default function LocationsIndexPage() {
             isBaseOrSelfService ? undefined : <BulkActionsDropdown />
           }
           customEmptyStateContent={{
-            title: "No locations yet",
-            text: "Locations help you track where your assets are. Create locations to organize assets by room, building, or site.",
+            title: "Nog geen locaties",
+            text: "Locaties helpen u bij te houden waar uw assets zich bevinden. Maak locaties aan om assets per kamer, gebouw of terrein in te delen.",
             newButtonRoute: "/locations/new",
-            newButtonContent: "Create your first location",
+            newButtonContent: "Maak uw eerste locatie aan",
           }}
           ItemComponent={ListItemContent}
           headerChildren={
             <>
-              <Th>Description</Th>
-              <Th>Parent location</Th>
-              <Th className="whitespace-nowrap">Child locations</Th>
+              <Th>Beschrijving</Th>
+              <Th>Hoofdlocatie</Th>
+              <Th className="whitespace-nowrap">Sublocaties</Th>
               <Th>Assets</Th>
               <Th>Kits</Th>
-              <Th>Actions</Th>
+              <Th>Acties</Th>
             </>
           }
         />

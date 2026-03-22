@@ -72,11 +72,11 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     const totalPages = Math.ceil(totalCategories / perPage);
 
     const header: HeaderData = {
-      title: "Categories",
+      title: "Categorieën",
     };
     const modelName = {
-      singular: "category",
-      plural: "categories",
+      singular: "categorie",
+      plural: "categorieën",
     };
 
     return data(
@@ -130,8 +130,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
     await deleteCategory({ id, organizationId });
 
     sendNotification({
-      title: "Category deleted",
-      message: "Your category has been deleted successfully",
+      title: "Categorie verwijderd",
+      message: "Uw categorie is succesvol verwijderd",
       icon: { name: "trash", variant: "error" },
       senderId: userId,
     });
@@ -144,7 +144,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
 }
 
 export const handle = {
-  breadcrumb: () => <Link to="/categories">Categories</Link>,
+  breadcrumb: () => <Link to="/categories">Categorieën</Link>,
 };
 export const ErrorBoundary = () => <ErrorContent />;
 
@@ -160,7 +160,7 @@ export default function CategoriesPage() {
           aria-label={`new category`}
           data-test-id="createNewCategory"
         >
-          New category
+          Nieuwe categorie
         </Button>
       </Header>
       <ListContentWrapper>
@@ -171,17 +171,17 @@ export default function CategoriesPage() {
             isBaseOrSelfService ? undefined : <BulkActionsDropdown />
           }
           customEmptyStateContent={{
-            title: "No categories yet",
-            text: "Categories help you organize assets by type. Create categories to group and filter your inventory.",
+            title: "Nog geen categorieën",
+            text: "Categorieën helpen u assets op type in te delen. Maak categorieën aan om uw inventaris te groeperen en filteren.",
             newButtonRoute: "/categories/new",
-            newButtonContent: "Create your first category",
+            newButtonContent: "Maak uw eerste categorie aan",
           }}
           ItemComponent={CategoryItem}
           headerChildren={
             <>
-              <Th>Description</Th>
+              <Th>Beschrijving</Th>
               <Th>Assets</Th>
-              <Th>Actions</Th>
+              <Th>Acties</Th>
             </>
           }
         />

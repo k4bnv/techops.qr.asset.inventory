@@ -14,8 +14,8 @@ export default function BulkRemoveFromKits() {
     <BulkUpdateDialogContent
       ref={zo.ref}
       type="remove-from-kit"
-      title="Remove assets from kits"
-      description="This action will remove the selected assets from their kits. Are you sure you want to remove them?"
+      title="Assets uit kits verwijderen"
+      description="Deze actie verwijdert de geselecteerde assets uit hun kits. Weet u zeker dat u ze wilt verwijderen?"
       actionUrl="/api/assets/bulk-remove-from-kits"
       arrayFieldId="assetIds"
     >
@@ -33,7 +33,7 @@ export default function BulkRemoveFromKits() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -41,7 +41,7 @@ export default function BulkRemoveFromKits() {
               width="full"
               disabled={disabled}
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </div>

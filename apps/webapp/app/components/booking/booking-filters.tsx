@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { useMatches } from "react-router";
 import { useCurrentOrganization } from "~/hooks/use-current-organization";
 import { useUserRoleHelper } from "~/hooks/user-user-role-helper";
+import { bookingStatusDutchMap } from "~/utils/status-labels";
 import type { RouteHandleWithName } from "~/modules/types";
 import type { OrganizationPermissionSettings } from "~/utils/permissions/custody-and-bookings-permissions.validator.client";
 import { userHasCustodyViewPermission } from "~/utils/permissions/custody-and-bookings-permissions.validator.client";
@@ -14,9 +15,9 @@ import { SortBy } from "../list/filters/sort-by";
 import When from "../when/when";
 
 const BOOKING_SORTING_OPTIONS = {
-  from: "From Date",
-  to: "To Date",
-  name: "Name",
+  from: "Vanaf datum",
+  to: "Tot datum",
+  name: "Naam",
 } as const;
 
 type BookingFiltersProps = {
@@ -50,7 +51,12 @@ export default function BookingFilters({
     <Filters
       className={className}
       slots={{
-        "left-of-search": <StatusFilter statusItems={BookingStatus} />,
+        "left-of-search": (
+          <StatusFilter
+            statusItems={BookingStatus}
+            labels={bookingStatusDutchMap}
+          />
+        ),
         "right-of-search": hideSortBy ? null : (
           <SortBy
             sortingOptions={BOOKING_SORTING_OPTIONS}
@@ -64,7 +70,7 @@ export default function BookingFilters({
         <DynamicDropdown
           trigger={
             <div className="my-2 flex cursor-pointer items-center gap-2 md:my-0">
-              Custodian <ChevronRight className="hidden rotate-90 md:inline" />
+              Beheerder <ChevronRight className="hidden rotate-90 md:inline" />
             </div>
           }
           model={{
@@ -73,8 +79,8 @@ export default function BookingFilters({
             deletedAt: null,
           }}
           renderItem={(item) => resolveTeamMemberName(item, true)}
-          label="Filter by custodian"
-          placeholder="Search team members"
+          label="Filteren op beheerder"
+          placeholder="Teamleden zoeken"
           initialDataKey="teamMembers"
           countKey="totalTeamMembers"
         />
@@ -87,12 +93,12 @@ export default function BookingFilters({
           </div>
         }
         model={{ name: "tag", queryKey: "name" }}
-        label="Filter by tag"
+        label="Filteren op tag"
         initialDataKey="tags"
         countKey="totalTags"
         withoutValueItem={{
           id: "untagged",
-          name: "Without tag",
+          name: "Zonder tag",
         }}
       />
     </Filters>

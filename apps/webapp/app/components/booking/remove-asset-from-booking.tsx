@@ -36,13 +36,13 @@ export const RemoveAssetFromBooking = ({ asset }: { asset: Asset }) => {
           )}
           title={
             isArchived || isCompleted
-              ? "Cannot remove assets from completed bookings"
+              ? "Assets kunnen niet worden verwijderd uit voltooide boekingen"
               : undefined
           }
           width="full"
           disabled={disabled || isArchived || isCompleted}
         >
-          Remove
+          Verwijder
         </Button>
       </AlertDialogTrigger>
 
@@ -54,17 +54,17 @@ export const RemoveAssetFromBooking = ({ asset }: { asset: Asset }) => {
             </span>
           </div>
           <AlertDialogTitle>
-            Remove "{asset.title}" from booking
+            Verwijder "{asset.title}" uit boeking
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to remove this asset from the booking?
+            Weet u zeker dat u dit asset uit de boeking wilt verwijderen?
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <div className="flex justify-center gap-2">
             <AlertDialogCancel asChild>
               <Button type="button" variant="secondary" disabled={disabled}>
-                Cancel
+                Annuleren
               </Button>
             </AlertDialogCancel>
 
@@ -76,7 +76,7 @@ export const RemoveAssetFromBooking = ({ asset }: { asset: Asset }) => {
                 value="removeAsset"
                 disabled={disabled}
               >
-                Remove
+                Verwijderen
               </Button>
             </Form>
           </div>

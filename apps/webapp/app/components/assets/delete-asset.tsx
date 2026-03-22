@@ -45,17 +45,17 @@ export const DeleteAsset = forwardRef<HTMLButtonElement, DeleteAssetProps>(
                 <TrashIcon />
               </span>
             </div>
-            <AlertDialogTitle>Delete {asset.title}</AlertDialogTitle>
+            <AlertDialogTitle>{asset.title} verwijderen</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete this asset? This action cannot be
-              undone.
+              Weet u zeker dat u dit asset wilt verwijderen? Deze actie kan niet
+              ongedaan worden gemaakt.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <div className="flex justify-center gap-2">
               <AlertDialogCancel asChild>
                 <Button type="button" variant="secondary" disabled={disabled}>
-                  Cancel
+                  Annuleren
                 </Button>
               </AlertDialogCancel>
 
@@ -74,7 +74,7 @@ export const DeleteAsset = forwardRef<HTMLButtonElement, DeleteAssetProps>(
                   data-test-id="confirmdeleteAssetButton"
                   disabled={disabled}
                 >
-                  Delete
+                  Verwijderen
                 </Button>
               </Form>
             </div>

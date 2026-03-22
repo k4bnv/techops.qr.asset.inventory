@@ -26,8 +26,8 @@ export default function BulkDeleteDialog() {
     <BulkUpdateDialogContent
       ref={zo.ref}
       type="trash"
-      title={`Delete (${totalSelected}) assets`}
-      description={`Are you sure you want to delete all (${totalSelected}) assets? This action cannot be undone.`}
+      title={`(${totalSelected}) assets verwijderen`}
+      description={`Weet u zeker dat u alle (${totalSelected}) assets wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.`}
       actionUrl="."
       arrayFieldId="assetIds"
     >
@@ -47,7 +47,7 @@ export default function BulkDeleteDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -56,7 +56,7 @@ export default function BulkDeleteDialog() {
               disabled={disabled}
               className="border-error-600 bg-error-600 hover:border-error-800 hover:bg-error-800"
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </>

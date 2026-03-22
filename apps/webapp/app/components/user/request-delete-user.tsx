@@ -23,7 +23,7 @@ import { TrashIcon } from "../icons/library";
 
 const Schema = z.object({
   email: z.string().email(),
-  reason: z.string().min(3, "Reason is a required field"),
+  reason: z.string().min(3, "Reden is een verplicht veld"),
 });
 
 export const RequestDeleteUser = () => {
@@ -48,7 +48,7 @@ export const RequestDeleteUser = () => {
           variant="danger"
           className="mt-3"
         >
-          Send delete request
+          Verwijderverzoek verzenden
         </Button>
       </AlertDialogTrigger>
 
@@ -61,26 +61,26 @@ export const RequestDeleteUser = () => {
               </span>
             </div>
             <AlertDialogTitle>
-              Are you sure you want to delete your account?
+              Weet u zeker dat u uw account wilt verwijderen?
             </AlertDialogTitle>
             <AlertDialogDescription>
-              In order to delete your account you need to send a request that
-              will be fulfilled within the next 72 hours. Account deletion is
-              final and cannot be undone.
+              Om uw account te verwijderen, moet u een verzoek indienen dat
+              binnen de volgende 72 uur wordt verwerkt. Het verwijderen van een
+              account is definitief en kan niet ongedaan worden gemaakt.
               <br />
               <br />
               <strong className="text-gray-900">
-                Deleting the user will also delete:
+                Het verwijderen van de gebruiker verwijdert ook:
               </strong>
             </AlertDialogDescription>
             <ul className="!mt-0 list-inside list-disc">
-              <li>All the user's data</li>
-              <li>All user's workspaces</li>
+              <li>Alle gegevens van de gebruiker</li>
+              <li>Alle werkruimtes van de gebruiker</li>
             </ul>
             <Input
               inputType="textarea"
               name="reason"
-              label="Reason for deleting your account"
+              label="Reden voor het verwijderen van uw account"
               required
               error={zo.errors.reason()?.message}
             />
@@ -89,7 +89,7 @@ export const RequestDeleteUser = () => {
             <div className="flex justify-center gap-2">
               <AlertDialogCancel asChild>
                 <Button variant="secondary" disabled={disabled} type="button">
-                  Cancel
+                  Annuleren
                 </Button>
               </AlertDialogCancel>
 
@@ -101,11 +101,10 @@ export const RequestDeleteUser = () => {
                 type="submit"
                 data-test-id="confirmdeleteUserButton"
                 disabled={disabled}
-                name="intent"
-                value="deleteUser"
-              >
                 Confirm
-              </Button>
+          >
+            Bevestigen
+          </Button>
             </div>
           </AlertDialogFooter>
         </Form>

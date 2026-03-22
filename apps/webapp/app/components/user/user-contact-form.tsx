@@ -31,7 +31,7 @@ export function UserContactDetailsForm({
   const isDisabled =
     disabled ||
     (user.sso && {
-      reason: "You cannot edit your details when using SSO.",
+      reason: "U kunt uw gegevens niet bewerken wanneer u SSO gebruikt.",
     });
   const validationErrors = getValidationErrors<
     typeof UserContactDetailsFormSchema
@@ -40,23 +40,23 @@ export function UserContactDetailsForm({
   return (
     <Card className="my-0">
       <div className="mb-6">
-        <h3 className="text-text-lg font-semibold">Contact Information</h3>
+        <h3 className="text-text-lg font-semibold">Contactgegevens</h3>
         <p className="text-sm text-gray-600">
-          Update your contact details and address information here. This
-          information will be visible to other users within your workspace and
-          may be used for communication purposes.
+          Werk hier uw contactgegevens en adresinformatie bij. Deze informatie
+          is zichtbaar voor andere gebruikers binnen uw werkruimte en kan worden
+          gebruikt voor communicatiedoeleinden.
         </p>
       </div>
       <Form method="post" ref={zo.ref} className="" replace>
         <FormRow
-          rowLabel="Phone number"
+          rowLabel="Telefoonnummer"
           className="border-t"
           required={zodFieldIsRequired(
             UserContactDetailsFormSchema.shape.phone
           )}
         >
           <Input
-            label="Phone"
+            label="Telefoon"
             type="tel"
             autoComplete="tel"
             hideLabel
@@ -74,13 +74,13 @@ export function UserContactDetailsForm({
         </FormRow>
 
         <FormRow
-          rowLabel="Street address"
+          rowLabel="Adres"
           required={zodFieldIsRequired(
             UserContactDetailsFormSchema.shape.street
           )}
         >
           <Input
-            label="Street"
+            label="Straat"
             type="text"
             autoComplete="street-address"
             name={zo.fields.street()}
@@ -98,11 +98,11 @@ export function UserContactDetailsForm({
         </FormRow>
 
         <FormRow
-          rowLabel="City"
+          rowLabel="Stad"
           required={zodFieldIsRequired(UserContactDetailsFormSchema.shape.city)}
         >
           <Input
-            label="City"
+            label="Stad"
             type="text"
             hideLabel
             autoComplete="city"
@@ -118,14 +118,14 @@ export function UserContactDetailsForm({
         </FormRow>
 
         <FormRow
-          rowLabel="State/Province and Postal Code"
+          rowLabel="Provincie en postcode"
           required={zodFieldIsRequired(
             UserContactDetailsFormSchema.shape.stateProvince
           )}
         >
           <div className="flex gap-6">
             <Input
-              label="State/Province"
+              label="Provincie"
               hideLabel
               autoComplete="state"
               type="text"
@@ -142,7 +142,7 @@ export function UserContactDetailsForm({
               disabled={isDisabled}
             />
             <Input
-              label="ZIP/Postal Code"
+              label="Postcode"
               type="text"
               hideLabel
               autoComplete="postal-code"
@@ -162,14 +162,14 @@ export function UserContactDetailsForm({
         </FormRow>
 
         <FormRow
-          rowLabel="Country/Region"
+          rowLabel="Land/Regio"
           className="border-b-0 pb-0"
           required={zodFieldIsRequired(
             UserContactDetailsFormSchema.shape.countryRegion
           )}
         >
           <Input
-            label="Country/Region"
+            label="Land/Regio"
             type="text"
             hideLabel
             autoComplete="country"
@@ -195,7 +195,7 @@ export function UserContactDetailsForm({
             name="intent"
             value="updateUserContact"
           >
-            Save
+            Opslaan
           </Button>
         </div>
       </Form>

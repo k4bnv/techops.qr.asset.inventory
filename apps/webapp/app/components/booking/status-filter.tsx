@@ -13,6 +13,7 @@ import {
 type BaseStatusFilterProps = {
   statusItems: Record<string, string>;
   name?: string;
+  labels?: Record<string, string>;
 };
 
 // When defaultValue is provided, onValueChange is required
@@ -33,7 +34,13 @@ type StatusFilterProps =
   | StatusFilterWithDefaultBehavior;
 
 export function StatusFilter(props: StatusFilterProps) {
-  const { statusItems, name = "status", defaultValue, onValueChange } = props;
+  const {
+    statusItems,
+    name = "status",
+    defaultValue,
+    onValueChange,
+    labels,
+  } = props;
   const navigation = useNavigation();
   const disabled = isFormProcessing(navigation.state);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -54,7 +61,7 @@ export function StatusFilter(props: StatusFilterProps) {
   // Use custom handler if provided, otherwise use local handler
   const handleValueChange = onValueChange || localHandleValueChange;
 
-  // Use custom default if provided, otherwise use "ALL"
+  // Use custom default if provided, otherwise use "ALLE"
   const effectiveDefaultValue = defaultValue || "ALL";
 
   return (
@@ -66,10 +73,10 @@ export function StatusFilter(props: StatusFilterProps) {
         disabled={disabled}
       >
         <SelectTrigger
-          aria-label="Filter by status"
+          aria-label="Filteren op status"
           className="mt-2 px-3.5 py-2 text-left text-base text-gray-500 md:mt-0 md:max-w-fit"
         >
-          <SelectValue placeholder="Filter by status" />
+          <SelectValue placeholder="Filteren op status" />
         </SelectTrigger>
         <SelectContent
           position="popper"
@@ -84,7 +91,11 @@ export function StatusFilter(props: StatusFilterProps) {
                 className="rounded-none border-b border-gray-200 px-6 py-4 pr-[5px]"
               >
                 <span className="mr-4 block text-[14px] lowercase text-gray-700 first-letter:uppercase">
-                  {value.split("_").join(" ")}
+                  {value === "ALL"
+                    ? "Alle"
+                    : labels
+                      ? labels[value]
+                      : value.split("_").join(" ")}
                 </span>
               </SelectItem>
             ))}

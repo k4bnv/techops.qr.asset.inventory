@@ -51,7 +51,7 @@ export function RelinkQrCodeDialog({
     type,
   }: OnCodeDetectionSuccessProps) {
     if (type === "barcode") {
-      setErrorMessage("Please scan a QR code, not a barcode.");
+      setErrorMessage("Scan een QR-code, geen streepjescode.");
       return;
     }
 
@@ -63,7 +63,7 @@ export function RelinkQrCodeDialog({
 
     if (currentQrId === qrId) {
       setErrorMessage(
-        `The new code you scanned is the same as the current code of the ${itemLabel}. Please scan a different code.`
+        `De nieuwe code die u heeft gescand is hetzelfde als de huidige code van het ${itemLabel}. Scan een andere code.`
       );
     }
   }
@@ -102,7 +102,7 @@ export function RelinkQrCodeDialog({
           <>
             <When truthy={currentState === "initial"}>
               <div>
-                <h3>Change QR Code</h3>
+                <h3>QR-code wijzigen</h3>
                 <p className="text-gray-600">{itemName}</p>
               </div>
             </When>
@@ -133,22 +133,22 @@ export function RelinkQrCodeDialog({
 
             <div className="flex items-center justify-center gap-4 border-b border-gray-200 p-4">
               <div className="flex-1 truncate text-right">
-                <p className="uppercase text-gray-500">Current code</p>
+                <p className="uppercase text-gray-500">Huidige code</p>
                 <p
                   className="truncate font-medium"
-                  title={currentQrId ? currentQrId : "Not linked yet"}
+                  title={currentQrId ? currentQrId : "Nog niet gekoppeld"}
                 >
-                  {currentQrId ? currentQrId : "Not linked yet"}
+                  {currentQrId ? currentQrId : "Nog niet gekoppeld"}
                 </p>
               </div>
               <div className="flex items-center justify-center rounded-lg border border-gray-200 p-2.5 shadow-lg">
                 <ArrowRightIcon />
               </div>
               <div className="flex-1 truncate">
-                <p className="uppercase text-gray-500">New code</p>
+                <p className="uppercase text-gray-500">Nieuwe code</p>
                 <p
                   className="truncate font-medium"
-                  title={newQrId ? newQrId : "Scan a QR code to link..."}
+                  title={newQrId ? newQrId : "Scan een QR-code om te koppelen..."}
                 >
                   {newQrId ? newQrId : "Scan a QR code to link..."}
                 </p>
@@ -183,7 +183,7 @@ export function RelinkQrCodeDialog({
                   }
                 }}
               >
-                Rescan
+                Opnieuw scannen
               </Button>
               <Button
                 type="button"
@@ -193,7 +193,7 @@ export function RelinkQrCodeDialog({
                   setCurrentState("qr-selected");
                 }}
               >
-                Link
+                Koppelen
               </Button>
             </div>
           </>
@@ -201,11 +201,11 @@ export function RelinkQrCodeDialog({
         <When truthy={currentState === "qr-selected"}>
           <div className="p-6">
             <div className="mb-5">
-              <h3>Change QR code</h3>
+              <h3>QR-code wijzigen</h3>
               <p>
-                Are you sure you want to relink the code for{" "}
-                <span className="font-bold">{itemName}</span>? The current code
-                will become unlinked.
+                Weet u zeker dat u de code voor{" "}
+                <span className="font-bold">{itemName}</span> wilt herkoppelen?
+                De huidige code wordt ontkoppeld.
               </p>
             </div>
 
@@ -214,7 +214,7 @@ export function RelinkQrCodeDialog({
                 <ArrowLeftIcon />
               </div>
               <div>
-                <p className="uppercase text-gray-600">Current code</p>
+                <p className="uppercase text-gray-600">Huidige code</p>
                 <p className="font-medium">{currentQrId ?? "N/A"}</p>
               </div>
             </div>
@@ -223,7 +223,7 @@ export function RelinkQrCodeDialog({
                 <ArrowRightIcon />
               </div>
               <div>
-                <p className="uppercase text-gray-600">New code</p>
+                <p className="uppercase text-gray-600">Nieuwe code</p>
                 <p className="font-medium">{newQrId}</p>
               </div>
             </div>
@@ -245,7 +245,7 @@ export function RelinkQrCodeDialog({
                   setErrorMessage("");
                 }}
               >
-                Rescan
+                Opnieuw scannen
               </Button>
               <Form method="post" className="flex-1">
                 <input type="hidden" value={newQrId} name="newQrId" />
@@ -256,7 +256,7 @@ export function RelinkQrCodeDialog({
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  Confirm
+                  Bevestigen
                 </Button>
               </Form>
             </div>

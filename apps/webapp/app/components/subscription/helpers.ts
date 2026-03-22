@@ -4,18 +4,18 @@ export const FREE_PLAN = {
     show_on_table: true,
   },
   product: {
-    name: "Free",
+    name: "Gratis",
     metadata: {
       features: `
-				Unlimited Assets, 
-				Chat support, 
-				3 Custom Fields, 
-				Github Support, 
-				TLS (SSL) Included, 
-				Automatic Upgrades, 
-				Server Maintenance
+				Onbeperkt aantal assets, 
+				Chatondersteuning, 
+				3 aangepaste velden, 
+				Github ondersteuning, 
+				TLS (SSL) inbegrepen, 
+				Automatische upgrades, 
+				Serveronderhoud
 			`,
-      slogan: "For personal use or hobby use.",
+      slogan: "Voor persoonlijk gebruik of hobby.",
     },
   },
   unit_amount: 0,

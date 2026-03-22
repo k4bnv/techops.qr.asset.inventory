@@ -59,7 +59,7 @@ export function ExportNrmButton() {
       className="w-max"
       disabled={
         disabled
-          ? { reason: "You must select at least one NRM to export" }
+          ? { reason: "U moet minstens één NRM selecteren om te exporteren" }
           : isDownloading
       }
       onClick={handleExport}
@@ -71,8 +71,8 @@ export function ExportNrmButton() {
           </span>
         ) : null}{" "}
         <span>
-          Export Selection
-          {allSelected ? "(All)" : disabled ? "" : `(${selectedNRMs.length})`}
+          Selectie exporteren
+          {allSelected ? "(Alle)" : disabled ? "" : `(${selectedNRMs.length})`}
         </span>
       </div>
     </Button>

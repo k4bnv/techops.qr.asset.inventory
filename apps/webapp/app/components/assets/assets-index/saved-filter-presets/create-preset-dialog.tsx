@@ -59,9 +59,10 @@ export function CreatePresetDialog({
         onClose={() => onOpenChange(false)}
         title={
           <div className="-mb-3 w-full pb-6">
-            <h3>Save filter preset</h3>
+            <h3>Filterpreset opslaan</h3>
             <p className="text-gray-500">
-              Give your filter a name and save it for quick access later.
+              Geef uw filter een naam en sla deze op om hem later snel te
+              kunnen openen.
             </p>
           </div>
         }
@@ -71,11 +72,11 @@ export function CreatePresetDialog({
             <input type="hidden" name="intent" value="create-preset" />
             <input type="hidden" name="query" value={query} />
             <Input
-              label="Preset name"
+              label="Presetnaam"
               name="name"
               value={name}
               onChange={onNameChange}
-              placeholder="e.g., Available laptops"
+              placeholder="bijv. Beschikbare laptops"
               maxLength={60}
               autoFocus
               error={nameError}
@@ -83,7 +84,7 @@ export function CreatePresetDialog({
 
             {/* Filter preview */}
             <div className="mt-4 rounded-md border border-gray-200 bg-gray-50 p-3">
-              <p className="mb-1 text-xs font-medium text-gray-600">Preview</p>
+              <p className="mb-1 text-xs font-medium text-gray-600">Voorbeeld</p>
               {preview}
             </div>
 
@@ -93,10 +94,10 @@ export function CreatePresetDialog({
                 variant="secondary"
                 onClick={() => onOpenChange(false)}
               >
-                Cancel
+                Annuleren
               </Button>
               <Button type="submit" disabled={!name.trim() || isSubmitting}>
-                {isSubmitting ? "Saving..." : "Save"}
+                {isSubmitting ? "Opslaan..." : "Opslaan"}
               </Button>
             </div>
           </Form>

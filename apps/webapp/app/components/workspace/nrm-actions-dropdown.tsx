@@ -69,12 +69,12 @@ export function TeamMembersActionsDropdown({
                 isPersonalOrg
                   ? {
                       reason:
-                        "You are not able to invite users to a personal workspace. ",
+                        "U kunt geen gebruikers uitnodigen voor een persoonlijke werkruimte.",
                     }
                   : false
               }
             >
-              Invite user
+              Gebruiker uitnodigen
             </Button>
           </DropdownMenuItem>
 
@@ -88,7 +88,7 @@ export function TeamMembersActionsDropdown({
               icon="pen"
               onClick={() => setOpen(false)}
             >
-              Edit
+              Bewerken
             </Button>
           </DropdownMenuItem>
 

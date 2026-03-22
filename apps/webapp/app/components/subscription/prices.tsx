@@ -70,7 +70,7 @@ export const Price = ({
         <>
           {!isFreePlan ? (
             <p className="mb-4 text-base font-semibold text-gray-900">
-              All {previousPlanName || "Free"} features and ...
+              Alle functies van {previousPlanName || "Gratis"} en ...
             </p>
           ) : null}
 
@@ -89,12 +89,12 @@ export const Price = ({
                   <AltCheckmarkIcon />
                 </i>
                 <span className="text-base text-gray-600">
-                  Optional: Single sign-on(SSO) -{" "}
+                  Optioneel: Single sign-on (SSO) -{" "}
                   <CrispButton
                     variant="link"
                     className="inline !w-auto text-[16px] font-normal underline"
                   >
-                    contact sales
+                    neem contact op met sales
                   </CrispButton>
                 </span>
               </li>

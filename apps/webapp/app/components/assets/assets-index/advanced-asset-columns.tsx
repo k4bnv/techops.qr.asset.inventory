@@ -109,7 +109,7 @@ export function AdvancedIndexColumn({
         {field.customField.type === CustomFieldType.MULTILINE_TEXT ? (
           <Popover>
             <PopoverTrigger className="underline hover:cursor-pointer">
-              View content
+              Inhoud bekijken
             </PopoverTrigger>
             <PopoverPortal>
               <PopoverContent
@@ -291,7 +291,7 @@ export function AdvancedIndexColumn({
       return <CustodyColumn custody={item.custody} />;
 
     case "availableToBook":
-      return <TextColumn value={item.availableToBook ? "Yes" : "No"} />;
+      return <TextColumn value={item.availableToBook ? "Ja" : "Nee"} />;
 
     case "upcomingReminder":
       return (
@@ -393,7 +393,7 @@ export function DescriptionColumn({ value }: { value: string }) {
             </TooltipTrigger>
 
             <TooltipContent side="top" className="max-w-[400px]">
-              <h5>Asset description</h5>
+              <h5>Asset-beschrijving</h5>
               <MarkdownViewer content={value} className="mt-2 text-sm" />
             </TooltipContent>
           </Tooltip>
@@ -480,7 +480,7 @@ function UpcomingReminderColumn({
   upcomingReminder: AdvancedIndexAsset["upcomingReminder"];
 }) {
   if (!upcomingReminder) {
-    return <Td>No upcoming reminder</Td>;
+    return <Td>Geen herinnering in het verschiet</Td>;
   }
 
   return (
@@ -597,7 +597,7 @@ function UpcomingBookingsColumn({
   });
 
   if (!bookings || bookings.length === 0) {
-    return <Td>No upcoming bookings</Td>;
+    return <Td>Geen boekingen in het verschiet</Td>;
   }
 
   return (
@@ -606,8 +606,8 @@ function UpcomingBookingsColumn({
         <PopoverTrigger asChild>
           <Button type="button" variant="link-gray">
             {bookings.length > 1
-              ? `${bookings.length} upcoming bookings`
-              : "1 upcoming booking"}
+              ? `${bookings.length} komende boekingen`
+              : "1 komende boeking"}
           </Button>
         </PopoverTrigger>
 
@@ -616,7 +616,7 @@ function UpcomingBookingsColumn({
             align="start"
             className="flex max-h-64 w-auto max-w-full flex-col gap-1 overflow-auto rounded-md border bg-white p-4"
           >
-            <h5 className="mb-1 border-b pb-2 text-sm">Upcoming Bookings</h5>
+            <h5 className="mb-1 border-b pb-2 text-sm">Komende boekingen</h5>
             {bookings.map((booking) => {
               const custodianName = booking?.custodianUser
                 ? `${booking.custodianUser.firstName} ${booking.custodianUser.lastName}`
@@ -671,7 +671,7 @@ function UpcomingBookingsColumn({
                           creator: {
                             name: booking.creator
                               ? `${booking.creator.firstName} ${booking.creator.lastName}`.trim()
-                              : "Unknown",
+                              : "Onbekend",
                             user: booking.creator
                               ? {
                                   id: booking.creator.id,

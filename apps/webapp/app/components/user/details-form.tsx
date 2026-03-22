@@ -20,11 +20,11 @@ import { Card } from "../shared/card";
 export const UserDetailsFormSchema = z.object({
   email: z
     .string()
-    .email("Please enter a valid email.")
+    .email("Voer een geldig e-mailadres in.")
     .transform((email) => email.toLowerCase()),
   username: z
     .string()
-    .min(4, { message: "Must be at least 4 characters long" }),
+    .min(4, { message: "Moet minstens 4 tekens lang zijn" }),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
 });
@@ -46,7 +46,7 @@ export function UserDetailsForm({
   const isDisabled =
     disabled ||
     (user.sso && {
-      reason: "You cannot edit your details when using SSO.",
+      reason: "U kunt uw gegevens niet bewerken wanneer u SSO gebruikt.",
     });
 
   const profilePictureError =
@@ -57,9 +57,9 @@ export function UserDetailsForm({
   return (
     <Card className="my-0">
       <div className="mb-6">
-        <h3 className="text-text-lg font-semibold">My details</h3>
+        <h3 className="text-text-lg font-semibold">Mijn gegevens</h3>
         <p className="text-sm text-gray-600">
-          Update your photo and personal details here.
+          Werk hier uw foto en persoonlijke gegevens bij.
         </p>
       </div>
       <Form
@@ -70,13 +70,13 @@ export function UserDetailsForm({
         encType="multipart/form-data"
       >
         <FormRow
-          rowLabel={"Full name"}
+          rowLabel={"Volledige naam"}
           className="border-t"
           required={zodFieldIsRequired(UserDetailsFormSchema.shape.firstName)}
         >
           <div className="flex gap-6">
             <Input
-              label="First name"
+              label="Voornaam"
               autoComplete="given-name"
               type="text"
               name={zo.fields.firstName()}
@@ -88,7 +88,7 @@ export function UserDetailsForm({
               disabled={isDisabled}
             />
             <Input
-              label="Last name"
+              label="Achternaam"
               autoComplete="family-name"
               type="text"
               name={zo.fields.lastName()}
@@ -102,7 +102,7 @@ export function UserDetailsForm({
           </div>
         </FormRow>
         <FormRow
-          rowLabel="Email address"
+          rowLabel="E-mailadres"
           className="relative"
           required={zodFieldIsRequired(
             UserDetailsFormSchema.shape.email._def.schema
@@ -126,7 +126,7 @@ export function UserDetailsForm({
             value={user?.email}
             className="w-full"
             disabled={true}
-            title="To change your email address, please contact support."
+            title="Neem contact op met de klantenservice om uw e-mailadres te wijzigen."
             required={zodFieldIsRequired(
               UserDetailsFormSchema.shape.email._def.schema
             )}
@@ -134,11 +134,11 @@ export function UserDetailsForm({
           <ChangeEmailForm currentEmail={user?.email} />
         </FormRow>
         <FormRow
-          rowLabel="Username"
+          rowLabel="Gebruikersnaam"
           required={zodFieldIsRequired(UserDetailsFormSchema.shape.username)}
         >
           <Input
-            label="Username"
+            label="Gebruikersnaam"
             hideLabel={true}
             addOn="shelf.nu/"
             type="text"
@@ -152,14 +152,14 @@ export function UserDetailsForm({
           />
         </FormRow>
         <FormRow
-          rowLabel="Profile picture"
+          rowLabel="Profielfoto"
           // subHeading="This will be displayed on your profile."
           className="border-b-0"
         >
           <div className="flex gap-3">
             <ProfilePicture />
             <div>
-              <p>Accepts PNG, JPG, JPEG, or WebP (max.4 MB)</p>
+              <p>Accepteert PNG, JPG, JPEG of WebP (max. 4 MB)</p>
               <Input
                 disabled={disabled}
                 accept={ACCEPT_SUPPORTED_IMAGES}
@@ -183,7 +183,7 @@ export function UserDetailsForm({
             name="intent"
             value="updateUser"
           >
-            Save
+            Opslaan
           </Button>
         </div>
       </Form>

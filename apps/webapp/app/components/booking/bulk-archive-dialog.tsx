@@ -28,8 +28,8 @@ export default function BulkArchiveDialog() {
       type="archive"
       arrayFieldId="bookingIds"
       actionUrl="/api/bookings/bulk-actions"
-      title={`Archive (${totalSelected}) bookings`}
-      description={`Are you sure you want to archive all (${totalSelected}) bookings?`}
+      title={`Boekingen (${totalSelected}) archiveren`}
+      description={`Weet u zeker dat u alle (${totalSelected}) boekingen wilt archiveren?`}
     >
       {({ disabled, fetcherError, handleCloseDialog }) => (
         <>
@@ -47,7 +47,7 @@ export default function BulkArchiveDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -56,7 +56,7 @@ export default function BulkArchiveDialog() {
               disabled={disabled}
               className="border-error-600 bg-error-600 hover:border-error-800 hover:bg-error-800"
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </>

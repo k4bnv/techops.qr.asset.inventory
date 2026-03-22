@@ -46,7 +46,7 @@ export default function CheckoutDialog({
         name="intent"
         value="checkOut"
       >
-        Check Out
+        Uitchecken
       </Button>
     );
   }
@@ -55,30 +55,29 @@ export default function CheckoutDialog({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button disabled={disabled} className="grow" size="sm" type="button">
-          Check Out
+          Uitchecken
         </Button>
       </AlertDialogTrigger>
 
       <AlertDialogContent portalProps={{ container: portalContainer }}>
         <AlertDialogHeader>
-          <AlertDialogTitle>Early Check-Out Warning</AlertDialogTitle>
+          <AlertDialogTitle>Waarschuwing voortijdig uitlenen</AlertDialogTitle>
           <AlertDialogDescription>
-            You are checking out the booking more than 15 minutes before the
-            start date. If you proceed, the start date will be adjusted to now:{" "}
+            U leent de boeking meer dan 15 minuten voor de startdatum uit. Als u doorgaat, wordt de startdatum aangepast naar nu:{" "}
             <span className="font-bold text-gray-700">
               <DateS date={new Date()} includeTime />
             </span>
             .
             <br />
             <br />
-            Do you want to adjust the start date or keep the original date?
+            Wilt u de startdatum aanpassen of de oorspronkelijke datum behouden?
           </AlertDialogDescription>
         </AlertDialogHeader>
 
         <AlertDialogFooter>
           <AlertDialogCancel asChild>
             <Button type="button" disabled={disabled} variant="secondary">
-              Cancel
+              Annuleren
             </Button>
           </AlertDialogCancel>
 
@@ -92,7 +91,7 @@ export default function CheckoutDialog({
             value={CheckoutIntentEnum["without-adjusted-date"]}
             form={formId}
           >
-            Don't Adjust Date
+            Datum niet aanpassen
           </Button>
 
           <Button
@@ -103,7 +102,7 @@ export default function CheckoutDialog({
             value={CheckoutIntentEnum["with-adjusted-date"]}
             form={formId}
           >
-            Adjust Date
+            Datum aanpassen
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -20,29 +20,29 @@ type ProcessItem = {
 const ITEMS: Array<ProcessItem> = [
   {
     icon: ClockIcon,
-    title: "Submit Request",
-    description: `Fill in all required information and select the assets you need. Click "Request reservation" to submit your request.`,
+    title: "Aanvraag indienen",
+    description: `Vul alle vereiste informatie in en selecteer de assets die u nodig heeft. Klik op "Reservering aanvragen" om uw aanvraag in te dienen.`,
     iconClassName: "bg-blue-100 text-blue-500",
   },
   {
     icon: InfoIcon,
-    title: "Admin Review",
+    title: "Behandeling door beheerder",
     description:
-      "Your booking will be shown as reserved, however the admin can choose to revert it back to draft or cancel it at any point, if there are any conflicts with other bookings.",
+      "Uw boeking wordt als gereserveerd weergegeven, maar de beheerder kan deze te allen tijde terugzetten naar concept of annuleren als er conflicten zijn met andere boekingen.",
     iconClassName: "bg-warning-100 text-warning-500",
   },
   {
     icon: ArrowRight,
-    title: "Check-Out",
+    title: "Uitchecken",
     description:
-      "On the start date of your booking, an administrator will check out the equipment on your behalf. You'll be responsible for the equipment during your booking period.",
+      "Op de startdatum van uw boeking zal een beheerder de apparatuur namens u uitchecken. U bent verantwoordelijk voor de apparatuur tijdens uw boekingsperiode.",
     iconClassName: "bg-violet-100 text-violet-500",
   },
   {
     icon: ArrowLeft,
-    title: "Check-In",
+    title: "Inchecken",
     description:
-      "At the end of you booking period, return the equipment to the administrator who will perform the check in action.",
+      "Aan het einde van uw boekingsperiode levert u de apparatuur in bij de beheerder, die de incheckactie zal uitvoeren.",
     iconClassName: "bg-indigo-100 text-indigo-500",
   },
 ];
@@ -56,7 +56,7 @@ export default function BookingProcessSidebar({
         <Button type="button" variant="block-link-gray" className={"mt-0"}>
           <div className="flex items-center gap-2">
             <InfoIcon className="size-4" />
-            How bookings work
+            Hoe boekingen werken
           </div>
         </Button>
       </SheetTrigger>
@@ -68,20 +68,18 @@ export default function BookingProcessSidebar({
         <div className="flex items-center justify-between bg-blue-500 p-4 text-white">
           <div className="flex items-center gap-2 text-lg font-bold">
             <InfoIcon className="size-4" />
-            Booking Process
+            Boekingsproces
           </div>
 
           <Close className="opacity-70 transition-opacity hover:opacity-100">
             <XIcon className="size-4" />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">Sluiten</span>
           </Close>
         </div>
 
         <div className="p-4">
           <p className="mb-8 border-l-4 border-blue-500 bg-blue-50 p-2 text-blue-500">
-            Base users reserve bookings that require admin approval and can be
-            cancelled at any time if there are conflicts with other bookings.
-            Admins handle equipment check-out and check-in.
+            Basisgebruikers reserveren boekingen die goedkeuring van de beheerder vereisen en kunnen op elk moment worden geannuleerd als er conflicten zijn met andere boekingen. Beheerders regelen het uit- en inchecken van apparatuur.
           </p>
 
           <div className="mb-8 flex flex-col gap-4">
@@ -108,20 +106,17 @@ export default function BookingProcessSidebar({
           </div>
 
           <div className="rounded-md bg-gray-50 p-4">
-            <h3 className="mb-1">Important Notes</h3>
+            <h3 className="mb-1">Belangrijke opmerkingen</h3>
 
             <ul className="list-inside list-disc">
               <li>
-                Equipment must be returned in the same condition it was checked
-                out.
+                Apparatuur moet in dezelfde staat worden geretourneerd als waarin deze is uitgecheckt.
               </li>
               <li>
-                If you need to extend your booking, contact an administrator
-                before your booking end date.
+                Als u uw boeking wilt verlengen, neem dan contact op met een beheerder voor de einddatum van uw boeking.
               </li>
               <li>
-                Administrators have final say on booking approvals based on
-                equipment availability and priorities.
+                Beheerders hebben de laatste stem over de goedkeuring van boekingen op basis van beschikbaarheid van apparatuur en prioriteiten.
               </li>
             </ul>
           </div>

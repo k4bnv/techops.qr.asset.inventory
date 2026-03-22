@@ -77,7 +77,7 @@ export default function AssetCustomFields({
           name={`cf-${field.id}`}
           disabled={disabled}
           defaultChecked={
-            getCustomFieldVal(field.id) === "Yes" || field.required
+            getCustomFieldVal(field.id) === "Ja" || field.required
           }
         />
         <label className="font-medium text-gray-700 lg:hidden">
@@ -207,21 +207,21 @@ export default function AssetCustomFields({
   return (
     <div className="border-b pb-6">
       <div className=" border-t py-5">
-        <h2 className="mb-1 text-[18px] font-semibold">Custom Fields</h2>
+        <h2 className="mb-1 text-[18px] font-semibold">Aangepaste velden</h2>
         <Button
           to="/settings/custom-fields"
           className="font-medium text-primary-600"
           target="_blank"
           variant="link"
         >
-          Manage custom fields
+          Aangepaste velden beheren
         </Button>
       </div>
       {customFields.length > 0 ? (
         <>
           {requiredFields.length > 0 && (
             <div className="border-t pt-4">
-              <h5>Required Fields</h5>
+              <h5>Verplichte velden</h5>
               {requiredFields.map((field, index) => (
                 <FormRow
                   key={field.id + index}
@@ -252,7 +252,7 @@ export default function AssetCustomFields({
           )}
           {optionalFields.length > 0 && (
             <div className="border-t pt-4">
-              <h5>Optional Fields</h5>
+              <h5>Optionele velden</h5>
               {optionalFields.map((field, index) => (
                 <FormRow
                   key={field.id + index}
@@ -289,9 +289,9 @@ export default function AssetCustomFields({
               <div className="mb-4 inline-flex items-center justify-center rounded-full border-8 border-solid border-gray-50 bg-gray-100 p-2 text-gray-600">
                 <SearchIcon />
               </div>
-              <h4 className="mb-6 text-base">No active custom fields</h4>
+              <h4 className="mb-6 text-base">Geen actieve aangepaste velden</h4>
               <Button to="/settings/custom-fields/new" variant="primary">
-                Create custom fields
+                Aangepaste velden aanmaken
               </Button>
             </div>
           </div>
@@ -329,7 +329,7 @@ function OptionSelect({
     );
   }, [field.options, searchQuery]);
 
-  const displayValue = value || `Choose ${field.name}`;
+  const displayValue = value || `Kies ${field.name}`;
 
   // Handle option selection
   function handleOptionClick(option: string) {
@@ -399,7 +399,7 @@ function OptionSelect({
               <Search className="ml-4 size-4 text-gray-500" />
               <input
                 ref={searchInputRef}
-                placeholder={`Search ${field.name}...`}
+                placeholder={`${field.name} zoeken...`}
                 className="border-0 px-4 py-2 pl-2 text-[14px] focus:border-0 focus:ring-0"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -409,7 +409,7 @@ function OptionSelect({
 
             {/* Options list */}
             {filteredOptions.length === 0 ? (
-              <div className="max-w-[400px] p-4">No options found</div>
+              <div className="max-w-[400px] p-4">Geen opties gevonden</div>
             ) : (
               filteredOptions.map((option, index) => {
                 const isSelected = value === option;

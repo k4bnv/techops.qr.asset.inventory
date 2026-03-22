@@ -35,9 +35,9 @@ export const UpdateGpsCoordinatesForm = ({
           // Error function
           () => {
             sendNotification({
-              title: "Location permissions blocked",
+              title: "Locatietoestemming geblokkeerd",
               message:
-                "Please give your browser permission to access GPS coordinates.",
+                "Geef uw browser toestemming om toegang te krijgen tot GPS-coördinaten.",
               icon: { name: "trash", variant: "error" },
             });
             reject();
@@ -90,7 +90,7 @@ export const UpdateGpsCoordinatesForm = ({
       onClick={handleSubmit}
     >
       <span className="flex items-center gap-2">
-        <Icon icon="gps" /> Update GPS coordinates
+        <Icon icon="gps" /> GPS-coördinaten bijwerken
       </span>
     </Button>
   );

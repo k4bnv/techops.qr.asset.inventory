@@ -21,14 +21,14 @@ export const ExportBackupButton = ({
           ? {
               reason:
                 totalItems === 0
-                  ? "You don't have any assets to export"
-                  : "Exporting is not available on the free tier of shelf.",
+                  ? "U heeft geen assets om te exporteren"
+                  : "Exporteren is niet beschikbaar in de gratis versie van shelf.",
             }
           : false
       }
-      title={totalItems === 0 ? "No assets to export" : "Export assets"}
+      title={totalItems === 0 ? "Geen assets om te exporteren" : "Assets exporteren"}
     >
-      Download CSV
+      CSV downloaden
     </Button>
   );
 };

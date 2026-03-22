@@ -24,7 +24,7 @@ import { Button } from "../shared/button";
 export const BulkPartialCheckinSchema = z.object({
   assetIds: z
     .array(z.string())
-    .min(1, "Please select at least one asset to check in."),
+    .min(1, "Selecteer ten minste één asset om in te checken."),
 });
 export default function BulkPartialCheckinDialog({
   open,
@@ -150,9 +150,9 @@ export default function BulkPartialCheckinDialog({
         title={
           <div className="w-full">
             <div className={tw("mb-5")}>
-              <h4>Check in selected items</h4>
+              <h4>Geselecteerde items inchecken</h4>
               <p>
-                The following items will be checked in and marked as Available.
+                De volgende items worden ingecheckt en als Beschikbaar gemarkeerd.
               </p>
             </div>
           </div>
@@ -214,7 +214,7 @@ export default function BulkPartialCheckinDialog({
                             kitId: kit.id,
                             image: kit.mainImage,
                             imageExpiration: kit.mainImageExpiration,
-                            alt: `${kit.name} kit image`,
+                            alt: `${kit.name} kit afbeelding`,
                           }}
                           className="size-5"
                         />
@@ -242,7 +242,7 @@ export default function BulkPartialCheckinDialog({
                                 mainImage: asset.mainImage,
                                 mainImageExpiration: asset.mainImageExpiration,
                               }}
-                              alt={`${asset.title} main image`}
+                              alt={`${asset.title} hoofdafbeelding`}
                             />
                             <span className="font-medium">{asset.title}</span>
                             {asset.category && (
@@ -273,7 +273,7 @@ export default function BulkPartialCheckinDialog({
                               mainImage: asset.mainImage,
                               mainImageExpiration: asset.mainImageExpiration,
                             }}
-                            alt={`${asset.title} main image`}
+                            alt={`${asset.title} hoofdafbeelding`}
                           />
                           <span className="font-medium">{asset.title}</span>
                           {asset.category && (
@@ -303,7 +303,7 @@ export default function BulkPartialCheckinDialog({
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
 
             {/* Submit button - conditional based on early check-in */}
@@ -315,7 +315,7 @@ export default function BulkPartialCheckinDialog({
                   to: booking.to,
                   from: booking.from,
                 }}
-                label={`Check in  item${totalSelectedItems !== 1 ? "s" : ""}`}
+                label={`${totalSelectedItems !== 1 ? "Items" : "Item"} inchecken`}
                 variant="primary"
                 disabled={disabled}
                 portalContainer={formRef.current || undefined}
@@ -332,7 +332,7 @@ export default function BulkPartialCheckinDialog({
                 name="intent"
                 value="partial-checkin"
               >
-                Check in items
+                Items inchecken
               </Button>
             )}
           </div>

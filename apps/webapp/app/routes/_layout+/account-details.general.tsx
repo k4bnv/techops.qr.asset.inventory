@@ -163,8 +163,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         await updateUser(updateUserPayload);
 
         sendNotification({
-          title: "User updated",
-          message: "Your settings have been updated successfully",
+          title: "Gebruiker bijgewerkt",
+          message: "Uw instellingen zijn succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -192,8 +192,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         await updateUserContact(updateUserContactPayload);
 
         sendNotification({
-          title: "Contact details updated",
-          message: "Your contact information has been updated successfully",
+          title: "Contactgegevens bijgewerkt",
+          message: "Uw contactgegevens zijn succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -222,9 +222,9 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Account deletion request",
+          title: "Verzoek om accountverwijdering",
           message:
-            "Your request has been sent to the admin and will be processed within 24 hours. You will receive an email confirmation.",
+            "Uw verzoek is verzonden naar de beheerder en wordt binnen 24 uur verwerkt. U ontvangt een e-mailbevestiging.",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -293,8 +293,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Email update initiated",
-          message: "Please check your email for a confirmation code",
+          title: "E-mailupdate gestart",
+          message: "Controleer uw e-mail voor een bevestigingscode",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -346,8 +346,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         );
 
         sendNotification({
-          title: "Email updated",
-          message: "Your email has been successfully updated",
+          title: "E-mail bijgewerkt",
+          message: "Uw e-mailadres is succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -380,7 +380,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       action: PermissionAction.read,
     });
 
-    const title = "Account Details";
+    const title = "Accountgegevens";
     const user = await getUserWithContact(userId);
 
     return payload({ title, user });
@@ -395,7 +395,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 ];
 
 export const handle = {
-  breadcrumb: () => "General",
+  breadcrumb: () => "Algemeen",
 };
 
 export default function UserPage() {
@@ -409,24 +409,24 @@ export default function UserPage() {
         <>
           <Card className="my-0">
             <div className="mb-6">
-              <h3 className="text-text-lg font-semibold">Password</h3>
+              <h3 className="text-text-lg font-semibold">Wachtwoord</h3>
               <p className="text-sm text-gray-600">
-                Update your password here.
+                Werk hier uw wachtwoord bij.
               </p>
             </div>
             <div>
-              <p>Need to reset your password?</p>
+              <p>Wachtwoord vergeten?</p>
               <p>
-                Click below to start the reset process. You'll be logged out and
-                redirected to our password reset page.
+                Klik hieronder om het herstelproces te starten. U wordt uitgelogd en
+                doorgeleid naar onze pagina voor het opnieuw instellen van uw wachtwoord.
               </p>
             </div>
             <PasswordResetForm />
           </Card>
           <Card className="my-0">
-            <h3 className="text-text-lg font-semibold">Delete account</h3>
+            <h3 className="text-text-lg font-semibold">Account verwijderen</h3>
             <p className="text-sm text-gray-600">
-              Send a request to delete your account.
+              Stuur een verzoek om uw account te verwijderen.
             </p>
             <RequestDeleteUser />
           </Card>

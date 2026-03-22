@@ -25,18 +25,18 @@ export default function BulkCategoryUpdateDialog() {
             <DynamicSelect
               disabled={disabled}
               model={{ name: "category", queryKey: "name" }}
-              placeholder="Uncategorized"
+              placeholder="Niet gecategoriseerd"
               initialDataKey="categories"
               countKey="totalCategories"
               fieldName="category"
-              contentLabel="Categories"
+              contentLabel="Categorieën"
               closeOnSelect
               allowClear
               extraContent={({ onItemCreated, closePopover }) => (
                 <InlineEntityCreationDialog
                   type="category"
-                  title="Create new category"
-                  buttonLabel="Create new category"
+                  title="Nieuwe categorie aanmaken"
+                  buttonLabel="Nieuwe categorie aanmaken"
                   onCreated={(created) => {
                     if (created?.type !== "category") return;
                     const category = created.entity;
@@ -69,7 +69,7 @@ export default function BulkCategoryUpdateDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -77,7 +77,7 @@ export default function BulkCategoryUpdateDialog() {
               width="full"
               disabled={disabled}
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </div>

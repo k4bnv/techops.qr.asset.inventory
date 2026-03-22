@@ -12,14 +12,14 @@ import { TagsAutocomplete } from "../tag/tags-autocomplete";
  */
 export const BulkUpdateTagsSchema = z.object({
   // Validate array of asset IDs
-  assetIds: z.array(z.string()).min(1, "At least one asset must be selected"),
+  assetIds: z.array(z.string()).min(1, "Minstens één asset moet geselecteerd zijn"),
   // Transform comma-separated string to array and validate
   tags: z
     .string()
     .transform((str) => str.split(",").filter(Boolean))
     .pipe(
       z.array(z.string()).min(1, {
-        message: "At least one tag must be selected",
+        message: "Minstens één tag moet geselecteerd zijn",
       })
     ),
 });
@@ -73,8 +73,8 @@ export default function BulkAssignTagsDialog() {
     <BulkUpdateDialogContent
       ref={zo.ref}
       type="tag-add"
-      title="Assign tags to assets"
-      description="Assign tags to selected assets. Assets that already have any of the selected tags, will be skipped."
+      title="Tags aan assets toewijzen"
+      description="Tags aan geselecteerde assets toewijzen. Assets die al een van de geselecteerde tags hebben, worden overgeslagen."
       actionUrl="/api/assets/bulk-assign-tags"
       arrayFieldId="assetIds"
     >
@@ -104,7 +104,7 @@ export default function BulkAssignTagsDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -112,7 +112,7 @@ export default function BulkAssignTagsDialog() {
               width="full"
               disabled={disabled}
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </div>

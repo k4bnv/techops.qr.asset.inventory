@@ -54,8 +54,8 @@ export default function BulkRemoveTagsDialog() {
     <BulkUpdateDialogContent
       ref={zo.ref}
       type="tag-remove"
-      title="Remove tags from assets"
-      description="Remove tags to selected assets. Assets that don't have any of the selected tags, will be skipped."
+      title="Tags van assets verwijderen"
+      description="Tags van geselecteerde assets verwijderen. Assets die geen van de geselecteerde tags hebben, worden overgeslagen."
       actionUrl="/api/assets/bulk-assign-tags?remove=true"
       arrayFieldId="assetIds"
     >
@@ -85,7 +85,7 @@ export default function BulkRemoveTagsDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -93,7 +93,7 @@ export default function BulkRemoveTagsDialog() {
               width="full"
               disabled={disabled}
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </div>

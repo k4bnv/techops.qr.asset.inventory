@@ -138,7 +138,7 @@ export default function ListAssetContent({
                   thumbnailImage: item.thumbnailImage,
                   mainImageExpiration: item.mainImageExpiration,
                 }}
-                alt={`Image of ${item.title}`}
+                alt={`Afbeelding van ${item.title}`}
                 className={tw(
                   "size-full rounded-[4px] border object-cover",
                   isKitAsset ? "border-gray-300" : ""

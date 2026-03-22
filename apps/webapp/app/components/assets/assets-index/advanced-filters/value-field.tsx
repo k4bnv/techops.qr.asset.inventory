@@ -108,7 +108,7 @@ export function ValueField({
           const endDate = new Date(end);
           if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
             if (startDate > endDate) {
-              setLocalError("Start date must be before or equal to end date");
+              setLocalError("Startdatum moet vóór of gelijk zijn aan einddatum");
               return;
             }
           }
@@ -119,7 +119,7 @@ export function ValueField({
             // For AMOUNT fields, enforce start <= end since amounts are always positive
             if (filter.type === "amount" && startNum > endNum) {
               setLocalError(
-                "Start value must be less than or equal to end value"
+                "Startwaarde moet kleiner of gelijk zijn aan eindwaarde"
               );
               return;
             }
@@ -213,12 +213,12 @@ export function ValueField({
 
   /** Generates placeholder for text input fields, based on the operator */
   function placeholder(operator: Filter["operator"]) {
-    if (disabled) return "Select a column first";
+    if (disabled) return "Selecteer eerst een kolom";
     return ["contains", "containsAll", "containsAny", "matchesAny"].includes(
       operator
     )
-      ? "Enter comma-separated values"
-      : "Enter value";
+      ? "Voer door komma's gescheiden waarden in"
+      : "Voer waarde in";
   }
 
   // Add error display for components that don't support error prop
@@ -267,13 +267,13 @@ export function ValueField({
                     <TooltipContent side="bottom" className="z-[9999999]">
                       <div className="max-w-[260px] sm:max-w-[320px]">
                         <h6 className="mb-1 text-xs font-semibold text-gray-700">
-                          Barcode scanner ready
+                          Barcode scanner gereed
                         </h6>
                         <p className="text-xs font-medium text-gray-500">
-                          This fields supports barcode scanners. Simply place
-                          your cursor in the field and scan a TechOps QR code with
-                          your barcode scanner. The value will be automatically
-                          filled in for you.
+                          Dit veld ondersteunt barcodescanners. Plaats uw
+                          cursor in het veld en scan een TechOps QR-code met
+                          uw barcodescanner. De waarde wordt automatisch
+                          ingevuld.
                         </p>
                       </div>
                     </TooltipContent>
@@ -477,7 +477,7 @@ export function ValueField({
         <Input
           {...commonInputProps}
           type="text"
-          label="Values"
+          label="Waarden"
           value={
             Array.isArray(filter.value)
               ? filter.value.join(", ")
@@ -570,7 +570,7 @@ function BooleanField({
           >
             <ChevronRight className="ml-[2px] inline-block rotate-90" />
             <span className="ml-2">
-              {disabled ? "Select a column first" : boolValue ? "Yes" : "No"}
+              {disabled ? "Selecteer eerst een kolom" : boolValue ? "Ja" : "Nee"}
             </span>{" "}
           </Button>
         </PopoverTrigger>
@@ -592,7 +592,7 @@ function BooleanField({
               onClick={() => handleSelect("true")}
               onKeyDown={handleActivationKeyPress(() => handleSelect("true"))}
             >
-              <span>Yes</span>
+              <span>Ja</span>
             </div>
             <div
               className={tw(
@@ -604,7 +604,7 @@ function BooleanField({
               onClick={() => handleSelect("false")}
               onKeyDown={handleActivationKeyPress(() => handleSelect("false"))}
             >
-              <span>No</span>
+              <span>Nee</span>
             </div>
           </PopoverContent>
         </PopoverPortal>
@@ -658,7 +658,7 @@ function EnumField({
   }, [isPopoverOpen, value, options, multiSelect]);
 
   const displayValue = disabled
-    ? "Select a column first"
+    ? "Selecteer eerst een kolom"
     : multiSelect
     ? selectedValues
         .map((v) => options.find((opt) => opt.id === v)?.label ?? v)
@@ -754,8 +754,8 @@ function EnumField({
           >
             {options.length === 0 ? (
               <div className="max-w-[400px] p-4">
-                No options available. Please contact support if you believe this
-                is an error.
+                Geen opties beschikbaar. Neem contact op met de ondersteuning
+                als u denkt dat dit een fout is.
               </div>
             ) : (
               options.map((option, index) => {
@@ -889,17 +889,17 @@ function CustodyEnumField({
     renderItem: (item: any) => resolveTeamMemberName(item, true),
     initialDataKey: "teamMembers",
     countKey: "totalTeamMembers",
-    label: "Filter by custodian",
+    label: "Filteren op beheerder",
     hideLabel: true,
     hideCounter: true,
-    placeholder: "Search team members",
+    placeholder: "Teamleden zoeken",
     withValueItem: {
       id: "in-custody",
-      name: "In custody",
+      name: "In beheer",
     },
     withoutValueItem: {
       id: "without-custody",
-      name: "Without custody",
+      name: "Zonder beheerder",
     },
     disabled,
   };
@@ -927,10 +927,10 @@ function CustodyEnumField({
                   ? selectedIds
                       .map((id) => {
                         if (id === "in-custody") {
-                          return "In custody";
+                          return "In beheer";
                         }
                         if (id === "without-custody") {
-                          return "Without custody";
+                          return "Zonder beheerder";
                         }
                         const teamMember = data.teamMembers.find(
                           (tm) => tm.id === id
@@ -940,7 +940,7 @@ function CustodyEnumField({
                         });
                       })
                       .join(", ")
-                  : "Select custodian"}
+                  : "Beheerder selecteren"}
               </span>
               <ChevronRight className="mr-1 inline-block rotate-90" />
             </div>
@@ -969,7 +969,7 @@ function CustodyEnumField({
     <DynamicSelect
       {...commonProps}
       fieldName={name}
-      placeholder="Select custodian"
+      placeholder="Beheerder selecteren"
       defaultValue={value as string}
       onChange={(selectedId) => {
         if (selectedId !== undefined) {
@@ -979,7 +979,7 @@ function CustodyEnumField({
       closeOnSelect={true}
       triggerWrapperClassName="w-full text-gray-700"
       className="z-[999999]"
-      contentLabel="Custodian"
+      contentLabel="Beheerder"
     />
   );
 }
@@ -1025,13 +1025,13 @@ function CategoryEnumField({
     ),
     initialDataKey: "categories",
     countKey: "totalCategories",
-    label: "Filter by category",
+    label: "Filteren op categorie",
     hideLabel: true,
     hideCounter: true,
-    placeholder: "Search categories",
+    placeholder: "Categorieën zoeken",
     withoutValueItem: {
       id: "uncategorized",
-      name: "Uncategorized",
+      name: "Niet gecategoriseerd",
     },
     disabled,
   };
@@ -1056,12 +1056,12 @@ function CategoryEnumField({
                 )}
               >
                 {disabled
-                  ? "Select a column first"
+                  ? "Selecteer eerst een kolom"
                   : selectedIds.length > 0
                   ? selectedIds
                       .map((id) => {
                         if (id === "uncategorized") {
-                          return "Uncategorized";
+                          return "Niet gecategoriseerd";
                         }
                         const category = data.categories?.find(
                           (cat) => cat.id === id
@@ -1069,7 +1069,7 @@ function CategoryEnumField({
                         return category?.name || "";
                       })
                       .join(", ")
-                  : "Select category"}
+                  : "Categorie selecteren"}
               </span>
               <ChevronRight className="mr-1 inline-block rotate-90" />
             </div>
@@ -1091,7 +1091,7 @@ function CategoryEnumField({
     <DynamicSelect
       {...commonProps}
       fieldName={name}
-      placeholder={disabled ? "Select a column first" : "Select category"}
+      placeholder={disabled ? "Selecteer eerst een kolom" : "Categorie selecteren"}
       defaultValue={value as string}
       onChange={(selectedId) => {
         if (selectedId !== undefined) {
@@ -1101,7 +1101,7 @@ function CategoryEnumField({
       closeOnSelect={true}
       triggerWrapperClassName="w-full text-gray-700"
       className="z-[999999]"
-      contentLabel="Category"
+      contentLabel="Categorie"
     />
   );
 }
@@ -1139,17 +1139,17 @@ function LocationEnumField({
     renderItem: (item: any) => (item.name ? item.name : "Without location"),
     initialDataKey: "locations",
     countKey: "totalLocations",
-    label: "Filter by location",
+    label: "Filteren op locatie",
     hideLabel: true,
     hideCounter: true,
-    placeholder: "Search locations",
+    placeholder: "Locaties zoeken",
     withValueItem: {
       id: "in-location",
-      name: "In a location",
+      name: "In een locatie",
     },
     withoutValueItem: {
       id: "without-location",
-      name: "Without location",
+      name: "Zonder locatie",
     },
     disabled,
   };
@@ -1174,15 +1174,15 @@ function LocationEnumField({
                 )}
               >
                 {disabled
-                  ? "Select column first"
+                  ? "Selecteer eerst een kolom"
                   : selectedIds.length > 0
                   ? selectedIds
                       .map((id) => {
                         if (id === "in-location") {
-                          return "In a location";
+                          return "In een locatie";
                         }
                         if (id === "without-location") {
-                          return "Without location";
+                          return "Zonder locatie";
                         }
                         const location = data.locations?.find(
                           (loc) => loc.id === id
@@ -1190,7 +1190,7 @@ function LocationEnumField({
                         return location?.name || "";
                       })
                       .join(", ")
-                  : "Select location"}
+                  : "Locatie selecteren"}
               </span>
               <ChevronRight className="mr-1 inline-block rotate-90" />
             </div>
@@ -1220,7 +1220,7 @@ function LocationEnumField({
     <DynamicSelect
       {...commonProps}
       fieldName={name}
-      placeholder={disabled ? "Select a column first" : "Select location"}
+      placeholder={disabled ? "Selecteer eerst een kolom" : "Locatie selecteren"}
       defaultValue={value as string}
       onChange={(selectedId) => {
         if (selectedId !== undefined) {
@@ -1230,7 +1230,7 @@ function LocationEnumField({
       closeOnSelect={true}
       triggerWrapperClassName="w-full text-gray-700"
       className="z-[999999]"
-      contentLabel="Location"
+      contentLabel="Locatie"
     />
   );
 }
@@ -1268,17 +1268,17 @@ function KitEnumField({
     renderItem: (item: any) => (item.name ? item.name : "Without kit"),
     initialDataKey: "kits",
     countKey: "totalKits",
-    label: "Filter by kit",
+    label: "Filteren op kit",
     hideLabel: true,
     hideCounter: true,
-    placeholder: "Search kits",
+    placeholder: "Kits zoeken",
     withValueItem: {
       id: "in-kit",
-      name: "In a kit",
+      name: "In een kit",
     },
     withoutValueItem: {
       id: "without-kit",
-      name: "Without kit",
+      name: "Zonder kit",
     },
     disabled,
   };
@@ -1303,21 +1303,21 @@ function KitEnumField({
                 )}
               >
                 {disabled
-                  ? "Select a column first"
+                  ? "Selecteer eerst een kolom"
                   : selectedIds.length > 0 && data.kits && data.kits.length > 0
                   ? selectedIds
                       .map((id) => {
                         if (id === "in-kit") {
-                          return "In a kit";
+                          return "In een kit";
                         }
                         if (id === "without-kit") {
-                          return "Without kit";
+                          return "Zonder kit";
                         }
                         const kit = data.kits?.find((kit) => kit.id === id);
                         return kit?.name || "";
                       })
                       .join(", ")
-                  : "Select kit"}
+                  : "Kit selecteren"}
               </span>
               <ChevronRight className="mr-1 inline-block rotate-90" />
             </div>
@@ -1347,7 +1347,7 @@ function KitEnumField({
     <DynamicSelect
       {...commonProps}
       fieldName={name}
-      placeholder={disabled ? "Select a column first" : "Select kit"}
+      placeholder={disabled ? "Selecteer eerst een kolom" : "Kit selecteren"}
       defaultValue={value as string}
       onChange={(selectedId) => {
         if (selectedId !== undefined) {
@@ -1395,17 +1395,17 @@ function UpcomingBookingsEnumField({
     renderItem: (item: any) => item.name,
     initialDataKey: "bookings",
     countKey: "totalBookings",
-    label: "Filter by booking",
+    label: "Filteren op boeking",
     hideLabel: true,
     hideCounter: true,
-    placeholder: "Search bookings",
+    placeholder: "Boekingen zoeken",
     withValueItem: {
       id: "has-booking",
-      name: "Has upcoming bookings",
+      name: "Heeft aankomende boekingen",
     },
     withoutValueItem: {
       id: "without-booking",
-      name: "No upcoming bookings",
+      name: "Geen aankomende boekingen",
     },
     disabled,
   };
@@ -1430,23 +1430,23 @@ function UpcomingBookingsEnumField({
                 )}
               >
                 {disabled
-                  ? "Select a column first"
+                  ? "Selecteer eerst een kolom"
                   : selectedIds.length > 0 &&
                     data.bookings &&
                     data.bookings.length > 0
                   ? selectedIds
                       .map((id) => {
                         if (id === "has-booking") {
-                          return "Has upcoming bookings";
+                          return "Heeft aankomende boekingen";
                         }
                         if (id === "without-booking") {
-                          return "No upcoming bookings";
+                          return "Geen aankomende boekingen";
                         }
                         const booking = data.bookings?.find((b) => b.id === id);
                         return booking?.name || "";
                       })
                       .join(", ")
-                  : "Select booking"}
+                  : "Boeking selecteren"}
               </span>
               <ChevronRight className="mr-1 inline-block rotate-90" />
             </div>
@@ -1476,7 +1476,7 @@ function UpcomingBookingsEnumField({
     <DynamicSelect
       {...commonProps}
       fieldName={name}
-      placeholder={disabled ? "Select a column first" : "Select booking"}
+      placeholder={disabled ? "Selecteer eerst een kolom" : "Boeking selecteren"}
       defaultValue={value as string}
       onChange={(selectedId) => {
         if (selectedId !== undefined) {
@@ -1486,7 +1486,7 @@ function UpcomingBookingsEnumField({
       closeOnSelect={true}
       triggerWrapperClassName="w-full text-gray-700"
       className="z-[999999]"
-      contentLabel="Booking"
+      contentLabel="Boeking"
     />
   );
 }
@@ -1521,12 +1521,12 @@ function TagsField({
     },
     initialDataKey: "tags",
     countKey: "totalTags",
-    label: "Filter by tag",
+    label: "Filteren op tag",
     hideLabel: true,
     hideCounter: true,
     withoutValueItem: {
       id: "untagged",
-      name: "Untagged",
+      name: "Zonder tags",
     },
     disabled,
   };
@@ -1551,18 +1551,18 @@ function TagsField({
                 )}
               >
                 {disabled
-                  ? "Select a column first"
+                  ? "Selecteer eerst een kolom"
                   : selectedIds.length > 0
                   ? selectedIds
                       .map((id) => {
                         if (id === "untagged") {
-                          return "Untagged";
+                          return "Zonder tags";
                         }
                         const tag = data.tags?.find((t) => t.id === id);
                         return tag?.name || "";
                       })
                       .join(", ")
-                  : "Select Tag"}
+                  : "Tag selecteren"}
               </span>
               <ChevronRight className="mr-1 inline-block rotate-90" />
             </div>
@@ -1572,7 +1572,7 @@ function TagsField({
         className="z-[999999]"
         selectionMode="none"
         defaultValues={selectedIds}
-        placeholder="Select tags"
+        placeholder="Tags selecteren"
         onSelectionChange={(selectedTagIds) => {
           handleChange(selectedTagIds.join(","));
         }}
@@ -1584,7 +1584,7 @@ function TagsField({
     <DynamicSelect
       {...commonProps}
       fieldName={name}
-      placeholder={disabled ? "Select a column first" : "Select tag"}
+      placeholder={disabled ? "Selecteer eerst een kolom" : "Tag selecteren"}
       defaultValue={value}
       onChange={(selectedId) => {
         if (selectedId) {
@@ -1818,7 +1818,7 @@ export function DateField({
       const startDate = parseISO(start);
       const endDate = parseISO(end);
       if (startDate > endDate) {
-        setLocalError("Start date must be before or equal to end date");
+        setLocalError("Startdatum moet vóór of gelijk zijn aan einddatum");
       } else {
         setLocalError(null);
       }
@@ -1847,7 +1847,7 @@ export function DateField({
         {...commonInputProps}
         label={""}
         type="text"
-        placeholder="Select a column first"
+        placeholder="Selecteer eerst een kolom"
       />
     );
   }
@@ -1858,7 +1858,7 @@ export function DateField({
         <div className="flex max-w-full items-center justify-normal gap-[2px]">
           <Input
             {...commonInputProps}
-            label="Start Date"
+            label="Startdatum"
             type="date"
             value={localValue[0]}
             onChange={handleDateChange(0)}
@@ -1867,7 +1867,7 @@ export function DateField({
           />
           <Input
             {...commonInputProps}
-            label="End Date"
+            label="Einddatum"
             type="date"
             value={localValue[1]}
             onChange={handleDateChange(1)}
@@ -1998,7 +1998,7 @@ function MultiDateInput({
         <div className="mr-1 inline-block size-[14px] align-middle">
           <PlusIcon />
         </div>
-        <span className="inline-block align-middle">Add another date</span>
+        <span className="inline-block align-middle">Nog een datum toevoegen</span>
       </Button>
     </div>
   );

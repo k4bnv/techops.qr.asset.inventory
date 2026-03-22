@@ -43,9 +43,9 @@ export function AvailabilityLabel({
   if (isAlreadyAdded) {
     return (
       <AvailabilityBadge
-        badgeText="Already added to this booking"
-        tooltipTitle="Asset is part of booking"
-        tooltipContent="This asset is already added to the current booking."
+        badgeText="Al toegevoegd aan deze boeking"
+        tooltipTitle="Asset is onderdeel van boeking"
+        tooltipContent="Dit asset is al toegevoegd aan de huidige boeking."
       />
     );
   }
@@ -57,10 +57,10 @@ export function AvailabilityLabel({
   if (!asset.availableToBook) {
     return (
       <AvailabilityBadge
-        badgeText={"Unavailable"}
-        tooltipTitle={"Asset is unavailable for bookings"}
+        badgeText={"Onbeschikbaar"}
+        tooltipTitle={"Asset is onbeschikbaar voor boekingen"}
         tooltipContent={
-          "This asset is marked as unavailable for bookings by an administrator."
+          "Dit asset is door een beheerder gemarkeerd als onbeschikbaar voor boekingen."
         }
       />
     );
@@ -72,9 +72,9 @@ export function AvailabilityLabel({
   if (isPartOfKit && showKitStatus) {
     return (
       <AvailabilityBadge
-        badgeText="Part of kit"
-        tooltipTitle="Asset is part of a kit"
-        tooltipContent="Remove the asset from the kit to add it individually."
+        badgeText="Onderdeel van kit"
+        tooltipTitle="Asset is onderdeel van een kit"
+        tooltipContent="Verwijder het asset uit de kit om het individueel toe te voegen."
       />
     );
   }
@@ -85,10 +85,10 @@ export function AvailabilityLabel({
   if (asset.custody) {
     return (
       <AvailabilityBadge
-        badgeText={"In custody"}
-        tooltipTitle={"Asset is in custody"}
+        badgeText={"In beheer"}
+        tooltipTitle={"Asset is in beheer"}
         tooltipContent={
-          "This asset is in custody of a team member making it currently unavailable for bookings."
+          "Dit asset is in beheer bij een teamlid, waardoor het momenteel onbeschikbaar is voor boekingen."
         }
       />
     );
@@ -117,12 +117,12 @@ export function AvailabilityLabel({
       })[0];
     return (
       <AvailabilityBadge
-        badgeText={"Already booked"}
-        tooltipTitle={"Asset is already part of a booking"}
+        badgeText={"Al geboekt"}
+        tooltipTitle={"Asset is al onderdeel van een boeking"}
         tooltipContent={
           conflictingBooking ? (
             <span>
-              This asset is added to a booking (
+              Dit asset is toegevoegd aan een boeking (
               <Button
                 to={`/bookings/${conflictingBooking.id}`}
                 target="_blank"
@@ -131,10 +131,10 @@ export function AvailabilityLabel({
               >
                 {conflictingBooking?.name}
               </Button>
-              ) that is overlapping the selected time period.
+              ) die de geselecteerde tijdsperiode overlapt.
             </span>
           ) : (
-            "This asset is added to a booking that is overlapping the selected time period."
+            "Dit asset is toegevoegd aan een boeking die de geselecteerde tijdsperiode overlapt."
           )
         }
       />
@@ -165,12 +165,12 @@ export function AvailabilityLabel({
 
     return (
       <AvailabilityBadge
-        badgeText={"Checked out"}
-        tooltipTitle={"Asset is currently checked out"}
+        badgeText={"Uitgeleend"}
+        tooltipTitle={"Asset is momenteel uitgeleend"}
         tooltipContent={
           conflictingBooking ? (
             <span>
-              This asset is currently checked out as part of another booking (
+              Dit asset is momenteel uitgeleend als onderdeel van een andere boeking (
               <Link
                 to={`${SERVER_URL}/bookings/
                 ${conflictingBooking.id}`}
@@ -178,10 +178,10 @@ export function AvailabilityLabel({
               >
                 {conflictingBooking?.name}
               </Link>
-              ) and should be available for your selected date range period
+              ) en zou beschikbaar moeten zijn voor uw geselecteerde datumperiode
             </span>
           ) : (
-            "This asset is currently checked out as part of another booking and should be available for your selected date range period"
+            "Dit asset is momenteel uitgeleend als onderdeel van een andere boeking en zou beschikbaar moeten zijn voor uw geselecteerde datumperiode"
           )
         }
       />
@@ -194,9 +194,9 @@ export function AvailabilityLabel({
   if (isAddedThroughKit) {
     return (
       <AvailabilityBadge
-        badgeText="Added through kit"
-        tooltipTitle="Asset was added through a kit"
-        tooltipContent="Remove the asset from the kit to add it individually."
+        badgeText="Toegevoegd via kit"
+        tooltipTitle="Asset is toegevoegd via een kit"
+        tooltipContent="Verwijder het asset uit de kit om het individueel toe te voegen."
       />
     );
   }
@@ -325,9 +325,9 @@ export function KitAvailabilityLabel({ kit }: { kit: KitForBooking }) {
   if (isInCustody) {
     return (
       <AvailabilityBadge
-        badgeText="In custody"
-        tooltipTitle="Kit is in custody"
-        tooltipContent="This kit is in custody or it contains some assets that are in custody."
+        badgeText="In beheer"
+        tooltipTitle="Kit is in beheer"
+        tooltipContent="Deze kit is in beheer of bevat assets die in beheer zijn."
       />
     );
   }
@@ -335,12 +335,12 @@ export function KitAvailabilityLabel({ kit }: { kit: KitForBooking }) {
   if (isCheckedOut) {
     return (
       <AvailabilityBadge
-        badgeText="Checked out"
-        tooltipTitle="Kit is checked out"
+        badgeText="Uitgeleend"
+        tooltipTitle="Kit is uitgeleend"
         tooltipContent={
           isCheckedOutInANonConflictingBooking
-            ? "This kit is currently checked out as part of another booking and should be available for your selected date range period"
-            : "This kit is currently checked out and is not available for your selected date range period"
+            ? "Deze kit is momenteel uitgeleend als onderdeel van een andere boeking en zou beschikbaar moeten zijn voor uw geselecteerde datumperiode"
+            : "Deze kit is momenteel uitgeleend en is niet beschikbaar voor uw geselecteerde datumperiode"
         }
       />
     );
@@ -349,9 +349,9 @@ export function KitAvailabilityLabel({ kit }: { kit: KitForBooking }) {
   if (isKitWithoutAssets) {
     return (
       <AvailabilityBadge
-        badgeText="No assets"
-        tooltipTitle="No assets in kit"
-        tooltipContent="There are no assets added to this kit yet."
+        badgeText="Geen assets"
+        tooltipTitle="Geen assets in kit"
+        tooltipContent="Er zijn nog geen assets aan deze kit toegevoegd."
       />
     );
   }
@@ -359,9 +359,9 @@ export function KitAvailabilityLabel({ kit }: { kit: KitForBooking }) {
   if (someAssetMarkedUnavailable) {
     return (
       <AvailabilityBadge
-        badgeText="Contains non-bookable assets"
-        tooltipTitle="Kit is unavailable for check-out"
-        tooltipContent="Some assets in this kit are marked as non-bookable. You can still add the kit to your booking, but you must remove the non-bookable assets to proceed with check-out."
+        badgeText="Bevat niet-boekbare assets"
+        tooltipTitle="Kit is onbeschikbaar voor uitlenen"
+        tooltipContent="Sommige assets in deze kit zijn gemarkeerd als niet-boekbaar. U kunt de kit nog steeds aan uw boeking toevoegen, maar u moet de niet-boekbare assets verwijderen om door te gaan met uitlenen."
       />
     );
   }
@@ -369,9 +369,9 @@ export function KitAvailabilityLabel({ kit }: { kit: KitForBooking }) {
   if (someAssetHasUnavailableBooking) {
     return (
       <AvailabilityBadge
-        badgeText="Already booked"
-        tooltipTitle="Kit is already part of a booking"
-        tooltipContent="This kit is already added to another booking."
+        badgeText="Al geboekt"
+        tooltipTitle="Kit is al onderdeel van een boeking"
+        tooltipContent="Deze kit is al toegevoegd aan een andere boeking."
       />
     );
   }

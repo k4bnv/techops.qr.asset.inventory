@@ -81,8 +81,8 @@ export function ConfigureColumnsDropdown() {
           icon="columns"
           className="mt-2 font-normal text-gray-500 md:mt-0"
           width="full"
-          title="Columns configuration"
-          aria-label={"Columns configuration"}
+          title="Kolomconfiguratie"
+          aria-label={"Kolomconfiguratie"}
         />
       </PopoverTrigger>
       <PopoverPortal>
@@ -106,23 +106,23 @@ export function ConfigureColumnsDropdown() {
             <div className="content-inner relative mb-[60px] max-h-[412px] overflow-y-scroll">
               <div className="py-[2px]">
                 <div className="px-[10px] py-2 text-gray-500">
-                  Fixed columns
+                  Vaste kolommen
                 </div>
                 <ColumnRow className="flex items-center gap-1 pb-2">
                   <FakeCheckbox
                     checked={true}
                     className={tw("mr-1 text-gray-600")}
                   />
-                  Name
+                  Naam
                 </ColumnRow>
               </div>
 
               <div className="border-t py-[2px]">
                 <div className="flex items-center justify-between px-[10px] py-2 text-gray-500">
                   <div>
-                    <div>Columns ({currentColumns.length})</div>
+                    <div>Kolommen ({currentColumns.length})</div>
                     <div className="text-xs text-gray-400">
-                      Alt+↑↓ to reorder
+                      Alt+↑↓ om te verplaatsen
                     </div>
                   </div>
                   <ColumnsBulkActions
@@ -132,17 +132,17 @@ export function ConfigureColumnsDropdown() {
                 </div>
                 {/* Screen reader instructions */}
                 <div className="sr-only" id="reorder-instructions">
-                  Use Tab to navigate between column labels and drag handles.
-                  Press Space or Enter on a column label to toggle its
-                  visibility. Focus the drag handle and press Alt plus arrow up
-                  or arrow down to reorder columns.
+                  Gebruik Tab om te navigeren tussen kolomlabels en handgrepen.
+                  Druk op Spatie of Enter op een kolomlabel om de zichtbaarheid ervan te wisselen. 
+                  Focus op de handgreep en druk op Alt plus pijl omhoog
+                  of pijl omlaag om kolommen te verplaatsen.
                 </div>
                 <Reorder.Group
                   values={currentColumns}
                   onReorder={setCurrentColumns}
                   as="ul"
                   role="list"
-                  aria-label="Reorderable columns list"
+                  aria-label="Lijst met verplaatsbare kolommen"
                   aria-describedby="reorder-instructions"
                 >
                   {currentColumns.map((column, index) => (
@@ -151,9 +151,9 @@ export function ConfigureColumnsDropdown() {
                       value={column}
                       as="li"
                       role="listitem"
-                      aria-label={`${parseColumnName(column.name)}, position ${
+                      aria-label={`${parseColumnName(column.name)}, positie ${
                         index + 1
-                      } of ${currentColumns.length}`}
+                      } van ${currentColumns.length}`}
                     >
                       <ColumnRow key={column.name}>
                         <div className="flex items-center gap-1">
@@ -222,12 +222,12 @@ export function ConfigureColumnsDropdown() {
                             }}
                             onKeyDown={(e) => handleKeyDown(e, index)}
                             className="flex h-auto cursor-move items-center p-1 text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary"
-                            aria-label={`Reorder ${parseColumnName(
+                            aria-label={`${parseColumnName(
                               column.name
-                            )}`}
+                            )} verplaatsen`}
                             aria-describedby="reorder-instructions"
                             aria-keyshortcuts="Alt+ArrowUp Alt+ArrowDown"
-                            title="Drag to reorder or use Alt+Arrow keys"
+                            title="Sleep om te verplaatsen of gebruik Alt+pijltjestoetsen"
                             tabIndex={0}
                           >
                             <div className="h-auto w-2">
@@ -248,7 +248,7 @@ export function ConfigureColumnsDropdown() {
                 variant="secondary"
                 width="full"
               >
-                Apply
+                Toepassen
               </Button>
             </footer>
           </fetcher.Form>
@@ -298,7 +298,7 @@ function ColumnsBulkActions({
               setIsOpen(false);
             }}
           >
-            Select all
+            Alles selecteren
           </Button>
 
           <Button
@@ -311,7 +311,7 @@ function ColumnsBulkActions({
               setIsOpen(false);
             }}
           >
-            Disselect all
+            Alles deselecteren
           </Button>
         </PopoverContent>
       </PopoverPortal>

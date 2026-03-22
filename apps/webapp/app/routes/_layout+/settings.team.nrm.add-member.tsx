@@ -19,7 +19,7 @@ import {
   PermissionEntity,
 } from "~/utils/permissions/permission.data";
 import { requirePermission } from "~/utils/roles.server";
-export const meta = () => [{ title: appendToMetaTitle("Add team member") }];
+export const meta = () => [{ title: appendToMetaTitle("Teamlid toevoegen") }];
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -43,7 +43,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 }
 
 export const NewOrEditMemberSchema = z.object({
-  name: z.string().min(1, "Name is required"),
+  name: z.string().min(1, "Naam is vereist"),
 });
 
 export async function action({ context, request }: ActionFunctionArgs) {
@@ -70,8 +70,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Successfully added a new team member",
-      message: "You are now able to give this team member custody over assets.",
+      title: "Nieuw teamlid succesvol toegevoegd",
+      message: "U kunt dit teamlid nu beheer over assets geven.",
       icon: { name: "success", variant: "success" },
       senderId: userId,
     });
@@ -101,19 +101,19 @@ export default function AddMember() {
           <UserIcon />
         </div>
         <div className="mb-5">
-          <h4>Add team member</h4>
+          <h4>Teamlid toevoegen</h4>
           <p>
-            Team members are added to your environment but do not have an
-            account to log in with.
+            Team leden worden toegevoegd aan uw omgeving, maar hebben geen
+            account om mee in te loggen.
           </p>
         </div>
         <Form method="post" ref={zo.ref}>
           <Input
             name={zo.fields.name()}
             type="text"
-            label="Name"
+            label="Naam"
             className="mb-8"
-            placeholder="Enter team member’s name"
+            placeholder="Voer de naam van het teamlid in"
             required
             autoFocus
             error={zo.errors.name()?.message}

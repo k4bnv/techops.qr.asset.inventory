@@ -17,8 +17,8 @@ export function ExportAssetsButton() {
   const [isDownloading, setIsDownloading] = useState(false);
 
   const allSelected = isSelectingAllItems(selectedAssets);
-  const title = `Export selection ${
-    disabled ? "" : allSelected ? "(All)" : `(${selectedAssets.length})`
+  const title = `Selectie exporteren ${
+    disabled ? "" : allSelected ? "(Alle)" : `(${selectedAssets.length})`
   }`;
 
   /** Get the assetIds from the atom and add them to assetIds search param */
@@ -71,13 +71,13 @@ export function ExportAssetsButton() {
           ? {
               reason: (
                 <>
-                  Exporting is not available on the free tier of shelf.{" "}
+                  Exporteren is niet beschikbaar in de gratis versie van shelf.{" "}
                   <UpgradeMessage />
                 </>
               ),
             }
           : disabled
-          ? { reason: "You must select at least 1 asset to export" }
+          ? { reason: "U moet minstens 1 asset selecteren om te exporteren" }
           : isDownloading
       }
     >

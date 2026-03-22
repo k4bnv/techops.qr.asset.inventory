@@ -16,7 +16,7 @@ import { Button } from "../shared/button";
 
 export const BulkAddToAuditSchema = z.object({
   assetIds: z.string().array().min(1),
-  auditId: z.string().min(1, "Please select an audit"),
+  auditId: z.string().min(1, "Selecteer een audit"),
 });
 
 type PendingAudit = {
@@ -61,10 +61,10 @@ export default function BulkAddToAuditDialog() {
     <BulkUpdateDialogContent
       ref={zo.ref}
       type="add-to-audit"
-      title="Add assets to existing audit"
-      description={`Add ${displayCount} asset${
+      title="Assets toevoegen aan bestaande audit"
+      description={`Voeg ${displayCount} asset${
         displayCount === 1 ? "" : "s"
-      } to a pending audit. Select an audit below.`}
+      } toe aan een lopende audit. Selecteer hieronder een audit.`}
       actionUrl="/api/audits/add-assets"
       arrayFieldId="assetIds"
       skipCloseOnSuccess={true}
@@ -80,14 +80,14 @@ export default function BulkAddToAuditDialog() {
               <>
                 <div className="mb-6 rounded-md border border-success-200 bg-success-50 p-4">
                   <p className="text-sm font-medium text-success-900">
-                    Successfully added {fetcherData.addedCount} asset
-                    {fetcherData.addedCount === 1 ? "" : "s"} to the audit!
+                    Succesvol {fetcherData.addedCount} asset
+                    {fetcherData.addedCount === 1 ? "" : "s"} toegevoegd aan de audit!
                   </p>
                   {fetcherData.skippedCount > 0 && (
                     <p className="mt-2 text-sm text-success-700">
                       {fetcherData.skippedCount} asset
-                      {fetcherData.skippedCount === 1 ? " was" : "s were"}{" "}
-                      already in the audit and skipped.
+                      {fetcherData.skippedCount === 1 ? "" : "s"}
+                      {fetcherData.skippedCount === 1 ? " zat" : " zaten"} al in de audit en is overgeslagen.
                     </p>
                   )}
                 </div>
@@ -98,7 +98,7 @@ export default function BulkAddToAuditDialog() {
                     width="full"
                     onClick={handleCloseDialog}
                   >
-                    Close
+                    Sluiten
                   </Button>
                   {selectedAuditId && (
                     <Button
@@ -107,7 +107,7 @@ export default function BulkAddToAuditDialog() {
                       to={`/audits/${selectedAuditId}/overview`}
                       onClick={handleCloseDialog}
                     >
-                      View audit
+                      Audit bekijken
                     </Button>
                   )}
                 </div>
@@ -117,7 +117,7 @@ export default function BulkAddToAuditDialog() {
               <>
                 <div className="mb-6 rounded-md border border-gray-200 bg-gray-50 p-4">
                   <p className="text-sm text-gray-600">
-                    There are no pending audits.
+                    Er zijn geen lopende audits.
                   </p>
                 </div>
                 <div className="flex gap-3">
@@ -127,7 +127,7 @@ export default function BulkAddToAuditDialog() {
                     width="full"
                     onClick={handleCloseDialog}
                   >
-                    Cancel
+                    Annuleren
                   </Button>
                   <Button
                     variant="primary"
@@ -135,7 +135,7 @@ export default function BulkAddToAuditDialog() {
                     to="/audits"
                     onClick={handleCloseDialog}
                   >
-                    Create new audit
+                    Nieuwe audit aanmaken
                   </Button>
                 </div>
               </>
@@ -146,7 +146,7 @@ export default function BulkAddToAuditDialog() {
                   <AuditSelector
                     name={zo.fields.auditId()}
                     audits={data?.audits || []}
-                    placeholder={isLoading ? "Loading..." : "Select an audit"}
+                    placeholder={isLoading ? "Laden..." : "Selecteer een audit"}
                     isLoading={isLoading}
                     error={
                       zo.errors.auditId()?.message || error || fetcherError
@@ -162,7 +162,7 @@ export default function BulkAddToAuditDialog() {
                     disabled={disabled}
                     onClick={handleCloseDialog}
                   >
-                    Cancel
+                    Annuleren
                   </Button>
                   <Button
                     type="submit"
@@ -170,7 +170,7 @@ export default function BulkAddToAuditDialog() {
                     width="full"
                     disabled={disabled}
                   >
-                    {disabled ? "Adding..." : "Add to audit"}
+                    {disabled ? "Toevoegen..." : "Toevoegen aan audit"}
                   </Button>
                 </div>
               </>

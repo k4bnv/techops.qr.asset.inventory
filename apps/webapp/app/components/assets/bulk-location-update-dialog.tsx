@@ -7,7 +7,7 @@ import { Button } from "../shared/button";
 export const BulkLocationUpdateSchema = z.object({
   assetIds: z.array(z.string()).optional().default([]),
   kitIds: z.array(z.string()).optional().default([]),
-  newLocationId: z.string({ required_error: "Please select a location" }),
+  newLocationId: z.string({ required_error: "Selecteer een locatie" }),
 });
 
 export default function BulkLocationUpdateDialog() {
@@ -41,7 +41,7 @@ export default function BulkLocationUpdateDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -49,7 +49,7 @@ export default function BulkLocationUpdateDialog() {
               width="full"
               disabled={disabled}
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </div>

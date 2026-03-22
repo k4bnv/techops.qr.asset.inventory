@@ -68,8 +68,8 @@ export function SubscriptionsOverview({
   if (!customer) {
     return (
       <div>
-        Your account doesn't have a customer id. Please contact support to get
-        this issue resolved
+        Uw account heeft geen klant-ID. Neem contact op met de support om dit
+        probleem op te lossen.
       </div>
     );
   }
@@ -98,7 +98,7 @@ export function SubscriptionsOverview({
       {workspaceSubscriptions.length > 0 && (
         <div>
           <h4 className="mb-3 text-sm font-medium uppercase text-gray-500">
-            Workspace Subscriptions
+            WORKSPACE ABONNEMENTEN
           </h4>
           {workspaceSubscriptions.map((subscription) => (
             <SubscriptionBox
@@ -110,7 +110,7 @@ export function SubscriptionsOverview({
             />
           ))}
           <div className="mt-2 text-right font-medium">
-            Subtotal:{" "}
+            Subtotaal:{" "}
             {new Intl.NumberFormat("en-US", {
               style: "currency",
               currency: "USD",
@@ -122,7 +122,7 @@ export function SubscriptionsOverview({
       {addonSubscriptions.length > 0 && (
         <div>
           <h4 className="mb-3 text-sm font-medium uppercase text-gray-500">
-            Add-ons
+            ADD-ONS
           </h4>
           {addonSubscriptions.map((subscription) => (
             <SubscriptionBox
@@ -134,7 +134,7 @@ export function SubscriptionsOverview({
             />
           ))}
           <div className="mt-2 text-right font-medium">
-            Subtotal:{" "}
+            Subtotaal:{" "}
             {new Intl.NumberFormat("en-US", {
               style: "currency",
               currency: "USD",
@@ -236,15 +236,15 @@ function Item({
     // Determine the display name based on tier or product name
     const displayName =
       planTier === "tier_2"
-        ? "Team plan"
+        ? "Team abonnement"
         : planTier === "tier_1"
-        ? "Plus plan"
+        ? "Plus abonnement"
         : productName;
 
     const arr: (string | ReactNode)[] = [
       displayName,
       formatSubscriptionStatus(subscription.status),
-      interval === "year" ? "Yearly billing" : "Monthly billing",
+      interval === "year" ? "Jaarlijkse facturering" : "Maandelijkse facturering",
     ];
     if (workspaceName) {
       arr.push(`Workspace: ${workspaceName}`);
@@ -252,7 +252,7 @@ function Item({
     if (isLegacyPricing) {
       arr.unshift(
         <div className="flex items-center gap-1">
-          <span>Legacy pricing</span> <LegacyPricingTooltip />
+          <span>Legacy prijsstelling</span> <LegacyPricingTooltip />
         </div>
       );
     }
@@ -271,22 +271,22 @@ function Item({
     if (trialEnded)
       return (
         <>
-          <div>Trial ended</div>
+          <div>Proefperiode beëindigd</div>
 
           <div className="text-gray-500">
             <CustomerPortalForm
-              buttonText="Add payment"
+              buttonText="Betaling toevoegen"
               buttonProps={{
                 variant: "link",
                 className: tw("font-normal underline"),
               }}
               className="inline"
             />{" "}
-            information to start subscription.
+            informatie om het abonnement te starten.
           </div>
         </>
       );
-    if (isPaused) return "Paused";
+    if (isPaused) return "Gepauzeerd";
     return (
       <>
         <div>
@@ -299,7 +299,7 @@ function Item({
 
         {isTrial && (
           <div className="text-gray-500">
-            after trial ends <TrialPaymentTooltip />
+            na afloop van de proefperiode <TrialPaymentTooltip />
           </div>
         )}
       </>
@@ -325,32 +325,32 @@ function Item({
           <div className="flex gap-2">
             {/* Start */}
             <div>
-              <span className="font-medium">ACQUIRED ON:</span>{" "}
+              <span className="font-medium">VERKREGEN OP:</span>{" "}
               <DateS date={new Date(subscription.created * 1000)} />
             </div>{" "}
             {/* End */}
             <div>
               {isTrial && (
                 <>
-                  <span className="font-medium">DAYS LEFT ON TRIAL:</span>{" "}
+                  <span className="font-medium">DAGEN RESTEREND IN PROEFPERIODE:</span>{" "}
                   {calculateDaysLeft(subscription.trial_end as number)}
                 </>
               )}
               {isActive && (
                 <>
-                  <span className="font-medium">RENEWS ON:</span>{" "}
+                  <span className="font-medium">WORDT VERNIEUWD OP:</span>{" "}
                   <DateS date={new Date(item.current_period_end * 1000)} />
                 </>
               )}
               {isPaused && (
                 <>
-                  <span className="font-medium">PAUSED ON:</span>{" "}
+                  <span className="font-medium">GEPAUZEERD OP:</span>{" "}
                   <DateS date={new Date(item.current_period_end * 1000)} />
                 </>
               )}
             </div>
             <div>
-              <span className="font-medium">QUANTITY:</span>{" "}
+              <span className="font-medium">AANTAL:</span>{" "}
               {(item?.quantity as number) || 1}
             </div>
           </div>
@@ -372,11 +372,11 @@ function TrialPaymentTooltip() {
         </TooltipTrigger>
         <TooltipContent side="bottom" className="max-w-[300px]">
           <p className="text-sm">
-            You will not be automatically charged when your trial ends, unless
-            you have already added your payment information. To manage your
-            payment methods, please go to the{" "}
+            Er worden niet automatisch kosten in rekening gebracht wanneer uw
+            proefperiode afloopt, tenzij u uw betalingsgegevens al heeft
+            toegevoegd. Om uw betaalmethoden te beheren, gaat u naar het{" "}
             <CustomerPortalForm
-              buttonText="customer portal"
+              buttonText="klantenportaal"
               className={tw("inline")}
               buttonProps={{
                 variant: "link",
@@ -401,18 +401,18 @@ function LegacyPricingTooltip() {
         </TooltipTrigger>
         <TooltipContent side="bottom" className="max-w-[300px]">
           <p>
-            You are on a{" "}
+            U bevindt zich op een{" "}
             <Button
               to="https://www.shelf.nu/legacy-plan-faq"
               target="_blank"
               variant="link"
             >
-              legacy pricing plan
+              legacy prijsplan
             </Button>
-            . We have since updated our pricing plans. <br />
-            You can view the new pricing plans in the customer portal. If you
-            cancel your subscription, you will not be able to renew it. For any
-            questions - get in touch with support
+            . We hebben sindsdien onze prijsplannen bijgewerkt. <br />
+            U kunt de nieuwe prijsplannen bekijken in het klantenportaal. Als u
+            uw abonnement opzegt, kunt u dit niet verlengen. Neem bij vragen
+            contact op met de support.
           </p>
         </TooltipContent>
       </Tooltip>
@@ -467,14 +467,14 @@ function getSubscriptionStatus(subscription: Stripe.Subscription) {
 /** Maps Stripe subscription status to a human-friendly label */
 function formatSubscriptionStatus(status: Stripe.Subscription.Status): string {
   const statusMap: Record<Stripe.Subscription.Status, string> = {
-    active: "Active",
-    past_due: "Past due",
-    unpaid: "Unpaid",
-    canceled: "Canceled",
+    active: "Actief",
+    past_due: "Achterstallig",
+    unpaid: "Onbetaald",
+    canceled: "Geannuleerd",
     incomplete: "Incomplete",
-    incomplete_expired: "Expired",
-    trialing: "Trialing",
-    paused: "Paused",
+    incomplete_expired: "Verlopen",
+    trialing: "Proefperiode",
+    paused: "Gepauzeerd",
   };
   return statusMap[status] || status;
 }

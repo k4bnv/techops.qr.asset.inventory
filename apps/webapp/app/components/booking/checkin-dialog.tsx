@@ -43,7 +43,7 @@ export default function CheckinDialog({
   booking,
   portalContainer,
   formId,
-  label = "Check-in",
+  label = "Inchecken",
   variant = "default",
   specificAssetIds,
 }: CheckinDialogProps) {
@@ -107,34 +107,33 @@ export default function CheckinDialog({
 
       <AlertDialogContent portalProps={{ container: portalContainer }}>
         <AlertDialogHeader>
-          <AlertDialogTitle>Early Check-in Warning</AlertDialogTitle>
+          <AlertDialogTitle>Waarschuwing voortijdig inchecken</AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogDescription>
           {currentTimeIsBeforeFrom ? (
             <>
-              You are checking in the booking more than 15 minutes before the
-              end date, however you are not allowed to adjust the end date
-              because the current time(
+              U checkt de boeking meer dan 15 minuten voor de einddatum in,
+              u bent echter niet gemachtigd om de einddatum aan te passen
+              omdat de huidige tijd (
               <span className="font-bold text-gray-700">
                 <DateS date={new Date()} includeTime />
               </span>
-              ) is before the start date(
+              ) voor de startdatum (
               <span className="font-bold text-gray-700">
                 <DateS date={booking.from} includeTime />
               </span>
-              ) of the booking.
+              ) van de boeking ligt.
             </>
           ) : (
             <>
-              You are checking in the booking more than 15 minutes before the
-              end date. If you proceed, the end date will be adjusted to now:{" "}
+              U checkt de boeking meer dan 15 minuten voor de einddatum in. Als u doorgaat, wordt de einddatum aangepast naar nu:{" "}
               <span className="font-bold text-gray-700">
                 <DateS date={new Date()} includeTime />
               </span>
               .
               <br />
               <br />
-              Do you want to adjust the end date or keep the original date?
+              Wilt u de einddatum aanpassen of de oorspronkelijke datum behouden?
             </>
           )}
         </AlertDialogDescription>
@@ -147,7 +146,7 @@ export default function CheckinDialog({
               type="button"
               className={currentTimeIsBeforeFrom ? "flex-1" : ""}
             >
-              Cancel
+              Annuleren
             </Button>
           </AlertDialogCancel>
 
@@ -173,7 +172,7 @@ export default function CheckinDialog({
             name="checkinIntentChoice"
             value={CheckinIntentEnum["without-adjusted-date"]}
           >
-            {currentTimeIsBeforeFrom ? "Check In" : "Don't Adjust Date"}
+            {currentTimeIsBeforeFrom ? "Inchecken" : "Datum niet aanpassen"}
           </Button>
           {!currentTimeIsBeforeFrom && (
             <Button
@@ -185,7 +184,7 @@ export default function CheckinDialog({
               name="checkinIntentChoice"
               value={CheckinIntentEnum["with-adjusted-date"]}
             >
-              Adjust Date
+              Datum aanpassen
             </Button>
           )}
         </AlertDialogFooter>

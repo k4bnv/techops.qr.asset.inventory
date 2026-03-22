@@ -161,7 +161,7 @@ export default function BulkDownloadQrDialog({
     } catch (error) {
       setDownloadState({
         status: "error",
-        error: error instanceof Error ? error.message : "Something went wrong.",
+        error: error instanceof Error ? error.message : "Er is iets misgegaan.",
       });
     }
   }, [apiResponse]);
@@ -209,7 +209,7 @@ export default function BulkDownloadQrDialog({
           {downloadState.status === "loading" ? (
             <div className="mb-6 flex flex-col items-center gap-4">
               <Spinner />
-              <h3>Generating Zip file ...</h3>
+              <h3>Zip-bestand genereren...</h3>
             </div>
           ) : (
             <>
@@ -217,24 +217,25 @@ export default function BulkDownloadQrDialog({
                 truthy={!isSelectingMoreThan100}
                 fallback={
                   <p className="mb-4">
-                    Bulk downloading QR codes is only available for maximum 100
-                    codes at a time. Please select less codes to download.
+                    Het in bulk downloaden van QR-codes is alleen beschikbaar voor
+                    maximaal 100 codes tegelijk. Selecteer minder codes om te
+                    downloaden.
                   </p>
                 }
               >
                 <h4 className="mb-1">
-                  Download qr codes for{" "}
-                  {allAssetsSelected ? "all" : selectedAssets.length} asset(s).
+                  Download QR-codes voor{" "}
+                  {allAssetsSelected ? "alle" : selectedAssets.length} asset(s).
                 </h4>
                 <p className="mb-4">
-                  {allAssetsSelected ? "All" : selectedAssets.length} qr code(s)
-                  will be downloaded in a zip file.
+                  {allAssetsSelected ? "Alle" : selectedAssets.length} QR-code(s)
+                  worden gedownload in een zip-bestand.
                 </p>
               </When>
 
               <When truthy={downloadState.status === "success"}>
                 <p className="mb-4 text-success-500">
-                  Successfully downloaded qr codes.
+                  QR-codes succesvol gedownload.
                 </p>
               </When>
 
@@ -250,7 +251,7 @@ export default function BulkDownloadQrDialog({
                   onClick={handleClose}
                   disabled={disabled}
                 >
-                  Close
+                  Sluiten
                 </Button>
 
                 <When truthy={downloadState.status !== "success"}>
@@ -260,7 +261,7 @@ export default function BulkDownloadQrDialog({
                     onClick={handleBulkDownloadQr}
                     disabled={disabled || isSelectingMoreThan100}
                   >
-                    Download
+                    Downloaden
                   </Button>
                 </When>
               </div>

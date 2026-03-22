@@ -32,15 +32,15 @@ export function InstallPwaPromptModal() {
             <div className="relative z-10  rounded-xl bg-white p-4 shadow-lg">
               <div className="mb-8 text-center">
                 <h4 className="mb-1 text-[18px] font-semibold">
-                  Install TechOps for mobile
+                  Installeer TechOps voor mobiel
                 </h4>
                 <p className="text-gray-600">
-                  Always available access to TechOps, with all features you have
-                  on desktop.{" "}
+                  Altijd toegang tot TechOps, met alle functies die u op de
+                  desktop heeft.{" "}
                   {promptInstall && (
                     <>
-                      Use the <strong>install button below</strong> to add TechOps
-                      to your device.
+                      Gebruik de <strong>installatieknop hieronder</strong> om
+                      TechOps aan uw apparaat toe te voegen.
                     </>
                   )}
                 </p>
@@ -48,12 +48,12 @@ export function InstallPwaPromptModal() {
                   <>
                     <ol className="mb-8 mt-2 pt-2">
                       <li>
-                        1. Click the <strong>share icon</strong>
+                        1. Klik op het <strong>deelpictogram</strong>
                       </li>
                       <li>
-                        2. Click <strong>"Add to Home Screen"</strong>
+                        2. Klik op <strong>"Zet op beginscherm"</strong>
                       </li>
-                      <li>3. Enjoy TechOps on your mobile device</li>
+                      <li>3. Geniet van TechOps op uw mobiele apparaat</li>
                     </ol>
 
                     <video
@@ -72,7 +72,7 @@ export function InstallPwaPromptModal() {
                   </>
                 )}
                 <p>
-                  For more information, contact your TechOps administrator.
+                  Neem voor meer informatie contact op met uw TechOps-beheerder.
                 </p>
               </div>
 
@@ -91,7 +91,7 @@ export function InstallPwaPromptModal() {
                     );
                   }}
                 >
-                  Install
+                  Installeren
                 </Button>
               )}
               <fetcher.Form
@@ -105,8 +105,9 @@ export function InstallPwaPromptModal() {
                   value="hidden"
                 />
                 <Button type="submit" width="full" variant="secondary">
-                  Skip for 2 weeks
+                  2 weken overslaan
                 </Button>
+
               </fetcher.Form>
             </div>
           </dialog>

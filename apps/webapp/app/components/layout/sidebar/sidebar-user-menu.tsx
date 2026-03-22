@@ -84,7 +84,7 @@ export default function SidebarUserMenu() {
             >
               <NavLink to="/me">
                 <UserPenIcon className="size-4" />
-                My Profile
+                Mijn profiel
               </NavLink>
             </DropdownMenuItem>
             <DropdownMenuItem
@@ -94,7 +94,7 @@ export default function SidebarUserMenu() {
             >
               <NavLink to="/account-details">
                 <UserRoundIcon className="size-4" />
-                Account settings
+                Accountinstellingen
               </NavLink>
             </DropdownMenuItem>
             <DropdownMenuItem
@@ -102,7 +102,7 @@ export default function SidebarUserMenu() {
               onSelect={logOut}
             >
               <LogOutIcon className="size-4" />
-              Log Out
+              Uitloggen
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

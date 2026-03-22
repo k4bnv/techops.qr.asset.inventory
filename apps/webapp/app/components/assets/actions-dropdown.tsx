@@ -70,7 +70,7 @@ const ConditionalActionsDropdown = () => {
             className="asset-actions hidden sm:flex"
           >
             <span className="flex items-center gap-2">
-              Actions <ChevronRight className="chev" />
+              Acties <ChevronRight className="chev" />
             </span>
           </Button>
         </PopoverTrigger>
@@ -84,7 +84,7 @@ const ConditionalActionsDropdown = () => {
           onClick={() => setOpen(true)}
         >
           <span className="flex items-center gap-2">
-            Actions <ChevronRight className="chev" />
+            Acties <ChevronRight className="chev" />
           </span>
         </Button>
 
@@ -142,7 +142,7 @@ const ConditionalActionsDropdown = () => {
                       }
                     >
                       <span className="flex items-center gap-1">
-                        <Icon icon="release-custody" /> Release custody
+                        <Icon icon="release-custody" /> Beheer vrijgeven
                       </span>
                     </Button>
                   ) : (
@@ -157,7 +157,7 @@ const ConditionalActionsDropdown = () => {
                     >
                       <span className="flex items-center gap-2">
                         <Icon icon="assign-custody" />{" "}
-                        {isSelfService ? "Take" : "Assign"} custody
+                        {isSelfService ? "Beheer overnemen" : "Beheer toewijzen"}
                       </span>
                     </Button>
                   )}
@@ -189,9 +189,9 @@ const ConditionalActionsDropdown = () => {
                         ? {
                             reason: (
                               <>
-                                This asset's location is managed by its parent
-                                kit <strong>"{asset.kit?.name}"</strong>. Update
-                                the kit's location instead.
+                                De locatie van dit asset wordt beheerd door de
+                                bovenliggende kit <strong>"{asset.kit?.name}"</strong>.
+                                Werk in plaats daarvan de locatie van de kit bij.
                               </>
                             ),
                           }
@@ -199,7 +199,7 @@ const ConditionalActionsDropdown = () => {
                     } // to show tooltip only when disabled
                   >
                     <span className="flex items-center gap-2">
-                      <Icon icon="location" /> Update location
+                      <Icon icon="location" /> Locatie bijwerken
                     </span>
                   </Button>
                 </div>
@@ -224,7 +224,7 @@ const ConditionalActionsDropdown = () => {
                   >
                     <span className="flex items-center gap-2">
                       <Icon icon="barcode" />
-                      Relink QR Code
+                      QR-code opnieuw koppelen
                     </span>
                   </Button>
                 </div>
@@ -243,7 +243,7 @@ const ConditionalActionsDropdown = () => {
                     >
                       <span className="flex items-center gap-2">
                         <AlarmClockIcon className="size-5" />
-                        Set reminder
+                        Herinnering instellen
                       </span>
                     </Button>
                   </div>
@@ -257,7 +257,7 @@ const ConditionalActionsDropdown = () => {
                     width="full"
                   >
                     <span className="flex items-center gap-2">
-                      <Icon icon="pen" /> Edit
+                      <Icon icon="pen" /> Bewerken
                     </span>
                   </Button>
                 </div>
@@ -271,7 +271,7 @@ const ConditionalActionsDropdown = () => {
                     onClick={handleMenuClose}
                   >
                     <span className="flex items-center gap-2">
-                      <Icon icon="duplicate" /> Duplicate
+                      <Icon icon="duplicate" /> Dupliceren
                     </span>
                   </Button>
                 </div>
@@ -295,7 +295,7 @@ const ConditionalActionsDropdown = () => {
                           assetIsCheckedOut || assetIsPartOfUnavailableKit
                         }
                       >
-                        Delete
+                        Verwijderen
                       </Button>
                     }
                   />
@@ -309,19 +309,19 @@ const ConditionalActionsDropdown = () => {
                     width="full"
                     onClick={handleMenuClose}
                   >
-                    Close
+                    Sluiten
                   </Button>
                 </div>
                 {assetIsCheckedOut ? (
                   <div className=" border-t p-2 text-left text-xs">
-                    Some actions are disabled due to the asset being checked
-                    out.
+                    Sommige acties zijn uitgeschakeld omdat het asset is
+                    uitgecheckt.
                   </div>
                 ) : null}
                 {assetIsPartOfUnavailableKit ? (
                   <div className=" border-t p-2 text-left text-xs">
-                    Some actions are disabled due to the asset being part of a
-                    kit.
+                    Sommige acties zijn uitgeschakeld omdat het asset deel
+                    uitmaakt van een kit.
                   </div>
                 ) : null}
               </When>
@@ -359,7 +359,7 @@ const ActionsDropdown = () => {
     return (
       <Button variant="secondary" to="#" data-test-id="assetActionsButton">
         <span className="flex items-center gap-2">
-          Actions <ChevronRight className="chev rotate-90" />
+          Acties <ChevronRight className="chev rotate-90" />
         </span>
       </Button>
     );

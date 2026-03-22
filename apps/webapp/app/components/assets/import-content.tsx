@@ -27,9 +27,10 @@ export const ImportContent = () => {
 
   return (
     <div className="text-left">
-      <h3>Import your own content</h3>
+      <h3>Eigen inhoud importeren</h3>
       <p>
-        Import your own content by placing it in the csv file. Here you can{" "}
+        Importeer uw eigen inhoud door deze in het csv-bestand te plaatsen. Hier
+        kunt u{" "}
         <Button
           variant="link"
           to={
@@ -40,188 +41,195 @@ export const ImportContent = () => {
           target="_blank"
           download
         >
-          download our CSV template.
+          onze CSV-sjabloon downloaden.
         </Button>{" "}
       </p>
       <WarningBox className="my-4">
         <>
-          <strong>IMPORTANT</strong>: Do not use data exported from asset backup
-          to import assets. You must use the template provided above or you will
-          get corrupted data.
+          <strong>BELANGRIJK</strong>: Gebruik geen gegevens die zijn
+          geëxporteerd uit een asset-back-up om assets te importeren. U moet de
+          hierboven verstrekte sjabloon gebruiken, anders krijgt u corrupte
+          gegevens.
         </>
       </WarningBox>
-      <h4>Base rules and limitations</h4>
+      <h4>Basisregels en beperkingen</h4>
       <ul className="list-inside list-disc">
         <li>
-          You must use <b>, (comma)</b> or <b>; (semicolon)</b> as a delimiter
-          in your csv file
+          U moet <b>, (komma)</b> of <b>; (puntkomma)</b> gebruiken als
+          scheidingsteken in uw csv-bestand
         </li>
-        <li>Each row represents a new asset that will be created</li>
+        <li>Elke rij vertegenwoordigt een nieuw asset dat zal worden aangemaakt</li>
         <li>
-          Columns such as <b>kit, category, location & custodian</b> represent
-          just the name of the related entry. As an example, if you put the
-          category <b>Laptops</b> we will look for an existing category with
-          that name and link the asset to it. If it doesn't exist, we will
-          create it.
-        </li>
-        <li>
-          Columns such as <b>tags</b> represent the names of a collection of
-          entries. To assign multiple tags, just seperate their names with
-          comas. If the tag doesn't exist, we will create it.
+          Kolommen zoals <b>kit, categorie, locatie & beheerder</b>{" "}
+          vertegenwoordigen alleen de naam van de gerelateerde invoer. Als
+          voorbeeld: als u de categorie <b>Laptops</b> invult, zoeken we naar
+          een bestaande categorie met die naam en koppelen we het asset daaraan.
+          Als deze niet bestaat, maken we deze aan.
         </li>
         <li>
-          The content you are importing will <b>NOT</b> be merged with existing
-          assets. A new asset will be created for each valid row in the sheet.
+          Kolommen zoals <b>tags</b> vertegenwoordigen de namen van een
+          verzameling vermeldingen. Om meerdere tags toe te wijzen, scheidt u
+          hun namen gewoon met komma's. Als de tag niet bestaat, maken we deze
+          aan.
+        </li>
+        <li>
+          De inhoud die u importeert zal <b>NIET</b> worden samengevoegd met
+          bestaande assets. Er wordt een nieuw asset aangemaakt voor elke
+          geldige rij in het blad.
         </li>
       </ul>
 
-      <h4 className="mt-2">Importing Custom fields</h4>
+      <h4 className="mt-2">Aangepaste velden importeren</h4>
       <div>
-        To import custom fields, prefix your column heading with <b>"cf: "</b>,{" "}
-        <br />
-        add the type followed by a coma from one of the allowed types:
+        Om aangepaste velden te importeren, laat u de kolomkop voorafgaan door{" "}
+        <b>"cf: "</b>, <br />
+        voeg het type toe gevolgd door een komma uit een van de toegestane
+        types:
         <ul className="list-inside list-disc pl-4">
           <li>
-            <b>text</b> - default if no type is passed
+            <b>text</b> - standaard als er geen type wordt doorgegeven
           </li>
           <li>
-            <b>boolean</b> - choose a yes or no value
+            <b>boolean</b> - kies een ja of nee waarde
           </li>
           <li>
-            <b>option</b> - you dont have to have the options created, we create
-            option(both the field and the option) while importing if the option
-            doesnt exisit.
+            <b>option</b> - u hoeft de opties niet aangemaakt te hebben, wij
+            maken de optie (zowel het veld als de optie) aan tijdens het
+            importeren als de optie niet bestaat.
           </li>
           <li>
-            <b>multiline text</b>
+            <b>multiline text</b> - tekst met meerdere regels
           </li>
           <li>
-            <b>date</b> - must be in <b>YYYY-MM-DD</b> format
+            <b>date</b> - moet in het formaat <b>JJJJ-MM-DD</b> zijn
           </li>
           <li>
-            <b>amount</b> - for currency values (e.g., 1234.56 - no currency
-            symbols)
+            <b>amount</b> - voor valutawaarden (bijv. 1234.56 - geen
+            valutasymbolen)
           </li>
           <li>
-            <b>number</b> - for numeric values including negatives (e.g.,
+            <b>number</b> - voor numerieke waarden inclusief negatieven (bijv.
             -123.45)
           </li>
         </ul>
-        If no type is mentioned <b>"text"</b> is used as default type.
+        Als er geen type wordt vermeld, wordt <b>"text"</b> als standaardtype
+        gebruikt.
       </div>
       <div>
-        This is how a sample header looks like for custom field with name{" "}
-        <b>"purchase date"</b> and type <b>"date"</b> :{" "}
+        Dit is hoe een voorbeeldkop eruit ziet voor een aangepast veld met de
+        naam <b>"purchase date"</b> en type <b>"date"</b> :{" "}
         <b>"cf:purchase date, type:date"</b>
       </div>
 
-      <h4 className="mt-2">Importing with QR codes</h4>
+      <h4 className="mt-2">Importeren met QR-codes</h4>
       <div>
-        You also have the option to se a TechOps QR code for each asset. This is
-        very valuable if you already have TechOps QR codes printed and you want to
-        link them to the assets you are importing.
+        U heeft ook de optie om een TechOps QR-code te gebruiken voor elk
+        asset. Dit is zeer waardevol als u al TechOps QR-codes heeft geprint en
+        u deze wilt koppelen aan de assets die u importeert.
         <br />
-        This feature comes with the following limitations:
+        Deze functie heeft de volgende beperkingen:
         <ul className="list-inside list-disc pl-4">
           <li>
-            <b>Existing code</b> - the QR code needs to already exist in shelf
+            <b>Bestaande code</b> - de QR-code moet al aanwezig zijn in shelf
           </li>
           <li>
-            <b>No duplicate codes</b> - the qrId needs to be unique for each
-            asset
+            <b>Geen dubbele codes</b> - de qrId moet uniek zijn voor elk asset
           </li>
           <li>
-            <b>No linked codes</b> - the qrId needs not be linked to any asset
-            or kit
+            <b>Geen gekoppelde codes</b> - de qrId mag niet gekoppeld zijn aan
+            een asset of kit
           </li>
           <li>
-            <b>QR ownership</b> - the QR code needs to be either unclaimed or
-            belong to the organization you are trying to import it to.
+            <b>QR-eigendom</b> - de QR-code moet ofwel niet-geclaimd zijn,
+            ofwel behoren tot de organisatie waarnaar u deze probeert te
+            importeren.
           </li>
         </ul>
-        If no <b>"qrId"</b> is used a new QR code will be generated.
+        Als er geen <b>"qrId"</b> wordt gebruikt, wordt er een nieuwe QR-code
+        gegenereerd.
         <br />
-        If you are interesting in receiving some unclaimed or unlinked codes,
-        feel free to get in touch with support and we can provide those for you.
+        Als u geïnteresseerd bent in het ontvangen van niet-geclaimde of
+        niet-gekoppelde codes, neem dan gerust contact op met de ondersteuning
+        en wij kunnen deze voor u verstrekken.
       </div>
 
       <When truthy={canUseBarcodes}>
-        <h4 className="mt-2">Importing with Barcodes</h4>
+        <h4 className="mt-2">Importeren met barcodes</h4>
         <div>
-          You can also import assets with barcodes using the barcode columns.
-          This feature supports three barcode types: <b>Code128</b>,{" "}
-          <b>Code39</b>, and <b>DataMatrix</b>.
+          U kunt ook assets importeren met barcodes via de barcode-kolommen.
+          Deze functie ondersteunt drie barcode-types: <b>Code128</b>,{" "}
+          <b>Code39</b> en <b>DataMatrix</b>.
           <br />
           <br />
-          <b>Barcode column format:</b>
+          <b>Formaat barcode-kolom:</b>
           <ul className="list-inside list-disc pl-4">
             <li>
-              <b>barcode_Code128</b> - For Code128 barcodes (4-40 characters,
-              supports letters, numbers, and symbols like dashes)
+              <b>barcode_Code128</b> - Voor Code128-barcodes (4-40 tekens,
+              ondersteunt letters, cijfers en symbolen zoals streepjes)
             </li>
             <li>
-              <b>barcode_Code39</b> - For Code39 barcodes (4-43 characters)
+              <b>barcode_Code39</b> - Voor Code39-barcodes (4-43 tekens)
             </li>
             <li>
-              <b>barcode_DataMatrix</b> - For DataMatrix barcodes (4-100
-              characters)
+              <b>barcode_DataMatrix</b> - Voor DataMatrix-barcodes (4-100
+              tekens)
             </li>
             <li>
-              <b>barcode_ExternalQR</b> - For external QR codes (1-2048
-              characters, URLs, text, or any external QR content)
+              <b>barcode_ExternalQR</b> - Voor externe QR-codes (1-2048 tekens,
+              URL's, tekst of enige externe QR-inhoud)
             </li>
             <li>
-              <b>barcode_EAN13</b> - For retail barcodes (13-digit product
-              identification codes))
+              <b>barcode_EAN13</b> - Voor retail-barcodes (13-cijferige
+              productidentificatiecodes))
             </li>
           </ul>
           <br />
-          <b>Important rules:</b>
+          <b>Belangrijke regels:</b>
           <ul className="list-inside list-disc pl-4">
             <li>
-              <b>Multiple barcodes</b> - Use comma separation for multiple
-              barcodes of the same type (e.g., "ABC123,DEF456")
+              <b>Meerdere barcodes</b> - Gebruik komma-scheiding voor meerdere
+              barcodes van hetzelfde type (bijv. "ABC123,DEF456")
             </li>
             <li>
-              <b>Unique values</b> - Each barcode value must be unique within
-              your organization
+              <b>Unieke waarden</b> - Elke barcodewaarde moet uniek zijn binnen
+              uw organisatie
             </li>
             <li>
-              <b>Character restrictions</b> - Code39 and DataMatrix allow only
-              letters and numbers, Code128 supports most symbols
+              <b>Tekenbeperkingen</b> - Code39 en DataMatrix staan alleen
+              letters en cijfers toe, Code128 ondersteunt de meeste symbolen
             </li>
             <li>
-              <b>Case insensitive</b> - Values will be automatically converted
-              to uppercase
+              <b>Niet hoofdlettergevoelig</b> - Waarden worden automatisch
+              omgezet naar hoofdletters
             </li>
           </ul>
-          Leave barcode columns empty if you don't want to assign barcodes to
-          specific assets.
+          Laat barcode-kolommen leeg als u geen barcodes wilt toewijzen aan
+          specifieke assets.
         </div>
       </When>
 
       <div>
-        <h4 className="mt-2">Extra considerations</h4>
+        <h4 className="mt-2">Extra overwegingen</h4>
         <ul className="list-inside list-disc pl-4">
           <li>
-            The first row of the sheet will be ignored. Use it to describe the
-            columns as in the example sheet.
+            De eerste rij van het blad wordt genegeerd. Gebruik deze om de
+            kolommen te beschrijven zoals in het voorbeeldblad.
           </li>
           <li>
-            If any of the data in the file is invalid, the whole import will
-            fail
+            Als gegevens in het bestand ongeldig zijn, zal de hele import
+            mislukken
           </li>
         </ul>
       </div>
 
       <div className="mt-2 w-full">
-        For more help, you can use our{" "}
+        Voor meer hulp kunt u onze{" "}
         <Button
           variant="link"
           to="https://www.shelf.nu/csv-helper"
           target="_blank"
         >
-          CSV Helper Tool
+          CSV-hulpmiddel
         </Button>
         .
       </div>
@@ -232,12 +240,12 @@ export const ImportContent = () => {
 };
 
 export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
-  const [agreed, setAgreed] = useState<"I AGREE" | "">("");
+  const [agreed, setAgreed] = useState<"IK GA AKKOORD" | "">("");
   const formRef = useRef<HTMLFormElement>(null);
   const fetcher = useFetcherWithReset<typeof action>();
 
   const { data, state } = fetcher;
-  const disabled = isFormProcessing(state) || agreed !== "I AGREE";
+  const disabled = isFormProcessing(state) || agreed !== "IK GA AKKOORD";
   const isSuccessful = data && !data.error;
   //
 
@@ -263,7 +271,7 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
       <Input
         type="file"
         name="file"
-        label="Select a csv file"
+        label="Selecteer een csv-bestand"
         required
         onChange={handleFileSelect}
         accept=".csv"
@@ -282,35 +290,35 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
         <AlertDialogTrigger asChild>
           <Button
             type="button"
-            title={"Confirm asset import"}
+            title={"Asset-import bevestigen"}
             disabled={!selectedFile}
             className="my-4"
           >
-            Confirm asset import
+            Asset-import bevestigen
           </Button>
         </AlertDialogTrigger>
         <AlertDialogContent className="max-w-[600px]">
           <AlertDialogHeader>
-            <AlertDialogTitle>Confirm asset import</AlertDialogTitle>
+            <AlertDialogTitle>Asset-import bevestigen</AlertDialogTitle>
             {!isSuccessful ? (
               <>
                 <AlertDialogDescription>
-                  You need to type: <b>"I AGREE"</b> in the field below to
-                  accept the import. By doing this you agree that you have read
-                  the requirements and you understand the limitations and
-                  consequences of using this feature.
+                  U moet <b>"IK GA AKKOORD"</b> typen in het onderstaande veld om de import
+                  te accepteren. Hiermee gaat u akkoord dat u de vereisten heeft
+                  gelezen en de beperkingen en gevolgen van het gebruik van deze
+                  functie begrijpt.
                 </AlertDialogDescription>
                 <Input
                   type="text"
-                  label={"Confirmation"}
+                  label={"Bevestiging"}
                   autoFocus
                   name="agree"
                   value={agreed}
                   onChange={(e) =>
                     setAgreed(e.target.value.toUpperCase() as any)
                   }
-                  placeholder="I AGREE"
-                  pattern="^I AGREE$" // We use a regex to make sure the user types the exact string
+                  placeholder="IK GA AKKOORD"
+                  pattern="^IK GA AKKOORD$" // We use a regex to make sure the user types the exact string
                   required
                   onKeyDown={(e) => {
                     if (e.key == "Enter") {
@@ -332,7 +340,7 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
               <p className="text-red-500">{data?.error?.message}</p>
               {data?.error?.additionalData?.duplicateCodes ? (
                 <BrokenQrCodesTable
-                  title="Duplicate codes"
+                  title="Dubbele codes"
                   data={
                     data.error.additionalData
                       .duplicateCodes as QRCodePerImportedAsset[]
@@ -341,7 +349,7 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
               ) : null}
               {data?.error?.additionalData?.nonExistentCodes ? (
                 <BrokenQrCodesTable
-                  title="Non existent codes"
+                  title="Niet-bestaande codes"
                   data={
                     data.error.additionalData
                       .nonExistentCodes as QRCodePerImportedAsset[]
@@ -350,7 +358,7 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
               ) : null}
               {data?.error?.additionalData?.linkedCodes ? (
                 <BrokenQrCodesTable
-                  title="Already linked codes"
+                  title="Al gekoppelde codes"
                   data={
                     data.error.additionalData
                       .linkedCodes as QRCodePerImportedAsset[]
@@ -359,7 +367,7 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
               ) : null}
               {data?.error?.additionalData?.connectedToOtherOrgs ? (
                 <BrokenQrCodesTable
-                  title="Some codes do not belong to this organization"
+                  title="Sommige codes behoren niet tot deze organisatie"
                   data={
                     data.error.additionalData
                       .connectedToOtherOrgs as QRCodePerImportedAsset[]
@@ -384,13 +392,13 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
                         Asset
                       </th>
                       <th scope="col" className="px-2 py-1">
-                        Custodian
+                        Beheerder
                       </th>
                       <th scope="col" className="px-2 py-1">
                         Kit
                       </th>
                       <th scope="col" className="px-2 py-1">
-                        Issue
+                        Probleem
                       </th>
                     </tr>
                   </thead>
@@ -419,10 +427,10 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
                   <thead className="bg-error-100 text-xs">
                     <tr>
                       <th scope="col" className="px-2 py-1">
-                        Incorrect Header
+                        Onjuiste kop
                       </th>
                       <th scope="col" className="px-2 py-1">
-                        Error
+                        Fout
                       </th>
                     </tr>
                   </thead>
@@ -443,16 +451,16 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
               ) : null}
 
               <p className="mt-2">
-                Please fix your CSV file and try again. If the issue persists,
-                don't hesitate to get in touch with us.
+                Herstel uw CSV-bestand en probeer het opnieuw. Als het probleem
+                aanhoudt, aarzel dan niet om contact met ons op te nemen.
               </p>
             </div>
           </When>
 
           <When truthy={isSuccessful}>
             <div>
-              <b className="text-green-500">Success!</b>
-              <p>Your assets have been imported.</p>
+              <b className="text-green-500">Succes!</b>
+              <p>Uw assets zijn geïmporteerd.</p>
             </div>
           </When>
 
@@ -461,18 +469,18 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
               <div className="flex gap-2">
                 <AlertDialogCancel asChild>
                   <Button type="button" variant="secondary" width="full">
-                    Close
+                    Sluiten
                   </Button>
                 </AlertDialogCancel>
                 <Button to="/assets" width="full" className="whitespace-nowrap">
-                  View new assets
+                  Nieuwe assets bekijken
                 </Button>
               </div>
             ) : (
               <>
                 <AlertDialogCancel asChild>
                   <Button type="button" variant="secondary">
-                    Cancel
+                    Annuleren
                   </Button>
                 </AlertDialogCancel>
                 <Button
@@ -483,7 +491,7 @@ export const FileForm = ({ intent, url }: { intent: string; url?: string }) => {
                   }}
                   disabled={disabled}
                 >
-                  {isFormProcessing(fetcher.state) ? "Importing..." : "Import"}
+                  {isFormProcessing(fetcher.state) ? "Importeren..." : "Importeren"}
                 </Button>
               </>
             )}
@@ -507,8 +515,8 @@ function BrokenQrCodesTable({
       <Table className="mt-1 [&_td]:p-1 [&_th]:p-1">
         <thead>
           <Tr>
-            <Th>Asset title</Th>
-            <Th>QR ID</Th>
+            <Th>Asset-titel</Th>
+            <Th>QR-ID</Th>
           </Tr>
         </thead>
         <tbody>
@@ -527,12 +535,12 @@ function BrokenQrCodesTable({
 function DuplicateBarcodesTable({ data }: { data: DuplicateBarcode[] }) {
   return (
     <div className="mt-3">
-      <h5>Duplicate barcodes</h5>
+      <h5>Dubbele barcodes</h5>
       <Table className="mt-1 [&_td]:p-1 [&_th]:p-1">
         <thead>
           <Tr>
             <Th>Barcode</Th>
-            <Th>Used by assets</Th>
+            <Th>Gebruikt door assets</Th>
           </Tr>
         </thead>
         <tbody>
@@ -543,7 +551,7 @@ function DuplicateBarcodesTable({ data }: { data: DuplicateBarcode[] }) {
                 <ul className="list-disc pl-4">
                   {barcode.assets.map((asset, i) => (
                     <li key={i}>
-                      {asset.title} ({asset.type}): Line {asset.row}
+                      {asset.title} ({asset.type}): Regel {asset.row}
                     </li>
                   ))}
                 </ul>

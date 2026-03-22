@@ -23,9 +23,9 @@ import { SavedFilterPresetsControls } from "./saved-filter-presets";
 import { AvailabilityViewToggle } from "./view-toggle";
 
 export const ASSET_SORTING_OPTIONS = {
-  title: "Name",
-  createdAt: "Date created",
-  updatedAt: "Date updated",
+  title: "Naam",
+  createdAt: "Aanmaakdatum",
+  updatedAt: "Wijzigingsdatum",
 } as const;
 
 export function AssetIndexFilters({
@@ -78,7 +78,7 @@ export function AssetIndexFilters({
                 className="block min-w-28 max-w-none font-normal text-gray-600 hover:text-gray-700"
                 type="button"
               >
-                Clear all filters
+                Alle filters wissen
               </Button>
               <div className="text-gray-600"> | </div>
             </div>
@@ -87,18 +87,18 @@ export function AssetIndexFilters({
             <DynamicDropdown
               trigger={
                 <div className="flex cursor-pointer items-center gap-2">
-                  Categories{" "}
+                  Categorieën{" "}
                   <ChevronRight className="hidden rotate-90 md:inline" />
                 </div>
               }
               model={{ name: "category", queryKey: "name" }}
-              label="Filter by category"
-              placeholder="Search categories"
+              label="Filteren op categorie"
+              placeholder="Categorieën zoeken"
               initialDataKey="categories"
               countKey="totalCategories"
               withoutValueItem={{
                 id: "uncategorized",
-                name: "Uncategorized",
+                name: "Zonder categorie",
               }}
             />
             <DynamicDropdown
@@ -108,28 +108,28 @@ export function AssetIndexFilters({
                 </div>
               }
               model={{ name: "tag", queryKey: "name" }}
-              label="Filter by tag"
+              label="Filteren op tag"
               initialDataKey="tags"
               countKey="totalTags"
               withoutValueItem={{
                 id: "untagged",
-                name: "Without tag",
+                name: "Zonder tag",
               }}
             />
             <DynamicDropdown
               trigger={
                 <div className="flex cursor-pointer items-center gap-2">
-                  Locations{" "}
+                  Locaties{" "}
                   <ChevronRight className="hidden rotate-90 md:inline" />
                 </div>
               }
               model={{ name: "location", queryKey: "name" }}
-              label="Filter by location"
+              label="Filteren op locatie"
               initialDataKey="locations"
               countKey="totalLocations"
               withoutValueItem={{
                 id: "without-location",
-                name: "Without location",
+                name: "Zonder locatie",
               }}
               renderItem={({ metadata }) => (
                 <div className="flex items-center gap-2">
@@ -146,7 +146,7 @@ export function AssetIndexFilters({
               <DynamicDropdown
                 trigger={
                   <div className="flex cursor-pointer items-center gap-2">
-                    Custodian{" "}
+                    Verantwoordelijke{" "}
                     <ChevronRight className="hidden rotate-90 md:inline" />
                   </div>
                 }
@@ -156,13 +156,13 @@ export function AssetIndexFilters({
                   deletedAt: null,
                 }}
                 renderItem={(item) => resolveTeamMemberName(item, true)}
-                label="Filter by custodian"
-                placeholder="Search team members"
+                label="Filteren op verantwoordelijke"
+                placeholder="Teamleden zoeken"
                 initialDataKey="teamMembers"
                 countKey="totalTeamMembers"
                 withoutValueItem={{
                   id: "without-custody",
-                  name: "Without custody",
+                  name: "Zonder beheerder",
                 }}
               />
             </When>

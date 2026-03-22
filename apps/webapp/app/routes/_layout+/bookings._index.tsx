@@ -55,13 +55,13 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 
 export const bookingsSearchFieldTooltipText = `
-Search bookings based on different fields. Separate your keywords by a comma(,) to search with OR condition. Supported fields are: 
-- Name
-- Description
+Doorzoek reserveringen op basis van verschillende velden. Scheid uw trefwoorden met een komma (,) om te zoeken met een OF-voorwaarde. Ondersteunde velden zijn:
+- Naam
+- Beschrijving
 - Tags
-- Custodian names (first or last name)
-- Asset names
-- Asset barcodes or qr code
+- Namen beheerders (voor- of achternaam)
+- Asset namen
+- Asset barcodes of QR-code
 `;
 
 export type BookingsIndexLoaderData = typeof loader;
@@ -89,7 +89,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         cause: null,
         title: "Not allowed",
         message:
-          "You cannot use bookings in a personal workspaces. Please create a Team workspace to create bookings.",
+          "U kunt geen reserveringen gebruiken in een persoonlijke werkruimte. Maak a.u.b. een Team werkruimte aan om reserveringen te maken.",
         label: "Booking",
         shouldBeCaptured: false,
       });
@@ -186,11 +186,11 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     const totalPages = Math.ceil(bookingCount / perPage);
 
     const header: HeaderData = {
-      title: "Bookings",
+      title: "Reserveringen",
     };
     const modelName = {
-      singular: "booking",
-      plural: "bookings",
+      singular: "reservering",
+      plural: "reserveringen",
     };
 
     return data(
@@ -214,7 +214,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         tags,
         totalTags: tags.length,
         searchFieldTooltip: {
-          title: "Search your bookings",
+          title: "Doorzoek uw reserveringen",
           text: parseMarkdownToReact(bookingsSearchFieldTooltipText),
         },
       }),
@@ -238,7 +238,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 
 export const handle = {
   name: "bookings.index",
-  breadcrumb: () => <Link to="/bookings">Bookings</Link>,
+  breadcrumb: () => <Link to="/bookings">Reserveringen</Link>,
 };
 
 export const shouldRevalidate: ShouldRevalidateFunction = ({
@@ -315,7 +315,7 @@ export default function BookingsIndexPage({
                 data-test-id="createNewBooking"
                 prefetch="none"
               >
-                New booking
+                Nieuwe reservering
               </Button>
             }
           />
@@ -331,23 +331,23 @@ export default function BookingsIndexPage({
             )
           }
           customEmptyStateContent={{
-            title: "No bookings yet",
-            text: "Bookings let your team reserve assets for specific dates. Create a booking to schedule equipment checkouts and returns.",
+            title: "Nog geen reserveringen",
+            text: "Met reserveringen kan uw team assets reserveren voor specifieke datums. Maak een reservering aan om het uitlenen en retourneren van apparatuur te plannen.",
             newButtonRoute: "/bookings/new",
-            newButtonContent: "Create your first booking",
+            newButtonContent: "Maak uw eerste reservering aan",
           }}
           ItemComponent={ListBookingsContent}
           headerChildren={
             <>
               <Th />
               <Th>Assets</Th>
-              <Th>Description</Th>
+              <Th>Beschrijving</Th>
 
-              <Th>From</Th>
-              <Th>To</Th>
+              <Th>Van</Th>
+              <Th>Tot</Th>
               <Th>Tags</Th>
-              <Th>Custodian</Th>
-              <Th>Created by</Th>
+              <Th>Beheerder</Th>
+              <Th>Aangemaakt door</Th>
             </>
           }
           headerExtraContent={
@@ -452,10 +452,10 @@ const ListBookingsContent = ({
       <Td>
         {hasUnavaiableAssets ? (
           <AvailabilityBadge
-            badgeText={"Includes unavailable assets"}
-            tooltipTitle={"Booking includes unavailable assets"}
+            badgeText={"Bevat niet-beschikbare assets"}
+            tooltipTitle={"Reservering bevat niet-beschikbare assets"}
             tooltipContent={
-              "There are some assets within this booking that are unavailable for reservation because they are checked-out, have custody assigned or are marked as not allowed to book"
+              "Er zijn enkele assets in deze reservering die niet beschikbaar zijn voor reservering omdat ze zijn uitgeleend, aan een beheerder zijn toegewezen of zijn gemarkeerd als 'niet te boeken'."
             }
           />
         ) : null}
@@ -503,7 +503,7 @@ const ListBookingsContent = ({
           items={item.tags}
           idKey="id"
           labelKey="name"
-          emptyMessage={<div className="text-sm text-gray-500">No tags</div>}
+          emptyMessage={<div className="text-sm text-gray-500">Geen tags</div>}
         />
       </Td>
 

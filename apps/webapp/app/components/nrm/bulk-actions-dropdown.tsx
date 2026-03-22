@@ -21,7 +21,7 @@ export default function BulkActionsDropdown() {
     return (
       <Button variant="secondary" to="#">
         <span className="flex items-center gap-2">
-          Actions <ChevronRight className="chev rotate-90" />
+          Acties <ChevronRight className="chev rotate-90" />
         </span>
       </Button>
     );
@@ -82,7 +82,7 @@ function ConditionalDropdown() {
           disabled={actionsButtonDisabled}
         >
           <Button type="button" variant="secondary">
-            <span className="flex items-center gap-2">Actions</span>
+            <span className="flex items-center gap-2">Acties</span>
           </Button>
         </DropdownMenuTrigger>
 
@@ -94,7 +94,7 @@ function ConditionalDropdown() {
           disabled={actionsButtonDisabled}
           type="button"
         >
-          <span className="flex items-center gap-2">Actions</span>
+          <span className="flex items-center gap-2">Acties</span>
         </Button>
 
         {open && (
@@ -128,12 +128,12 @@ function ConditionalDropdown() {
             >
               <BulkUpdateDialogTrigger
                 type="trash"
-                label="Delete"
+                label="Verwijderen"
                 onClick={closeMenu}
                 disabled={
                   someNRMHasCustody
                     ? {
-                        reason: "Some team members have custodies over assets.",
+                        reason: "Sommige teamleden hebben beheer over assets.",
                       }
                     : false
                 }

@@ -49,9 +49,9 @@ export function RenamePresetDialog({
         onClose={() => onOpenChange(false)}
         title={
           <div className="-mb-3 w-full pb-6">
-            <h3>Rename filter preset</h3>
+            <h3>Filterpreset hernoemen</h3>
             <p className="text-gray-500">
-              Update the name of your saved filter preset.
+              Werk de naam van uw opgeslagen filterpreset bij.
             </p>
           </div>
         }
@@ -61,11 +61,11 @@ export function RenamePresetDialog({
             <input type="hidden" name="intent" value="rename-preset" />
             <input type="hidden" name="presetId" value={presetId} />
             <Input
-              label="New name"
+              label="Nieuwe naam"
               name="name"
               value={name}
               onChange={onNameChange}
-              placeholder="Enter new name"
+              placeholder="Voer nieuwe naam in"
               maxLength={60}
               autoFocus
               error={nameError}
@@ -76,10 +76,10 @@ export function RenamePresetDialog({
                 variant="secondary"
                 onClick={() => onOpenChange(false)}
               >
-                Cancel
+                Annuleren
               </Button>
               <Button type="submit" disabled={!name.trim() || isSubmitting}>
-                {isSubmitting ? "Renaming..." : "Rename"}
+                {isSubmitting ? "Hernoemen..." : "Hernoemen"}
               </Button>
             </div>
           </Form>

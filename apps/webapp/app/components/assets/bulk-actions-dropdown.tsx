@@ -47,7 +47,7 @@ export default function BulkActionsDropdown() {
     return (
       <Button variant="secondary" to="#" className="font-medium">
         <span className="flex items-center gap-2">
-          Actions <ChevronRight className="chev rotate-90" />
+          Acties <ChevronRight className="chev rotate-90" />
         </span>
       </Button>
     );
@@ -196,12 +196,12 @@ function ConditionalDropdown() {
               disabled
                 ? {
                     reason:
-                      "You must select at least 1 asset to perform an action",
+                      "U moet minstens 1 asset selecteren om een actie uit te voeren",
                   }
                 : false
             }
           >
-            <span className="flex items-center gap-2">Actions</span>
+            <span className="flex items-center gap-2">Acties</span>
           </Button>
         </DropdownMenuTrigger>
 
@@ -213,7 +213,7 @@ function ConditionalDropdown() {
           disabled={disabled}
           type="button"
         >
-          <span className="flex items-center gap-2">Actions</span>
+          <span className="flex items-center gap-2">Acties</span>
         </Button>
 
         {open && (
@@ -253,7 +253,7 @@ function ConditionalDropdown() {
                 width="full"
               >
                 <span className="flex items-center gap-2">
-                  <Icon icon="download" /> Download QR Codes
+                  <Icon icon="download" /> QR-codes downloaden
                 </span>
               </Button>
             </DropdownMenuItem>
@@ -267,7 +267,7 @@ function ConditionalDropdown() {
               <DropdownMenuItem className="py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
                   type="start-audit"
-                  label="Create audit"
+                  label="Audit aanmaken"
                   onClick={closeMenu}
                   disabled={isLoading}
                 />
@@ -284,7 +284,7 @@ function ConditionalDropdown() {
               <DropdownMenuItem className="border-b py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
                   type="add-to-audit"
-                  label="Add to existing audit"
+                  label="Toevoegen aan bestaande audit"
                   onClick={closeMenu}
                   disabled={isLoading}
                 />
@@ -301,7 +301,7 @@ function ConditionalDropdown() {
               <DropdownMenuItem className="py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
                   type="release-custody"
-                  label="Release custody"
+                  label="Verantwoordelijkheid vrijgeven"
                   onClick={closeMenu}
                   disabled={
                     !allAssetsAreInCustody ||
@@ -309,10 +309,10 @@ function ConditionalDropdown() {
                     disableReleaseCustody
                       ? {
                           reason: someAssetPartOfUnavailableKit
-                            ? "Some of the selected assets have custody assigned via a kit. If you want to change their custody, please update the kit instead."
+                            ? "Sommige geselecteerde assets zijn onderdeel van een kit die niet beschikbaar is. Als u hun beheerder wilt wijzigen, werk dan de kit bij."
                             : disableReleaseCustody
-                            ? "Self service can only release their own custody."
-                            : "Some of the selected assets are not in custody.",
+                            ? "Selfservice kan alleen de eigen beheerder vrijgeven."
+                            : "Sommige geselecteerde assets zijn niet in beheer.",
                         }
                       : isLoading
                   }
@@ -321,14 +321,14 @@ function ConditionalDropdown() {
               <DropdownMenuItem className="border-b py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
                   type="assign-custody"
-                  label={isSelfService ? "Take custody" : "Assign custody"}
+                  label={isSelfService ? "Beheer overnemen" : "Beheerder toewijzen"}
                   onClick={closeMenu}
                   disabled={
                     !allAssetsAreAvailable || someAssetPartOfUnavailableKit
                       ? {
                           reason: someAssetPartOfUnavailableKit
-                            ? "Some of the selected assets have custody assigned via a kit. If you want to change their custody, please update the kit instead."
-                            : "Some of the selected assets are not available.",
+                            ? "Sommige geselecteerde assets zijn onderdeel van een kit die niet beschikbaar is. Als u hun beheerder wilt wijzigen, werk dan de kit bij."
+                            : "Sommige geselecteerde assets zijn niet beschikbaar.",
                         }
                       : isLoading
                   }
@@ -348,7 +348,7 @@ function ConditionalDropdown() {
                   type="tag-add"
                   onClick={closeMenu}
                   disabled={isLoading}
-                  label="Assign tags"
+                  label="Tags toewijzen"
                 />
               </DropdownMenuItem>
               <DropdownMenuItem className="py-1 lg:p-0">
@@ -356,7 +356,7 @@ function ConditionalDropdown() {
                   type="tag-remove"
                   onClick={closeMenu}
                   disabled={isLoading}
-                  label="Remove tags"
+                  label="Tags verwijderen"
                 />
               </DropdownMenuItem>
               <DropdownMenuItem className="border-t py-1 lg:p-0">
@@ -375,14 +375,14 @@ function ConditionalDropdown() {
               </DropdownMenuItem>
               <DropdownMenuItem className="border-t py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
-                  label="Add to kit"
+                  label="Aan kit toevoegen"
                   type="add-to-kit"
                   onClick={closeMenu}
                   disabled={
                     someAssetCheckedOut
                       ? {
                           reason:
-                            "Some of the selected kits are checked out. Please finish your booking first, before adding them in kit.",
+                            "Sommige geselecteerde assets zijn uitgecheckt. Rond de boeking af voordat u ze aan een kit toevoegt.",
                         }
                       : isLoading
                   }
@@ -390,7 +390,7 @@ function ConditionalDropdown() {
               </DropdownMenuItem>
               <DropdownMenuItem className=" py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
-                  label="Remove from kit"
+                  label="Uit kit verwijderen"
                   type="remove-from-kit"
                   onClick={closeMenu}
                   disabled={isLoading}
@@ -398,7 +398,7 @@ function ConditionalDropdown() {
               </DropdownMenuItem>
               <DropdownMenuItem className="border-t py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
-                  label="Mark as available"
+                  label="Markeren als beschikbaar"
                   type="available"
                   onClick={closeMenu}
                   disabled={isLoading}
@@ -406,7 +406,7 @@ function ConditionalDropdown() {
               </DropdownMenuItem>
               <DropdownMenuItem className="border-b py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
-                  label="Mark as unavailable"
+                  label="Markeren als onbeschikbaar"
                   type="unavailable"
                   onClick={closeMenu}
                   disabled={isLoading}
@@ -416,13 +416,13 @@ function ConditionalDropdown() {
               <DropdownMenuItem className="py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
                   type="trash"
-                  label="Delete"
+                  label="Verwijderen"
                   onClick={closeMenu}
                   disabled={
                     someAssetCheckedOut
                       ? {
                           reason:
-                            "Some of the selected kits are checked out. Please finish your booking first, before deleting them.",
+                            "Sommige geselecteerde assets zijn uitgecheckt. Rond de boeking af voordat u ze verwijdert.",
                         }
                       : isLoading
                   }
@@ -437,7 +437,7 @@ function ConditionalDropdown() {
                   width="full"
                   onClick={() => setOpen(false)}
                 >
-                  Close
+                  Sluiten
                 </Button>
               </DropdownMenuItem>
             </When>

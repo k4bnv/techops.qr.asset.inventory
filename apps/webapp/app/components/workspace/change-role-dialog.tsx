@@ -25,9 +25,9 @@ import {
 } from "../shared/modal";
 
 const roleOptions: Record<string, UserFriendlyRoles> = {
-  [OrganizationRoles.ADMIN]: "Administrator",
-  [OrganizationRoles.BASE]: "Base",
-  [OrganizationRoles.SELF_SERVICE]: "Self service",
+  [OrganizationRoles.ADMIN]: "Beheerder",
+  [OrganizationRoles.BASE]: "Basis",
+  [OrganizationRoles.SELF_SERVICE]: "Selfservice",
 };
 
 interface EntityCounts {
@@ -130,10 +130,9 @@ export function ChangeRoleDialog({
                 <SuccessIcon className="size-6 text-success-600" />
               </div>
               <AlertDialogHeader className="mb-0">
-                <AlertDialogTitle>Role updated successfully</AlertDialogTitle>
+                <AlertDialogTitle>Rol succesvol bijgewerkt</AlertDialogTitle>
                 <AlertDialogDescription id="change-role-description">
-                  The user's role has been changed. The change takes effect
-                  immediately.
+                  De rol van de gebruiker is gewijzigd. De wijziging wordt onmiddellijk van kracht.
                 </AlertDialogDescription>
               </AlertDialogHeader>
             </div>
@@ -144,17 +143,16 @@ export function ChangeRoleDialog({
                 width="full"
                 onClick={() => onOpenChange(false)}
               >
-                Close
+                Sluiten
               </Button>
             </AlertDialogFooter>
           </>
         ) : (
           <>
             <AlertDialogHeader>
-              <AlertDialogTitle>Change user role</AlertDialogTitle>
+              <AlertDialogTitle>Gebruikersrol wijzigen</AlertDialogTitle>
               <AlertDialogDescription id="change-role-description">
-                Change this user's role in the workspace. This takes effect
-                immediately.
+                Wijzig de rol van deze gebruiker in de werkruimte. Dit wordt onmiddellijk van kracht.
               </AlertDialogDescription>
             </AlertDialogHeader>
 
@@ -172,7 +170,7 @@ export function ChangeRoleDialog({
 
               <div className="py-3">
                 <label htmlFor="role-select" className="mb-1 block font-medium">
-                  Role
+                  Rol
                 </label>
                 <Popover
                   open={rolePopoverOpen}
@@ -187,7 +185,7 @@ export function ChangeRoleDialog({
                     >
                       <ChevronRight className="ml-[2px] inline-block rotate-90" />
                       <span className="ml-2">
-                        {roleOptions[selectedRole] || "Select role"}
+                        {roleOptions[selectedRole] || "Selecteer rol"}
                       </span>
                     </Button>
                   </PopoverTrigger>
@@ -227,48 +225,48 @@ export function ChangeRoleDialog({
                 {showDemotion ? (
                   <div className="mt-4 rounded-md border border-warning-200 bg-warning-25 p-3">
                     <p className="text-sm font-medium text-warning-700">
-                      Demotion — entities will be transferred
+                      Degradatie — entiteiten worden overgedragen
                     </p>
                     {isLoadingDemotionData ? (
                       <p className="mt-2 text-sm text-gray-600">
-                        Loading entity counts...
+                        Entiteitstellingen laden...
                       </p>
                     ) : entityCounts && entityCounts.total > 0 ? (
                       <>
                         <p className="mt-2 text-sm text-gray-600">
-                          This user owns{" "}
-                          <strong>{entityCounts.total} entities</strong> that
-                          will be transferred to the selected recipient:
+                          Deze gebruiker bezit{" "}
+                          <strong>{entityCounts.total} entiteiten</strong> die
+                          worden overgedragen aan de geselecteerde ontvanger:
                         </p>
                         <ul className="mt-1 list-inside list-disc text-sm text-gray-600">
                           {entityCounts.assets > 0 && (
                             <li>{entityCounts.assets} assets</li>
                           )}
                           {entityCounts.categories > 0 && (
-                            <li>{entityCounts.categories} categories</li>
+                            <li>{entityCounts.categories} categorieën</li>
                           )}
                           {entityCounts.tags > 0 && (
                             <li>{entityCounts.tags} tags</li>
                           )}
                           {entityCounts.locations > 0 && (
-                            <li>{entityCounts.locations} locations</li>
+                            <li>{entityCounts.locations} locaties</li>
                           )}
                           {entityCounts.customFields > 0 && (
-                            <li>{entityCounts.customFields} custom fields</li>
+                            <li>{entityCounts.customFields} aangepaste velden</li>
                           )}
                           {entityCounts.bookings > 0 && (
-                            <li>{entityCounts.bookings} bookings</li>
+                            <li>{entityCounts.bookings} boekingen</li>
                           )}
                           {entityCounts.kits > 0 && (
                             <li>{entityCounts.kits} kits</li>
                           )}
                           {entityCounts.assetReminders > 0 && (
                             <li>
-                              {entityCounts.assetReminders} asset reminders
+                              {entityCounts.assetReminders} asset-herinneringen
                             </li>
                           )}
                           {entityCounts.images > 0 && (
-                            <li>{entityCounts.images} images</li>
+                            <li>{entityCounts.images} afbeeldingen</li>
                           )}
                         </ul>
 
@@ -278,7 +276,7 @@ export function ChangeRoleDialog({
                               htmlFor="recipient-select"
                               className="mb-1 block text-sm font-medium"
                             >
-                              Transfer entities to
+                              Entiteiten overdragen aan
                             </label>
                             <Popover
                               open={recipientPopoverOpen}
@@ -296,10 +294,10 @@ export function ChangeRoleDialog({
                                     {selectedRecipient
                                       ? `${selectedRecipient.name}${
                                           selectedRecipient.isOwner
-                                            ? " (Owner)"
+                                            ? " (Eigenaar)"
                                             : ""
                                         } — ${selectedRecipient.email}`
-                                      : "Select recipient"}
+                                      : "Selecteer ontvanger"}
                                   </span>
                                 </Button>
                               </PopoverTrigger>
@@ -333,7 +331,7 @@ export function ChangeRoleDialog({
                                       )}
                                     >
                                       {r.name}
-                                      {r.isOwner ? " (Owner)" : ""} — {r.email}
+                                      {r.isOwner ? " (Eigenaar)" : ""} — {r.email}
                                     </div>
                                   ))}
                                 </PopoverContent>
@@ -344,7 +342,7 @@ export function ChangeRoleDialog({
                       </>
                     ) : entityCounts && entityCounts.total === 0 ? (
                       <p className="mt-2 text-sm text-gray-600">
-                        This user has no entities to transfer.
+                        Deze gebruiker heeft geen entiteiten om over te dragen.
                       </p>
                     ) : null}
                   </div>
@@ -365,7 +363,7 @@ export function ChangeRoleDialog({
                   disabled={disabled}
                   onClick={() => onOpenChange(false)}
                 >
-                  Cancel
+                  Annuleren
                 </Button>
                 <Button
                   type="submit"
@@ -376,7 +374,7 @@ export function ChangeRoleDialog({
                     (showDemotion && isLoadingDemotionData)
                   }
                 >
-                  {disabled ? "Changing..." : "Change role"}
+                  {disabled ? "Wijzigen..." : "Rol wijzigen"}
                 </Button>
               </AlertDialogFooter>
             </fetcher.Form>

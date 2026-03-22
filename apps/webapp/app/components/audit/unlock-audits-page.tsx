@@ -74,7 +74,7 @@ export function UnlockAuditsPage({
             <ClipboardCheckIcon className="size-6" />
           </div>
           <h2 className="mb-2 text-display-xs font-semibold">
-            Unlock {AUDIT_ADDON.label}
+            Ontgrendel {AUDIT_ADDON.label}
           </h2>
           <p className="text-gray-600">{AUDIT_ADDON.subtitle}</p>
         </div>
@@ -82,7 +82,7 @@ export function UnlockAuditsPage({
         {/* Feature list */}
         <div className="mb-8 rounded-xl border border-gray-200 bg-white p-6">
           <h3 className="mb-4 text-lg font-semibold">
-            What you get with Audits
+            Wat u krijgt met Audits
           </h3>
           <ul className="space-y-3">
             {features.map((feature) => (
@@ -144,36 +144,36 @@ function PricingSection({
 }) {
   return (
     <div className="mb-8 rounded-xl border border-gray-200 bg-white p-6">
-      <h3 className="mb-4 text-lg font-semibold">Select your pricing plan</h3>
+      <h3 className="mb-4 text-lg font-semibold">Selecteer uw prijsplan</h3>
       <div className="flex flex-wrap items-stretch gap-4">
         {monthlyPrice && (
           <IntervalCard
-            label="Monthly"
+            label="Maandelijks"
             isSelected={selectedInterval === "month"}
             onSelect={() => onIntervalChange("month")}
             mainPrice={fmtPrice(
               monthlyPrice.unit_amount || 0,
               monthlyPrice.currency
             )}
-            footnote="Billed monthly"
+            footnote="Maandelijks gefactureerd"
           />
         )}
         {yearlyPrice && (
           <IntervalCard
-            label="Yearly"
+            label="Jaarlijks"
             isSelected={selectedInterval === "year"}
             onSelect={() => onIntervalChange("year")}
             mainPrice={fmtPrice(
               Math.round((yearlyPrice.unit_amount || 0) / 12),
               yearlyPrice.currency
             )}
-            footnote={`Billed annually ${fmtPrice(
+            footnote={`Jaarlijks gefactureerd ${fmtPrice(
               yearlyPrice.unit_amount || 0,
               yearlyPrice.currency
             )}`}
             discountBadge={
               yearlyDiscount != null && yearlyDiscount > 0
-                ? `Save ${yearlyDiscount}%`
+                ? `Bespaar ${yearlyDiscount}%`
                 : undefined
             }
           />
@@ -238,14 +238,14 @@ function TrialExpiredCTA({ auditSubInfo }: { auditSubInfo?: AuditSubInfo }) {
   return (
     <div className="rounded-xl border border-gray-200 bg-white p-6 text-center">
       <p className="mb-1 font-semibold text-gray-900">
-        Your Audits trial has ended
+        Uw Audits-proefperiode is afgelopen
       </p>
       <p className="mb-2 text-sm text-gray-600">
-        Add a payment method to continue using Audits.
+        Voeg een betaalmethode toe om Audits te blijven gebruiken.
       </p>
       {auditSubInfo && (
         <p className="mb-4 text-sm text-gray-500">
-          Your plan:{" "}
+          Uw plan:{" "}
           <span className="font-medium text-gray-700">
             {fmtPrice(
               auditSubInfo.interval === "year"
@@ -258,16 +258,16 @@ function TrialExpiredCTA({ auditSubInfo }: { auditSubInfo?: AuditSubInfo }) {
           {auditSubInfo.interval === "year" && (
             <span>
               {" "}
-              (billed annually{" "}
-              {fmtPrice(auditSubInfo.amount, auditSubInfo.currency)}/yr)
+              (jaarlijks gefactureerd{" "}
+              {fmtPrice(auditSubInfo.amount, auditSubInfo.currency)}/jr)
             </span>
           )}
-          {auditSubInfo.interval === "month" && <span> (billed monthly)</span>}
+          {auditSubInfo.interval === "month" && <span> (maandelijks gefactureerd)</span>}
         </p>
       )}
       {!auditSubInfo && <div className="mb-4" />}
       <CustomerPortalForm
-        buttonText="Add payment method to continue"
+        buttonText="Betaalmethode toevoegen om door te gaan"
         buttonProps={{ variant: "primary", width: "full" }}
       />
     </div>
@@ -308,10 +308,10 @@ function OwnerCTAs({
               className="mt-0.5 shrink-0"
             />
             <span className="text-[13px] text-gray-600">
-              I understand that after the 7-day free trial, my payment method on
-              file will be automatically charged at the regular subscription
-              rate. I can cancel anytime before the trial ends to avoid being
-              charged.
+              Ik begrijp dat na de gratis proefperiode van 7 dagen, mijn
+              bekende betaalmethode automatisch wordt belast tegen het
+              reguliere abonnementstarief. Ik kan op elk moment annuleren
+              voordat de proefperiode afloopt om kosten te voorkomen.
             </span>
           </label>
         </div>
@@ -332,7 +332,7 @@ function OwnerCTAs({
           >
             <span className="item flex gap-2">
               <SparklesIcon className="size-4" />
-              {isStartingTrial ? "Enabling..." : "Enable for free for 7 days"}
+              {isStartingTrial ? "Inschakelen..." : "7 dagen gratis inschakelen"}
             </span>
           </Button>
         </trialFetcher.Form>
@@ -349,13 +349,13 @@ function OwnerCTAs({
             disabled={isSubscribing}
           >
             {isSubscribing
-              ? "Redirecting..."
+              ? "Doorsturen..."
               : selectedInterval === "year"
-              ? `Subscribe yearly (${fmtPrice(
+              ? `Jaarlijks abonneren (${fmtPrice(
                   selectedPrice.unit_amount || 0,
                   selectedPrice.currency
-                )}/yr)`
-              : `Subscribe monthly (${fmtPrice(
+                )}/jr)`
+              : `Maandelijks abonneren (${fmtPrice(
                   selectedPrice.unit_amount || 0,
                   selectedPrice.currency
                 )}/mo)`}

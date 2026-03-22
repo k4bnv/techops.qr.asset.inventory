@@ -36,9 +36,9 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 
 const AUDIT_SORTING_OPTIONS = {
-  name: "Name",
-  createdAt: "Creation Date",
-  dueDate: "Due date",
+  name: "Naam",
+  createdAt: "Aanmaakdatum",
+  dueDate: "Vervaldatum",
 } as const;
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
@@ -105,8 +105,8 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         modelName,
         isSelfServiceOrBase,
         searchFieldTooltip: {
-          title: "Search audits",
-          text: "Search audits by name or description.",
+          title: "Zoek audits",
+          text: "Zoek audits op naam of beschrijving.",
         },
       }),
       {
@@ -155,17 +155,17 @@ export default function AuditsIndexPage() {
           headerChildren={
             <>
               <Th>Status</Th>
-              <Th>Description</Th>
-              <Th>Created by</Th>
-              <Th>Assignee</Th>
-              <Th className="whitespace-nowrap">Due date</Th>
-              <Th>Created</Th>
-              <Th>Started</Th>
-              <Th>Completed</Th>
-              <Th className="text-right">Expected</Th>
-              <Th className="text-right">Found</Th>
-              <Th className="text-right">Missing</Th>
-              <Th className="text-right">Unexpected</Th>
+              <Th>Beschrijving</Th>
+              <Th>Aangemaakt door</Th>
+              <Th>Toegewezen aan</Th>
+              <Th className="whitespace-nowrap">Vervaldatum</Th>
+              <Th>Aangemaakt</Th>
+              <Th>Gestart</Th>
+              <Th>Voltooid</Th>
+              <Th className="text-right">Verwacht</Th>
+              <Th className="text-right">Gevonden</Th>
+              <Th className="text-right">Ontbrekend</Th>
+              <Th className="text-right">Onverwacht</Th>
             </>
           }
         />
@@ -183,7 +183,7 @@ const ListItemContent = ({ item }: { item: AuditListItem }) => {
   const creatorName =
     createdBy?.firstName && createdBy?.lastName
       ? `${createdBy.firstName} ${createdBy.lastName}`
-      : createdBy?.email || "Unknown";
+      : createdBy?.email || "Onbekend";
   const creatorImg =
     createdBy?.profilePicture || "/static/images/default_pfp.jpg";
 
@@ -194,7 +194,7 @@ const ListItemContent = ({ item }: { item: AuditListItem }) => {
         firstAssignment.user.lastName || ""
       }`.trim() ||
       firstAssignment.user.email ||
-      "Unknown"
+      "Onbekend"
     : null;
   const assigneeImg =
     firstAssignment?.user?.profilePicture || "/static/images/default_pfp.jpg";

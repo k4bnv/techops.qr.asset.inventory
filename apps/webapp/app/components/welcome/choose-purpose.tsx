@@ -58,22 +58,22 @@ const PLAN_DETAILS: Record<
   }
 > = {
   personal: {
-    title: "Personal",
+    title: "Persoonlijk",
     description:
-      "For testing or individual use. Includes 3 custom fields and branded QR labels.",
-    chip: "Free",
-    helper: "Personal workspaces are free and ready to use immediately.",
+      "Voor testen of individueel gebruik. Inclusief 3 aangepaste velden en merkgebonden QR-labels.",
+    chip: "Gratis",
+    helper: "Persoonlijke werkruimtes zijn gratis en direct klaar voor gebruik.",
     analytics: "cta-start-personal",
-    ctaLabel: "Start using TechOps",
+    ctaLabel: "Starten met TechOps",
     href: "/assets",
   },
   team: {
     title: "Team",
-    description: `For organizations and labs. Includes collaboration features with a ${config.freeTrialDays}-day free trial. No credit card required.`,
-    chip: `${config.freeTrialDays}-day trial`,
-    badge: "Recommended",
+    description: `Voor organisaties en labs. Inclusief samenwerkingsfuncties met een gratis proefperiode van ${config.freeTrialDays} dagen. Geen creditcard vereist.`,
+    chip: `${config.freeTrialDays} dagen proefperiode`,
+    badge: "Aanbevolen",
     analytics: "cta-next-team",
-    ctaLabel: "Next: Select a plan",
+    ctaLabel: "Volgende: Selecteer een abonnement",
     href: "/select-plan",
   },
 };
@@ -126,8 +126,8 @@ export function ChoosePurpose({
   ].filter(Boolean);
   const ctaLabel =
     selectedPlan === "personal" && wantsAnyAddon
-      ? `Start with ${selectedAddons.join(" & ")} trial`
-      : selectedDetails?.ctaLabel ?? "Start using TechOps";
+      ? `Start met de ${selectedAddons.join(" & ")} proefperiode`
+      : selectedDetails?.ctaLabel ?? "Starten met TechOps";
 
   // Determine href for team flow (pass addon params)
   const teamParams = new URLSearchParams();
@@ -150,19 +150,19 @@ export function ChoosePurpose({
         <ShelfSymbolLogo className="mb-4 size-8" />
         <div className="mb-4 max-w-2xl text-center">
           <h3 className="text-2xl font-semibold text-gray-900">
-            How would you like to get started with TechOps?
+            Hoe wilt u aan de slag met TechOps?
           </h3>
           <p className="mt-3 text-base text-gray-600">
-            Your choice determines which features we prepare for you. You can
-            always switch later.
+            Uw keuze bepaalt welke functies we voor u voorbereiden. U kunt
+            later altijd nog overstappen.
           </p>
           <p className="mt-4 rounded-lg bg-gray-50 px-4 py-3 text-sm text-gray-600">
-            If your organization already uses TechOps, you don't need to create a
-            new workspace — look for your email invite or sign in instead.
+            Als uw organisatie al TechOps gebruikt, hoeft u geen nieuwe werkruimte aan te maken —
+            zoek naar uw e-mailuitnodiging of log in.
           </p>
         </div>
         <h4 className=" w-full text-left  font-semibold text-gray-700">
-          Select a plan
+          Selecteer een plan
         </h4>
         <div className="grid w-full grid-cols-2 gap-4">
           {(Object.keys(PLAN_DETAILS) as Array<SignupPlan>).map((planKey) => {
@@ -197,7 +197,7 @@ export function ChoosePurpose({
         {showAddonsSection ? (
           <>
             <h4 className="mt-6 w-full text-left font-semibold text-gray-700">
-              Choose optional add-ons
+              Kies optionele add-ons
             </h4>
             {showAuditOption ? (
               <AddonToggle
@@ -318,7 +318,7 @@ function AddonToggle({
           <div className="flex-1">
             <div className="flex items-center gap-2">
               <h4 className="text-base font-semibold text-gray-900">{label}</h4>
-              <Tag className="bg-primary-50 text-primary-700">7-day trial</Tag>
+              <Tag className="bg-primary-50 text-primary-700">7 dagen proefperiode</Tag>
             </div>
             <p className="mt-1 text-sm text-gray-600">{description}</p>
           </div>
@@ -378,14 +378,14 @@ function AddonBillingCards({
               billingInterval === "month" ? "text-primary-600" : "text-gray-500"
             )}
           >
-            Monthly
+            Maandelijks
           </p>
           <p className="text-2xl font-semibold">
             {fmtPrice(monthlyPrice.unit_amount || 0, monthlyPrice.currency)}
             <span className="text-sm font-normal text-gray-500">/mo</span>
           </p>
-          <p className="text-xs text-gray-500">Billed monthly</p>
-          <p className="mt-1 text-xs text-gray-500">per workspace</p>
+          <p className="text-xs text-gray-500">Maandelijks gefactureerd</p>
+          <p className="mt-1 text-xs text-gray-500">per werkruimte</p>
         </button>
       )}
       {yearlyPrice && (
@@ -401,7 +401,7 @@ function AddonBillingCards({
         >
           {yearlyDiscount != null && yearlyDiscount > 0 && (
             <span className="absolute -top-2.5 rounded-full bg-primary-500 px-2 py-0.5 text-[10px] font-semibold text-white">
-              Save {yearlyDiscount}%
+              Bespaar {yearlyDiscount}%
             </span>
           )}
           <p
@@ -410,7 +410,7 @@ function AddonBillingCards({
               billingInterval === "year" ? "text-primary-600" : "text-gray-500"
             )}
           >
-            Yearly
+            Jaarlijks
           </p>
           <p className="text-2xl font-semibold">
             {fmtPrice(
@@ -420,10 +420,10 @@ function AddonBillingCards({
             <span className="text-sm font-normal text-gray-500">/mo</span>
           </p>
           <p className="text-xs text-gray-500">
-            Billed annually{" "}
+            Jaarlijks gefactureerd{" "}
             {fmtPrice(yearlyPrice.unit_amount || 0, yearlyPrice.currency)}
           </p>
-          <p className="mt-1 text-xs text-gray-500">per workspace</p>
+          <p className="mt-1 text-xs text-gray-500">per werkruimte</p>
         </button>
       )}
     </div>

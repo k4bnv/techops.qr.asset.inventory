@@ -29,10 +29,9 @@ export default function ImportUsersSuccessContent({
     >
       <ClientOnly fallback={null}>{() => <SuccessAnimation />}</ClientOnly>
 
-      <h4>Import completed</h4>
+      <h4>Import voltooid</h4>
       <p className="mb-4">
-        Users from the csv file has been invited. Below you can find a summary
-        of the invited users.
+        Gebruikers uit het CSV-bestand zijn uitgenodigd. Hieronder vindt u een overzicht van de uitgenodigde gebruikers.
       </p>
 
       <When truthy={!!data.extraMessage}>
@@ -44,14 +43,14 @@ export default function ImportUsersSuccessContent({
       <When truthy={!!data?.inviteSentUsers?.length}>
         <ImportUsersTable
           className="mb-4"
-          title="Invited users"
+          title="Uitgenodigde gebruikers"
           users={data?.inviteSentUsers ?? []}
         />
       </When>
       <When truthy={!!data?.skippedUsers?.length}>
         <ImportUsersTable
           className="mb-4"
-          title="Skipped users"
+          title="Overgeslagen gebruikers"
           users={data?.skippedUsers ?? []}
         />
       </When>
@@ -66,7 +65,7 @@ export default function ImportUsersSuccessContent({
           Close
         </Button>
         <Button type="button" onClick={onViewInvites} className="flex-1">
-          View Invites
+          Uitnodigingen bekijken
         </Button>
       </div>
     </div>

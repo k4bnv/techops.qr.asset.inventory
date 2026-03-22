@@ -24,7 +24,7 @@ export default function BulkActionsDropdown() {
     return (
       <Button variant="secondary" to="#">
         <span className="flex items-center gap-2">
-          Actions <ChevronRight className="chev rotate-90" />
+          Acties <ChevronRight className="chev rotate-90" />
         </span>
       </Button>
     );
@@ -88,7 +88,7 @@ function ConditionalDropdown() {
           disabled={disabled}
         >
           <Button type="button" variant="secondary">
-            <span className="flex items-center gap-2">Actions</span>
+            <span className="flex items-center gap-2">Acties</span>
           </Button>
         </DropdownMenuTrigger>
 
@@ -134,13 +134,13 @@ function ConditionalDropdown() {
             >
               <BulkUpdateDialogTrigger
                 type="activate"
-                label="Activate"
+                label="Activeren"
                 onClick={closeMenu}
                 disabled={
                   someFieldsActivated
                     ? {
                         reason:
-                          "Some of the selected fields are already activated. Please make sure you are selecting deactivated fields only.",
+                          "Sommige geselecteerde velden zijn al geactiveerd. Zorg ervoor dat u alleen gedeactiveerde velden selecteert.",
                       }
                     : isLoading
                 }
@@ -154,13 +154,13 @@ function ConditionalDropdown() {
             >
               <BulkUpdateDialogTrigger
                 type="deactivate"
-                label="Deactivate"
+                label="Deactiveren"
                 onClick={closeMenu}
                 disabled={
                   someFieldsDeactivated
                     ? {
                         reason:
-                          "Some of the selected fields are already deactivated. Please make sure you are selecting activated fields only.",
+                          "Sommige geselecteerde velden zijn al gedeactiveerd. Zorg ervoor dat u alleen geactiveerde velden selecteert.",
                       }
                     : isLoading
                 }

@@ -33,7 +33,7 @@ export function StarButton({ preset }: { preset: NormalizedPreset }) {
       <button
         type="submit"
         className="mt-0.5 text-gray-400 hover:text-yellow-500"
-        title={optimisticStarred ? "Unstar" : "Star"}
+        title={optimisticStarred ? "Markering verwijderen" : "Markeren"}
         // why: Prevent form submission from bubbling and closing parent popover
         onClick={(e) => e.stopPropagation()}
       >

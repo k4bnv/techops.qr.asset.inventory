@@ -8,7 +8,7 @@ export function ReturnedBadge() {
     <Badge color={colors.bg} textColor={colors.text} withDot={false}>
       <span className="inline-flex items-center">
         <Check className="mr-1 size-3.5" style={{ color: colors.text }} />
-        Returned
+        Geretourneerd
       </span>
     </Badge>
   );

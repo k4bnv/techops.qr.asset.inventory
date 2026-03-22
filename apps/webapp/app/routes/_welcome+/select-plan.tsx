@@ -32,7 +32,7 @@ import {
 import { tw } from "~/utils/tw";
 
 export const meta: MetaFunction = () => [
-  { title: appendToMetaTitle("Welcome to TechOps") },
+  { title: appendToMetaTitle("Welkom bij TechOps") },
 ];
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
@@ -67,8 +67,8 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
 
     return data(
       payload({
-        title: "Subscription",
-        subTitle: "Pick an account plan that fits your workflow.",
+        title: "Abonnement",
+        subTitle: "Kies een abonnement dat bij uw workflow past.",
         /** Filter out the montly and yearly prices to only have prices for team plan */
         prices,
         customer,
@@ -155,16 +155,16 @@ export default function SelectPlan() {
 
     let footnote = "";
     if (interval === "year") {
-      footnote = `Billed annually ${fmtPrice(
+      footnote = `Jaarlijks gefactureerd ${fmtPrice(
         amount / 10,
         price.currency
-      )} per workspace`;
+      )} per werkruimte`;
     } else if (interval === "month") {
-      footnote = "Billed monthly per workspace";
+      footnote = "Maandelijks gefactureerd per werkruimte";
     }
 
     return {
-      label: interval === "year" ? "Annual" : "Monthly",
+      label: interval === "year" ? "Jaarlijks" : "Maandelijks",
       price: `${formattedPrice}/mo`,
       footnote,
     };
@@ -185,7 +185,7 @@ export default function SelectPlan() {
   const fmtPerMonth = (cents: number, currency: string) =>
     fmtPrice(isYearly ? Math.round(cents / 12) : cents, currency);
 
-  const billingLabel = isYearly ? "yr" : "mo";
+  const billingLabel = isYearly ? "jr" : "mnd";
 
   const selectedAddons = [
     wantsAudits && "Audits",
@@ -193,22 +193,22 @@ export default function SelectPlan() {
   ].filter(Boolean);
   const trialText =
     selectedAddons.length > 0
-      ? `You won't be charged during the trial. After ${
+      ? `Tijdens de proefperiode worden er geen kosten in rekening gebracht. Na ${
           config.freeTrialDays
-        } days, continue on Team + ${selectedAddons.join(
+        } dagen gaat u verder op Team + ${selectedAddons.join(
           " + "
-        )} or change plans.`
-      : `You won't be charged during the trial. After ${config.freeTrialDays} days, continue on Team or change plans.`;
+        )} of wijzigt u uw abonnement.`
+      : `Tijdens de proefperiode worden er geen kosten in rekening gebracht. Na ${config.freeTrialDays} dagen gaat u verder op Team of wijzigt u uw abonnement.`;
 
   return (
     <div className="flex flex-col items-center p-4 sm:p-6">
       <ShelfSymbolLogo className="my-4 size-8 md:mt-0" />
       <div className="mb-8 text-center">
         <h3 className="text-2xl font-semibold text-gray-900">
-          Select your payment plan
+          Selecteer uw betalingsplan
         </h3>
         <p className="mt-3 text-base text-gray-600">
-          No credit card or payment required to start your 7-day trial.{" "}
+          Geen creditcard of betaling vereist om uw proefperiode van 7 dagen te starten.{" "}
         </p>
       </div>
 
@@ -221,7 +221,7 @@ export default function SelectPlan() {
           className="flex items-center justify-between gap-2"
           aria-label="Billing interval"
         >
-          <legend className="sr-only">Choose billing interval</legend>
+          <legend className="sr-only">Kies factureringsinterval</legend>
           {(Object.keys(planPrices) as BillingInterval[]).map((interval) => {
             const price = planPrices[interval];
             if (!price) return null;
@@ -258,7 +258,7 @@ export default function SelectPlan() {
                         " absolute right-2 top-2 bg-orange-100 text-orange-700"
                       )}
                     >
-                      Save 54%
+                      Bespaar 54%
                     </Tag>
                   ) : null}
                   <span className="text-sm font-semibold text-primary-700">
@@ -279,10 +279,10 @@ export default function SelectPlan() {
         <section className="space-y-4">
           <div>
             <h3 className="text-lg font-semibold text-gray-900">
-              Optional add-ons
+              Optionele add-ons
             </h3>
             <p className="mt-1 text-sm text-gray-600">
-              Advanced capabilities for migrations & IT environments.
+              Geavanceerde mogelijkheden voor migraties en IT-omgevingen.
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-2">
@@ -338,7 +338,7 @@ export default function SelectPlan() {
                             {AUDIT_ADDON.label}
                           </h4>
                           <Tag className="whitespace-nowrap bg-primary-50 text-primary-700">
-                            7-day trial
+                            7 dagen proefperiode
                           </Tag>
                         </div>
                       </div>
@@ -353,17 +353,17 @@ export default function SelectPlan() {
                             activeAuditPrice.unit_amount || 0,
                             activeAuditPrice.currency
                           )}
-                          /mo
+                          /mnd
                         </span>
                         <p className="text-xs text-gray-500">
-                          Billed{" "}
+                          Gefactureerd{" "}
                           {isYearly
-                            ? `annually ${fmtPrice(
+                            ? `jaarlijks ${fmtPrice(
                                 activeAuditPrice.unit_amount || 0,
                                 activeAuditPrice.currency
                               )}`
-                            : "monthly"}{" "}
-                          per workspace
+                            : "maandelijks"}{" "}
+                          per werkruimte
                         </p>
                       </div>
                     ) : null}
@@ -424,7 +424,7 @@ export default function SelectPlan() {
                             {BARCODE_ADDON.label}
                           </h4>
                           <Tag className="whitespace-nowrap bg-primary-50 text-primary-700">
-                            7-day trial
+                            7 dagen proefperiode
                           </Tag>
                         </div>
                       </div>
@@ -439,17 +439,17 @@ export default function SelectPlan() {
                             activeBarcodePrice.unit_amount || 0,
                             activeBarcodePrice.currency
                           )}
-                          /mo
+                          /mnd
                         </span>
                         <p className="text-xs text-gray-500">
-                          Billed{" "}
+                          Gefactureerd{" "}
                           {isYearly
-                            ? `annually ${fmtPrice(
+                            ? `jaarlijks ${fmtPrice(
                                 activeBarcodePrice.unit_amount || 0,
                                 activeBarcodePrice.currency
                               )}`
-                            : "monthly"}{" "}
-                          per workspace
+                            : "maandelijks"}{" "}
+                          per werkruimte
                         </p>
                       </div>
                     ) : null}
@@ -464,24 +464,24 @@ export default function SelectPlan() {
         <section className="space-y-4">
           <div>
             <h3 className="text-lg font-semibold text-gray-900">
-              Enterprise integrations
+              Enterprise-integraties
             </h3>
           </div>
           <Card className="flex flex-col gap-3">
             <div>
               <h4 className="text-base font-semibold text-gray-900">
-                SSO Integration (Team only)
+                SSO-integratie (alleen Team)
               </h4>
               <div className="mt-1">
-                <GrayBadge className="whitespace-nowrap">Paid add-on</GrayBadge>
+                <GrayBadge className="whitespace-nowrap">Betaalde add-on</GrayBadge>
               </div>
             </div>
             <p className="text-sm text-gray-600">
-              Single sign-on for your organization; centralized identity &
-              access.
+              Single sign-on voor uw organisatie; gecentraliseerde identiteit &
+              toegang.
             </p>
             <p className="text-xs text-gray-500">
-              Available for Team workspaces. Pricing provided during evaluation.
+              Beschikbaar voor Team-werkruimtes. Prijzen worden verstrekt tijdens de evaluatie.
             </p>
           </Card>
         </section>
@@ -498,7 +498,7 @@ export default function SelectPlan() {
             <div className="space-y-2 text-sm">
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">
-                  Team ({isYearly ? "yearly" : "monthly"})
+                  Team ({isYearly ? "jaarlijks" : "maandelijks"})
                 </span>
                 <span className="font-medium text-gray-900">
                   {fmtPrice(teamPriceAmount, teamPriceCurrency)}/{billingLabel}
@@ -507,7 +507,7 @@ export default function SelectPlan() {
               {wantsAudits && activeAuditPrice ? (
                 <div className="flex items-center justify-between">
                   <span className="text-gray-600">
-                    Audits ({isYearly ? "yearly" : "monthly"})
+                    Audits ({isYearly ? "jaarlijks" : "maandelijks"})
                   </span>
                   <span className="font-medium text-gray-900">
                     {fmtPrice(auditPriceAmount, activeAuditPrice.currency)}/
@@ -518,7 +518,7 @@ export default function SelectPlan() {
               {wantsBarcodes && activeBarcodePrice ? (
                 <div className="flex items-center justify-between">
                   <span className="text-gray-600">
-                    Barcodes ({isYearly ? "yearly" : "monthly"})
+                    Barcodes ({isYearly ? "jaarlijks" : "maandelijks"})
                   </span>
                   <span className="font-medium text-gray-900">
                     {fmtPrice(barcodePriceAmount, activeBarcodePrice.currency)}/
@@ -528,7 +528,7 @@ export default function SelectPlan() {
               ) : null}
               <div className="border-t border-gray-200 pt-2">
                 <div className="flex items-center justify-between">
-                  <span className="font-semibold text-gray-900">Total</span>
+                  <span className="font-semibold text-gray-900">Totaal</span>
                   <span className="font-semibold text-gray-900">
                     {fmtPrice(totalAmount, teamPriceCurrency)}/{billingLabel}
                   </span>
@@ -536,7 +536,7 @@ export default function SelectPlan() {
                 {isYearly && (
                   <p className="mt-1 text-right text-xs text-gray-500">
                     {fmtPrice(Math.round(totalAmount / 12), teamPriceCurrency)}
-                    /mo effective rate
+                    /mnd effectief tarief
                   </p>
                 )}
               </div>
@@ -575,12 +575,12 @@ export default function SelectPlan() {
           disabled={disabled}
           data-analytics="cta-start-trial"
         >
-          Start {config.freeTrialDays}-day free trial
+          Start de gratis proefperiode van {config.freeTrialDays} dagen
         </Button>
       </Form>
 
       <Button variant="link" to="/welcome" className="mt-4">
-        Back
+        Terug
       </Button>
     </div>
   );

@@ -61,7 +61,7 @@ export const BookingActionsDropdown = ({ noteId }: { noteId: string }) => {
               <DropdownMenuItem className="w-full cursor-pointer rounded  py-2 text-left text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-700">
                 <span className="flex items-center gap-2">
                   <TrashIcon />
-                  Delete
+                  Verwijderen
                 </span>
               </DropdownMenuItem>
             </AlertDialogTrigger>
@@ -72,15 +72,15 @@ export const BookingActionsDropdown = ({ noteId }: { noteId: string }) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Are you sure you want to delete this note?
+            Weet u zeker dat u deze notitie wilt verwijderen?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently remove this note
-            from our servers.
+            Deze actie kan niet ongedaan worden gemaakt. Dit zal deze notitie
+            permanent van onze servers verwijderen.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel disabled={disabled}>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={disabled}>Annuleren</AlertDialogCancel>
           <fetcher.Form
             action={`/bookings/${params.bookingId}/activity`}
             method="DELETE"
@@ -92,7 +92,7 @@ export const BookingActionsDropdown = ({ noteId }: { noteId: string }) => {
               size="sm"
               disabled={disabled}
             >
-              Delete
+              Verwijderen
             </Button>
           </fetcher.Form>
         </AlertDialogFooter>

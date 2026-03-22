@@ -3,6 +3,7 @@ import { BookingStatus } from "@prisma/client";
 import { useUserData } from "~/hooks/use-user-data";
 import { useUserRoleHelper } from "~/hooks/user-user-role-helper";
 import { bookingStatusColorMap } from "~/utils/bookings";
+import { bookingStatusDutchMap } from "~/utils/status-labels";
 import { Badge } from "../shared/badge";
 import {
   Tooltip,
@@ -39,12 +40,12 @@ export function BookingStatusBadge({
       {shouldShowExtraInfo ? (
         <ExtraInfoTooltip>
           <span className="block whitespace-nowrap lowercase first-letter:uppercase">
-            {status} - subject to review
+            {bookingStatusDutchMap[status]} - onder voorbehoud
           </span>
         </ExtraInfoTooltip>
       ) : (
         <span className="block whitespace-nowrap lowercase first-letter:uppercase">
-          {status}
+          {bookingStatusDutchMap[status]}
         </span>
       )}
     </Badge>
@@ -58,9 +59,8 @@ function ExtraInfoTooltip({ children }: { children: ReactNode }) {
         <TooltipTrigger>{children}</TooltipTrigger>
         <TooltipContent side="top" className="max-w-72">
           <p>
-            Your booking is currently reserved, however the admin can choose to
-            reject or close it at any point of time, if there are conflicts with
-            other bookings.
+            Uw boeking is momenteel gereserveerd, maar de beheerder kan deze te
+            allen tijde afwijzen of sluiten als er conflicten zijn met andere boekingen.
           </p>
         </TooltipContent>
       </Tooltip>

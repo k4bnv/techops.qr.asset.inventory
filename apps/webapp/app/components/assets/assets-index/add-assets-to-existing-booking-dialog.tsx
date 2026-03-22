@@ -20,9 +20,9 @@ import useApiQuery from "~/hooks/use-api-query";
 
 export const addAssetsToExistingBookingSchema = z.object({
   id: z
-    .string({ required_error: "Please select booking." })
-    .min(1, "Please select booking."),
-  assetsIds: z.string().array().min(1, "Please select at least one asset."),
+    .string({ required_error: "Selecteer een boeking." })
+    .min(1, "Selecteer een boeking."),
+  assetsIds: z.string().array().min(1, "Selecteer ten minste één asset."),
   addOnlyRestAssets: z.coerce.boolean().optional().nullable(),
 });
 
@@ -55,8 +55,8 @@ export default function AddAssetsToExistingBookingDialog() {
       ref={zo.ref}
       type="booking-exist"
       arrayFieldId="assetsIds"
-      title="Add to existing booking"
-      description={`Add selected(${selectedAssets.length}) assets to existing booking.`}
+      title="Toevoegen aan bestaande boeking"
+      description={`Geselecteerde (${selectedAssets.length}) assets toevoegen aan bestaande boeking.`}
       actionUrl="/api/assets/add-to-booking"
       className="lg:w-[600px]"
       skipCloseOnSuccess
@@ -77,10 +77,10 @@ export default function AddAssetsToExistingBookingDialog() {
                   <SelectValue
                     placeholder={
                       isFetchingBookings
-                        ? "Fetching bookings..."
+                        ? "Boekingen ophalen..."
                         : bookings.length === 0
-                        ? "No bookings available"
-                        : "Select booking"
+                        ? "Geen boekingen beschikbaar"
+                        : "Selecteer boeking"
                     }
                   />
                 </SelectTrigger>
@@ -105,7 +105,7 @@ export default function AddAssetsToExistingBookingDialog() {
                     ))
                   ) : (
                     <div className="p-2 text-center text-sm text-gray-500">
-                      No bookings available
+                      Geen boekingen beschikbaar
                     </div>
                   )}
                 </SelectContent>
@@ -113,8 +113,8 @@ export default function AddAssetsToExistingBookingDialog() {
               <When truthy={!isFetchingBookings && bookings.length === 0}>
                 <div className="mb-4 rounded-md border border-gray-300 bg-gray-25 p-2">
                   <p className="text-sm text-gray-600">
-                    No draft or reserved bookings found. Create a new booking
-                    first to add assets to it.
+                    Geen concept- of gereserveerde boekingen gevonden. Maak
+                    eerst een nieuwe boeking aan om assets toe te voegen.
                   </p>
                 </div>
               </When>
@@ -136,7 +136,7 @@ export default function AddAssetsToExistingBookingDialog() {
                     }
                   >
                     <div className="mt-4">
-                      <p>Already added assets are : </p>
+                      <p>Reeds toegevoegde assets zijn:</p>
                       <ul className="mb-2 list-inside list-disc">
                         {fetcherErrorAdditionalData?.alreadyAddedAssets?.map(
                           (asset: Pick<Asset, "id" | "title">) => (
@@ -159,7 +159,7 @@ export default function AddAssetsToExistingBookingDialog() {
                           className="w-full"
                           variant="secondary"
                         >
-                          Add only the rest of the assets
+                          Alleen de overige assets toevoegen
                         </Button>
                       </When>
                     </div>
@@ -175,7 +175,7 @@ export default function AddAssetsToExistingBookingDialog() {
                   disabled={disabled}
                   onClick={handleCloseDialog}
                 >
-                  Cancel
+                  Annuleren
                 </Button>
                 <Button
                   type="submit"
@@ -183,7 +183,7 @@ export default function AddAssetsToExistingBookingDialog() {
                   width="full"
                   disabled={disabled}
                 >
-                  Confirm
+                  Bevestigen
                 </Button>
               </div>
             </div>
@@ -193,10 +193,10 @@ export default function AddAssetsToExistingBookingDialog() {
           <When truthy={!!fetcherData?.success}>
             <div>
               <div className="mb-4 rounded-md border border-success-500 p-2 text-success-500">
-                <h5 className="text-success-500">Booking updated</h5>
+                <h5 className="text-success-500">Boeking bijgewerkt</h5>
                 <p>
-                  The assets you selected have been added to the booking. Do you
-                  want to add more or view the booking?
+                  De door u geselecteerde assets zijn toegevoegd aan de boeking.
+                  Wilt u er meer toevoegen of de boeking bekijken?
                 </p>
               </div>
 
@@ -208,7 +208,7 @@ export default function AddAssetsToExistingBookingDialog() {
                   disabled={disabled}
                   onClick={handleCloseDialog}
                 >
-                  Add more
+                  Meer toevoegen
                 </Button>
                 <Button
                   type="button"
@@ -219,7 +219,7 @@ export default function AddAssetsToExistingBookingDialog() {
                     void navigate(`/bookings/${fetcherData?.bookingId}`);
                   }}
                 >
-                  View booking
+                  Boeking bekijken
                 </Button>
               </div>
             </div>

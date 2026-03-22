@@ -4,7 +4,7 @@ import { isFormProcessing } from "~/utils/form";
 import { Button } from "../shared/button";
 
 export const CustomerPortalForm = ({
-  buttonText = "Go to Customer Portal",
+  buttonText = "Ga naar het klantenportaal",
   buttonProps,
   className,
 }: {
@@ -21,7 +21,7 @@ export const CustomerPortalForm = ({
       className={className}
     >
       <Button type="submit" disabled={isProcessing} {...buttonProps}>
-        {isProcessing ? "Redirecting to Customer Portal..." : buttonText}
+        {isProcessing ? "Doorsturen naar het klantenportaal..." : buttonText}
       </Button>
     </customerPortalFetcher.Form>
   );

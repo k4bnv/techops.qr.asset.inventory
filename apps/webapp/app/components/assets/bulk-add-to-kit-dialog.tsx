@@ -33,10 +33,12 @@ export default function BulkAddToKitDialog() {
     <BulkUpdateDialogContent
       ref={zo.ref}
       type="add-to-kit"
-      title="Add assets to a kit"
+      title="Assets toevoegen aan een kit"
       description={`${selectedAssets} asset${
         selectedAssets > 1 ? "s" : ""
-      } will be added to the kit. Please select a kit to add the assets to`}
+      } ${
+        selectedAssets > 1 ? "worden" : "wordt"
+      } toegevoegd aan de kit. Selecteer een kit om de assets aan toe te voegen`}
       actionUrl="/api/assets/bulk-add-to-kit"
       arrayFieldId="assetIds"
     >
@@ -46,7 +48,7 @@ export default function BulkAddToKitDialog() {
             <KitSelector
               name={zo.fields.kit()}
               kits={data?.kits || []}
-              placeholder={isLoading ? "Loading..." : "Select a kit"}
+              placeholder={isLoading ? "Laden..." : "Selecteer een kit"}
               isLoading={isLoading}
               error={zo.errors.kit()?.message || error || fetcherError}
             />
@@ -54,9 +56,9 @@ export default function BulkAddToKitDialog() {
 
           <div className="mb-6 rounded-md border border-blue-200 bg-blue-50 p-3">
             <p className="text-sm text-blue-800">
-              <strong>Location Update Notice:</strong> Adding assets to a kit
-              will automatically update the asset locations to match the kit's
-              location (if the kit has one).
+              <strong>Locatie-update bericht:</strong> Het toevoegen van assets
+              aan een kit zal automatisch de locaties van de assets bijwerken
+              naar de locatie van de kit (als de kit er een heeft).
             </p>
           </div>
 
@@ -68,7 +70,7 @@ export default function BulkAddToKitDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -76,7 +78,7 @@ export default function BulkAddToKitDialog() {
               width="full"
               disabled={disabled}
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </div>

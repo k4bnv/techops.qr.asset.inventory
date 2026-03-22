@@ -30,7 +30,7 @@ import { Card } from "../shared/card";
 import { Spinner } from "../shared/spinner";
 
 export const NewCustomFieldFormSchema = z.object({
-  name: z.string().min(2, "Name is required"),
+  name: z.string().min(2, "Naam is verplicht"),
   helpText: z
     .string()
     .optional()
@@ -47,7 +47,7 @@ export const NewCustomFieldFormSchema = z.object({
   organizationId: z.string(),
   options: z.array(z.string()).optional(),
   categories: z
-    .array(z.string().min(1, "Please select a category"))
+    .array(z.string().min(1, "Selecteer een categorie"))
     .optional()
     .default([]),
 });
@@ -65,15 +65,15 @@ interface Props {
 }
 
 const FIELD_TYPE_DESCRIPTION: { [key in CustomFieldType]: string } = {
-  TEXT: "A place to store short information for your asset. For instance: Serial numbers, notes or anything you wish. No input validation. Any text is acceptable.",
-  OPTION: "A dropdown list of predefined options.",
-  BOOLEAN: "A true/false or yes/no value.",
-  DATE: "A date picker for selecting a date.",
+  TEXT: "Een plek om korte informatie voor uw asset op te slaan. Bijvoorbeeld: serienummers, notities of wat u maar wilt. Geen invoervalidatie. Elke tekst is acceptabel.",
+  OPTION: "Een vervolgkeuzelijst met vooraf gedefinieerde opties.",
+  BOOLEAN: "Een waar/onwaar of ja/nee waarde.",
+  DATE: "Een datumkiezer voor het selecteren van een datum.",
   MULTILINE_TEXT:
-    "A place to store longer, multiline information for your asset. For instance: Descriptions, comments, or detailed notes.",
+    "Een plek om langere informatie over meerdere regels voor uw asset op te slaan. Bijvoorbeeld: beschrijvingen, opmerkingen of gedetailleerde notities.",
   AMOUNT:
-    "Enter numerical values to be formatted in your workspace's currency. Supports decimals.",
-  NUMBER: "Enter numerical values. Supports decimals.",
+    "Voer numerieke waarden in die worden opgemaakt in de valuta van uw workspace. Ondersteunt decimalen.",
+  NUMBER: "Voer numerieke waarden in. Ondersteunt decimalen.",
 };
 
 export const CustomFieldForm = ({
@@ -116,12 +116,12 @@ export const CustomFieldForm = ({
         encType="multipart/form-data"
       >
         <FormRow
-          rowLabel={"Name"}
+          rowLabel={"Naam"}
           className="border-b-0 pb-[10px] pt-0"
           required={zodFieldIsRequired(NewCustomFieldFormSchema.shape.name)}
         >
           <Input
-            label="Name"
+            label="Naam"
             hideLabel
             name={zo.fields.name()}
             disabled={disabled}
@@ -130,7 +130,7 @@ export const CustomFieldForm = ({
             onChange={updateTitle}
             className="w-full"
             defaultValue={name || ""}
-            placeholder="Choose a field name"
+            placeholder="Kies een veldnaam"
             required={zodFieldIsRequired(NewCustomFieldFormSchema.shape.name)}
           />
         </FormRow>
@@ -155,7 +155,7 @@ export const CustomFieldForm = ({
                 className="px-3.5 py-3"
                 id="custom-field-type"
               >
-                <SelectValue placeholder="Choose a field type" />
+                <SelectValue placeholder="Kies een veldtype" />
               </SelectTrigger>
               <SelectContent
                 position="popper"
@@ -226,10 +226,10 @@ export const CustomFieldForm = ({
               defaultChecked={active === undefined || active}
             />
             <label htmlFor="custom-field-active">
-              <div className="text-base font-medium text-gray-700">Active</div>
+              <div className="text-base font-medium text-gray-700">Actief</div>
               <p className="text-[14px] text-gray-600">
-                Deactivating a field will no longer show it on the asset form
-                and page
+                Het deactiveren van een veld zorgt ervoor dat het niet meer wordt
+                weergegeven op het asset-formulier en de pagina
               </p>
             </label>
           </div>
@@ -242,16 +242,16 @@ export const CustomFieldForm = ({
 
         <div>
           <FormRow
-            rowLabel="Category"
+            rowLabel="Categorie"
             subHeading={
               <p>
-                Select asset categories for which you want to use this custom
-                field.{" "}
+                Selecteer de asset-categorieën waarvoor u dit aangepaste veld
+                wilt gebruiken.{" "}
                 <Link
                   to="https://www.shelf.nu/knowledge-base/linking-custom-fields-to-categories"
                   target="_blank"
                 >
-                  Read more
+                  Lees meer
                 </Link>
               </p>
             }
@@ -265,11 +265,11 @@ export const CustomFieldForm = ({
               />
               <label htmlFor="custom-field-use-categories">
                 <div className="text-base font-medium text-gray-700">
-                  Use for select categories
+                  Gebruik voor geselecteerde categorieën
                 </div>
                 <p className="text-[14px] text-gray-600">
-                  In case you only want to use this custom field for asset with
-                  certain categories.
+                  Indien u dit aangepaste veld alleen wilt gebruiken voor assets
+                  met bepaalde categorieën.
                 </p>
               </label>
             </div>
@@ -286,11 +286,11 @@ export const CustomFieldForm = ({
 
         <div>
           <FormRow
-            rowLabel="Help Text"
+            rowLabel="Helptekst"
             subHeading={
               <p>
-                This text will function as a help text that is visible when
-                filling the field
+                Deze tekst fungeert als helptekst die zichtbaar is bij het
+                invullen van het veld
               </p>
             }
             required={zodFieldIsRequired(
@@ -299,10 +299,10 @@ export const CustomFieldForm = ({
           >
             <Input
               inputType="textarea"
-              label="Help Text"
+              label="Helptekst"
               name={zo.fields.helpText()}
               defaultValue={helpText || ""}
-              placeholder="Add a help text for your custom field."
+              placeholder="Voeg een helptekst toe voor uw aangepaste veld."
               disabled={disabled}
               data-test-id="fieldHelpText"
               className="w-full"
@@ -328,10 +328,10 @@ export const CustomFieldForm = ({
             disabled={disabled}
             className={"mr-2"}
           >
-            Cancel
+            Annuleren
           </Button>
           <Button type="submit" disabled={disabled}>
-            {disabled ? <Spinner /> : "Save"}
+            {disabled ? <Spinner /> : "Opslaan"}
           </Button>
         </div>
       </Form>

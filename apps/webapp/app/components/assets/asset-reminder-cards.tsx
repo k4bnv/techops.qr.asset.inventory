@@ -24,14 +24,14 @@ export function AssetReminderCards({
   return (
     <div className={tw("rounded border bg-white", className)} style={style}>
       <div className="flex items-center justify-between gap-4 border-b px-4 py-3">
-        <h5>Reminders</h5>
+        <h5>Herinneringen</h5>
 
         <Button
           to={`/assets/${asset.id}/reminders`}
           variant="block-link-gray"
           className="!mt-0"
         >
-          View all
+          Alles bekijken
         </Button>
       </div>
 

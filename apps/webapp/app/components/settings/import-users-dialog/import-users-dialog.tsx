@@ -56,7 +56,7 @@ export default function ImportUsersDialog({
 
     const file = event.target.files?.[0];
     if (file?.type !== "text/csv") {
-      setError("Invalid file type. Please select a CSV file.");
+      setError("Ongeldig bestandstype. Selecteer een CSV-bestand.");
       return;
     }
 
@@ -79,7 +79,7 @@ export default function ImportUsersDialog({
           className="mt-2 w-full md:mt-0 md:w-max"
           onClick={openDialog}
         >
-          <span className="whitespace-nowrap">Import Users</span>
+          <span className="whitespace-nowrap">Gebruikers importeren</span>
         </Button>
       )}
 
@@ -106,61 +106,53 @@ export default function ImportUsersDialog({
             />
           ) : (
             <div className="px-6 pb-4 pt-2">
-              <h3>Invite Users via CSV Upload</h3>
+              <h3>Gebruikers uitnodigen via CSV-upload</h3>
               <p>
-                Invite multiple users to your organization by uploading a CSV
-                file. To get started,{" "}
+                Nodig meerdere gebruikers uit voor uw organisatie door een CSV-bestand te uploaden. Om te beginnen,{" "}
                 <Button
                   variant="link"
                   to="/static/shelf.nu-example-import-users-from-content.csv"
                   target="_blank"
                   download
                 >
-                  download our CSV template.
+                  download ons CSV-sjabloon.
                 </Button>
               </p>
               <WarningBox className="my-4">
                 <>
-                  <strong>IMPORTANT</strong>: Use the provided template to
-                  ensure proper formatting. Uploading incorrectly formatted
-                  files may cause errors.
+                  <strong>BELANGRIJK</strong>: Gebruik het meegeleverde sjabloon om de juiste opmaak te garanderen. Het uploaden van verkeerd geformatteerde bestanden kan fouten veroorzaken.
                 </>
               </WarningBox>
-              <h4>Base Rules and Limitations</h4>
+              <h4>Basisregels en beperkingen</h4>
               <ul className="list-inside list-disc">
                 <li>
-                  You must use <b>, (comma)</b> as a delimiter in your CSV file.
+                  U moet <b>, (komma)</b> als scheidingsteken gebruiken in uw CSV-bestand.
                 </li>
                 <li>
-                  Only valid roles are <b>ADMIN</b>, <b>BASE</b> and{" "}
-                  <b>SELF_SERVICE</b>. Role column is case-sensitive.
+                  Alleen de rollen <b>ADMIN</b>, <b>BASE</b> en{" "}
+                  <b>SELF_SERVICE</b> zijn geldig. De rolkolom is hoofdlettergevoelig.
                 </li>
                 <li>
-                  Each row represents a new user to be invited. Ensure the email
-                  column is valid.
+                  Elke rij vertegenwoordigt een nieuwe gebruiker die moet worden uitgenodigd. Zorg ervoor dat de e-mailkolom geldig is.
                 </li>
                 <li>
-                  Invited users will receive an email with a link to join the
-                  organization.
+                  Uigenedodigde gebruikers ontvangen een e-mail met een link om lid te worden van de organisatie.
                 </li>
                 <li>
-                  <b>Optional</b>: You can populate the <b>teamMemberId</b>{" "}
-                  column if you want the user to get linked to an existing NRM.
+                  <b>Optioneel</b>: U kunt de kolom <b>teamMemberId</b>{" "}
+                  invullen als u de gebruiker wilt koppelen aan een bestaande NRM.
                 </li>
               </ul>
 
-              <h4 className="mt-2">Extra Considerations</h4>
+              <h4 className="mt-2">Extra overwegingen</h4>
               <ul className="mb-4 list-inside list-disc">
                 <li>
-                  The first row of the sheet will be ignored. Use it for column
-                  headers as in the provided template.
+                  De eerste rij van het blad wordt genegeerd. Gebruik deze voor kolomkoppen zoals in het meegeleverde sjabloon.
                 </li>
               </ul>
 
               <p className="mb-4">
-                Once you've uploaded your file, a summary of the processed
-                invitations will be displayed, along with any errors
-                encountered.
+                Zodra u uw bestand heeft geüpload, wordt een overzicht van de verwerkte uitnodigingen weergegeven, samen met eventuele fouten.
               </p>
 
               <fetcher.Form
@@ -170,7 +162,7 @@ export default function ImportUsersDialog({
               >
                 <Input
                   inputType="textarea"
-                  label="Enter your message to user"
+                  label="Voer uw bericht aan de gebruiker in"
                   name="message"
                   className="mb-2"
                   disabled={disabled}
@@ -180,7 +172,7 @@ export default function ImportUsersDialog({
                 <Input
                   type="file"
                   name="file"
-                  label="Select a csv file"
+                  label="Selecteer een CSV-bestand"
                   required
                   accept=".csv"
                   className="mb-2"
@@ -196,7 +188,7 @@ export default function ImportUsersDialog({
                 </When>
 
                 <Button type="submit" disabled={!selectedFile || disabled}>
-                  Import now
+                  Nu importeren
                 </Button>
               </fetcher.Form>
             </div>

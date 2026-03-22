@@ -36,9 +36,9 @@ export function AvailabilityViewToggle({
               return newParams;
             });
           }}
-          title="Switch to list view"
-          tooltip="List view"
-          aria-label="Switch to list view"
+          title="Overschakelen naar lijstweergave"
+          tooltip="Lijstweergave"
+          aria-label="Overschakelen naar lijstweergave"
           icon="sort"
         />
         <Button
@@ -58,9 +58,9 @@ export function AvailabilityViewToggle({
               return newParams;
             });
           }}
-          title={"Switch to availability view"}
-          tooltip="Availability view"
-          aria-label="Switch to availability view"
+          title={"Overschakelen naar beschikbaarheidsweergave"}
+          tooltip="Beschikbaarheidsweergave"
+          aria-label="Overschakelen naar beschikbaarheidsweergave"
         >
           <CalendarIcon className="size-5" />
         </Button>

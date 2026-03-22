@@ -9,7 +9,7 @@ import { Button } from "../shared/button";
 export const BulkRemoveAssetsAndKitSchema = z.object({
   assetOrKitIds: z
     .array(z.string())
-    .min(1, "Please select at least one asset or kit."),
+    .min(1, "Selecteer ten minste één asset of kit."),
 });
 
 export default function BulkRemoveAssetAndKitDialog() {
@@ -21,9 +21,9 @@ export default function BulkRemoveAssetAndKitDialog() {
     <BulkUpdateDialogContent
       ref={zo.ref}
       type="trash"
-      title={`Remove selected items (${totalSelectedItems})`}
+      title={`Geselecteerde items verwijderen (${totalSelectedItems})`}
       arrayFieldId="assetOrKitIds"
-      description={`Are you sure you want to remove ${totalSelectedItems} selected item(s)? This action cannot be undone.`}
+      description={`Weet u zeker dat u de ${totalSelectedItems} geselecteerde item(s) wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt.`}
       actionUrl={`/bookings/${booking.id}/overview`}
     >
       {({ fetcherError, disabled, handleCloseDialog }) => (
@@ -42,7 +42,7 @@ export default function BulkRemoveAssetAndKitDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -51,7 +51,7 @@ export default function BulkRemoveAssetAndKitDialog() {
               disabled={disabled}
               className="border-error-600 bg-error-600 hover:border-error-800 hover:!bg-error-800"
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </>

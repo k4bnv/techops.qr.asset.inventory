@@ -47,7 +47,7 @@ import { TagsAutocomplete } from "../tag/tags-autocomplete";
 export const NewAssetFormSchema = z.object({
   title: z
     .string()
-    .min(2, "Name is required")
+    .min(2, "Naam is verplicht")
     .transform((val) => val.trim()), // We trim to avoid white spaces at start and end
 
   description: z.string().transform((val) => val.trim()),
@@ -217,8 +217,8 @@ export const AssetForm = ({
 
         <div className="flex items-start justify-between border-b pb-5">
           <div className=" ">
-            <h2 className="mb-1 text-[18px] font-semibold">Basic fields</h2>
-            <p>Basic information about your asset.</p>
+            <h2 className="mb-1 text-[18px] font-semibold">Basisvelden</h2>
+            <p>Basisinformatie over uw asset.</p>
           </div>
           <div className="hidden flex-1 justify-end gap-2 md:flex">
             <Actions disabled={disabled} referer={referer} />
@@ -226,12 +226,12 @@ export const AssetForm = ({
         </div>
 
         <FormRow
-          rowLabel={"Name"}
+          rowLabel={"Naam"}
           className="border-b-0 pb-[10px]"
           required={true}
         >
           <Input
-            label="Name"
+            label="Naam"
             hideLabel
             name="title"
             disabled={disabled}
@@ -247,12 +247,12 @@ export const AssetForm = ({
         </FormRow>
 
         <FormRow
-          rowLabel={"Asset ID"}
+          rowLabel={"Asset-ID"}
           className="border-b-0 pb-[10px]"
           subHeading={
             id
-              ? "This is the unique identifier for this asset"
-              : "This sequential ID will be assigned when the asset is created"
+              ? "Dit is de unieke identificatie voor dit asset"
+              : "Dit sequentiële ID wordt toegewezen wanneer het asset wordt aangemaakt"
           }
         >
           <div className="flex items-center gap-2">
@@ -270,7 +270,7 @@ export const AssetForm = ({
             <span className="font-medium text-gray-400">-</span>
             <div className="grow">
               <Input
-                label="Number"
+                label="Nummer"
                 hideLabel
                 name="sequentialIdNumber"
                 disabled={true}
@@ -285,7 +285,7 @@ export const AssetForm = ({
           <p className="mt-1 text-sm text-gray-600"></p>
         </FormRow>
 
-        <FormRow rowLabel={"Main image"} className="pt-[10px]">
+        <FormRow rowLabel={"Hoofdafbeelding"} className="pt-[10px]">
           <div className="flex items-center gap-2">
             {id && thumbnailImage && mainImageExpiration ? (
               <AssetImage
@@ -296,19 +296,19 @@ export const AssetForm = ({
                   mainImage: mainImage,
                   mainImageExpiration: new Date(mainImageExpiration),
                 }}
-                alt={`${title} main image`}
+                alt={`${title} hoofdafbeelding`}
               />
             ) : null}
             <div>
               <p className="hidden lg:block">
                 <HoverCard openDelay={50} closeDelay={50}>
                   <HoverCardTrigger className={tw("inline-flex w-full  ")}>
-                    Accepts PNG, JPG, JPEG, or WebP (max.8 MB)
+                    Accepteert PNG, JPG, JPEG of WebP (max. 8 MB)
                   </HoverCardTrigger>
                   <HoverCardContent side="left">
-                    Images will be automatically resized on upload. Width will
-                    be set at 1200px and height will be adjusted accordingly to
-                    keep the aspect ratio.
+                    Afbeeldingen worden automatisch geschaald bij het uploaden.
+                    De breedte wordt ingesteld op 1200px en de hoogte wordt
+                    dienovereenkomstig aangepast om de aspectratio te behouden.
                   </HoverCardContent>
                 </HoverCard>
               </p>
@@ -318,14 +318,14 @@ export const AssetForm = ({
                 name="mainImage"
                 type="file"
                 onChange={validateFile}
-                label={"Main image"}
+                label={"Hoofdafbeelding"}
                 hideLabel
                 error={mainImageError}
                 className="mt-2"
                 inputClassName="border-0 shadow-none p-0 rounded-none"
               />
               <p className="mt-2 lg:hidden">
-                Accepts PNG, JPG, JPEG, or WebP (max.8 MB)
+                Accepteert PNG, JPG, JPEG of WebP (max. 8 MB)
               </p>
             </div>
           </div>
@@ -333,12 +333,12 @@ export const AssetForm = ({
 
         <div>
           <FormRow
-            rowLabel={"Description"}
+            rowLabel={"Beschrijving"}
             subHeading={
               <p>
-                This is the initial object description. It will be shown on the
-                asset’s overview page. You can always change it. Maximum 1000
-                characters.
+                Dit is de initiële objectbeschrijving. Deze wordt weergegeven op
+                de overzichtspagina van het asset. U kunt dit altijd wijzigen.
+                Maximaal 1000 tekens.
               </p>
             }
             className="border-b-0"
@@ -346,11 +346,11 @@ export const AssetForm = ({
             <Input
               inputType="textarea"
               maxLength={1000}
-              label={"Description"}
+              label={"Beschrijving"}
               name="description"
               defaultValue={description || ""}
               hideLabel
-              placeholder="Add a description for your asset."
+              placeholder="Voeg een beschrijving toe voor uw asset."
               disabled={disabled}
               data-test-id="assetDescription"
               className="w-full"
@@ -359,18 +359,18 @@ export const AssetForm = ({
         </div>
 
         <FormRow
-          rowLabel="Category"
+          rowLabel="Categorie"
           subHeading={
             <p>
-              Make it unique. Each asset can have 1 category. It will show on
-              your index.{" "}
+              Maak het uniek. Elk asset kan 1 categorie hebben. Dit wordt
+              weergegeven op uw overzicht.{" "}
               <Button
                 to="/categories/new"
                 variant="link-gray"
                 className="text-gray-600 underline"
                 target="_blank"
               >
-                Create categories
+                Categorieën maken
               </Button>
             </p>
           }
@@ -381,8 +381,8 @@ export const AssetForm = ({
             defaultValue={categoryId ?? undefined}
             model={{ name: "category", queryKey: "name" }}
             triggerWrapperClassName="flex flex-col !gap-0 justify-start items-start [&_.inner-label]:w-full [&_.inner-label]:text-left "
-            contentLabel="Categories"
-            label="Category"
+            contentLabel="Categorieën"
+            label="Categorie"
             hideLabel
             initialDataKey="categories"
             countKey="totalCategories"
@@ -391,9 +391,9 @@ export const AssetForm = ({
             allowClear={true}
             extraContent={({ onItemCreated, closePopover }) => (
               <InlineEntityCreationDialog
-                title="Create new category"
+                title="Nieuwe categorie maken"
                 type="category"
-                buttonLabel="Create new category"
+                buttonLabel="Nieuwe categorie maken"
                 onCreated={(created) => {
                   if (created?.type !== "category") return;
                   const category = created.entity;
@@ -414,14 +414,15 @@ export const AssetForm = ({
           rowLabel="Tags"
           subHeading={
             <p>
-              Tags can help you organise your database. They can be combined.{" "}
+              Tags kunnen u helpen uw database te organiseren. Ze kunnen
+              gecombineerd worden.{" "}
               <Button
                 to="/tags/new"
                 className="text-gray-600 underline"
                 target="_blank"
                 variant="link-gray"
               >
-                Create tags
+                Tags maken
               </Button>
             </p>
           }
@@ -436,18 +437,18 @@ export const AssetForm = ({
         </FormRow>
 
         <FormRow
-          rowLabel="Location"
+          rowLabel="Locatie"
           subHeading={
             <p>
-              A location is a place where an item is supposed to be located.
-              This is different than the last scanned location{" "}
+              Een locatie is een plek waar een item zich hoort te bevinden. Dit
+              is iets anders dan de laatst gescande locatie{" "}
               <Button
                 to="/locations/new"
                 className="text-gray-600 underline"
                 target="_blank"
                 variant="link-gray"
               >
-                Create locations
+                Locaties maken
               </Button>
             </p>
           }
@@ -468,8 +469,8 @@ export const AssetForm = ({
                   triggerWrapperClassName="flex flex-col !gap-0 justify-start items-start [&_.inner-label]:w-full [&_.inner-label]:text-left "
                   defaultValue={locationId || undefined}
                   model={{ name: "location", queryKey: "name" }}
-                  contentLabel="Locations"
-                  label="Location"
+                  contentLabel="Locaties"
+                  label="Locatie"
                   hideLabel
                   initialDataKey="locations"
                   countKey="totalLocations"
@@ -478,11 +479,11 @@ export const AssetForm = ({
                 />
               </HoverCardTrigger>
               <HoverCardContent side="left">
-                <h5 className="text-left text-[14px]">Action disabled</h5>
+                <h5 className="text-left text-[14px]">Actie uitgeschakeld</h5>
                 <p className="text-left text-[14px]">
-                  This asset's location is managed by its parent kit{" "}
-                  <strong>"{asset?.kit?.name}"</strong>. Update the kit's
-                  location instead.
+                  De locatie van dit asset wordt beheerd door de bovenliggende
+                  kit <strong>"{asset?.kit?.name}"</strong>. Werk in plaats
+                  daarvan de locatie van de kit bij.
                 </p>
               </HoverCardContent>
             </HoverCard>
@@ -494,8 +495,8 @@ export const AssetForm = ({
               triggerWrapperClassName="flex flex-col !gap-0 justify-start items-start [&_.inner-label]:w-full [&_.inner-label]:text-left "
               defaultValue={locationId || undefined}
               model={{ name: "location", queryKey: "name" }}
-              contentLabel="Locations"
-              label="Location"
+              contentLabel="Locaties"
+              label="Locatie"
               hideLabel
               initialDataKey="locations"
               countKey="totalLocations"
@@ -504,8 +505,8 @@ export const AssetForm = ({
               extraContent={({ onItemCreated, closePopover }) => (
                 <InlineEntityCreationDialog
                   type="location"
-                  title="Create new location"
-                  buttonLabel="Create new location"
+                  title="Nieuwe locatie maken"
+                  buttonLabel="Nieuwe locatie maken"
                   onCreated={(created) => {
                     if (created?.type !== "location") return;
                     const location = created.entity;
@@ -535,11 +536,11 @@ export const AssetForm = ({
         </FormRow>
 
         <FormRow
-          rowLabel={"Value"}
+          rowLabel={"Waarde"}
           subHeading={
             <p>
-              Specify the value of assets to get an idea of the total value of
-              your inventory.
+              Geef de waarde van assets op om een idee te krijgen van de totale
+              waarde van uw inventaris.
             </p>
           }
           className="border-b-0 py-[10px]"
@@ -547,7 +548,7 @@ export const AssetForm = ({
           <div className="relative w-full">
             <Input
               type="number"
-              label="Value"
+              label="Waarde"
               inputClassName="pl-[70px] valuation-input"
               hideLabel
               name="valuation"
@@ -567,7 +568,7 @@ export const AssetForm = ({
           <FormRow
             rowLabel={"Barcodes"}
             className="border-b-0"
-            subHeading="Add additional barcodes to this asset (Code 128, Code 39, or Data Matrix). Note: Each asset automatically gets a default TechOps QR code for tracking."
+            subHeading="Voeg extra barcodes toe aan dit asset (Code 128, Code 39 of Data Matrix). Let op: elk asset krijgt automatisch een standaard TechOps QR-code voor tracking."
           >
             <BarcodesInput
               ref={barcodesInputRef}
@@ -609,12 +610,12 @@ const Actions = ({
   <>
     {/* Save button is first in DOM order so Enter key triggers it by default */}
     <Button type="submit" disabled={disabled} className="order-last">
-      Save
+      Opslaan
     </Button>
 
     <ButtonGroup>
       <Button to={referer} variant="secondary" disabled={disabled}>
-        Cancel
+        Annuleren
       </Button>
       <AddAnother disabled={disabled} />
     </ButtonGroup>
@@ -632,11 +633,11 @@ const AddAnother = ({ disabled }: { disabled: boolean }) => (
           name="addAnother"
           value="true"
         >
-          Add another
+          Nog een toevoegen
         </Button>
       </TooltipTrigger>
       <TooltipContent side="bottom">
-        <p className="text-sm">Save the asset and add a new one</p>
+        <p className="text-sm">Sla het asset op en voeg een nieuwe toe</p>
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>

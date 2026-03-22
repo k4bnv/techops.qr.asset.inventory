@@ -152,7 +152,7 @@ export default function OrganizationSelector() {
               className=" w-full select-none justify-start rounded p-2 text-left font-medium text-gray-900 outline-none  hover:bg-gray-50 hover:text-gray-800 "
               onClick={closeDropdown}
             >
-              Manage workspaces
+              Werkruimtes beheren
             </Button>
           </DropdownMenuContent>
         </DropdownMenu>

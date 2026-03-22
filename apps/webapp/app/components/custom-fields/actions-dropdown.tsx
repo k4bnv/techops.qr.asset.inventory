@@ -35,7 +35,7 @@ export function ActionsDropdown({ customField }: { customField: CustomField }) {
             className="justify-start text-gray-700 hover:text-gray-700"
             width="full"
           >
-            Edit
+            Bewerken
           </Button>
         </DropdownMenuItem>
         <DropdownMenuSeparator className="bg-gray-100" />

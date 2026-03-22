@@ -49,7 +49,7 @@ export default function CheckinDropdown({
         size="sm"
         to={`/bookings/${booking.id}/overview/checkin-assets`}
       >
-        Check-in
+        Inchecken
       </Button>
     );
   }
@@ -79,7 +79,7 @@ export default function CheckinDropdown({
         >
           <Button type="button" disabled={disabled} className="grow" size="sm">
             <span className="flex items-center gap-2">
-              Check-in <ChevronRightIcon className="chev size-4 rotate-90" />
+              Inchecken <ChevronRightIcon className="chev size-4 rotate-90" />
             </span>
           </Button>
         </DropdownMenuTrigger>
@@ -93,7 +93,7 @@ export default function CheckinDropdown({
           size="sm"
         >
           <span className="flex items-center gap-2">
-            Check-in <ChevronRightIcon className="chev size-4" />
+            Inchecken <ChevronRightIcon className="chev size-4" />
           </span>
         </Button>
 
@@ -125,7 +125,7 @@ export default function CheckinDropdown({
                 portalContainer={portalContainer}
                 formId={formId}
                 onClose={closeMenu}
-                label="Quick check-in"
+                label="Snel inchecken"
                 variant="dropdown"
               />
             </DropdownMenuItem>
@@ -141,7 +141,7 @@ export default function CheckinDropdown({
                 to={`/bookings/${booking.id}/overview/checkin-assets`}
               >
                 <span className="flex items-center gap-2">
-                  <ListChecks className="size-4" /> Explicit check-in
+                  <ListChecks className="size-4" /> Expliciet inchecken
                 </span>
               </Button>
             </DropdownMenuItem>

@@ -119,8 +119,8 @@ export enum BOOKING_SCHEDULER_EVENTS_ENUM {
  */
 export const BOOKING_ASSET_SORTING_OPTIONS = {
   status: "Status",
-  title: "Name",
-  category: "Category",
+  title: "Naam",
+  category: "Categorie",
 } as const;
 
 export type BookingAssetSortingOption =

@@ -42,7 +42,7 @@ export function CancelBookingDialog({ bookingName }: CancelBookingDialogProps) {
           className="justify-start rounded-sm px-2 py-1.5 text-sm font-medium text-gray-700 outline-none hover:bg-slate-100 hover:text-gray-700"
           width="full"
         >
-          Cancel
+          Annuleren
         </Button>
       </AlertDialogTrigger>
 
@@ -53,10 +53,10 @@ export function CancelBookingDialog({ bookingName }: CancelBookingDialogProps) {
               <AlertIcon />
             </span>
           </div>
-          <AlertDialogTitle>Cancel {bookingName}</AlertDialogTitle>
+          <AlertDialogTitle>{bookingName} annuleren</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to cancel this booking? This action cannot be
-            undone.
+            Weet u zeker dat u deze boeking wilt annuleren? Deze actie kan niet
+            ongedaan worden gemaakt.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <Form method="post" ref={zo.ref}>
@@ -66,8 +66,8 @@ export function CancelBookingDialog({ bookingName }: CancelBookingDialogProps) {
               htmlFor="cancellationReason"
               className="mb-1 block text-left text-[14px] font-medium text-gray-700"
             >
-              Cancellation reason{" "}
-              <span className="font-normal text-gray-500">(optional)</span>
+              Reden van annulering{" "}
+              <span className="font-normal text-gray-500">(optioneel)</span>
             </label>
             <textarea
               id="cancellationReason"
@@ -75,7 +75,7 @@ export function CancelBookingDialog({ bookingName }: CancelBookingDialogProps) {
               rows={3}
               maxLength={500}
               className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900 placeholder:text-gray-500 focus:border-primary-500 focus:ring-primary-500"
-              placeholder="Let the custodian know why this booking was cancelled..."
+              placeholder="Laat de beheerder weten waarom deze boeking is geannuleerd..."
               disabled={disabled}
               aria-describedby="cancellationReason-description"
             />
@@ -90,15 +90,14 @@ export function CancelBookingDialog({ bookingName }: CancelBookingDialogProps) {
               id="cancellationReason-description"
               className="-mt-1 text-text-sm text-gray-500"
             >
-              If the custodian has an associated user account with an email
-              address, they will be notified of the cancellation reason.
+              Als de beheerder een gekoppeld gebruikersaccount met een e-mailadres heeft, wordt deze op de hoogte gesteld van de reden van annulering.
             </p>
           </div>
           <AlertDialogFooter>
             <div className="flex justify-center gap-2">
               <AlertDialogCancel asChild>
                 <Button type="button" variant="secondary" disabled={disabled}>
-                  Go back
+                  Terug
                 </Button>
               </AlertDialogCancel>
               <Button
@@ -108,7 +107,7 @@ export function CancelBookingDialog({ bookingName }: CancelBookingDialogProps) {
                 )}
                 disabled={disabled}
               >
-                Cancel booking
+                Boeking annuleren
               </Button>
             </div>
           </AlertDialogFooter>

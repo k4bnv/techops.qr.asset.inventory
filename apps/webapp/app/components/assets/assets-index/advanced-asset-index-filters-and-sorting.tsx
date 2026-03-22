@@ -201,7 +201,7 @@ function AdvancedFilter() {
           >
             {/* We use the initial sorts, as we only count the ones returned from the server as those are already active filters */}
             {initialFilters.length > 0
-              ? `Filtered by ${initialFilters.length}`
+              ? `Gefilterd op ${initialFilters.length}`
               : "Filter"}
           </Button>
         </PopoverTrigger>
@@ -215,8 +215,8 @@ function AdvancedFilter() {
             <div className="border-b p-4 pb-5">
               {filters.length === 0 ? (
                 <div>
-                  <h5>No filters applied to this view</h5>
-                  <p>Add a column below to filter the view</p>
+                  <h5>Geen filters toegepast op deze weergave</h5>
+                  <p>Voeg hieronder een kolom toe om de weergave te filteren</p>
                 </div>
               ) : (
                 <div className="flex flex-col gap-2">
@@ -295,7 +295,7 @@ function AdvancedFilter() {
                                 }}
                                 disabled={
                                   filter.isNew
-                                    ? { reason: "Please select a column" }
+                                    ? { reason: "Selecteer een kolom" }
                                     : false
                                 }
                               />
@@ -359,7 +359,7 @@ function AdvancedFilter() {
                   <div className="mr-1 inline-block size-[14px] align-middle">
                     <PlusIcon />
                   </div>
-                  <span className="inline-block align-middle">Add filter</span>
+                  <span className="inline-block align-middle">Filter toevoegen</span>
                 </Button>
                 <Button
                   variant="block-link-gray"
@@ -379,7 +379,7 @@ function AdvancedFilter() {
                     className="mt-0 whitespace-nowrap text-[14px]"
                     onClick={clearAllFilters}
                   >
-                    Clear all
+                    Alles wissen
                   </Button>
                 )}
 
@@ -393,7 +393,7 @@ function AdvancedFilter() {
                   disabled={!validation.canApplyFilters || disabled}
                   onClick={applyFilters}
                 >
-                  Apply filters
+                  Filters toepassen
                 </Button>
               </div>
             </div>
@@ -509,8 +509,8 @@ function AdvancedSorting() {
         >
           {/* We use the initial sorts, as we only count the ones returned from the server as those are already active filters */}
           {initialSorts.length > 0
-            ? `Sorted by ${initialSorts.length}`
-            : "Sort"}
+            ? `Gesorteerd op ${initialSorts.length}`
+            : "Sorteren"}
         </Button>
       </PopoverTrigger>
       <PopoverPortal>
@@ -523,8 +523,8 @@ function AdvancedSorting() {
           <div className="border-b p-4 pb-5">
             {sorts.length === 0 ? (
               <div>
-                <h5>No sorting applied to this view</h5>
-                <p>Add a column below to sort by</p>
+                <h5>Geen sortering toegepast op deze weergave</h5>
+                <p>Voeg hieronder een kolom toe om op te sorteren</p>
               </div>
             ) : (
               <Reorder.Group values={sorts} onReorder={setSorts}>
@@ -537,7 +537,7 @@ function AdvancedSorting() {
                         </div>
                         <div className="mt-[-2px]">
                           <span className="text-gray-500 ">
-                            {index === 0 ? "sort" : "then"} by
+                            {index === 0 ? "sorteer" : "vervolgens"} op
                           </span>{" "}
                           {parseColumnName(s.name)}
                         </div>
@@ -548,7 +548,7 @@ function AdvancedSorting() {
                             htmlFor={`sort-${s.name}`}
                             className="text-[12px] text-gray-500"
                           >
-                            ascending:{" "}
+                            oplopend:{" "}
                           </label>
                           <Switch
                             id={`sort-${s.name}`}
@@ -736,7 +736,7 @@ function PickAColumnToSortBy({
               : false
           }
         >
-          <span>Pick a column to sort by</span>{" "}
+          <span>Kies een kolom om op te sorteren</span>{" "}
           <ChevronRight className="ml-2 inline-block rotate-90" />
         </Button>
       </PopoverTrigger>
@@ -751,7 +751,7 @@ function PickAColumnToSortBy({
             <Search className="ml-4 size-4 text-gray-500" />
             <input
               ref={searchInputRef}
-              placeholder="Search column..."
+              placeholder="Kolom zoeken..."
               className="border-0 px-4 py-2 pl-2 text-[14px] focus:border-0 focus:ring-0"
               value={searchQuery}
               onChange={handleSearch}
@@ -785,7 +785,7 @@ function PickAColumnToSortBy({
             ))}
             {filteredOptions.length === 0 && (
               <div className="px-4 py-2 text-[14px] text-gray-500">
-                No columns found
+                Geen kolommen gevonden
               </div>
             )}
           </div>

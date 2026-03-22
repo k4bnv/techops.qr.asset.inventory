@@ -15,15 +15,15 @@ export const ImportButton = ({
         ? {
             reason: (
               <>
-                Importing is not available on the free tier of shelf.{" "}
+                Importeren is niet beschikbaar in de gratis versie van shelf.{" "}
                 <UpgradeMessage />
               </>
             ),
           }
         : false
     }
-    title="Import assets"
+    title="Assets importeren"
   >
-    Import
+    Importeren
   </Button>
 );

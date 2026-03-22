@@ -19,8 +19,12 @@ export default function BulkMarkAvailabilityDialog({
     <BulkUpdateDialogContent
       ref={zo.ref}
       type={type}
-      title={`Mark assets as ${type}`}
-      description={`Mark all selected assets as ${type}. Assets that are already ${type}, will be skipped.`}
+      title={`Assets markeren als ${type === "available" ? "beschikbaar" : "onbeschikbaar"}`}
+      description={`Alle geselecteerde assets markeren als ${
+        type === "available" ? "beschikbaar" : "onbeschikbaar"
+      }. Assets die al ${
+        type === "available" ? "beschikbaar" : "onbeschikbaar"
+      } zijn, worden overgeslagen.`}
       actionUrl="/api/assets/bulk-mark-availability"
       arrayFieldId="assetIds"
     >
@@ -40,7 +44,7 @@ export default function BulkMarkAvailabilityDialog({
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -48,7 +52,7 @@ export default function BulkMarkAvailabilityDialog({
               width="full"
               disabled={disabled}
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </div>

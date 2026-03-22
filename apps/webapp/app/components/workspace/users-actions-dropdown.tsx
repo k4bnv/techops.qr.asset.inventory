@@ -115,7 +115,7 @@ export function TeamUsersActionsDropdown({
                   disabled={disabled}
                 >
                   <span className="flex items-center gap-2">
-                    <RefreshIcon /> Resend invite
+                    <RefreshIcon /> Uitnodiging opnieuw verzenden
                   </span>
                 </Button>
                 <Button
@@ -128,7 +128,7 @@ export function TeamUsersActionsDropdown({
                   disabled={disabled}
                 >
                   <span className="flex items-center gap-2">
-                    <UserXIcon /> Cancel invite
+                    <UserXIcon /> Uitnodiging annuleren
                   </span>
                 </Button>
               </>
@@ -145,16 +145,16 @@ export function TeamUsersActionsDropdown({
                   width="full"
                   disabled={
                     isCurrentUser
-                      ? { reason: "You cannot change your own role" }
+                      ? { reason: "U kunt uw eigen rol niet wijzigen" }
                       : isSSO
                       ? {
                           reason:
-                            "This user is managed via SSO. Role changes must be made through your identity provider.",
+                            "Deze gebruiker wordt beheerd via SSO. Rolwijzigingen moeten worden doorgevoerd via uw identiteitsprovider.",
                         }
                       : isAdministrator && roleEnum === OrganizationRoles.ADMIN
                       ? {
                           reason:
-                            "Only the workspace owner can change an Administrator's role.",
+                            "Alleen de eigenaar van de werkruimte kan de rol van een beheerder wijzigen.",
                         }
                       : disabled
                   }
@@ -164,7 +164,7 @@ export function TeamUsersActionsDropdown({
                   }}
                 >
                   <span className="flex items-center gap-2">
-                    <PenIcon /> Change role
+                    <PenIcon /> Rol wijzigen
                   </span>
                 </Button>
                 <Button
@@ -177,13 +177,13 @@ export function TeamUsersActionsDropdown({
                   disabled={
                     isCurrentUser
                       ? {
-                          reason: "You cannot revoke your own access",
+                          reason: "U kunt uw eigen toegang niet intrekken",
                         }
                       : disabled
                   }
                 >
                   <span className="flex items-center gap-2">
-                    <RemoveUserIcon /> Revoke access
+                    <RemoveUserIcon /> Toegang intrekken
                   </span>
                 </Button>
               </>

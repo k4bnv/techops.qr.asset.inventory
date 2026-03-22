@@ -5,26 +5,26 @@
  */
 
 export const BARCODE_ADDON = {
-  label: "Alternative Barcodes",
+  label: "Alternatieve Barcodes",
 
   /** One-liner used in cards, banners, and onboarding toggles */
   description:
-    "Generate new barcodes or use your existing ones. Supports Code128, Code39, EAN-13, DataMatrix & QR codes — ideal for migrations.",
+    "Genereer nieuwe barcodes of gebruik uw bestaande. Ondersteunt Code128, Code39, EAN-13, DataMatrix & QR-codes — ideaal voor migraties.",
 
   /** Shorter subtitle for modal headers */
   subtitle:
-    "Add support for industry-standard barcode formats to your workspace.",
+    "Voeg ondersteuning voor industriestandaard barcodeformaten toe aan uw workspace.",
 
   /** Non-owner banner — tells the user to contact the owner */
   nonOwnerDescription:
-    "Generate new barcodes or use your existing ones. Supports Code128, Code39, EAN-13, DataMatrix & QR codes — ideal for migrations. Contact your workspace owner to enable this feature.",
+    "Genereer nieuwe barcodes of gebruik uw bestaande. Ondersteunt Code128, Code39, EAN-13, DataMatrix & QR-codes — ideaal voor migraties. Neem contact op met de eigenaar van de workspace om deze functie in te schakelen.",
 
   /** Bullet-point features for modals and emails */
   features: [
-    "Supports Code128, Code39, EAN-13, DataMatrix & QR codes",
-    "Generate new barcode labels or use your existing ones",
-    "Print barcode labels for your assets",
-    "Built-in barcode scanner for quick asset lookups",
+    "Ondersteunt Code128, Code39, EAN-13, DataMatrix & QR-codes",
+    "Genereer nieuwe barcodelabels of gebruik uw bestaande",
+    "Print barcodelabels voor uw assets",
+    "Ingebouwde barcodescanner voor snel opzoeken van assets",
   ],
 } as const;
 
@@ -33,20 +33,20 @@ export const AUDIT_ADDON = {
 
   /** One-liner used in cards, banners, and onboarding toggles */
   description:
-    "Create audits, assign auditors, scan QR codes, and track asset verification in real-time.",
+    "Maak audits aan, wijs auditors toe, scan QR-codes en volg assetverificatie in realtime.",
 
   /** Shorter subtitle for modal/page headers */
-  subtitle: "Add powerful audit capabilities to your workspace.",
+  subtitle: "Voeg krachtige auditmogelijkheden toe aan uw workspace.",
 
   /** Non-owner message on the unlock page */
   nonOwnerDescription:
-    "Contact your workspace owner to enable the Audits add-on for your organization.",
+    "Neem contact op met de eigenaar van de workspace om de Audits add-on in te schakelen voor uw organisatie.",
 
   /** Bullet-point features for modals, unlock page, and emails */
   features: [
-    "Create audits and assign auditors to verify your assets",
-    "Set due dates and track progress in real-time",
-    "Use QR code scanning for quick asset verification",
-    "Generate detailed audit reports",
+    "Maak audits aan en wijs auditors toe om uw assets te verifiëren",
+    "Stel vervaldatums in en volg de voortgang in realtime",
+    "Gebruik QR-codescanning voor snelle assetverificatie",
+    "Genereer gedetailleerde auditrapporten",
   ],
 } as const;

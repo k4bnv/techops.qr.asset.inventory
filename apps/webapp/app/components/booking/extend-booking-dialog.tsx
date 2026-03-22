@@ -85,7 +85,7 @@ export default function ExtendBookingDialog({
         width="full"
         onClick={handleOpen}
       >
-        Extend booking
+        Boeking verlengen
       </Button>
 
       <DialogPortal>
@@ -102,20 +102,20 @@ export default function ExtendBookingDialog({
           }
         >
           <div className="px-6 pb-4">
-            <h3 className="mb-1">Extend booking</h3>
+            <h3 className="mb-1">Boeking verlengen</h3>
             <p className="mb-4">
-              Change the end date of your booking to a date in the future.
+              Wijzig de einddatum van uw boeking naar een datum in de toekomst.
             </p>
 
             <fetcher.Form ref={zo.ref} method="POST">
               <div className="required-input-label mb-1 text-text-sm font-medium text-gray-700">
-                New end date
+                Nieuwe einddatum
               </div>
 
               <Input
                 key={currentEndDate}
                 defaultValue={currentEndDate}
-                label="End Date"
+                label="Einddatum"
                 type="datetime-local"
                 hideLabel
                 name={zo.fields.endDate()}
@@ -125,7 +125,7 @@ export default function ExtendBookingDialog({
                   zo.errors.endDate()?.message
                 }
                 className="mb-4 w-full"
-                placeholder="Booking"
+                placeholder="Boeking"
               />
 
               <When truthy={!!fetcher?.data?.error}>
@@ -162,7 +162,7 @@ export default function ExtendBookingDialog({
               />
               {error && (
                 <p className="mt-1 text-sm text-orange-600">
-                  Working hours validation unavailable: {error}
+                  Validatie van werktijden niet beschikbaar: {error}
                 </p>
               )}
               <input type="hidden" name="intent" value="extend-booking" />
@@ -180,10 +180,10 @@ export default function ExtendBookingDialog({
                   className="flex-1"
                   onClick={handleClose}
                 >
-                  Cancel
+                  Annuleren
                 </Button>
                 <Button type="submit" className="flex-1" disabled={disabled}>
-                  Submit
+                  Opslaan
                 </Button>
               </div>
             </fetcher.Form>

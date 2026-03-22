@@ -411,8 +411,8 @@ export function SavedFilterPresetsControls() {
               <BookOpen className="size-4" />
               <span className="hidden whitespace-nowrap md:inline">
                 {presets.length > 0
-                  ? `Saved Filters (${presets.length})`
-                  : "Saved Filters"}
+                  ? `Opgeslagen filters (${presets.length})`
+                  : "Opgeslagen filters"}
               </span>
             </div>
           </Button>
@@ -430,12 +430,12 @@ export function SavedFilterPresetsControls() {
                 </div>
                 <div className="space-y-2">
                   <h3 className="text-sm font-medium text-gray-900">
-                    No saved filters yet
+                    Nog geen opgeslagen filters
                   </h3>
                   <p className="text-sm text-gray-500">
-                    Save your current filter configuration to quickly access it
-                    later. Apply filters, then click Save in the filters menu to
-                    create your first preset.
+                    Sla uw huidige filterconfiguratie op om deze later snel te
+                    kunnen openen. Pas filters toe en klik vervolgens op Opslaan
+                    in het filtermenu om uw eerste preset te maken.
                   </p>
                   {hasActiveFilters && (
                     <Button
@@ -447,7 +447,7 @@ export function SavedFilterPresetsControls() {
                     >
                       <div className="flex items-center gap-2">
                         <Save className="size-4" />
-                        Save Filter
+                        Filter opslaan
                       </div>
                     </Button>
                   )}
@@ -460,7 +460,7 @@ export function SavedFilterPresetsControls() {
                   <Search className="ml-4 size-4 text-gray-500" />
                   <input
                     ref={searchInputRef}
-                    placeholder="Search presets..."
+                    placeholder="Presets zoeken..."
                     className="w-full border-0 px-4 py-2 pl-2 text-[14px] focus:border-0 focus:ring-0"
                     value={searchQuery}
                     onChange={handleSearch}
@@ -470,7 +470,7 @@ export function SavedFilterPresetsControls() {
 
                 {allFilteredPresets.length === 0 ? (
                   <div className="px-3 py-6 text-center text-sm text-gray-500">
-                    No presets found
+                    Geen presets gevonden
                   </div>
                 ) : (
                   <div className="max-h-[400px] space-y-3 overflow-y-auto p-3">
@@ -478,7 +478,7 @@ export function SavedFilterPresetsControls() {
                     {filteredStarredPresets.length > 0 && (
                       <div>
                         <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
-                          Starred
+                          Gemarkeerd
                         </div>
                         <div className="space-y-1">
                           {filteredStarredPresets.map((preset, index) => (
@@ -510,7 +510,7 @@ export function SavedFilterPresetsControls() {
                       <div>
                         {filteredStarredPresets.length > 0 && (
                           <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-wide text-gray-500">
-                            All presets
+                            Alle presets
                           </div>
                         )}
                         <div className="space-y-1">

@@ -14,7 +14,7 @@ export function CategoryBadge({
     </Badge>
   ) : (
     <Badge color="#575757" withDot={false} className={className}>
-      Uncategorized
+      Niet gecategoriseerd
     </Badge>
   );
 }

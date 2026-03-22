@@ -31,22 +31,22 @@ function FilterOperatorDisplay({
 /** Maps the FilterOperator to a user friendly name */
 export const operatorsMap: Record<FilterOperator, string[]> = {
   is: ["=", "is"],
-  isNot: ["≠", "Is not"],
-  contains: ["∋", "Contains"],
-  before: ["<", "Before"],
-  after: [">", "After"],
-  between: ["<>", "Between"],
-  gt: [">", "Greater than"],
-  lt: ["<", "Lower than"],
-  gte: [">=", "Greater or equal"],
-  lte: ["<=", "Lower or equal"],
-  in: ["∈", "Is any of"],
-  containsAll: ["⊇", "Contains all"],
-  containsAny: ["⊃", "Contains any"],
-  matchesAny: ["≈", "Matches any"],
-  inDates: ["∈", "In dates"],
-  excludeAny: ["⊄", "Exclude any of"], // New operator with clear meaning for tag exclusion
-  withinHierarchy: ["↳", "Is in (incl. sub-locations)"],
+  isNot: ["≠", "Is niet"],
+  contains: ["∋", "Bevat"],
+  before: ["<", "Vóór"],
+  after: [">", "Na"],
+  between: ["<>", "Tussen"],
+  gt: [">", "Groter dan"],
+  lt: ["<", "Kleiner dan"],
+  gte: [">=", "Groter of gelijk aan"],
+  lte: ["<=", "Kleiner of gelijk aan"],
+  in: ["∈", "Is een van"],
+  containsAll: ["⊇", "Bevat alle"],
+  containsAny: ["⊃", "Bevat een van"],
+  matchesAny: ["≈", "Komt overeen met een van"],
+  inDates: ["∈", "In datums"],
+  excludeAny: ["⊄", "Sluit een van uit"], // New operator with clear meaning for tag exclusion
+  withinHierarchy: ["↳", "Is in (incl. sublocaties)"],
 };
 
 // Define the allowed operators for each field type

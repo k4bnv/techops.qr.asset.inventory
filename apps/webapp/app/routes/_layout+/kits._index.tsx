@@ -193,13 +193,13 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         modelName,
         search,
         hasActiveFilters,
-        searchFieldLabel: "Search kits",
+        searchFieldLabel: "Zoek kits",
         teamMembers,
         totalTeamMembers,
         currentUserTeamMember,
         searchFieldTooltip: {
-          title: "Search your kits database",
-          text: "Search kits based on name or description.",
+          title: "Doorzoek uw kits database",
+          text: "Zoek kits op naam of beschrijving.",
         },
         locations,
         totalLocations,
@@ -246,7 +246,7 @@ export default function KitsIndexPage() {
       <Header>
         {canCreateKit && (
           <Button to="new" role="link" aria-label="new kit">
-            New kit
+            Nieuwe kit
           </Button>
         )}
       </Header>
@@ -269,13 +269,13 @@ export default function KitsIndexPage() {
             <DynamicDropdown
               trigger={
                 <div className="my-2 flex cursor-pointer items-center gap-2 md:my-0">
-                  Custodian{" "}
+                  Beheerder{" "}
                   <ChevronRight className="hidden rotate-90 md:inline" />
                 </div>
               }
               model={{ name: "teamMember", queryKey: "name", deletedAt: null }}
-              label="Filter by custodian"
-              placeholder="Search team members"
+              label="Filter op beheerder"
+              placeholder="Zoek teamleden"
               countKey="totalTeamMembers"
               initialDataKey="teamMembers"
               transformItem={(item) => ({
@@ -339,36 +339,35 @@ export default function KitsIndexPage() {
             ItemComponent={ListContent}
             bulkActions={isBase ? undefined : <BulkActionsDropdown />}
             customEmptyStateContent={{
-              title: "No kits yet",
-              text: "Kits let you group related assets together. Create a kit to bundle equipment that's typically used as a set.",
+              title: "Nog geen kits",
+              text: "Met kits kunt u gerelateerde assets groeperen. Maak een kit om apparatuur te bundelen die doorgaans als set wordt gebruikt.",
               newButtonRoute: "/kits/new",
-              newButtonContent: "Create your first kit",
+              newButtonContent: "Maak uw eerste kit aan",
             }}
             headerChildren={
               <>
-                <Th>Category</Th>
-                <Th>Location</Th>
-                <Th>Description</Th>
+                <Th>Categorie</Th>
+                <Th>Locatie</Th>
+                <Th>Beschrijving</Th>
                 <Th>Assets</Th>
                 <Th className="flex items-center gap-1 whitespace-nowrap">
-                  Custodian{" "}
+                  Beheerder{" "}
                   <InfoTooltip
                     iconClassName="size-4"
                     content={
                       <>
-                        <h6>Asset custody</h6>
+                        <h6>Asset beheer</h6>
                         <p>
-                          This column shows if a user has custody of the asset
-                          either via direct assignment or via a booking. If you
-                          see <GrayBadge>private</GrayBadge> that means you
-                          don't have the permissions to see who has custody of
-                          the asset.
+                          Deze kolom toont of een gebruiker het beheer heeft over de asset,
+                          hetzij via directe toewijzing of via een reservering. Als u
+                          <GrayBadge>privé</GrayBadge> ziet, betekent dit dat u
+                          geen toestemming heeft om te zien wie het beheer heeft over de asset.
                         </p>
                       </>
                     }
                   />
                 </Th>
-                <Th>Actions</Th>
+                <Th>Acties</Th>
               </>
             }
           />

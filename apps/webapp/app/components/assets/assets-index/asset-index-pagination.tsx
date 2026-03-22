@@ -59,8 +59,8 @@ export function AssetIndexPagination() {
             type="button"
             onClick={handleScrollToTop}
             variant="secondary"
-            title="Scroll to top"
-            aria-label="Scroll to top"
+            title="Naar boven scrollen"
+            aria-label="Naar boven scrollen"
             className="h-[34px]"
           >
             <ChevronRight className="chev -rotate-90" />
@@ -92,9 +92,9 @@ export function AssetIndexPagination() {
                   )}
                   name="mode"
                   value="SIMPLE"
-                  aria-label="Switch to simple mode"
+                  aria-label="Omschakelen naar eenvoudige modus"
                 >
-                  Simple
+                  Eenvoudig
                 </Button>
                 <Button
                   type="submit"
@@ -105,9 +105,9 @@ export function AssetIndexPagination() {
                   )}
                   name="mode"
                   value="ADVANCED"
-                  aria-label="Switch to advanced mode"
+                  aria-label="Omschakelen naar geavanceerde modus"
                 >
-                  Advanced
+                  Geavanceerd
                 </Button>
               </ButtonGroup>
             </fetcher.Form>

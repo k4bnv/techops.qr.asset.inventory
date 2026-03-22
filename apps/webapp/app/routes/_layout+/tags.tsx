@@ -134,8 +134,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
     await deleteTag({ id, organizationId });
 
     sendNotification({
-      title: "Tag deleted",
-      message: "Your tag has been deleted successfully",
+      title: "Tag verwijderd",
+      message: "Uw tag is succesvol verwijderd",
       icon: { name: "trash", variant: "error" },
       senderId: userId,
     });
@@ -164,7 +164,7 @@ export default function CategoriesPage() {
           aria-label={`new tag`}
           data-test-id="createNewTag"
         >
-          New tag
+          Nieuwe tag
         </Button>
       </Header>
       <ListContentWrapper>
@@ -179,17 +179,17 @@ export default function CategoriesPage() {
             isBaseOrSelfService ? undefined : <BulkActionsDropdown />
           }
           customEmptyStateContent={{
-            title: "No tags yet",
-            text: "Tags let you label assets with flexible keywords. Create tags to add custom metadata to your inventory.",
+            title: "Nog geen tags",
+            text: "Met tags kunt u assets labelen met flexibele trefwoorden. Maak tags aan om aangepaste metadata aan uw inventaris toe te voegen.",
             newButtonRoute: "/tags/new",
-            newButtonContent: "Create your first tag",
+            newButtonContent: "Maak uw eerste tag aan",
           }}
           ItemComponent={TagItem}
           headerChildren={
             <>
-              <Th>Description</Th>
-              <Th>Use for</Th>
-              <Th>Actions</Th>
+              <Th>Beschrijving</Th>
+              <Th>Gebruiken voor</Th>
+              <Th>Acties</Th>
             </>
           }
         />
@@ -226,7 +226,7 @@ const TagItem = ({
             <GrayBadge key={useFor}>{formatEnum(useFor)}</GrayBadge>
           ))
         ) : (
-          <GrayBadge>All</GrayBadge>
+          <GrayBadge>Alle</GrayBadge>
         )}
       </div>
     </Td>

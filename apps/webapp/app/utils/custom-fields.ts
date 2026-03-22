@@ -36,15 +36,15 @@ const getSchema = ({
   const text = required
     ? z.string(params).min(1, {
         message: field_name
-          ? `${field_name} is required`
-          : `This field is required`,
+          ? `${field_name} is verplicht`
+          : `Dit veld is verplicht`,
       })
     : z.string(params).optional();
 
   const option = required
     ? z
         .string(params)
-        .min(1, `${field_name ? field_name : "This field"} is required`)
+        .min(1, `${field_name ? field_name : "Dit veld"} is verplicht`)
     : z.string(params).optional();
 
   return {
@@ -60,16 +60,16 @@ const getSchema = ({
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           path: [`cf-${id}`],
-          message: `${v} is not a valid option`,
+          message: `${v} is geen geldige optie`,
         });
       }
       return v;
     }),
     amount: required
-      ? z.coerce.number().refine((value) => value !== 0, "Please enter a value")
+      ? z.coerce.number().refine((value) => value !== 0, "Voer een waarde in")
       : z.coerce.number(params).optional().nullable(),
     number: required
-      ? z.coerce.number().refine((value) => value !== 0, "Please enter a value")
+      ? z.coerce.number().refine((value) => value !== 0, "Voer een waarde in")
       : z.coerce.number(params).optional().nullable(),
   } as Record<CustomFieldZodSchema["type"], z.ZodTypeAny>;
 };
@@ -100,8 +100,8 @@ function buildSchema(fields: CustomFieldZodSchema[]) {
         params: {
           description: field.helpText,
           required_error: field.name
-            ? `${field.name} is required`
-            : `This field is required`,
+            ? `${field.name} is verplicht`
+            : `Dit veld is verplicht`,
         },
         field_name: field.name,
         required: field.required,
@@ -168,7 +168,7 @@ export const extractCustomFieldValuesFromPayload = ({
  * @returns Formatted custom field value or undefined if no valid value
  */
 const NUMERIC_VALUE_GUIDANCE =
-  "Expected format: Plain numbers with optional decimal separator (e.g., 600, 600.50, or 600,50). Currency symbols will be automatically removed.";
+  "Verwacht formaat: Alleen getallen met optioneel decimaal scheidingsteken (bijv. 600, 600.50 of 600,50). Valutasymbolen worden automatisch verwijderd.";
 
 const CURRENCY_SYMBOLS_REGEX = /[$€£¥₹₽₩₪₫฿₴₦₲₵₡₺₨]/g;
 
@@ -186,7 +186,7 @@ function formatInvalidNumericMessage(
   const assetPart = options?.assetTitle
     ? ` (asset: '${options.assetTitle}')`
     : "";
-  return `Custom field '${fieldName}'${assetPart}: Invalid value '${value}'.`;
+  return `Aangepast veld '${fieldName}'${assetPart}: Ongeldige waarde '${value}'.`;
 }
 
 /**
@@ -281,7 +281,7 @@ function sanitizeNumericInput(
     // Reject if multiple separators are present (indicates thousand separators)
     if (dotCount > 1 || commaCount > 1 || (dotCount > 0 && commaCount > 0)) {
       throwInvalid(
-        "Contains thousand separator format (multiple dots/commas or mixed separators)."
+        "Bevat duizendtal scheidingsteken formaat (meerdere punten/komma's of gemengde scheidingstekens)."
       );
     }
 
@@ -294,7 +294,7 @@ function sanitizeNumericInput(
       // If exactly 3 digits after comma and more than 1 digit before, likely thousand separator
       if (afterComma.length === 3 && parts[0].length > 0) {
         throwInvalid(
-          "Contains thousand separator format (comma with 3 digits after it)."
+          "Bevat duizendtal scheidingsteken formaat (komma met 3 cijfers erachter)."
         );
       }
       value = value.replace(",", ".");
@@ -304,19 +304,19 @@ function sanitizeNumericInput(
       // If exactly 3 digits after dot and more than 1 digit before, likely thousand separator
       if (afterDot.length === 3 && parts[0].length > 0) {
         throwInvalid(
-          "Contains thousand separator format (dot with 3 digits after it)."
+          "Bevat duizendtal scheidingsteken formaat (punt met 3 cijfers erachter)."
         );
       }
     }
 
     if (!/^[0-9]+(?:\.[0-9]+)?$/.test(value)) {
-      throwInvalid("Contains non-numeric characters.");
+      throwInvalid("Bevat niet-numerieke tekens.");
     }
 
     const numericValue = Number(value);
 
     if (!Number.isFinite(numericValue)) {
-      throwInvalid("Value is not a finite number.");
+      throwInvalid("Waarde is geen eindig getal.");
     }
 
     const finalValue = isNegative ? -numericValue : numericValue;
@@ -394,12 +394,12 @@ export const buildCustomFieldValue = (
         cause instanceof RangeError
           ? cause?.message
           : "Invalid custom field value",
-      message: `Failed to read/process custom field value for '${
+      message: `Kan aangepaste veldwaarde voor '${
         def.name
-      }' with type '${def.type}'. The value we found is: '${value.raw}'. ${
+      }' met type '${def.type}' niet lezen/verwerken. De gevonden waarde is: '${value.raw}'. ${
         def.type === "DATE"
-          ? "Make sure to format your dates using the format: YYYY-MM-DD"
-          : "Please verify the provided value matches the expected format"
+          ? "Zorg ervoor dat uw datums het formaat YYYY-MM-DD hebben"
+          : "Controleer of de opgegeven waarde overeenkomt met het verwachte formaat"
       }`,
       label: "Custom fields",
       shouldBeCaptured: false,
@@ -426,7 +426,7 @@ export const getCustomFieldDisplayValue = (
   }
 
   if (Object.hasOwnProperty.call(value, "valueBoolean")) {
-    return value.valueBoolean ? "Yes" : "No";
+    return value.valueBoolean ? "Ja" : "Nee";
   }
 
   if (value.valueDate) {
@@ -465,11 +465,11 @@ export const getDefinitionFromCsvHeader = (
 
 // order of the keys control the UI form dorpdown order, so dont change unless u know what you are doing
 export const FIELD_TYPE_NAME: { [key in CustomFieldType]: string } = {
-  TEXT: "Single-line text",
-  MULTILINE_TEXT: "Multi-line text",
-  OPTION: "Option",
+  TEXT: "Tekst (enkele regel)",
+  MULTILINE_TEXT: "Tekst (meerdere regels)",
+  OPTION: "Optie",
   BOOLEAN: "Boolean",
-  DATE: "Date",
-  AMOUNT: "Amount",
-  NUMBER: "Number",
+  DATE: "Datum",
+  AMOUNT: "Bedrag",
+  NUMBER: "Getal",
 };

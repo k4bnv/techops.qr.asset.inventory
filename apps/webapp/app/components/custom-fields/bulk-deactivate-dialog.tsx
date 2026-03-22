@@ -32,8 +32,8 @@ export default function BulkDeactivateDialog() {
       type="deactivate"
       arrayFieldId="customFieldIds"
       actionUrl="/api/custom-fields/bulk-actions"
-      title={`Deactivate (${totalSelected}) custom fields.`}
-      description={`All selected (${totalSelected}) custom fields be deactivated on confirm.`}
+      title={`(${totalSelected}) aangepaste velden deactiveren.`}
+      description={`Alle geselecteerde (${totalSelected}) aangepaste velden worden gedeactiveerd bij bevestiging.`}
     >
       {({ disabled, handleCloseDialog, fetcherError }) => (
         <>
@@ -51,7 +51,7 @@ export default function BulkDeactivateDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -59,7 +59,7 @@ export default function BulkDeactivateDialog() {
               width="full"
               disabled={disabled}
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </>

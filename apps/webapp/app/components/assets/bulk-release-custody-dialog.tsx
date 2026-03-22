@@ -14,8 +14,8 @@ export default function BulkReleaseCustodyDialog() {
     <BulkUpdateDialogContent
       ref={zo.ref}
       type="release-custody"
-      title="Release custody of assets"
-      description="Are you sure you want to release custody of all selected assets?"
+      title="Beheer van assets vrijgeven"
+      description="Weet u zeker dat u het beheer van alle geselecteerde assets wilt vrijgeven?"
       actionUrl="/api/assets/bulk-release-custody"
       arrayFieldId="assetIds"
     >
@@ -33,7 +33,7 @@ export default function BulkReleaseCustodyDialog() {
               disabled={disabled}
               onClick={handleCloseDialog}
             >
-              Cancel
+              Annuleren
             </Button>
             <Button
               type="submit"
@@ -41,7 +41,7 @@ export default function BulkReleaseCustodyDialog() {
               width="full"
               disabled={disabled}
             >
-              Confirm
+              Bevestigen
             </Button>
           </div>
         </div>

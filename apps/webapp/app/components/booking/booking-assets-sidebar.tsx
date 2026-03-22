@@ -137,7 +137,7 @@ export function BookingAssetsSidebar({
             </SheetTitle>
             <SheetDescription className="text-left">
               {booking.assets.length}{" "}
-              {booking.assets.length === 1 ? "asset" : "assets"} in this booking
+              {booking.assets.length === 1 ? "asset" : "assets"} in deze boeking
             </SheetDescription>
           </SheetHeader>
 
@@ -156,11 +156,11 @@ export function BookingAssetsSidebar({
                 <thead>
                   <tr className="border-b border-gray-200 text-left ">
                     <th className="px-6 py-3 font-normal text-gray-600">
-                      Name
+                      Naam
                     </th>
                     <th className="px-6 py-3"> </th>
                     <th className="px-6 py-3 font-normal text-gray-600">
-                      Category
+                      Categorie
                     </th>
                     <th className="px-6 py-3"> </th>
                   </tr>
@@ -197,7 +197,7 @@ export function BookingAssetsSidebar({
                                     className="text-gray-900 hover:text-gray-700"
                                     target="_blank"
                                     onlyNewTabIconOnHover={true}
-                                    aria-label="Go to kit"
+                                    aria-label="Ga naar kit"
                                   >
                                     <div className="max-w-[200px] truncate sm:max-w-[250px] md:max-w-[350px] lg:max-w-[450px]">
                                       {kit.name}
@@ -258,7 +258,7 @@ export function BookingAssetsSidebar({
                                             mainImageExpiration:
                                               asset.mainImageExpiration,
                                           }}
-                                          alt={`Image of ${asset.title}`}
+                                          alt={`Afbeelding van ${asset.title}`}
                                           className="size-full rounded-[4px] border border-gray-300 object-cover"
                                           withPreview
                                         />
@@ -328,7 +328,7 @@ export function BookingAssetsSidebar({
                                     mainImageExpiration:
                                       asset.mainImageExpiration,
                                   }}
-                                  alt={`Image of ${asset.title}`}
+                                  alt={`Afbeelding van ${asset.title}`}
                                   className="size-full rounded-[4px] border object-cover"
                                   withPreview
                                 />

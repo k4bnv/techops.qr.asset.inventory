@@ -36,7 +36,7 @@ export const DeleteBooking = ({
           className="justify-start rounded-sm px-2 py-1.5 text-sm font-medium text-gray-700 outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-slate-100 hover:text-gray-700"
           width="full"
         >
-          Delete
+          Verwijderen
         </Button>
       </AlertDialogTrigger>
 
@@ -47,17 +47,17 @@ export const DeleteBooking = ({
               <TrashIcon />
             </span>
           </div>
-          <AlertDialogTitle>Delete {booking.name}</AlertDialogTitle>
+          <AlertDialogTitle>{booking.name} verwijderen</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete this Booking? This action cannot be
-            undone. All assets associated with this booking will be released.
+            Weet u zeker dat u deze boeking wilt verwijderen? Deze actie kan niet
+            ongedaan worden gemaakt. Alle assets die aan deze boeking zijn gekoppeld, worden vrijgegeven.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <div className="flex justify-center gap-2">
             <AlertDialogCancel asChild>
               <Button type="button" variant="secondary" disabled={disabled}>
-                Cancel
+                Annuleren
               </Button>
             </AlertDialogCancel>
 
@@ -72,7 +72,7 @@ export const DeleteBooking = ({
                 value="delete"
                 disabled={disabled}
               >
-                Delete
+                Verwijderen
               </Button>
             </Form>
           </div>

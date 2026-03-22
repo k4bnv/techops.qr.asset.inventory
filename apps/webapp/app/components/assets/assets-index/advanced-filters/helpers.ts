@@ -24,14 +24,14 @@ export type UIFieldType =
  * Mapping of friendly names for UI display
  */
 const uiFieldTypeNames: Record<UIFieldType, string> = {
-  string: "Single-line text",
-  text: "Multi-line text",
-  boolean: "Yes/No",
-  date: "Date",
-  number: "Number",
-  amount: "Amount",
-  enum: "Option",
-  array: "List",
+  string: "Tekst (enkele regel)",
+  text: "Tekst (meerdere regels)",
+  boolean: "Ja/Nee",
+  date: "Datum",
+  number: "Getal",
+  amount: "Bedrag",
+  enum: "Optie",
+  array: "Lijst",
 };
 
 /**

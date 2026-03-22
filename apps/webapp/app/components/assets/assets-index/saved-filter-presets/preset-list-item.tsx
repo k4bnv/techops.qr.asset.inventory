@@ -83,7 +83,7 @@ export function PresetListItem({
           <span className="truncate">{preset.name}</span>
           {/* Loading indicator when applying preset */}
           {isApplying && (
-            <div className="shrink-0" title="Applying preset...">
+            <div className="shrink-0" title="Preset toepassen...">
               <Spinner className="size-4" />
             </div>
           )}
@@ -91,7 +91,7 @@ export function PresetListItem({
           {isActive && !isApplying && (
             <div
               className="flex size-4 shrink-0 items-center justify-center rounded-full bg-gray-100"
-              title="Currently active"
+              title="Momenteel actief"
             >
               <Check className="size-3 text-gray-600" />
             </div>
@@ -113,7 +113,7 @@ export function PresetListItem({
             onRename(preset);
           }}
           className="rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
-          title="Rename"
+          title="Hernoemen"
         >
           <Pencil className="size-3.5" />
         </button>
@@ -124,12 +124,12 @@ export function PresetListItem({
             type="submit"
             onClick={(e) => {
               e.stopPropagation();
-              if (!confirm("Delete this preset?")) {
+              if (!confirm("Deze preset verwijderen?")) {
                 e.preventDefault();
               }
             }}
             className="rounded p-1 text-gray-400 hover:bg-red-50 hover:text-red-500"
-            title="Delete"
+            title="Verwijderen"
           >
             <Trash2 className="size-3.5" />
           </button>

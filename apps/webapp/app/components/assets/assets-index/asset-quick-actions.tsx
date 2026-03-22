@@ -43,8 +43,8 @@ export default function AssetQuickActions({
           variant="secondary"
           className={"p-2"}
           to={`/assets/${asset.id}/edit`}
-          aria-label="Edit asset information"
-          tooltip="Edit asset information"
+          aria-label="Assetgegevens bewerken"
+          tooltip="Assetgegevens bewerken"
         >
           <PencilIcon className="size-4" />
         </Button>
@@ -64,8 +64,8 @@ export default function AssetQuickActions({
             size="sm"
             variant="secondary"
             className={"p-2"}
-            aria-label="Show asset label"
-            tooltip="Show asset label"
+            aria-label="Asset-label tonen"
+            tooltip="Asset-label tonen"
           >
             <QrCodeIcon className="size-4" />
           </Button>
@@ -84,8 +84,8 @@ export default function AssetQuickActions({
           variant="secondary"
           className={"p-2"}
           to={`/assets/${asset.id}/overview/duplicate`}
-          aria-label="Duplicate asset"
-          tooltip="Duplicate asset"
+          aria-label="Asset dupliceren"
+          tooltip="Asset dupliceren"
         >
           <CopyIcon className="size-4" />
         </Button>
@@ -106,8 +106,8 @@ export default function AssetQuickActions({
               size="sm"
               variant="secondary"
               className={"p-2"}
-              aria-label="Delete asset"
-              tooltip="Delete asset"
+              aria-label="Asset verwijderen"
+              tooltip="Asset verwijderen"
             >
               <Trash2Icon className="size-4" />
             </Button>

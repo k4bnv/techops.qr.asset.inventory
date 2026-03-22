@@ -120,7 +120,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         cause: null,
         title: "Not allowed",
         message:
-          "You don't have permission to access the advanced mode. We will automatically switch you back to 'simple' mode. Please reload the page.",
+          "U heeft geen toestemming om de geavanceerde modus te openen. We schakelen u automatisch terug naar de 'eenvoudige' modus. Herlaad de pagina.",
         label: "Assets",
         status: 403,
       });
@@ -214,8 +214,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Assets deleted",
-          message: "Your assets has been deleted successfully",
+          title: "Assets verwijderd",
+          message: "Uw assets zijn succesvol verwijderd",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -353,17 +353,17 @@ export default function AssetIndexPage() {
               aria-label={`new asset`}
               data-test-id="createNewAsset"
             >
-              New asset
+              Nieuwe asset
             </Button>
           </>
         </When>
       </Header>
       <AssetsList
         customEmptyStateContent={{
-          title: "No assets yet",
-          text: "Assets are the core of your inventory. Create your first asset to start tracking equipment, devices, or anything your team manages.",
+          title: "Nog geen assets",
+          text: "Assets vormen de kern van uw inventaris. Maak uw eerste asset aan om apparatuur, apparaten of iets anders dat uw team beheert, te volgen.",
           newButtonRoute: "/assets/new",
-          newButtonContent: "Create your first asset",
+          newButtonContent: "Maak uw eerste asset aan",
         }}
       />
     </div>

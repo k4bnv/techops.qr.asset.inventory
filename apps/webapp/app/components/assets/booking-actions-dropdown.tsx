@@ -17,12 +17,11 @@ export default function BookingActionsDropdown() {
     ? {
         reason: (
           <>
-            Cannot book this asset directly because it's part of a kit. Please
-            book the{" "}
+            Dit asset kan niet direct worden geboekt omdat het deel uitmaakt
+            van een kit. Boek in plaats daarvan de{" "}
             <Button to={`/kits/${asset.kit.id}`} target="_blank" variant="link">
               kit
-            </Button>{" "}
-            instead.
+            </Button>.
           </>
         ),
       }
@@ -31,7 +30,7 @@ export default function BookingActionsDropdown() {
   const disabledTrigger = availableToBook
     ? false
     : {
-        reason: "This asset has been marked as unavailable for bookings.",
+        reason: "Dit asset is gemarkeerd als onbeschikbaar voor boekingen.",
       };
 
   const links = [
@@ -39,14 +38,14 @@ export default function BookingActionsDropdown() {
       indexType: "asset",
       id: asset.id,
       disabled,
-      label: "Create new booking",
+      label: "Nieuwe boeking maken",
       icon: "bookings",
       to: "overview/create-new-booking",
     },
     {
       indexType: "asset",
       id: asset.id,
-      label: "Add to existing booking",
+      label: "Toevoegen aan bestaande boeking",
       icon: "booking-exist",
       disabled,
       to: `overview/add-to-existing-booking`,
@@ -58,7 +57,7 @@ export default function BookingActionsDropdown() {
       <GenericBookActionsDropdown
         links={links}
         key={"asset"}
-        label={"Book"}
+        label={"Boeken"}
         disabledTrigger={disabledTrigger}
       />
     </div>

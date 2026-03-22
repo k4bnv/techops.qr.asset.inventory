@@ -71,29 +71,27 @@ export const AssetsList = ({
   const isSwappingMode = modeFetcher?.formData;
   const headerChildren = modeIsSimple ? (
     <>
-      <Th>Category</Th>
+      <Th>Categorie</Th>
       <Th>Tags</Th>
       <When truthy={!isUserPage}>
         <Th className="flex items-center gap-1 whitespace-nowrap">
-          Custodian{" "}
+          Verantwoordelijke{" "}
           <InfoTooltip
             iconClassName="size-4"
             content={
               <>
-                <h6>Asset custody</h6>
+                <h6>Asset verantwoordelijkheid</h6>
                 <p>
-                  This column shows if a user has custody of the asset either
-                  via direct assignment or via a booking. If you see{" "}
-                  <GrayBadge>private</GrayBadge> that means you don't have the
-                  permissions to see who has custody of the asset.
+                  Deze kolom laat zien of een gebruiker verantwoordelijk is voor de asset, hetzij via directe toewijzing of via een boeking. Als u{" "}
+                  <GrayBadge>privé</GrayBadge> ziet, betekent dit dat u geen toestemming heeft om te zien wie verantwoordelijk is voor de asset.
                 </p>
               </>
             }
           />
         </Th>
       </When>
-      <Th>Location</Th>
-      <Th>Actions</Th>
+      <Th>Locatie</Th>
+      <Th>Acties</Th>
     </>
   ) : (
     <AdvancedTableHeader columns={columns} />
@@ -118,7 +116,7 @@ export const AssetsList = ({
           className="absolute inset-0 z-[100] flex flex-col items-center  bg-gray-25/95 pt-[30vh]"
         >
           <Spinner />
-          <p className="mt-2">Changing mode...</p>
+          <p className="mt-2">Modus wijzigen...</p>
         </motion.div>
       </When>
 
@@ -144,7 +142,7 @@ export const AssetsList = ({
                         mainImageExpiration:
                           resource.extendedProps?.mainImageExpiration,
                       }}
-                      alt={`Image of ${resource.title}`}
+                      alt={`Afbeelding van ${resource.title}`}
                       className="size-14 rounded border object-cover"
                       withPreview
                     />
@@ -229,7 +227,7 @@ export const ListAssetContent = ({
                   thumbnailImage: item.thumbnailImage,
                   mainImageExpiration: item.mainImageExpiration,
                 }}
-                alt={`Image of ${item.title}`}
+                alt={`Afbeelding van ${item.title}`}
                 className="size-full rounded-[4px] border object-cover"
                 withPreview
               />
@@ -328,7 +326,7 @@ function AdvancedModeMobileFallback() {
   return (
     <div className="flex h-full flex-col items-center justify-center gap-2">
       <p className="text-center">
-        Advanced mode is currently not available on mobile.
+        De geavanceerde modus is momenteel niet beschikbaar op mobiel.
       </p>
       <fetcher.Form
         method="post"
@@ -343,7 +341,7 @@ function AdvancedModeMobileFallback() {
         <input type="hidden" name="intent" value="changeMode" />
 
         <Button type="submit" name="mode" value="SIMPLE" disabled={disabled}>
-          Change to simple mode
+          Overschakelen naar eenvoudige modus
         </Button>
       </fetcher.Form>
     </div>

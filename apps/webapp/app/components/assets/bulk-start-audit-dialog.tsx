@@ -34,7 +34,7 @@ export const BulkStartAuditSchema = BaseAuditSchema.extend({
     return parsed.isValid && parsed > DateTime.now();
   },
   {
-    message: "Due date must be in the future",
+    message: "De vervaldatum moet in de toekomst liggen",
     path: ["dueDate"],
   }
 );
@@ -99,8 +99,8 @@ function StartAuditDialogContent({
         <div className="py-4 pr-6">
           <Input
             name={nameField}
-            label="Audit name"
-            placeholder="Quarterly warehouse audit"
+            label="Auditnaam"
+            placeholder="Kwartaal magazijnaudit"
             error={nameError}
             required
             disabled={formDisabled}
@@ -109,8 +109,8 @@ function StartAuditDialogContent({
 
           <Input
             name={descriptionField}
-            label="Description"
-            placeholder="Add context that will help auditors (optional)."
+            label="Beschrijving"
+            placeholder="Voeg context toe die auditors helpt (optioneel)."
             inputType="textarea"
             rows={5}
             maxLength={AUDIT_DESCRIPTION_MAX_LENGTH}
@@ -125,7 +125,7 @@ function StartAuditDialogContent({
 
           <Input
             name={dueDateField}
-            label="Due date"
+            label="Vervaldatum"
             type="datetime-local"
             error={dueDateError}
             disabled={formDisabled}
@@ -136,10 +136,10 @@ function StartAuditDialogContent({
         {/* Right column: Team member selector */}
         <div className="!border-r">
           <Separator className="md:hidden" />
-          <p className="p-3 pb-0 font-medium">Select assignee (optional).</p>
+          <p className="p-3 pb-0 font-medium">Selecteer uitvoerder (optioneel).</p>
           <p className="border-b p-3 ">
-            If no assignee is selected, any admin user can perform the audit.
-            This can also be done by multiple users at different times.
+            Als er geen uitvoerder is geselecteerd, kan elke beheerder de audit uitvoeren.
+            Dit kan ook door meerdere gebruikers op verschillende tijdstippen worden gedaan.
           </p>
           <AuditTeamMemberSelector error={assigneeError} />
         </div>
@@ -153,10 +153,10 @@ function StartAuditDialogContent({
           disabled={formDisabled}
           onClick={handleCloseDialog}
         >
-          Cancel
+          Annuleren
         </Button>
         <Button type="submit" variant="primary" disabled={formDisabled}>
-          Create audit
+          Audit aanmaken
         </Button>
       </div>
     </>
@@ -187,8 +187,8 @@ export default function BulkStartAuditDialog() {
       ref={zo.ref}
       type="start-audit"
       className="md:w-[800px]"
-      title="Start an audit"
-      description={`You're about to start an audit for ${displayCount} asset${
+      title="Audit starten"
+      description={`U staat op het punt een audit te starten voor ${displayCount} asset${
         displayCount === 1 ? "" : "s"
       }.`}
       actionUrl="/api/audits/start"
