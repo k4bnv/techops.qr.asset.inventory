@@ -12,7 +12,7 @@ import { Config } from "./types";
 
 export const config: Config = {
   sendOnboardingEmail: SEND_ONBOARDING_EMAIL || false,
-  enablePremiumFeatures: true, // White-label: paywalls disabled for TechOps
+  enablePremiumFeatures: false, // White-label: paywalls disabled for TechOps
   freeTrialDays: Number(FREE_TRIAL_DAYS || 7),
   disableSignup: true, // Hardcoded to true for TechOps deployment
   disableSSO: DISABLE_SSO || false,
