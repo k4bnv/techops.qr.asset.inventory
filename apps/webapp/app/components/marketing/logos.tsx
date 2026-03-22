@@ -1,45 +1,25 @@
-import { ShelfTypography } from "~/components/icons/library";
-import { config } from "~/config/shelf.config";
+import { Box } from "lucide-react";
 import { tw } from "~/utils/tw";
 import When from "../when/when";
 
 /**
  * Logo shown in the sidebar
- * If a custom logo is used, we dynamically show that or the symbol depending on {optimisticMinimizedSidebar}
  */
 export const ShelfSidebarLogo = ({ minimized }: { minimized: boolean }) => {
-  const { logoPath } = config;
-
-  /** If a custom logo is used, we just use that instead of doing the dynamic shelf typograpy */
-  if (logoPath) {
-    return minimized ? (
-      <img
-        src={logoPath.symbol}
-        alt="TechOps Logo"
-        className="mx-1.5 inline h-[32px] transition duration-150 ease-linear"
-      />
-    ) : (
-      <img
-        src={logoPath.fullLogo}
-        alt="TechOps Logo"
-        className="mx-1.5 inline h-[32px] transition duration-150 ease-linear"
-      />
-    );
-  }
-
   return (
-    <>
-      <img
-        src="/static/images/shelf-symbol.png"
-        alt="TechOps Logo"
-        className="mx-1.5 inline h-[32px]"
-      />
-      <When truthy={!minimized}>
-        <span className="logo-text transition duration-150 ease-linear">
-          <ShelfTypography />
+    <div className="flex items-center justify-center">
+      <Box className="mx-1.5 inline h-[32px] w-[32px] text-orange-500" strokeWidth={2.5} />
+      <div
+        className={tw(
+          "overflow-hidden transition-all duration-150 ease-linear",
+          minimized ? "w-0 opacity-0" : "w-auto opacity-100 ml-1"
+        )}
+      >
+        <span className="text-xl font-bold tracking-tight text-gray-900">
+          TechOps
         </span>
-      </When>
-    </>
+      </div>
+    </div>
   );
 };
 
@@ -47,53 +27,35 @@ export const ShelfSidebarLogo = ({ minimized }: { minimized: boolean }) => {
  * Logo shown in the header for mobile screen sizes
  */
 export const ShelfMobileLogo = () => {
-  const { logoPath } = config;
-
-  if (logoPath) {
-    return <img src={logoPath.fullLogo} alt="TechOps Logo" className="h-full" />;
-  }
-
   return (
-    <img
-      src="/static/images/logo-full-color(x2).png"
-      alt="logo"
-      className="h-full"
-    />
+    <div className="flex h-full items-center">
+      <Box className="h-6 w-6 text-orange-500 mr-2" strokeWidth={2.5} />
+      <span className="text-lg font-bold tracking-tight text-gray-900">
+        TechOps
+      </span>
+    </div>
   );
 };
 
 /**
- * Lego symbol
+ * Symbol only
  */
 export const ShelfSymbolLogo = ({ className }: { className?: string }) => {
-  const { logoPath } = config;
-  const classes = tw("mx-auto mb-2 size-12", className);
-
-  if (logoPath) {
-    return <img src={logoPath.symbol} alt="TechOps Logo" className={classes} />;
-  }
-
-  return (
-    <img src="/static/images/shelf-symbol.png" alt="logo" className={classes} />
-  );
+  const classes = tw("mx-auto mb-2 size-12 text-orange-500", className);
+  return <Box className={classes} strokeWidth={2.5} />;
 };
 
 /**
  * Full logo
  */
 export const ShelfFullLogo = ({ className }: { className?: string }) => {
-  const { logoPath } = config;
-  const classes = tw(className);
-
-  if (logoPath) {
-    return <img src={logoPath.fullLogo} alt="TechOps Logo" className={classes} />;
-  }
-
+  const classes = tw("flex items-center justify-center", className);
   return (
-    <img
-      src="/static/images/logo-full-color(x2).png"
-      alt="logo"
-      className={classes}
-    />
+    <div className={classes}>
+      <Box className="h-10 w-10 text-orange-500 mr-3" strokeWidth={2.5} />
+      <span className="text-3xl font-bold tracking-tight text-gray-900">
+        TechOps
+      </span>
+    </div>
   );
 };

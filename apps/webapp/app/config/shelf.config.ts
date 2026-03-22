@@ -21,7 +21,7 @@ export const config: Config = {
     fullLogo: "/static/images/logo-full-color(x2).png",
     symbol: "/static/images/shelf-symbol.png",
   },
-  faviconPath: "/static/favicon.ico",
+  faviconPath: "/static/favicon.svg",
   emailPrimaryColor: "#EF6820",
   showHowDidYouFindUs: SHOW_HOW_DID_YOU_FIND_US || false,
   collectBusinessIntel:

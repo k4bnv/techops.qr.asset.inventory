@@ -32,14 +32,14 @@ export function InstallPwaPromptModal() {
             <div className="relative z-10  rounded-xl bg-white p-4 shadow-lg">
               <div className="mb-8 text-center">
                 <h4 className="mb-1 text-[18px] font-semibold">
-                  Install shelf for mobile
+                  Install TechOps for mobile
                 </h4>
                 <p className="text-gray-600">
-                  Always available access to shelf, with all features you have
+                  Always available access to TechOps, with all features you have
                   on desktop.{" "}
                   {promptInstall && (
                     <>
-                      Use the <strong>install button below</strong> to add shelf
+                      Use the <strong>install button below</strong> to add TechOps
                       to your device.
                     </>
                   )}
