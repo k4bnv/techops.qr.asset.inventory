@@ -54,7 +54,7 @@ export function RoleChangeEmailTemplate({
           <CustomEmailFooter footerText={customEmailFooter} />
 
           <Text style={{ fontSize: "14px", color: "#344054" }}>
-            This is an automatic email sent from shelf.nu to{" "}
+            This is an automatic email sent from TechOps to{" "}
             <span style={{ color: emailPrimaryColor }}>{recipientEmail}</span>.
           </Text>
         </div>

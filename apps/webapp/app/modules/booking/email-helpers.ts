@@ -113,7 +113,7 @@ export async function sendCheckinReminder(
 
   sendEmail({
     to: booking.custodianUser!.email,
-    subject: `🔔 Checkin reminder (${booking.name}) - shelf.nu`,
+    subject: `🔔 Checkin reminder (${booking.name}) - TechOps`,
     text: checkinReminderEmailContent({
       hints,
       bookingName: booking.name,
@@ -256,7 +256,7 @@ export async function sendBookingUpdatedEmail({
       ? `${booking.custodianUser.firstName} ${booking.custodianUser.lastName}`
       : booking.custodianTeamMember?.name ?? "";
 
-    const subject = `📝 Booking updated (${booking.name}) - shelf.nu`;
+    const subject = `📝 Booking updated (${booking.name}) - TechOps`;
 
     const emailArgs: BasicEmailContentArgs = {
       bookingName: booking.name,
