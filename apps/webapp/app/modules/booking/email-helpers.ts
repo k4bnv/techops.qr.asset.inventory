@@ -58,7 +58,7 @@ To view the booking, follow the link below:
 ${SERVER_URL}/bookings/${bookingId}
 ${customEmailFooter ? `\n---\n${customEmailFooter}` : ""}
 Thanks,
-The Shelf Team
+The TechOps Team
 `;
 };
 

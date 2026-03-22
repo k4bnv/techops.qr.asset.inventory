@@ -117,8 +117,8 @@ export const ImportContent = () => {
 
       <h4 className="mt-2">Importing with QR codes</h4>
       <div>
-        You also have the option to se a Shelf QR code for each asset. This is
-        very valuable if you already have Shelf QR codes printed and you want to
+        You also have the option to se a TechOps QR code for each asset. This is
+        very valuable if you already have TechOps QR codes printed and you want to
         link them to the assets you are importing.
         <br />
         This feature comes with the following limitations:

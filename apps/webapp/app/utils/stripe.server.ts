@@ -749,7 +749,7 @@ export async function getCustomerPaidInvoices(customerId: string, limit = 10) {
 
 /**
  * Retrieves Stripe customer data and builds a deduplicated email list.
- * Use this when sending subscription-related emails to both Stripe and Shelf emails.
+ * Use this when sending subscription-related emails to both Stripe and TechOps emails.
  */
 export async function getCustomerNotificationData({
   customerId,
@@ -764,7 +764,7 @@ export async function getCustomerNotificationData({
   const stripeName =
     stripeCustomer && !stripeCustomer.deleted ? stripeCustomer.name : null;
 
-  // Deduplicate emails (Stripe email + Shelf user email)
+  // Deduplicate emails (Stripe email + TechOps user email)
   const emailsToNotify = new Set<string>();
   if (stripeEmail) emailsToNotify.add(stripeEmail.toLowerCase());
   if (user.email) emailsToNotify.add(user.email.toLowerCase());
@@ -777,7 +777,7 @@ export async function getCustomerNotificationData({
 
 /**
  * Prepares invoice notification data and returns deduplicated email list.
- * Use this when sending invoice-related emails to both Stripe and Shelf emails.
+ * Use this when sending invoice-related emails to both Stripe and TechOps emails.
  */
 export async function getInvoiceNotificationData({
   customerId,
@@ -794,7 +794,7 @@ export async function getInvoiceNotificationData({
   });
 
   const subscriptionName =
-    invoice.lines?.data?.[0]?.description || "Shelf Subscription";
+    invoice.lines?.data?.[0]?.description || "TechOps Subscription";
   const amountDue = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: invoice.currency,
@@ -962,7 +962,7 @@ export async function getOwnerSubscriptionInfo(
   try {
     if (!stripe || !premiumIsEnabled) {
       return {
-        hasActiveSubscription: false,
+        hasActiveSubscription: true,
         subscriptions: [],
         tierId: null,
       };
@@ -975,7 +975,7 @@ export async function getOwnerSubscriptionInfo(
 
     if (!user?.customerId) {
       return {
-        hasActiveSubscription: false,
+        hasActiveSubscription: true,
         subscriptions: [],
         tierId: user?.tierId || null,
       };
@@ -992,7 +992,7 @@ export async function getOwnerSubscriptionInfo(
 
     if (activeSubscriptions.length === 0) {
       return {
-        hasActiveSubscription: false,
+        hasActiveSubscription: true,
         subscriptions: [],
         tierId: user.tierId,
       };
@@ -1031,7 +1031,7 @@ export async function getOwnerSubscriptionInfo(
     }
 
     return {
-      hasActiveSubscription: details.length > 0,
+      hasActiveSubscription: true,
       subscriptions: details,
       tierId: user.tierId,
     };

@@ -88,7 +88,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
     const lines = [
       "BEGIN:VCALENDAR",
       "VERSION:2.0",
-      "PRODID:-//Shelf.nu//Shelf Calendar 1.0//EN",
+      "PRODID:-//TechOps Asset Inventory//TechOps Calendar 1.0//EN",
       "CALSCALE:GREGORIAN",
       "METHOD:PUBLISH",
       "BEGIN:VEVENT",
@@ -100,7 +100,7 @@ export async function loader({ request, context, params }: LoaderFunctionArgs) {
       `DTSTART:${formattedFromDate}`,
       `DTEND:${formattedToDate}`,
       `DTSTAMP:${formattedDTSTAMP}`,
-      "CATEGORIES:Shelf.nu booking",
+      "CATEGORIES:TechOps Asset Inventory booking",
       `DESCRIPTION:${description}`,
       `URL:${bookingUrl}`,
       "BEGIN:VALARM",

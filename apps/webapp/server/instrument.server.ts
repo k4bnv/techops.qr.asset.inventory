@@ -6,7 +6,8 @@ import { SENTRY_DSN } from "~/utils/env";
 import type { ShelfError } from "~/utils/error";
 import { isLikeShelfError } from "~/utils/error";
 
-if (SENTRY_DSN) {
+// White-label: Sentry telemetry disabled for TechOps self-hosted instance
+if (false && SENTRY_DSN) {
   Sentry.init({
     dsn: SENTRY_DSN,
     // Performance Monitoring

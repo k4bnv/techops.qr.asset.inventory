@@ -36,7 +36,7 @@ import { validateNonSSOSignup } from "~/utils/sso.server";
 
 export function loader({ context }: LoaderFunctionArgs) {
   const title = "Create an account";
-  const subHeading = "Start your journey with Shelf";
+  const subHeading = "Start your journey with TechOps";
   const { disableSignup } = config;
 
   try {

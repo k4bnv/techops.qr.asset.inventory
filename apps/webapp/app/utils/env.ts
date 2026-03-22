@@ -227,11 +227,8 @@ export const MAINTENANCE_MODE =
     isRequired: false,
   }) === "true" || false;
 
-export const ENABLE_PREMIUM_FEATURES =
-  getEnv("ENABLE_PREMIUM_FEATURES", {
-    isSecret: false,
-    isRequired: false,
-  }) === "true" || false;
+// White-label: premium features are always enabled for self-hosted TechOps instance
+export const ENABLE_PREMIUM_FEATURES = true;
 
 export const SHOW_HOW_DID_YOU_FIND_US =
   getEnv("SHOW_HOW_DID_YOU_FIND_US", {

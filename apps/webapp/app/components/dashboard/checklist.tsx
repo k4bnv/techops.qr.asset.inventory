@@ -242,7 +242,7 @@ export default function OnboardingChecklist() {
         <div className="mb-4">
           <h4 className=" text-lg font-semibold">Customize your experience</h4>
           <p className="text-[14px] text-gray-600">
-            Optimize your workflow and use Shelf in way that works for you and
+            Optimize your workflow and use TechOps in way that works for you and
             your organizations.
           </p>
         </div>

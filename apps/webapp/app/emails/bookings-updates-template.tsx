@@ -54,7 +54,7 @@ export function BookingUpdatesEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Bookings update from Shelf.nu</title>
+        <title>Bookings update from TechOps Asset Inventory</title>
       </Head>
 
       <Container

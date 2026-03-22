@@ -112,7 +112,7 @@ const ASSET_SCHEDULER_EVENT_HANDLERS: Record<
         });
 
         sendEmail({
-          subject: "⏰ Asset Reminder Notice - Shelf",
+          subject: "⏰ Asset Reminder Notice - TechOps",
           to: user.email,
           text: assetAlertEmailText({
             asset: reminder.asset,

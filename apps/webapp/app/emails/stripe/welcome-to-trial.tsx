@@ -25,7 +25,7 @@ export const sendTeamTrialWelcomeEmail = async ({
   email,
 }: TeamTrialWelcomeProps) => {
   try {
-    const subject = "Your Shelf Team Trial is Ready - Next Steps";
+    const subject = "Your TechOps Team Trial is Ready - Next Steps";
     const html = await welcomeToTrialEmailHtml({ firstName });
     const text = welcomeToTrialEmailText({ firstName });
 
@@ -53,7 +53,7 @@ export const welcomeToTrialEmailText = ({
   firstName?: string | null;
 }) => `Hey${firstName ? ` ${firstName}` : ""},
 
-Carlos Virreira here, Co-founder of Shelf Asset Management, Inc. I'm thrilled to inform you that your Shelf Team Trial has been activated! This is an excellent step towards more efficient asset management for your team.
+Carlos Virreira here, Co-founder of TechOps Asset Management, Inc. I'm thrilled to inform you that your TechOps Team Trial has been activated! This is an excellent step towards more efficient asset management for your team.
 
 To get started with your trial:
 
@@ -61,13 +61,13 @@ To get started with your trial:
 Visit ${SERVER_URL}/account-details/workspace to see all your workspaces. Click "NEW WORKSPACE" to create your team workspace.
 
 2. Add Your First Assets
-Start populating your inventory to see Shelf in action. Try our QR code feature for easy asset tracking.
+Start populating your inventory to see TechOps in action. Try our QR code feature for easy asset tracking.
 
 3. Invite Team Members
-Collaboration is key. Add your colleagues to truly experience the power of Shelf.
+Collaboration is key. Add your colleagues to truly experience the power of TechOps.
 
 Explore Key Features:
-- Custom Fields: Tailor Shelf to your specific needs - https://www.shelf.nu/knowledge-base/custom-field-types-in-shelf
+- Custom Fields: Tailor TechOps to your specific needs - https://www.shelf.nu/knowledge-base/custom-field-types-in-shelf
 - Bookings: Efficiently manage equipment reservations - https://www.shelf.nu/knowledge-base/use-case-scenarios-explaing-our-bookings-feature
 - Kits: Group related assets for easier management - https://www.shelf.nu/features/kits
 
@@ -76,7 +76,7 @@ Need help? Check out our Knowledge Base for quick answers, or reach out to us at
 Remember, your trial gives you full access to all premium features. Make the most of it!
 
 Happy asset tracking,
-The Shelf Team
+The TechOps Team
 `;
 
 function WelcomeToTrialEmailTemplate({
@@ -89,7 +89,7 @@ function WelcomeToTrialEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Your Shelf Team Trial is Ready - Next Steps</title>
+        <title>Your TechOps Team Trial is Ready - Next Steps</title>
       </Head>
 
       <Container style={{ padding: "32px 16px", maxWidth: "100%" }}>
@@ -101,8 +101,8 @@ function WelcomeToTrialEmailTemplate({
           </Text>
 
           <Text style={{ ...styles.p }}>
-            Carlos Virreira here, Co-founder of Shelf Asset Management, Inc. I'm
-            thrilled to inform you that your <strong>Shelf Team Trial</strong>{" "}
+            Carlos Virreira here, Co-founder of TechOps Asset Management, Inc. I'm
+            thrilled to inform you that your <strong>TechOps Team Trial</strong>{" "}
             has been activated! This is an excellent step towards more efficient
             asset management for your team.
           </Text>
@@ -122,12 +122,12 @@ function WelcomeToTrialEmailTemplate({
             </li>
             <li style={{ marginBottom: "12px" }}>
               <strong>Add Your First Assets:</strong> Start populating your
-              inventory to see Shelf in action. Try our QR code feature for easy
+              inventory to see TechOps in action. Try our QR code feature for easy
               asset tracking.
             </li>
             <li style={{ marginBottom: "12px" }}>
               <strong>Invite Team Members:</strong> Collaboration is key. Add
-              your colleagues to truly experience the power of Shelf.
+              your colleagues to truly experience the power of TechOps.
             </li>
           </ol>
 
@@ -152,7 +152,7 @@ function WelcomeToTrialEmailTemplate({
             >
               Custom Fields
             </Link>
-            : Tailor Shelf to your specific needs
+            : Tailor TechOps to your specific needs
           </Text>
 
           <Text style={{ ...styles.p }}>
@@ -188,7 +188,7 @@ function WelcomeToTrialEmailTemplate({
           <Text style={{ marginTop: "24px", ...styles.p }}>
             Happy asset tracking, <br />
             Carlos Virreira <br />
-            Co-founder, Shelf Asset Management, Inc.
+            Co-founder, TechOps Asset Management, Inc.
             <br />
             P.S. Have questions or feedback? I'd love to hear from you. Reply
             directly to this email, and let's chat!

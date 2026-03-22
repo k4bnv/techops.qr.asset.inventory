@@ -98,7 +98,7 @@ export const CodePreview = ({
       codes.push({
         id: qrObj.qr.id,
         type: "qr",
-        label: "Shelf QR Code",
+        label: "TechOps QR Code",
         qrData: {
           size: qrObj.qr.size,
           src: qrObj.qr.src,
@@ -439,12 +439,6 @@ export const QrLabel = React.forwardRef<HTMLDivElement, QrLabelProps>(
               ? sequentialId
               : data?.qr?.id}
           </div>
-          {showShelfBranding ? (
-            <div>
-              Powered by{" "}
-              <span style={{ fontWeight: 600, color: "black" }}>shelf.nu</span>
-            </div>
-          ) : null}
         </div>
       </div>
     );
@@ -533,12 +527,6 @@ export const BarcodeLabel = React.forwardRef<HTMLDivElement, BarcodeLabelProps>(
               )}
             </div>
           </div>
-          {showShelfBranding ? (
-            <div>
-              Powered by{" "}
-              <span style={{ fontWeight: 600, color: "black" }}>shelf.nu</span>
-            </div>
-          ) : null}
         </div>
       </div>
     );

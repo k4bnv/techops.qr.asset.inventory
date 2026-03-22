@@ -58,7 +58,7 @@ export const links: LinksFunction = () => [
 
 export const meta: MetaFunction = () => [
   {
-    title: "shelf.nu",
+    title: "TechOps",
   },
 ];
 
@@ -135,7 +135,7 @@ function App() {
         "Apologies, we’re down for scheduled maintenance. Please try again later."
       }
       cta={{
-        to: "https://www.shelf.nu/blog-categories/updates-maintenance",
+        to: "/",
         text: "Learn more",
       }}
       icon="tool"

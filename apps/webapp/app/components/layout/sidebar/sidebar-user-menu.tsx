@@ -98,16 +98,6 @@ export default function SidebarUserMenu() {
               </NavLink>
             </DropdownMenuItem>
             <DropdownMenuItem
-              asChild
-              className="cursor-pointer gap-2 border-b border-gray-200 p-2"
-              onClick={closeDropdown}
-            >
-              <NavLink to="/account-details/subscription">
-                <Wallet className="size-4" />
-                Subscriptions
-              </NavLink>
-            </DropdownMenuItem>
-            <DropdownMenuItem
               className="mt-1 cursor-pointer gap-2 border-b border-gray-200 p-2"
               onSelect={logOut}
             >

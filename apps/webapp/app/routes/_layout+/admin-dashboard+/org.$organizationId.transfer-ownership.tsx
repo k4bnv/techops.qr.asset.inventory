@@ -78,9 +78,9 @@ export async function loader({ context, params }: LoaderFunctionArgs) {
 /**
  * Handles the transfer ownership form submission.
  *
- * This action allows Shelf admins to transfer ownership of any organization
+ * This action allows TechOps admins to transfer ownership of any organization
  * to one of its existing admins. The flow:
- * 1. Validates that the current user is a Shelf admin
+ * 1. Validates that the current user is a TechOps admin
  * 2. Parses and validates the form data (new owner ID + confirmation checkbox)
  * 3. Fetches the organization to get its details for the transfer
  * 4. Calls transferOwnership which updates the org owner and swaps user roles

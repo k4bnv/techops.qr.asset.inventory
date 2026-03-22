@@ -53,7 +53,7 @@ export function InstallPwaPromptModal() {
                       <li>
                         2. Click <strong>"Add to Home Screen"</strong>
                       </li>
-                      <li>3. Enjoy Shelf on your mobile device</li>
+                      <li>3. Enjoy TechOps on your mobile device</li>
                     </ol>
 
                     <video
@@ -72,15 +72,7 @@ export function InstallPwaPromptModal() {
                   </>
                 )}
                 <p>
-                  For more information, read the full{" "}
-                  <Button
-                    to="https://www.shelf.nu/knowledge-base/shelf-mobile-app"
-                    variant="link"
-                    target="_blank"
-                    className="mt-4"
-                  >
-                    guide
-                  </Button>
+                  For more information, contact your TechOps administrator.
                 </p>
               </div>
 

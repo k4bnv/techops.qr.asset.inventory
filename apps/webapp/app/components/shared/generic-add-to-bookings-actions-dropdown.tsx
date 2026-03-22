@@ -93,7 +93,7 @@ const ConditionalActionsDropdown = ({
             }} // is a hack to fix the popover not being in the right place on mobile
             // can not target [data-radix-popper-content-wrapper] for this file only with css
             // so we have to use dangerouslySetInnerHTML
-            // PR : https://github.com/Shelf-nu/shelf.nu/pull/304
+            // PR : https://github.com/TechOps-nu/shelf.nu/pull/304
           ></style>
         )}
         <PopoverPortal>

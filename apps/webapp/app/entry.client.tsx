@@ -5,7 +5,8 @@ import { Provider as JotaiProvider } from "jotai";
 import { hydrateRoot } from "react-dom/client";
 import { HydratedRouter } from "react-router/dom";
 
-if (window.env?.SENTRY_DSN) {
+// White-label: Sentry telemetry disabled for TechOps self-hosted instance
+if (false && window.env?.SENTRY_DSN) {
   Sentry.init({
     dsn: window.env.SENTRY_DSN,
     tunnel: "/api/sentry-tunnel",
@@ -95,12 +96,8 @@ React.startTransition(() => {
       </JotaiProvider>
     </React.StrictMode>,
     {
-      onRecoverableError(error, errorInfo) {
-        if (window.env?.SENTRY_DSN) {
-          Sentry.captureException(error, {
-            extra: { componentStack: errorInfo.componentStack },
-          });
-        }
+      onRecoverableError(_error, _errorInfo) {
+        // White-label: Sentry telemetry disabled for TechOps self-hosted instance
       },
     }
   );

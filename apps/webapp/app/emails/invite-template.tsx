@@ -29,7 +29,7 @@ export function InvitationEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Invitation to join Shelf</title>
+        <title>Invitation to join TechOps</title>
       </Head>
 
       <Container
@@ -42,7 +42,7 @@ export function InvitationEmailTemplate({
             Howdy,
             <br />
             {invite.inviter.firstName} {invite.inviter.lastName} invites you to
-            join Shelf as a member of {invite.organization.name}
+            join TechOps as a member of {invite.organization.name}
             's workspace. Click the link to accept the invite:
           </Text>
 
@@ -98,7 +98,7 @@ export function InvitationEmailTemplate({
 
           <Text style={{ marginBottom: "32px", ...styles.p }}>
             Thanks, <br />
-            The Shelf team
+            The TechOps team
           </Text>
 
           <CustomEmailFooter

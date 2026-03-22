@@ -48,7 +48,7 @@ export function RoleChangeEmailTemplate({
 
           <Text style={{ marginBottom: "32px", ...styles.p }}>
             Thanks, <br />
-            The Shelf team
+            The TechOps team
           </Text>
 
           <CustomEmailFooter footerText={customEmailFooter} />

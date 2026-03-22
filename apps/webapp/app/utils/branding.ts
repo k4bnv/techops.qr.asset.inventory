@@ -1,22 +1,8 @@
 /**
- * Resolves whether Shelf branding should be displayed on labels.
- *
- * @param override - Explicit preference coming from the current render context.
- * @param organizationDefault - The stored organization preference, if available.
- * @returns `true` when branding should be shown, defaulting to `true` when no
- * preference is provided.
+ * Resolves whether TechOps branding should be displayed on labels.
+ * White-label override: always returns false for TechOps self-hosted instance.
  */
 export const resolveShowShelfBranding = (
-  override?: boolean,
-  organizationDefault?: boolean
-): boolean => {
-  if (typeof override === "boolean") {
-    return override;
-  }
-
-  if (typeof organizationDefault === "boolean") {
-    return organizationDefault;
-  }
-
-  return true;
-};
+  _override?: boolean,
+  _organizationDefault?: boolean
+): boolean => false;

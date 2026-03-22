@@ -55,7 +55,7 @@ To view the audit, follow the link below:
 ${SERVER_URL}/audits/${auditId}/overview${orgQuery}
 ${customEmailFooter ? `\n---\n${customEmailFooter}\n` : ""}
 Thanks,
-The Shelf Team
+The TechOps Team
 `;
 };
 

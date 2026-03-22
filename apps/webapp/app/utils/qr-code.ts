@@ -2,8 +2,8 @@ import { SERVER_URL, URL_SHORTENER } from "~/utils/env";
 import { isQrId } from "~/utils/id";
 
 /**
- * Checks if a QR code value is a Shelf QR code
- * Shelf QR codes can be:
+ * Checks if a QR code value is a TechOps QR code
+ * TechOps QR codes can be:
  * 1. Raw QR ID (e.g., "cm4abc123...")
  * 2. SERVER_URL/qr/{qrId} format (e.g., "https://shelf.nu/qr/cm4abc123")
  * 3. URL_SHORTENER/{qrId} format (e.g., "https://eam.sh/cm4abc123")

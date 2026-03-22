@@ -86,7 +86,7 @@ If you'd like to keep using Barcodes, no action is needed - everything will tran
 
 If you have any questions, feel free to reach out to us at ${SUPPORT_EMAIL}. We're happy to help!
 
-The Shelf Team
+The TechOps Team
 `;
   }
 
@@ -100,7 +100,7 @@ Don't worry - your barcode data won't be deleted. Once you subscribe, everything
 
 If you have any questions, feel free to reach out to us at ${SUPPORT_EMAIL}. We're happy to help!
 
-The Shelf Team
+The TechOps Team
 `;
 };
 
@@ -218,7 +218,7 @@ function BarcodeTrialEndsTomorrowEmailTemplate({
             {SUPPORT_EMAIL}. We're happy to help!
           </Text>
 
-          <Text style={{ marginTop: "24px", ...styles.p }}>The Shelf Team</Text>
+          <Text style={{ marginTop: "24px", ...styles.p }}>The TechOps Team</Text>
         </div>
       </Container>
     </Html>

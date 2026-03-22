@@ -200,24 +200,10 @@ const WorkspaceGeneralEditForms = ({
           rowLabel={"Label branding"}
           className={"border-b-0"}
           subHeading={
-            canHideShelfBranding ? (
-              <p>
-                Control whether the "Powered by Shelf.nu" footer appears on QR
+            <p>
+                Control whether the "Powered by TechOps" footer appears on QR
                 and barcode labels.
               </p>
-            ) : (
-              <p>
-                This is a premium feature.{" "}
-                <Button
-                  variant="link"
-                  className="inline text-xs"
-                  to="/account-details/subscription"
-                >
-                  Upgrade your plan
-                </Button>{" "}
-                to hide Shelf branding on labels.
-              </p>
-            )
           }
         >
           <div className="flex items-center gap-3">
@@ -229,8 +215,8 @@ const WorkspaceGeneralEditForms = ({
             <Switch
               id="showShelfBranding"
               name={zo.fields.showShelfBranding()}
-              defaultChecked={organization.showShelfBranding ?? true}
-              disabled={!canHideShelfBranding}
+              defaultChecked={organization.showShelfBranding ?? false}
+              disabled={false}
               aria-labelledby="showShelfBranding-label"
               aria-describedby="showShelfBranding-desc"
             />
@@ -238,18 +224,15 @@ const WorkspaceGeneralEditForms = ({
               <label
                 id="showShelfBranding-label"
                 htmlFor="showShelfBranding"
-                className={tw(
-                  "cursor-pointer text-[14px] font-medium",
-                  canHideShelfBranding ? "text-gray-700" : "text-gray-400"
-                )}
+                className="cursor-pointer text-[14px] font-medium text-gray-700"
               >
-                Display Shelf branding on labels
+                Display TechOps branding on labels
               </label>
               <p
                 id="showShelfBranding-desc"
                 className="text-[14px] text-gray-600"
               >
-                Toggle Shelf branding on downloadable QR and barcode labels.
+                Toggle TechOps branding on downloadable QR and barcode labels.
               </p>
             </div>
           </div>

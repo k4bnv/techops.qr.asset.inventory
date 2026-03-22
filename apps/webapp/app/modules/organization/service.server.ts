@@ -736,7 +736,7 @@ export async function transferOwnership({
 
     /**
      * Validate if the current user is the owner of organization
-     * or is a Shelf admin
+     * or is a TechOps admin
      */
     if (
       !currentOwnerUserOrg.roles.includes(OrganizationRoles.OWNER) &&
@@ -891,7 +891,7 @@ export async function transferOwnership({
 
     /** Send email to new owner */
     sendEmail({
-      subject: `🎉 You're now the Owner of ${currentOrganization.name} - Shelf`,
+      subject: `🎉 You're now the Owner of ${currentOrganization.name} - TechOps`,
       to: newOwnerUserOrg.user.email,
       text: newOwnerEmailText({
         newOwnerName: `${newOwnerUserOrg.user.firstName} ${newOwnerUserOrg.user.lastName}`,

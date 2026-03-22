@@ -3119,7 +3119,7 @@ export async function removeAssets({
      * So we need to set it back to AVAILABLE
      * We only do that if the booking we removed it from is ongoing or overdue.
      * Reason is that the user can add an asset to a draft booking and remove it and that will reset its status back to available, which shouldnt happen
-     * https://github.com/Shelf-nu/shelf.nu/issues/703#issuecomment-1944315975
+     * https://github.com/TechOps-nu/shelf.nu/issues/703#issuecomment-1944315975
      *
      * Because prisma doesnt support transactional execution of nested queries, we need to do them in 2 steps, because if the disconnect runs first,
      * the updateMany will not find the assets in the booking anymore and wont update them

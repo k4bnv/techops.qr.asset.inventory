@@ -306,7 +306,7 @@ function EmailPreview({
         <p>
           <span className="text-gray-400">From:</span>{" "}
           <span className="text-gray-700">
-            Shelf &lt;notifications@shelf.nu&gt;
+            TechOps &lt;notifications@shelf.nu&gt;
           </span>
         </p>
         <p>
@@ -351,7 +351,7 @@ function EmailPreview({
             >
               <img
                 src="/static/images/logo-full-color(x2).png"
-                alt="Shelf logo"
+                alt="TechOps logo"
                 style={{ height: "32px", width: "auto" }}
               />
             </div>
@@ -452,7 +452,7 @@ function EmailPreview({
                 marginBottom: "32px",
               }}
             >
-              &copy; 2026 Shelf.nu
+              &copy; 2026 TechOps Asset Inventory
             </p>
           </div>
         </div>
