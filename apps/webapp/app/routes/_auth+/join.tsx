@@ -16,7 +16,6 @@ import { config } from "~/config/shelf.config";
 import { useSearchParams } from "~/hooks/search-params";
 import { ContinueWithEmailForm } from "~/modules/auth/components/continue-with-email-form";
 import { signUpWithEmailPass } from "~/modules/auth/service.server";
-import { authenticator } from "~/modules/auth/auth.server";
 import { findUserByEmail } from "~/modules/user/service.server";
 import { appendToMetaTitle } from "~/utils/append-to-meta-title";
 import {
@@ -51,9 +50,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
     });
   }
 
-  await authenticator.isAuthenticated(request, {
-    successRedirect: "/assets",
-  });
+  const { sessionStorage } = await import("~/../server/session");
+  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
+  if (session.has("user")) {
+    throw redirect("/assets");
+  }
 
   return data(payload({ title, subHeading }));
 }
