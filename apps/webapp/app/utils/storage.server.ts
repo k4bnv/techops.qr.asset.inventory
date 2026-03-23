@@ -389,7 +389,7 @@ async function normalizeToAsyncIterable(
  */
 export async function uploadImageFromUrl(
   imageUrl: string,
-  { filename, contentType, bucketName, resizeOptions }: UploadOptions,
+  { filename, contentType, bucketName, resizeOptions, userId, ownerOrgId }: UploadOptions & { userId: string; ownerOrgId: string },
   cache?: LRUCache<string, CachedImage>
 ): Promise<string | null> {
   try {
@@ -403,30 +403,16 @@ export async function uploadImageFromUrl(
         buffer = cached.buffer;
         actualContentType = cached.contentType;
 
-        // Upload cached optimized version
-        const { data, error } = await getSupabaseAdmin()
-          .storage.from(bucketName)
-          .upload(filename, buffer, {
+        const { db } = await import("~/database/db.server");
+        const image = await db.image.create({
+          data: {
             contentType: actualContentType,
-            upsert: true,
-            metadata: {
-              source: "url",
-              originalUrl: imageUrl,
-            },
-          });
-
-        if (error) {
-          /** Log the error so we are aware if there are some issues with uploading */
-          logUploadError(error, {
-            imageUrl,
-            filename,
-            contentType,
-            bucketName,
-          });
-
-          throw error;
-        }
-        return data.path;
+            blob: buffer,
+            userId,
+            ownerOrgId,
+          },
+        });
+        return `/api/image/${image.id}`;
       }
     }
 
@@ -548,35 +534,33 @@ export async function uploadImageFromUrl(
       resizeOptions
     );
 
-    // Upload to Supabase
-    const { data, error } = await getSupabaseAdmin()
-      .storage.from(bucketName)
-      .upload(filename, file, {
-        contentType: actualContentType,
-        upsert: true,
-        metadata: {
-          source: "url",
-          originalUrl: imageUrl,
-        },
-      });
+    const croppedBuffer = Buffer.from(file);
 
-    if (error) {
-      /** Log the error so we are aware if there are some issues with uploading */
-      logUploadError(error, {
-        imageUrl,
-        filename,
-        contentType,
-        bucketName,
-      });
-      throw error;
-    }
+    const { db } = await import("~/database/db.server");
+    const image = await db.image.create({
+      data: {
+        contentType: actualContentType,
+        blob: croppedBuffer,
+        userId,
+        ownerOrgId,
+      },
+    });
+
+    const path = `/api/image/${image.id}`;
 
     // After successful upload, cache the optimized version if cache is provided
-    if (cache && data.path) {
-      await cacheOptimizedImage(data.path, imageUrl, cache);
+    if (cache) {
+      const imageSize = croppedBuffer.length;
+      if (imageSize <= (cache.maxSize ?? 100 * 1024 * 1024) - (cache.calculatedSize || 0)) {
+        cache.set(imageUrl, {
+          buffer: croppedBuffer,
+          contentType: actualContentType,
+          size: imageSize,
+        });
+      }
     }
 
-    return data.path;
+    return path;
   } catch (cause) {
     const isShelfError = isLikeShelfError(cause);
 
@@ -606,12 +590,7 @@ export async function deleteProfilePicture({
   bucketName?: string;
 }) {
   try {
-    if (
-      !url.startsWith(
-        `${SUPABASE_URL}/storage/v1/object/public/profile-pictures/`
-      ) ||
-      url === ""
-    ) {
+    if (!url.startsWith("/api/image/") && !url.includes("profile-pictures")) {
       throw new ShelfError({
         cause: null,
         message: "Invalid file URL",
@@ -620,12 +599,14 @@ export async function deleteProfilePicture({
       });
     }
 
-    const { error } = await getSupabaseAdmin()
-      .storage.from(bucketName)
-      .remove([url.split(`${bucketName}/`)[1]]);
-
-    if (error) {
-      throw error;
+    const imageId = url.replace("/api/image/", "");
+    const { db } = await import("~/database/db.server");
+    
+    // Check if the id is a valid cuid or uuid before trying to delete
+    if (imageId && !imageId.includes("/")) {
+      await db.image.deleteMany({
+        where: { id: imageId },
+      });
     }
   } catch (cause) {
     Logger.error(
@@ -657,12 +638,11 @@ export async function deleteAssetImage({
       });
     }
 
-    const { error } = await getSupabaseAdmin()
-      .storage.from(bucketName)
-      .remove([path]);
-
-    if (error) {
-      throw error;
+    const { db } = await import("~/database/db.server");
+    if (path && !path.includes("/")) {
+      await db.image.deleteMany({
+        where: { id: path },
+      });
     }
 
     return true;
@@ -698,11 +678,7 @@ export function getFileUploadPath({
  */
 export async function removePublicFile({ publicUrl }: { publicUrl: string }) {
   try {
-    if (
-      !publicUrl.startsWith(
-        `${SUPABASE_URL}/storage/v1/object/public/${PUBLIC_BUCKET}/`
-      )
-    ) {
+    if (!publicUrl.startsWith("/api/image/") && !publicUrl.includes(PUBLIC_BUCKET)) {
       throw new ShelfError({
         cause: null,
         message: "Invalid file URL",
@@ -711,12 +687,13 @@ export async function removePublicFile({ publicUrl }: { publicUrl: string }) {
       });
     }
 
-    const { error } = await getSupabaseAdmin()
-      .storage.from(PUBLIC_BUCKET)
-      .remove([publicUrl.split(`${PUBLIC_BUCKET}/`)[1]]);
-
-    if (error) {
-      throw error;
+    const imageId = publicUrl.replace("/api/image/", "");
+    const { db } = await import("~/database/db.server");
+    
+    if (imageId && !imageId.includes("/")) {
+      await db.image.deleteMany({
+        where: { id: imageId },
+      });
     }
   } catch (cause) {
     throw new ShelfError({

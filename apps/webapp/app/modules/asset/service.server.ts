@@ -2475,6 +2475,8 @@ export async function createAssetsFromContentImport({
                 width: 1200,
                 withoutEnlargement: true,
               },
+              userId,
+              ownerOrgId: organizationId,
             },
             imageCache
           );
