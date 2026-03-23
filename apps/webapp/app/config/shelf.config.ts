@@ -15,7 +15,7 @@ export const config: Config = {
   enablePremiumFeatures: false, // White-label: paywalls disabled for TechOps
   freeTrialDays: Number(FREE_TRIAL_DAYS || 7),
   disableSignup: false, // Hardcoded to true for TechOps deployment
-  disableSSO: DISABLE_SSO || false,
+  disableSSO: DISABLE_SSO || true,
 
   logoPath: {
     fullLogo: "/static/images/logo-full-color(x2).png",
