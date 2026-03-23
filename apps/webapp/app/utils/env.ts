@@ -127,7 +127,7 @@ export function initEnv() {
  * Server env
  */
 export const SERVER_URL = getEnv("SERVER_URL").replace(/\/+$/, "");
-export const SUPABASE_SERVICE_ROLE = getEnv("SUPABASE_SERVICE_ROLE");
+export const SUPABASE_SERVICE_ROLE = getEnv("SUPABASE_SERVICE_ROLE", { isRequired: false, isSecret: true });
 export const INVITE_TOKEN_SECRET = getEnv("INVITE_TOKEN_SECRET", {
   isSecret: true,
 });
@@ -186,9 +186,10 @@ export const NODE_ENV = getEnv("NODE_ENV", {
   isSecret: false,
   isRequired: false,
 });
-export const SUPABASE_URL = getEnv("SUPABASE_URL", { isSecret: false });
+export const SUPABASE_URL = getEnv("SUPABASE_URL", { isSecret: false, isRequired: false });
 export const SUPABASE_ANON_PUBLIC = getEnv("SUPABASE_ANON_PUBLIC", {
   isSecret: false,
+  isRequired: false,
 });
 export const MAPTILER_TOKEN = getEnv("MAPTILER_TOKEN", {
   isSecret: false,
