@@ -82,13 +82,13 @@ export function ParagraphSelect({ value, onChange }: ParagraphSelectProps) {
         onChange={(event) => onChange(event.target.value as ToolbarBlock)}
         disabled={value === "raw_block"}
       >
-        <option value="paragraph">Paragraph</option>
+        <option value="paragraph">Alinea</option>
         <option value="heading1">Heading 1</option>
         <option value="heading2">Heading 2</option>
         <option value="heading3">Heading 3</option>
         <option value="heading4">Heading 4</option>
-        <option value="bullet_list">Bullet list</option>
-        <option value="ordered_list">Numbered list</option>
+        <option value="bullet_list">Opsommingslijst</option>
+        <option value="ordered_list">Genummerde lijst</option>
         <option value="blockquote">Quote</option>
       </select>
     </label>

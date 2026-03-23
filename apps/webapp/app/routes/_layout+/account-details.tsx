@@ -14,7 +14,7 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 
 export const handle = {
-  breadcrumb: () => <Link to="/account-details">Account Details</Link>,
+  breadcrumb: () => <Link to="/account-details">Accountgegevens</Link>,
 };
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
@@ -28,8 +28,8 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       action: PermissionAction.read,
     });
 
-    const title = "Account Details";
-    const subHeading = "Manage your preferences here.";
+    const title = "Accountgegevens";
+    const subHeading = "Beheer hier uw voorkeuren.";
     const header = {
       title,
       subHeading,
@@ -50,8 +50,8 @@ export const shouldRevalidate = () => false;
 
 export default function AccountDetailsPage() {
   const items = [
-    { to: "general", content: "General" },
-    { to: "workspace", content: "Workspaces" },
+    { to: "general", content: "Algemeen" },
+    { to: "workspace", content: "Werkruimtes" },
   ];
 
   const enablePremium = useRouteLoaderData<typeof layoutLoader>(
@@ -59,7 +59,7 @@ export default function AccountDetailsPage() {
   )?.enablePremium;
 
   if (enablePremium) {
-    items.push({ to: "subscription", content: "Subscription" });
+    items.push({ to: "subscription", content: "Abonnement" });
   }
 
   return (

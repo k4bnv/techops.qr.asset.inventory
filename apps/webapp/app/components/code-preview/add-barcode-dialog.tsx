@@ -61,8 +61,8 @@ export function AddBarcodeDialog({
               className={activeTab === "scan" ? "flex h-full flex-col" : ""}
             >
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="input">Input code</TabsTrigger>
-                <TabsTrigger value="scan">Scan code</TabsTrigger>
+                <TabsTrigger value="input">Code invoeren</TabsTrigger>
+                <TabsTrigger value="scan">Code scannen</TabsTrigger>
               </TabsList>
 
               <TabsContent value="input">

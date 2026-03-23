@@ -31,7 +31,7 @@ import {
 } from "~/utils/permissions/permission.data";
 import { requirePermission } from "~/utils/roles.server";
 
-export const meta = () => [{ title: appendToMetaTitle("Duplicate asset") }];
+export const meta = () => [{ title: appendToMetaTitle("Asset dupliceren") }];
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -117,7 +117,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Asset successfully duplicated",
+      title: "Asset succesvol gedupliceerd",
       message: `${asset.title} has been duplicated.`,
       icon: { name: "success", variant: "success" },
       senderId: userId,
@@ -181,7 +181,7 @@ export default function DuplicateAsset() {
 
           <Input
             type="number"
-            label="Amount of duplicates"
+            label="Aantal duplicaten"
             name={zo.fields.amountOfDuplicates()}
             defaultValue={1}
             placeholder="How many duplicates assets you want to create for this asset ?"

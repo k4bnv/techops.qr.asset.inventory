@@ -188,7 +188,7 @@ export async function sendAuditAssignedEmail({
     Logger.error(
       new ShelfError({
         cause: emailError,
-        message: "Failed to send audit assignment email",
+        message: "Verzenden van audit-toewijzingse-mail mislukt",
         additionalData: {
           auditId: audit.id,
           assigneeEmail,
@@ -257,7 +257,7 @@ export function sendAuditCancelledEmails({
       Logger.error(
         new ShelfError({
           cause: emailError,
-          message: "Failed to send audit cancellation email",
+          message: "Verzenden van audit-annulerings-e-mail mislukt",
           additionalData: {
             auditId: audit.id,
             userId: assignment.userId,
@@ -342,7 +342,7 @@ export function sendAuditCompletedEmail({
       Logger.error(
         new ShelfError({
           cause: emailError,
-          message: "Failed to send audit completion email",
+          message: "Verzenden van audit-voltooiings-e-mail mislukt",
           additionalData: {
             auditId: audit.id,
             userId: assignment.userId,
@@ -490,7 +490,7 @@ export function sendAuditOverdueEmail({
       Logger.error(
         new ShelfError({
           cause: emailError,
-          message: "Failed to send overdue notice email",
+          message: "Verzenden van achterstallige-meldings-e-mail mislukt",
           additionalData: {
             auditId: audit.id,
             email: recipient.email,

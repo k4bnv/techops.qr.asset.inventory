@@ -139,7 +139,7 @@ export const csvDataFromRequest = async ({ request }: { request: Request }) => {
     if (isMaxFileSizeError(cause)) {
       throw new ShelfError({
         cause,
-        title: "File too large",
+        title: "Bestand te groot",
         message:
           "The CSV file is too large. Please reduce the file size by removing empty rows or splitting it into smaller files and try again.",
         label: "CSV",
@@ -248,7 +248,7 @@ export async function exportAssetsBackupToCsv({
     if (!csvData || !csvData.length) {
       throw new ShelfError({
         cause: null,
-        title: "No assets to export",
+        title: "Geen assets om te exporteren",
         message:
           "Your workspace doesn't have any assets so there is nothing to export.",
         label: "CSV",
@@ -926,7 +926,7 @@ export const buildCsvExportDataFromBookings = (
     const firstAsset =
       booking.assets && booking.assets.length > 0
         ? booking.assets[0]
-        : { title: "No assets" };
+        : { title: "Geen assets" };
 
     // First add the main booking row (including the first asset)
     const bookingRow = Object.keys(headers).map((column) => {

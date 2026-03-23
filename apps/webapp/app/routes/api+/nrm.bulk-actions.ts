@@ -44,8 +44,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
         await bulkDeleteNRMs({ nrmIds, organizationId });
 
         sendNotification({
-          title: "Non-registered members deleted",
-          message: "Your non-registered members has been deleted successfully",
+          title: "Niet-geregistreerde leden verwijderd",
+          message: "Uw niet-geregistreerde leden zijn succesvol verwijderd",
           icon: { name: "trash", variant: "error" },
           senderId: userId,
         });

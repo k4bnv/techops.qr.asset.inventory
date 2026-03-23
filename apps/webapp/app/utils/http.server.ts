@@ -100,7 +100,7 @@ export function parseData<Schema extends ZodType<any, any, any>>(
     } catch (cause) {
       throw new ShelfError({
         cause,
-        message: "Invalid form data",
+        message: "Ongeldige formuliergegevens",
         label: "Request validation",
         shouldBeCaptured: false,
         status: 400,
@@ -134,7 +134,7 @@ export function parseData<Schema extends ZodType<any, any, any>>(
 
     throw badRequest(errorMessage, {
       shouldBeCaptured: true,
-      title: "Validation error",
+      title: "Validatiefout",
       ...options,
       additionalData: {
         ...options?.additionalData,

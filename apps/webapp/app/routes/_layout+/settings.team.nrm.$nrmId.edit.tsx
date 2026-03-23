@@ -52,7 +52,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     throw data(error(reason), { status: reason.status });
   }
 }
-export const meta = () => [{ title: appendToMetaTitle("Edit team member") }];
+export const meta = () => [{ title: appendToMetaTitle("Teamlid bewerken") }];
 
 export async function action({ context, request, params }: ActionFunctionArgs) {
   const authSession = context.getSession();
@@ -81,7 +81,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       title: "Success",
       icon: { name: "success", variant: "success" },
       senderId: userId,
-      message: "Name of team member is edited successfully",
+      message: "Naam van teamlid is succesvol bijgewerkt",
     });
 
     return redirect("/settings/team/nrm");

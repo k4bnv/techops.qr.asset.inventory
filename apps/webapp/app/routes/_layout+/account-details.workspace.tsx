@@ -5,7 +5,7 @@ import { appendToMetaTitle } from "~/utils/append-to-meta-title";
 export const meta = () => [{ title: appendToMetaTitle("Workspaces") }];
 
 export const handle = {
-  breadcrumb: () => <Link to="/account-details/workspace">Workspaces</Link>,
+  breadcrumb: () => <Link to="/account-details/workspace">Werkruimtes</Link>,
 };
 
 export default function WorkspacesIndex() {

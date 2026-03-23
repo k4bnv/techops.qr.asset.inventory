@@ -104,7 +104,7 @@ export type AssetWithBooking = Asset & {
   qrScanned: string;
 };
 
-export const meta = () => [{ title: appendToMetaTitle("Manage assets") }];
+export const meta = () => [{ title: appendToMetaTitle("Assets beheren") }];
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
@@ -198,11 +198,11 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     return payload({
       header: {
         title: `Add assets for '${booking?.name}'`,
-        subHeading: "Fill up the booking with the assets of your choice",
+        subHeading: "Vul de reservering met de gewenste assets",
       },
-      searchFieldLabel: "Search assets",
+      searchFieldLabel: "Assets zoeken",
       searchFieldTooltip: {
-        title: "Search your asset database",
+        title: "Doorzoek uw assetdatabase",
         text: "Search assets based on asset name or description, category, tag, location, custodian name. Simply separate your keywords by a space: 'Laptop lenovo 2020'.",
       },
       showSidebar: true,
@@ -435,13 +435,13 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     // Send email to custodian about asset changes
     const assetChanges: string[] = [];
     if (newAssetIds.length > 0) {
-      assetChanges.push("Assets were added to the booking");
+      assetChanges.push("Assets zijn toegevoegd aan de reservering");
     }
     if (removedAssetIds.length > 0) {
-      assetChanges.push("Assets were removed from the booking");
+      assetChanges.push("Assets zijn verwijderd uit de reservering");
     }
     if (assetChanges.length > 0) {
-      assetChanges.push("View booking activity for full details");
+      assetChanges.push("Bekijk reserveringsactiviteit voor volledige details");
       void sendBookingUpdatedEmail({
         bookingId,
         organizationId,
@@ -615,8 +615,8 @@ export default function AddAssetsToNewBooking() {
             </div>
           }
           model={{ name: "category", queryKey: "name" }}
-          label="Filter by category"
-          placeholder="Search categories"
+          label="Filteren op categorie"
+          placeholder="Categorieën zoeken"
           initialDataKey="categories"
           countKey="totalCategories"
         />
@@ -627,7 +627,7 @@ export default function AddAssetsToNewBooking() {
             </div>
           }
           model={{ name: "tag", queryKey: "name" }}
-          label="Filter by tag"
+          label="Filteren op tag"
           initialDataKey="tags"
           countKey="totalTags"
         />
@@ -638,7 +638,7 @@ export default function AddAssetsToNewBooking() {
             </div>
           }
           model={{ name: "location", queryKey: "name" }}
-          label="Filter by location"
+          label="Filteren op locatie"
           initialDataKey="locations"
           countKey="totalLocations"
           renderItem={({ metadata }) => (
@@ -669,7 +669,7 @@ export default function AddAssetsToNewBooking() {
           }}
           emptyStateClassName="py-10"
           customEmptyStateContent={{
-            title: "You haven't added any assets yet.",
+            title: "U heeft nog geen assets toegevoegd.",
             text: "What are you waiting for? Create your first asset now!",
             newButtonRoute: "/assets/new",
             newButtonContent: "New asset",

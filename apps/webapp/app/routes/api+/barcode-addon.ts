@@ -71,7 +71,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
       if (currentOrganization.usedBarcodeTrial) {
         throw new ShelfError({
           cause: null,
-          message: "This workspace has already used the free barcode trial.",
+          message: "Deze werkruimte heeft de gratis barcode-proefperiode al gebruikt.",
           status: 400,
           label: "Stripe",
           shouldBeCaptured: false,

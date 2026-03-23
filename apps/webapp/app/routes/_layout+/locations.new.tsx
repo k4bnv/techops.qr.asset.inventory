@@ -130,8 +130,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
       })) ?? location;
 
     sendNotification({
-      title: "Location created",
-      message: "Your location has been created successfully",
+      title: "Locatie aangemaakt",
+      message: "Uw locatie is succesvol aangemaakt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });
@@ -157,7 +157,7 @@ export default function NewLocationPage() {
 
   return (
     <div className="relative">
-      <Header title={title ? title : "Untitled location"} />
+      <Header title={title ? title : "Naamloze locatie"} />
       <div>
         <LocationForm />
       </div>

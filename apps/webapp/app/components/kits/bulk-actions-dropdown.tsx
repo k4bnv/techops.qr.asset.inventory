@@ -199,14 +199,14 @@ function ConditionalDropdown() {
               <DropdownMenuItem className="py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
                   type="release-custody"
-                  label="Release custody"
+                  label="Beheer vrijgeven"
                   onClick={closeMenu}
                   disabled={
                     !allKitsInCustody || disableReleaseCustody
                       ? {
                           reason: disableReleaseCustody
                             ? "Self service can only release their own custody."
-                            : "Some of the selected kits are not in custody",
+                            : "Sommige geselecteerde kits zijn niet in beheer",
                         }
                       : isLoading
                   }
@@ -215,7 +215,7 @@ function ConditionalDropdown() {
               <DropdownMenuItem className="border-b py-1 lg:p-0">
                 <BulkUpdateDialogTrigger
                   type="assign-custody"
-                  label={isSelfService ? "Take custody" : "Assign custody"}
+                  label={isSelfService ? "Beheer overnemen" : "Beheer toewijzen"}
                   onClick={closeMenu}
                   disabled={
                     !allKitsAvailable ||
@@ -223,7 +223,7 @@ function ConditionalDropdown() {
                       ? {
                           reason: someAssetsInsideKitsCheckedOutOrInCustody
                             ? "Some of the asset(s) inside this kits are either checked out or in custody. You need to resolve that before you can assign custody."
-                            : "Some of the selected kits are not available",
+                            : "Sommige geselecteerde kits zijn niet beschikbaar",
                         }
                       : isLoading
                   }

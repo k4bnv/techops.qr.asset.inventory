@@ -52,7 +52,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     if (!audit || audit.organizationId !== organizationId) {
       throw new ShelfError({
         cause: null,
-        message: "Audit not found or access denied",
+        message: "Audit niet gevonden of toegang geweigerd",
         additionalData: { userId, auditId },
         label: "Audit",
         status: 404,
@@ -79,8 +79,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         );
 
         sendNotification({
-          title: "Note created",
-          message: "Your audit note has been created successfully",
+          title: "Notitie aangemaakt",
+          message: "Uw auditnotitie is succesvol aangemaakt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -106,8 +106,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         );
 
         sendNotification({
-          title: "Note deleted",
-          message: "Your audit note has been deleted successfully",
+          title: "Notitie verwijderd",
+          message: "Uw auditnotitie is succesvol verwijderd",
           icon: { name: "trash", variant: "error" },
           senderId: authSession.userId,
         });

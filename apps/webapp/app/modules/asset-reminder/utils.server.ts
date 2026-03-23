@@ -55,8 +55,8 @@ export async function resolveRemindersActions({
       });
 
       sendNotification({
-        title: "Reminder updated",
-        message: "Your asset reminder has been updated successfully",
+        title: "Herinnering bijgewerkt",
+        message: "Uw assetherinnering is succesvol bijgewerkt",
         icon: { name: "success", variant: "success" },
         senderId: userId,
       });
@@ -70,8 +70,8 @@ export async function resolveRemindersActions({
       await deleteAssetReminder({ id, organizationId });
 
       sendNotification({
-        title: "Reminder deleted",
-        message: "Your asset reminder has been deleted successfully",
+        title: "Herinnering verwijderd",
+        message: "Uw assetherinnering is succesvol verwijderd",
         icon: { name: "trash", variant: "error" },
         senderId: userId,
       });

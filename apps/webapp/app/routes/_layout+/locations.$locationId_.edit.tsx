@@ -146,8 +146,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Location updated",
-      message: "Your location  has been updated successfully",
+      title: "Locatie bijgewerkt",
+      message: "Uw locatie is succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: userId,
     });

@@ -85,7 +85,7 @@ export async function uploadAuditImage({
     if (!image) {
       throw new ShelfError({
         cause: null,
-        message: "No image file found in the request",
+        message: "Geen afbeeldingsbestand gevonden in het verzoek",
         additionalData: { auditSessionId, auditAssetId },
         label,
       });

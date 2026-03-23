@@ -49,7 +49,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
       formData,
       BulkUpdateTagsSchema.and(CurrentSearchParamsSchema),
       {
-        message: "Invalid tag assignment data provided",
+        message: "Ongeldige tag-toewijzingsgegevens opgegeven",
         additionalData: { userId, organizationId },
       }
     );
@@ -66,7 +66,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
 
     sendNotification({
       title: "Assets updated",
-      message: "Your asset's tags have been successfully updated",
+      message: "De tags van uw asset zijn succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

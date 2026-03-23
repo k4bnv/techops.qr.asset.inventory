@@ -172,8 +172,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     await deleteLocation({ id, organizationId });
 
     sendNotification({
-      title: "Location deleted",
-      message: "Your location has been deleted successfully",
+      title: "Locatie verwijderd",
+      message: "Uw locatie is succesvol verwijderd",
       icon: { name: "trash", variant: "error" },
       senderId: authSession.userId,
     });

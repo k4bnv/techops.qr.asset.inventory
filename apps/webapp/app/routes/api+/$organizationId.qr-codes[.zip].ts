@@ -48,7 +48,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          message: "Something went wrong fetching the QR codes.",
+          message: "Er is iets misgegaan bij het ophalen van de QR-codes.",
           additionalData: { userId, organizationId },
           label: "QR",
         });

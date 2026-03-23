@@ -110,8 +110,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Booking Updated",
-      message: "Your booking has been updated successfully",
+      title: "Reservering bijgewerkt",
+      message: "Uw reservering is succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

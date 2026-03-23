@@ -244,7 +244,7 @@ export function AuditImageUploadDialog({
                     name="content"
                     value={noteContent}
                     onChange={(e) => setNoteContent(e.target.value)}
-                    placeholder="Add a note about these images..."
+                    placeholder="Voeg een opmerking toe over deze afbeeldingen..."
                     className="min-h-[100px] w-full rounded-md border border-gray-300 px-3 py-2 text-sm placeholder:text-gray-400 focus:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-300/20"
                     rows={4}
                     disabled={isSubmitting}

@@ -116,7 +116,7 @@ export async function fetchAllPdfRelatedData(
     if (!organization) {
       throw new ShelfError({
         cause: null,
-        message: "Organization not found",
+        message: "Organisatie niet gevonden",
         status: 404,
         label: "Organization",
       });

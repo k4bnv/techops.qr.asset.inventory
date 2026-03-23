@@ -252,7 +252,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       if (auditAssetIds.length === 0) {
         throw new ShelfError({
           cause: null,
-          message: "No matching assets found in audit",
+          message: "Geen overeenkomende assets gevonden in audit",
           additionalData: { intent, assetIds },
           label,
           status: 400,
@@ -271,7 +271,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
 
     throw new ShelfError({
       cause: null,
-      message: "Invalid action intent",
+      message: "Ongeldige actie-intent",
       additionalData: { intent },
       label,
       status: 400,
@@ -335,7 +335,7 @@ export default function AuditOverview() {
               isActive={currentFilter === "MISSING"}
             />
             <StatCard
-              label="Unexpected"
+              label="Onverwacht"
               value={unexpectedCount}
               filterType="UNEXPECTED"
               isActive={currentFilter === "UNEXPECTED"}

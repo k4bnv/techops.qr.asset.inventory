@@ -22,7 +22,7 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 import { resolveTeamMemberName } from "~/utils/user";
 
-export const meta = () => [{ title: appendToMetaTitle("Release kit custody") }];
+export const meta = () => [{ title: appendToMetaTitle("Kitbeheer vrijgeven") }];
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -97,7 +97,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       if (custody?.custodian?.userId !== userId) {
         throw new ShelfError({
           cause: null,
-          title: "Action not allowed",
+          title: "Actie niet toegestaan",
           message: "Self user can release custody of themselves only.",
           additionalData: { userId, kitId },
           label: "Kit",
@@ -154,7 +154,7 @@ export default function ReleaseKitCustody() {
           <UserXIcon />
         </div>
         <div className="mb-5">
-          <h4>Release custody of kit</h4>
+          <h4>Beheer van kit vrijgeven</h4>
           <p>
             Are you sure you want to release{" "}
             {isSelfService ? (

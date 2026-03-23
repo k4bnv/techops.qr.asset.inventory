@@ -54,7 +54,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
       ignoreFilters: isManageAssetsUrl,
     });
 
-    const header: HeaderData = { title: "Kit assets" };
+    const header: HeaderData = { title: "Kitassets" };
 
     const modelName = {
       singular: "asset",
@@ -123,12 +123,12 @@ export default function KitAssets() {
         <List
           ItemComponent={ListContent}
           customEmptyStateContent={{
-            title: "Not assets in kit",
+            title: "Geen assets in kit",
             text: userRoleCanManageAssets
               ? "Start by adding your first asset."
               : "",
             newButtonContent: userRoleCanManageAssets
-              ? "Add assets"
+              ? "Assets toevoegen"
               : undefined,
             newButtonRoute: userRoleCanManageAssets
               ? "manage-assets?status=AVAILABLE"

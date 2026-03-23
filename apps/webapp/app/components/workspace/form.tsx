@@ -28,7 +28,7 @@ import { Card } from "../shared/card";
 import { Spinner } from "../shared/spinner";
 
 export const NewWorkspaceFormSchema = z.object({
-  name: z.string().min(2, "Name is required"),
+  name: z.string().min(2, "Naam is vereist"),
   currency: z.custom<Currency>(),
 });
 
@@ -95,7 +95,7 @@ export const WorkspaceForm = ({ name, currency, children }: Props) => {
         </FormRow>
 
         <FormRow
-          rowLabel={"Main image"}
+          rowLabel={"Hoofdafbeelding"}
           className="border-b-0"
           subHeading={
             "Used to place your organization's logo or symbol. For best results, use a square image."
@@ -111,7 +111,7 @@ export const WorkspaceForm = ({ name, currency, children }: Props) => {
               name="image"
               type="file"
               onChange={validateFile}
-              label={"Main image"}
+              label={"Hoofdafbeelding"}
               hideLabel
               error={imageError}
               className="mt-2"
@@ -137,7 +137,7 @@ export const WorkspaceForm = ({ name, currency, children }: Props) => {
               name={zo.fields.currency()}
             >
               <SelectTrigger className="px-3.5 py-3">
-                <SelectValue placeholder="Choose a currency" />
+                <SelectValue placeholder="Kies een valuta" />
               </SelectTrigger>
               <SelectContent
                 position="popper"

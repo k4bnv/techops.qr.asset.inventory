@@ -250,7 +250,7 @@ export async function getLocation(
 
     throw new ShelfError({
       cause,
-      title: "Location not found",
+      title: "Locatie niet gevonden",
       message:
         "The location you are trying to access does not exist or you do not have permission to access it.",
       additionalData: {
@@ -553,7 +553,7 @@ async function validateParentLocation({
   if (parentDepth + 1 + subtreeDepth > MAX_LOCATION_DEPTH) {
     throw new ShelfError({
       cause: null,
-      title: "Not allowed",
+      title: "Niet toegestaan",
       message: `Locations cannot be nested deeper than ${MAX_LOCATION_DEPTH} levels.`,
       additionalData: {
         parentId,
@@ -1342,7 +1342,7 @@ async function createBulkLocationChangeNotes({
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          message: "User not found",
+          message: "Gebruiker niet gevonden",
           additionalData: { userId },
           label,
         });
@@ -1493,7 +1493,7 @@ export async function updateLocationAssets({
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          message: "Location not found",
+          message: "Locatie niet gevonden",
           additionalData: { locationId, userId, organizationId },
           status: 404,
           label: "Location",
@@ -1683,7 +1683,7 @@ export async function updateLocationKits({
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          message: "Location not found",
+          message: "Locatie niet gevonden",
           additionalData: { locationId, userId, organizationId },
           status: 404,
           label: "Location",

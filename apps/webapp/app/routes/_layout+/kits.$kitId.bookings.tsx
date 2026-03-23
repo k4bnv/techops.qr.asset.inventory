@@ -119,7 +119,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
       ...teamMembersData,
       ...tagsData,
       searchFieldTooltip: {
-        title: "Search your bookings",
+        title: "Uw reserveringen doorzoeken",
         text: parseMarkdownToReact(bookingsSearchFieldTooltipText),
       },
     });

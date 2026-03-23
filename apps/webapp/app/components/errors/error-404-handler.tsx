@@ -100,7 +100,7 @@ export default function Error404Handler({
               >
                 <Select name="organizationId" disabled={disabled}>
                   <SelectTrigger className="mb-4 max-w-80 px-3.5 py-2 text-left text-gray-500">
-                    <SelectValue placeholder="Select workspace to switch" />
+                    <SelectValue placeholder="Werkruimte selecteren om naar te schakelen" />
                   </SelectTrigger>
                   <SelectContent
                     position="popper"

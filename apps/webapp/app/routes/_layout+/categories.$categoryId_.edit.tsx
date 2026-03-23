@@ -29,12 +29,12 @@ import { requirePermission } from "~/utils/roles.server";
 import { zodFieldIsRequired } from "~/utils/zod";
 
 export const UpdateCategoryFormSchema = z.object({
-  name: z.string().min(3, "Name is required"),
+  name: z.string().min(3, "Naam is vereist"),
   description: z.string(),
   color: z.string().regex(/^#[0-9a-fA-F]{6}$/),
 });
 
-const title = "Edit category";
+const title = "Categorie bewerken";
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -108,7 +108,7 @@ export async function action({ context, request, params }: LoaderFunctionArgs) {
 
     sendNotification({
       title: "Category Updated",
-      message: "Your category has been updated successfully",
+      message: "Uw categorie is succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });
@@ -138,7 +138,7 @@ export default function EditCategory() {
         <div className="gap-3 lg:flex lg:items-end">
           <Input
             label="Name"
-            placeholder="Category name"
+            placeholder="Categorienaam"
             className="mb-4 lg:mb-0 lg:max-w-[180px]"
             name={zo.fields.name()}
             disabled={disabled}
@@ -149,7 +149,7 @@ export default function EditCategory() {
             defaultValue={category.name}
           />
           <Input
-            label="Description"
+            label="Beschrijving"
             placeholder="Description (optional)"
             name={zo.fields.description()}
             disabled={disabled}

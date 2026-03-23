@@ -35,17 +35,17 @@ import { validEmail } from "~/utils/misc";
 import { validateNonSSOSignup } from "~/utils/sso.server";
 
 export function loader({ context }: LoaderFunctionArgs) {
-  const title = "Create an account";
-  const subHeading = "Start your journey with TechOps";
+  const title = "Account aanmaken";
+  const subHeading = "Begin uw reis met TechOps";
   const { disableSignup } = config;
 
   try {
     if (disableSignup) {
       throw new ShelfError({
         cause: null,
-        title: "Signup is disabled",
+        title: "Aanmelden is uitgeschakeld",
         message:
-          "For more information, please contact your workspace administrator.",
+          "Neem contact op met uw werkruimtebeheerder voor meer informatie.",
         label: "User onboarding",
         status: 403,
         shouldBeCaptured: false,
@@ -68,21 +68,21 @@ const JoinFormSchema = z
       .string()
       .transform((email) => email.toLowerCase())
       .refine(validEmail, () => ({
-        message: "Please enter a valid email",
+        message: "Vul een geldig e-mailadres in",
       })),
     password: z
       .string()
-      .min(8, "Your password is too short. Min 8 characters are required."),
+      .min(8, "Uw wachtwoord is te kort. Minimaal 8 tekens vereist."),
     confirmPassword: z
       .string()
-      .min(8, "Your password is too short. Min 8 characters are required."),
+      .min(8, "Uw wachtwoord is te kort. Minimaal 8 tekens vereist."),
     redirectTo: z.string().optional(),
   })
   .superRefine(({ password, confirmPassword }, ctx) => {
     if (password !== confirmPassword) {
       return ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Password and confirm password must match",
+        message: "Wachtwoord en bevestig wachtwoord moeten overeenkomen",
         path: ["confirmPassword"],
       });
     }
@@ -107,7 +107,7 @@ export async function action({ request }: ActionFunctionArgs) {
         if (existingUser) {
           throw new ShelfError({
             cause: null,
-            message: "User with this Email already exits, login instead",
+            message: "Gebruiker met dit e-mailadres bestaat al, log in plaats daarvan in",
             additionalData: {
               email,
             },
@@ -156,7 +156,7 @@ export default function Join() {
           <div>
             <Input
               data-test-id="email"
-              label="Email address"
+              label="E-mailadres"
               placeholder="zaans@huisje.com"
               required
               autoFocus={true}
@@ -170,7 +170,7 @@ export default function Join() {
           </div>
 
           <PasswordInput
-            label="Password"
+            label="Wachtwoord"
             placeholder="**********"
             required
             data-test-id="password"
@@ -181,7 +181,7 @@ export default function Join() {
             error={zo.errors.password()?.message}
           />
           <PasswordInput
-            label="Confirm Password"
+            label="Bevestig wachtwoord"
             placeholder="**********"
             required
             data-test-id="confirmPassword"
@@ -204,7 +204,7 @@ export default function Join() {
             disabled={disabled}
             width="full"
           >
-            Get Started
+            Aan de slag
           </Button>
         </Form>
         <div className="mt-6">
@@ -214,7 +214,7 @@ export default function Join() {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="bg-white px-2 text-gray-500">
-                {"Or use a One Time Password"}
+                {"Of gebruik een eenmalig wachtwoord"}
               </span>
             </div>
           </div>
@@ -224,7 +224,7 @@ export default function Join() {
         </div>
         <div className="flex items-center justify-center pt-5">
           <div className="text-center text-sm text-gray-500">
-            {"Already have an account? "}
+            {"Al een account? "}
             <Button
               variant="link"
               to={{
@@ -232,7 +232,7 @@ export default function Join() {
                 search: searchParams.toString(),
               }}
             >
-              Log in
+              Inloggen
             </Button>
           </div>
         </div>

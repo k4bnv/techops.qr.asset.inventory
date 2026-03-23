@@ -26,7 +26,7 @@ import { requirePermission } from "~/utils/roles.server";
 import { zodFieldIsRequired } from "~/utils/zod";
 
 export const NewTagFormSchema = z.object({
-  name: z.string().min(3, "Name is required"),
+  name: z.string().min(3, "Naam is vereist"),
   description: z.string(),
   color: z
     .string()
@@ -102,8 +102,8 @@ export async function action({ context, request }: LoaderFunctionArgs) {
     });
 
     sendNotification({
-      title: "Tag created",
-      message: "Your tag has been created successfully",
+      title: "Tag aangemaakt",
+      message: "Uw tag is succesvol aangemaakt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });
@@ -143,7 +143,7 @@ export default function NewTag() {
               required={zodFieldIsRequired(NewTagFormSchema.shape.name)}
             />
             <Input
-              label="Description"
+              label="Beschrijving"
               placeholder="Description (optional)"
               name={zo.fields.description()}
               disabled={disabled}
@@ -167,7 +167,7 @@ export default function NewTag() {
               labelKey="label"
               valueKey="value"
               label="Use for"
-              placeholder="Select use for"
+              placeholder="Selecteer gebruiksdoel"
               tooltip={{
                 title: "Use for",
                 content:

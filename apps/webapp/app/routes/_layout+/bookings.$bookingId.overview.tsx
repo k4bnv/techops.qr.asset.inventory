@@ -181,7 +181,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     if (!canSeeAllBookings && booking.custodianUserId !== authSession.userId) {
       throw new ShelfError({
         cause: null,
-        message: "You are not authorized to view this booking",
+        message: "U bent niet gemachtigd om deze reservering te bekijken",
         status: 403,
         label: "Booking",
         shouldBeCaptured: false,
@@ -483,7 +483,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
         partialCheckinProgress,
         partialCheckinDetails,
         // Asset search tooltip
-        searchFieldLabel: "Search by asset name",
+        searchFieldLabel: "Zoeken op assetnaam",
       }),
       {
         headers: [setCookie(await userPrefs.serialize(cookie))],
@@ -653,8 +653,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       });
 
       sendNotification({
-        title: "Booking deleted",
-        message: "Your booking has been deleted successfully",
+        title: "Reservering verwijderd",
+        message: "Uw reservering is succesvol verwijderd",
         icon: { name: "trash", variant: "error" },
         senderId: userId,
       });
@@ -722,8 +722,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Booking saved",
-          message: "Your booking has been saved successfully",
+          title: "Reservering opgeslagen",
+          message: "Uw reservering is succesvol opgeslagen",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -782,8 +782,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Booking reserved",
-          message: "Your booking has been reserved successfully",
+          title: "Reservering bevestigd",
+          message: "Uw reservering is succesvol bevestigd",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -820,7 +820,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Booking checked-out",
+          title: "Reservering uitgecheckt",
           message: "Your booking has been checked-out successfully",
           icon: { name: "success", variant: "success" },
           senderId: userId,
@@ -838,7 +838,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         ) {
           throw new ShelfError({
             cause: null,
-            title: "Not allowed to quick check-in",
+            title: "Snel inchecken niet toegestaan",
             message:
               "Explicit check-in is required in this organization. Please use the explicit check-in scanner.",
             status: 403,
@@ -851,7 +851,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         ) {
           throw new ShelfError({
             cause: null,
-            title: "Not allowed to quick check-in",
+            title: "Snel inchecken niet toegestaan",
             message:
               "Explicit check-in is required in this organization. Please use the explicit check-in scanner.",
             status: 403,
@@ -891,7 +891,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Booking checked-in",
+          title: "Reservering ingecheckt",
           message: "Your booking has been checked-in successfully",
           icon: { name: "success", variant: "success" },
           senderId: userId,
@@ -948,8 +948,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Asset removed",
-          message: "Your asset has been removed from the booking",
+          title: "Asset verwijderd",
+          message: "Uw asset is verwijderd uit de reservering",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -962,8 +962,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         await archiveBooking({ id, organizationId, userId: user.id });
 
         sendNotification({
-          title: "Booking archived",
-          message: "Your booking has been archived successfully",
+          title: "Reservering gearchiveerd",
+          message: "Uw reservering is succesvol gearchiveerd",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -1005,8 +1005,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Booking canceled",
-          message: "Your booking has been canceled successfully",
+          title: "Reservering geannuleerd",
+          message: "Uw reservering is succesvol geannuleerd",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -1053,8 +1053,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Kit removed",
-          message: "Your kit has been removed from the booking",
+          title: "Kit verwijderd",
+          message: "Uw kit is verwijderd uit de reservering",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -1067,8 +1067,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         await revertBookingToDraft({ id, organizationId, userId });
 
         sendNotification({
-          title: "Booking reverted",
-          message: "Your booking has been reverted back to draft successfully",
+          title: "Reservering hersteld",
+          message: "Uw reservering is succesvol teruggezet naar concept",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -1107,7 +1107,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Booking extended",
+          title: "Reservering verlengd",
           message: "Your booking has been extended to new end date.",
           icon: { name: "success", variant: "success" },
           senderId: userId,
@@ -1176,8 +1176,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Kit removed",
-          message: "Your kit has been removed from the booking",
+          title: "Kit verwijderd",
+          message: "Uw kit is verwijderd uit de reservering",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });

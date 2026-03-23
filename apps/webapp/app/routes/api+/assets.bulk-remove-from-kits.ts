@@ -51,7 +51,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
     sendNotification({
       icon: { name: "success", variant: "success" },
       senderId: userId,
-      title: "Bulk assets removed from kits",
+      title: "Assets in bulk uit kits verwijderd",
       message: `Successfully removed ${assetIds.length} assets from kits.`,
     });
 

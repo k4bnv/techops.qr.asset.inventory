@@ -126,7 +126,7 @@ export async function resolveUserAction(
         .catch((cause) => {
           throw new ShelfError({
             cause,
-            message: "Organization not found",
+            message: "Organisatie niet gevonden",
             additionalData: { organizationId, targetUserId, userId },
             label: "Team",
           });
@@ -185,7 +185,7 @@ export async function resolveUserAction(
         });
 
       sendNotification({
-        title: "Invitation cancelled",
+        title: "Uitnodiging geannuleerd",
         message: "The invitation has successfully been cancelled.",
         icon: { name: "success", variant: "success" },
         senderId: userId,
@@ -223,7 +223,7 @@ export async function resolveUserAction(
       if (!role) {
         throw new ShelfError({
           cause: null,
-          message: "Invalid role",
+          message: "Ongeldige rol",
           additionalData: { userFriendlyRole },
           label: "Team",
         });
@@ -265,7 +265,7 @@ export async function resolveUserAction(
 
       if (invite) {
         sendNotification({
-          title: "Successfully invited user",
+          title: "Gebruiker succesvol uitgenodigd",
           message:
             "They will receive an email in which they can complete their registration.",
           icon: { name: "success", variant: "success" },
@@ -306,7 +306,7 @@ export async function resolveUserAction(
       if (targetUserId === userId) {
         throw new ShelfError({
           cause: null,
-          message: "You cannot change your own role",
+          message: "U kunt uw eigen rol niet wijzigen",
           label: "Team",
         });
       }
@@ -319,7 +319,7 @@ export async function resolveUserAction(
       if (!targetUserOrg) {
         throw new ShelfError({
           cause: null,
-          message: "User is not a member of this organization",
+          message: "Gebruiker is geen lid van deze organisatie",
           label: "Team",
         });
       }
@@ -435,7 +435,7 @@ export async function resolveUserAction(
       });
 
       sendNotification({
-        title: "Role updated",
+        title: "Rol bijgewerkt",
         message: `User role has been changed to ${roleName}`,
         icon: { name: "success", variant: "success" },
         senderId: userId,
@@ -446,7 +446,7 @@ export async function resolveUserAction(
     default: {
       throw new ShelfError({
         cause: null,
-        message: "Invalid action",
+        message: "Ongeldige actie",
         additionalData: { intent },
         label: "Team",
       });
@@ -486,7 +486,7 @@ export async function generateUniqueUsername(email: string): Promise<string> {
 
   throw new ShelfError({
     cause: null,
-    message: "Unable to generate unique username after maximum attempts",
+    message: "Kan geen unieke gebruikersnaam genereren na maximale pogingen",
     label: "User",
     additionalData: { email, attempts: MAX_USERNAME_ATTEMPTS },
   });

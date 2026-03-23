@@ -16,20 +16,20 @@ const filterValueSchema = {
         if (dates.length !== 2) return true;
         return new Date(dates[0]) <= new Date(dates[1]);
       },
-      { message: "Start date must be before or equal to end date" }
+      { message: "Startdatum moet voor of gelijk zijn aan einddatum" }
     ),
   ]),
   amount: z.union([
     // Single amount validation (must be positive)
     z.coerce
       .number()
-      .min(0, "Amount must be positive")
+      .min(0, "Bedrag moet positief zijn")
       .transform((val) => (Number.isNaN(val) ? undefined : val)),
 
     // Range (between) validation for amounts
     z
-      .array(z.coerce.number().min(0, "Amount must be positive"))
-      .length(2, "Range must have two values")
+      .array(z.coerce.number().min(0, "Bedrag moet positief zijn"))
+      .length(2, "Bereik moet twee waarden hebben")
       .refine(
         (numbers) => {
           // Skip validation if any number is NaN
@@ -41,7 +41,7 @@ const filterValueSchema = {
           return true;
         },
         {
-          message: "Start value must be less than or equal to end value",
+          message: "Startwaarde moet kleiner of gelijk zijn aan eindwaarde",
         }
       ),
   ]),
@@ -55,7 +55,7 @@ const filterValueSchema = {
     // Range (between) validation
     z
       .array(z.coerce.number())
-      .length(2, "Range must have two values")
+      .length(2, "Bereik moet twee waarden hebben")
       .refine(
         (numbers) => {
           // Skip validation if any number is NaN
@@ -67,7 +67,7 @@ const filterValueSchema = {
           return true;
         },
         {
-          message: "Start value must be less than or equal to end value",
+          message: "Startwaarde moet kleiner of gelijk zijn aan eindwaarde",
         }
       ),
   ]),

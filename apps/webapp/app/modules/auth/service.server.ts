@@ -430,7 +430,7 @@ export async function validateSession(token: string) {
       Logger.error(
         new ShelfError({
           cause: null,
-          message: "Refresh token is invalid or has been revoked",
+          message: "Vernieuwingstoken is ongeldig of is ingetrokken",
           label,
           shouldBeCaptured: false,
         })
@@ -457,7 +457,7 @@ export async function refreshAccessToken(
     if (!refreshToken) {
       throw new ShelfError({
         cause: null,
-        message: "Refresh token is required",
+        message: "Vernieuwingstoken is vereist",
         label,
       });
     }

@@ -33,7 +33,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     if (paramOrgId !== organizationId) {
       throw new ShelfError({
         cause: null,
-        message: "Organization access denied",
+        message: "Toegang tot organisatie geweigerd",
         label: "Working hours",
       });
     }

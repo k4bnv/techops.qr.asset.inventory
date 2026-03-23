@@ -14,7 +14,7 @@ export default function BulkReleaseCustodyDialog() {
     <BulkUpdateDialogContent
       ref={zo.ref}
       type="release-custody"
-      title="Release custody over kits"
+      title="Beheer over kits vrijgeven"
       description="Are you sure you want to release custody of all selected kits?"
       actionUrl="/api/kits/bulk-actions"
       arrayFieldId="kitIds"

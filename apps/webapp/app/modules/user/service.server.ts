@@ -108,7 +108,7 @@ export async function getUserByID(
   } catch (cause) {
     throw new ShelfError({
       cause,
-      title: "User not found",
+      title: "Gebruiker niet gevonden",
       message: "The user you are trying to access does not exist.",
       additionalData: { id, ...options },
       label,
@@ -405,7 +405,7 @@ export async function createUserFromSSO(
     if (roles.length === 0) {
       throw new ShelfError({
         cause: null,
-        title: "No groups assigned",
+        title: "Geen groepen toegewezen",
         message:
           "The user has no groups assigned that are available in shelf. Please contact an administrator for more information",
         label: "Auth",
@@ -633,7 +633,7 @@ export async function updateUserFromSSO(
     if (desiredRoles.length === 0) {
       throw new ShelfError({
         cause: null,
-        title: "No groups assigned",
+        title: "Geen groepen toegewezen",
         message:
           "The user has no groups assigned that are available in shelf. Please contact an administrator for more information",
         label: "Auth",
@@ -1264,7 +1264,7 @@ export async function softDeleteUser(id: User["id"]) {
     } else {
       throw new ShelfError({
         cause,
-        message: "Unable to delete user",
+        message: "Kan gebruiker niet verwijderen",
         additionalData: { id },
         label,
       });
@@ -1425,7 +1425,7 @@ export async function changeUserRole({
     if (!userOrg) {
       throw new ShelfError({
         cause: null,
-        message: "User is not a member of this organization",
+        message: "Gebruiker is geen lid van deze organisatie",
         additionalData: { userId, organizationId },
         label,
         shouldBeCaptured: false,
@@ -1451,7 +1451,7 @@ export async function changeUserRole({
     ) {
       throw new ShelfError({
         cause: null,
-        title: "Insufficient permissions",
+        title: "Onvoldoende rechten",
         message: "Only the workspace owner can promote users to Administrator.",
         label,
         status: 403,
@@ -1466,7 +1466,7 @@ export async function changeUserRole({
     ) {
       throw new ShelfError({
         cause: null,
-        title: "Insufficient permissions",
+        title: "Onvoldoende rechten",
         message: "Only the workspace owner can change an Administrator's role.",
         label,
         status: 403,
@@ -1731,7 +1731,7 @@ export async function getUserFromOrg<T extends Prisma.UserInclude | undefined>({
 
       throw new ShelfError({
         cause: null,
-        title: "User not found",
+        title: "Gebruiker niet gevonden",
         message: "",
         additionalData: {
           model: "teamMember",

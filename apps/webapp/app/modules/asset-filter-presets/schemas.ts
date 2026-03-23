@@ -6,7 +6,7 @@ import { z } from "zod";
  */
 export const CreatePresetFormSchema = z.object({
   intent: z.literal("create-preset"),
-  name: z.string().min(1, "Name is required").max(60, "Name too long"),
+  name: z.string().min(1, "Naam is vereist").max(60, "Naam te lang"),
   query: z.string(),
 });
 
@@ -17,7 +17,7 @@ export const CreatePresetFormSchema = z.object({
 export const RenamePresetFormSchema = z.object({
   intent: z.literal("rename-preset"),
   presetId: z.string().min(1, "Preset ID is required"),
-  name: z.string().min(1, "Name is required").max(60, "Name too long"),
+  name: z.string().min(1, "Naam is vereist").max(60, "Naam te lang"),
 });
 
 /**

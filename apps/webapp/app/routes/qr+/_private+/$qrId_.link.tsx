@@ -66,7 +66,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     if (qr?.organizationId && qr.organizationId !== organizationId) {
       throw new ShelfError({
         message: "This QR code doesn't belong to your current organization.",
-        title: "Not allowed",
+        title: "Niet toegestaan",
         label: "QR",
         status: 403,
         cause: null,
@@ -75,7 +75,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
 
     return payload({
       header: {
-        title: "Link QR with asset",
+        title: "QR koppelen aan asset",
       },
       qrId,
       organizations,

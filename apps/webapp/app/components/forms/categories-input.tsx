@@ -55,8 +55,8 @@ export default function CategoriesInput({
                 extraContent={({ onItemCreated, closePopover }) => (
                   <InlineEntityCreationDialog
                     type="category"
-                    title="Create new category"
-                    buttonLabel="Create new category"
+                    title="Nieuwe categorie aanmaken"
+                    buttonLabel="Nieuwe categorie aanmaken"
                     onCreated={(created) => {
                       if (created?.type !== "category") return;
 

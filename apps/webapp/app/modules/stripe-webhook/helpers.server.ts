@@ -229,7 +229,7 @@ export async function constructVerifiedWebhookEvent(request: Request): Promise<{
     .catch((cause) => {
       throw new ShelfError({
         cause,
-        message: "No user found",
+        message: "Geen gebruiker gevonden",
         additionalData: { customerId },
         label: "Stripe webhook",
         status: 500,

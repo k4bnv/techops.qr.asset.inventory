@@ -39,7 +39,7 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 import { slugify } from "~/utils/slugify";
 
-const title = "New asset";
+const title = "Nieuwe asset";
 const header = {
   title,
 };
@@ -230,8 +230,8 @@ export async function action({ context, request }: LoaderFunctionArgs) {
     await Promise.all(postCreationTasks);
 
     sendNotification({
-      title: "Asset created",
-      message: "Your asset has been created successfully",
+      title: "Asset aangemaakt",
+      message: "Uw asset is succesvol aangemaakt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });
@@ -259,7 +259,7 @@ export default function NewAssetPage() {
 
   return (
     <div className="relative">
-      <Header title={title ? title : "Untitled Asset"} />
+      <Header title={title ? title : "Naamloze asset"} />
       <div>
         <AssetForm
           qrId={qrId}

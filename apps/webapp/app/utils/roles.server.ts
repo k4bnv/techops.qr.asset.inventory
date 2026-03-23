@@ -18,7 +18,7 @@ export async function requireUserWithPermission(name: Roles, userId: string) {
   } catch (cause) {
     throw new ShelfError({
       cause,
-      message: "You do not have permission to access this resource",
+      message: "U heeft geen toestemming om toegang te krijgen tot deze resource",
       additionalData: { userId, name },
       label: "Permission",
       status: 403,

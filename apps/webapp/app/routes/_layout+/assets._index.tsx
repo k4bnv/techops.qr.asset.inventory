@@ -94,7 +94,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
           throw new ShelfError({
             cause,
             message:
-              "We can't find your user data. Please try again or contact support.",
+              "Uw gebruikersgegevens zijn niet gevonden. Probeer het opnieuw of neem contact op met ondersteuning.",
             additionalData: { userId },
             label: "Assets",
           });
@@ -118,7 +118,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       });
       throw new ShelfError({
         cause: null,
-        title: "Not allowed",
+        title: "Niet toegestaan",
         message:
           "U heeft geen toestemming om de geavanceerde modus te openen. We schakelen u automatisch terug naar de 'eenvoudige' modus. Herlaad de pagina.",
         label: "Assets",

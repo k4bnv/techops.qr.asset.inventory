@@ -32,14 +32,14 @@ const DayScheduleSchema = z
       if (!data.openTime) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Open time is required when day is marked as open",
+          message: "Begintijd is vereist wanneer de dag als open is gemarkeerd",
           path: ["openTime"],
         });
       }
       if (!data.closeTime) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Close time is required when day is marked as open",
+          message: "Eindtijd is vereist wanneer de dag als open is gemarkeerd",
           path: ["closeTime"],
         });
       }
@@ -57,7 +57,7 @@ const DayScheduleSchema = z
         if (openTotalMinutes >= closeTotalMinutes) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: "Close time must be after open time",
+            message: "Eindtijd moet na begintijd liggen",
             path: ["closeTime"],
           });
         }
@@ -85,7 +85,7 @@ export const WeeklyScheduleSchema = z
     if (!hasOpenDay) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "At least one day must be marked as open",
+        message: "Minimaal één dag moet als open zijn gemarkeerd",
       });
     }
   });
@@ -118,7 +118,7 @@ export const CreateOverrideFormSchema = z
     if (isNaN(date.getTime())) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Invalid date",
+        message: "Ongeldige datum",
         path: ["date"],
       });
     }
@@ -128,7 +128,7 @@ export const CreateOverrideFormSchema = z
       if (!data.openTime || data.openTime.trim() === "") {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Open time is required when override is open",
+          message: "Begintijd is vereist wanneer de uitzondering open is",
           path: ["openTime"],
         });
       } else {
@@ -136,7 +136,7 @@ export const CreateOverrideFormSchema = z
         if (!timeValidation.success) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: "Invalid open time format",
+            message: "Ongeldig begintijdformaat",
             path: ["openTime"],
           });
         }
@@ -145,7 +145,7 @@ export const CreateOverrideFormSchema = z
       if (!data.closeTime || data.closeTime.trim() === "") {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Close time is required when override is open",
+          message: "Eindtijd is vereist wanneer de uitzondering open is",
           path: ["closeTime"],
         });
       } else {
@@ -153,7 +153,7 @@ export const CreateOverrideFormSchema = z
         if (!timeValidation.success) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: "Invalid close time format",
+            message: "Ongeldig eindtijdformaat",
             path: ["closeTime"],
           });
         }
@@ -176,7 +176,7 @@ export const CreateOverrideFormSchema = z
           if (openTotalMinutes >= closeTotalMinutes) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
-              message: "Close time must be after open time",
+              message: "Eindtijd moet na begintijd liggen",
               path: ["closeTime"],
             });
           }

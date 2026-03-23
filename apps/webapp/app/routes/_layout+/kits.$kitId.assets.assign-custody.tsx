@@ -54,7 +54,7 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 import { resolveTeamMemberName } from "~/utils/user";
 
-export const meta = () => [{ title: appendToMetaTitle("Assign kit custody") }];
+export const meta = () => [{ title: appendToMetaTitle("Kitbeheer toewijzen") }];
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -113,7 +113,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     if (someUnavailableAsset) {
       sendNotification({
         title: "Cannot assign custody at this time.",
-        message: "One of the asset in kit is not available",
+        message: "Een van de assets in de kit is niet beschikbaar",
         icon: { name: "trash", variant: "error" },
         senderId: userId,
       });
@@ -183,7 +183,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       AssignCustodySchema,
       {
         additionalData: { userId, kitId },
-        message: "Please select a team member",
+        message: "Selecteer een teamlid",
       }
     );
 
@@ -216,7 +216,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     }).catch((cause) => {
       throw new ShelfError({
         cause,
-        title: "Team member not found",
+        title: "Teamlid niet gevonden",
         message: "The selected team member could not be found.",
         additionalData: { userId, kitId, custodianId },
         label: "Kit",
@@ -227,7 +227,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     if (isSelfService && custodianTeamMember.userId !== user.id) {
       throw new ShelfError({
         cause: null,
-        title: "Action not allowed",
+        title: "Actie niet toegestaan",
         message: "Self user can only assign custody to themselves only.",
         additionalData: { userId, kitId, custodianId },
         label: "Kit",
@@ -346,10 +346,10 @@ export default function GiveKitCustody() {
               deletedAt: null,
             }}
             fieldName="custodian"
-            contentLabel="Team members"
+            contentLabel="Teamleden"
             initialDataKey="teamMembers"
             countKey="totalTeamMembers"
-            placeholder="Select a team member"
+            placeholder="Selecteer een teamlid"
             closeOnSelect
             transformItem={(item) => ({
               ...item,

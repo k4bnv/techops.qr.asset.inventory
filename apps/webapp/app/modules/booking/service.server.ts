@@ -512,8 +512,8 @@ export async function updateBasicBooking({
     if (notAllowedStatus.includes(booking.status)) {
       throw new ShelfError({
         cause: null,
-        title: "Update failed",
-        message: "Booking update is not allowed at this state of booking",
+        title: "Bijwerken mislukt",
+        message: "Reserveringsbijwerking is niet toegestaan in deze reserveringsstatus",
         label,
       });
     }
@@ -564,7 +564,7 @@ export async function updateBasicBooking({
       } else {
         throw new ShelfError({
           cause: null,
-          title: "Update failed",
+          title: "Bijwerken mislukt",
           message:
             "Custodian team member is required to update booking. This should not happen. Please refresh the page and try agian. If the issue persists, contact support",
           label,
@@ -771,7 +771,7 @@ export async function updateBasicBooking({
     throw new ShelfError({
       cause,
       label,
-      title: "Update failed",
+      title: "Bijwerken mislukt",
       message: isLikeShelfError(cause)
         ? cause.message
         : "Could not update the details of booking",
@@ -861,7 +861,7 @@ export async function reserveBooking({
         throw new ShelfError({
           cause: null,
           label,
-          title: "Booking conflict",
+          title: "Reserveringsconflict",
           message: `Cannot reserve booking. Some assets are already booked or checked out: ${conflictedAssetNames}${additionalText}. Please remove conflicted assets and try again.`,
           shouldBeCaptured: false,
         });
@@ -941,7 +941,7 @@ export async function reserveBooking({
     } else {
       throw new ShelfError({
         cause: null,
-        title: "Update failed",
+        title: "Bijwerken mislukt",
         message:
           "Custodian team member is required to update booking. This should not happen. Please refresh the page and try agian. If the issue persists, contact support",
         label,
@@ -1152,7 +1152,7 @@ export async function checkoutBooking({
       throw new ShelfError({
         cause: null,
         label,
-        title: "Assets in custody",
+        title: "Assets in beheer",
         message: `Cannot check out booking. Some assets are currently in custody: ${assetNames}${additionalText}. Please release custody first or remove these assets from the booking.`,
         shouldBeCaptured: false,
       });
@@ -2201,7 +2201,7 @@ export async function archiveBooking({
         throw new ShelfError({
           cause,
           label,
-          title: "Not found",
+          title: "Niet gevonden",
           message:
             "Booking not found, are you sure it exists in current workspace?",
         });
@@ -2684,7 +2684,7 @@ export async function extendBooking({
     throw new ShelfError({
       cause,
       label,
-      title: "Error",
+      title: "Fout",
       message: isShelfError
         ? cause.message
         : "Something went wrong while extending the booking.",
@@ -2749,7 +2749,7 @@ export async function getBookingsFilterData({
     if (!teamMember) {
       throw new ShelfError({
         cause: null,
-        title: "Team member not found",
+        title: "Teamlid niet gevonden",
         message:
           "You are not part of a team in this organization. Please contact your organization admin to resolve this",
         label: "Booking",
@@ -3416,7 +3416,7 @@ export async function getBooking<T extends Prisma.BookingInclude | undefined>(
 
       throw new ShelfError({
         cause: null,
-        title: "Booking not found",
+        title: "Reservering niet gevonden",
         message: "",
         additionalData: {
           model: "booking",
@@ -3437,7 +3437,7 @@ export async function getBooking<T extends Prisma.BookingInclude | undefined>(
 
     throw new ShelfError({
       cause,
-      title: "Booking not found",
+      title: "Reservering niet gevonden",
       message:
         "The booking you are trying to access does not exist or you do not have permission to access it.",
       additionalData: {
@@ -4514,7 +4514,7 @@ export async function loadBookingsData({
 
   // Set up header and model name
   const header: HeaderData = {
-    title: "Bookings",
+    title: "Reserveringen",
   };
 
   const modelName = {

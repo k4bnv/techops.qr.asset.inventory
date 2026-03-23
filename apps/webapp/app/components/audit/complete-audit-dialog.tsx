@@ -54,7 +54,7 @@ export default function CompleteAuditDialog({
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button disabled={disabled} variant="primary" type="button">
-          Complete Audit
+          Audit voltooien
         </Button>
       </AlertDialogTrigger>
 
@@ -74,7 +74,7 @@ export default function CompleteAuditDialog({
           <AlertDialogHeader>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="size-5 text-success-500" />
-              <AlertDialogTitle>Complete Audit</AlertDialogTitle>
+              <AlertDialogTitle>Audit voltooien</AlertDialogTitle>
             </div>
             <button
               type="button"
@@ -139,7 +139,7 @@ export default function CompleteAuditDialog({
                   ref={textareaRef}
                   id="completion-note"
                   name="note"
-                  placeholder="Add completion notes here..."
+                  placeholder="Voeg afsluitende notities toe hier..."
                   className="min-h-[120px] w-full rounded-md border border-gray-300 px-3 py-2 text-sm placeholder:text-gray-400 focus:border-primary-300 focus:outline-none focus:ring-2 focus:ring-primary-300/20"
                   rows={5}
                 />
@@ -156,7 +156,7 @@ export default function CompleteAuditDialog({
               </Button>
             </AlertDialogCancel>
             <Button type="submit" variant="primary" disabled={formDisabled}>
-              {formDisabled ? "Completing..." : "Complete Audit"}
+              {formDisabled ? "Completing..." : "Audit voltooien"}
             </Button>
           </AlertDialogFooter>
         </Form>

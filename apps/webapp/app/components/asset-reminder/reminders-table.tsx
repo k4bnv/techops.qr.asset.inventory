@@ -34,7 +34,7 @@ export default function RemindersTable({
   const { assetId } = useParams<{ assetId: string }>();
 
   const emptyStateTitle = isAssetReminderPage
-    ? "No reminders for this asset"
+    ? "Geen herinneringen voor dit asset"
     : "No reminders created yet.";
 
   return (
@@ -77,11 +77,11 @@ export default function RemindersTable({
         }}
         headerChildren={
           <>
-            <Th>Message</Th>
+            <Th>Bericht</Th>
             <When truthy={!isAssetReminderPage}>
               <Td>Asset</Td>
             </When>
-            <Th>Alert Date</Th>
+            <Th>Waarschuwingsdatum</Th>
             <Th>Status</Th>
             <Th>Users</Th>
           </>
@@ -111,7 +111,7 @@ function ListContent({
 }) {
   const now = new Date();
   const status =
-    now < new Date(item.alertDateTime) ? "Pending" : "Reminder sent";
+    now < new Date(item.alertDateTime) ? "In afwachting" : "Herinnering verzonden";
 
   return (
     <>
@@ -135,7 +135,7 @@ function ListContent({
       <Td>
         <Badge
           color={
-            status === "Pending" ? colors.yellow["500"] : colors.green["500"]
+            status === "In afwachting" ? colors.yellow["500"] : colors.green["500"]
           }
         >
           {status}
@@ -144,7 +144,7 @@ function ListContent({
       <Td>
         <ReminderTeamMembers
           teamMembers={item.teamMembers}
-          isAlreadySent={status === "Reminder sent"}
+          isAlreadySent={status === "Herinnering verzonden"}
         />
       </Td>
       <Td>

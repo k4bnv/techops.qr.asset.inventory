@@ -44,8 +44,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
         await bulkDeleteLocations({ locationIds, organizationId });
 
         sendNotification({
-          title: "Locations deleted",
-          message: "Your locations has been deleted successfully",
+          title: "Locaties verwijderd",
+          message: "Uw locaties zijn succesvol verwijderd",
           icon: { name: "trash", variant: "error" },
           senderId: userId,
         });

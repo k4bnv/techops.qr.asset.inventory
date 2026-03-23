@@ -18,10 +18,10 @@ export const setReminderSchema = z.object({
   message: z.string().min(1, "Please enter message."),
   alertDateTime: z.coerce
     .date()
-    .min(new Date(), "Please select a date in the future"),
+    .min(new Date(), "Selecteer een datum in de toekomst"),
   teamMembers: z
     .array(z.string())
-    .min(1, "Please select at least one team member"),
+    .min(1, "Selecteer minimaal één teamlid"),
   redirectTo: z.string().optional(),
 });
 
@@ -120,7 +120,7 @@ export default function SetOrEditReminderDialog({
               disabled={disabled}
               autoFocus
               required
-              placeholder="Enter name of reminder"
+              placeholder="Voer naam van herinnering in"
               className="mb-4"
             />
 
@@ -132,7 +132,7 @@ export default function SetOrEditReminderDialog({
                   validationErrors?.message?.message ||
                   zo.errors.message()?.message
                 }
-                label="Message"
+                label="Bericht"
                 disabled={disabled}
                 autoFocus
                 required
@@ -169,7 +169,7 @@ export default function SetOrEditReminderDialog({
                   validationErrors?.alertDateTime?.message ||
                   zo.errors.alertDateTime()?.message
                 }
-                label="Reminder Date"
+                label="Herinneringsdatum"
                 disabled={disabled}
                 autoFocus
                 required

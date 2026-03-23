@@ -41,7 +41,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
         .catch((cause) => {
           throw new ShelfError({
             cause,
-            message: "Failed to get team member",
+            message: "Ophalen van teamlid mislukt",
             additionalData: { teamMemberId, userId },
             label: "Team",
           });
@@ -87,7 +87,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
     }
 
     sendNotification({
-      title: "Successfully invited user",
+      title: "Gebruiker succesvol uitgenodigd",
       message:
         "They will receive an email in which they can complete their registration.",
       icon: { name: "success", variant: "success" },

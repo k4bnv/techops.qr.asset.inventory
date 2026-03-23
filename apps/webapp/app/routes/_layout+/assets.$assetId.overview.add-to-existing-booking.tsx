@@ -43,7 +43,7 @@ const updateBookingSchema = z.object({
   bookingId: z.string().min(1, "Please select a booking."),
 });
 
-export const meta = () => [{ title: appendToMetaTitle("Add to booking") }];
+export const meta = () => [{ title: appendToMetaTitle("Toevoegen aan reservering") }];
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -146,8 +146,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Booking Updated",
-      message: "Your booking has been updated successfully",
+      title: "Reservering bijgewerkt",
+      message: "Uw reservering is succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

@@ -22,7 +22,7 @@ export const GenerateBatchQr = () => {
   }
   return (
     <div className="flex w-[400px] flex-col gap-2 bg-gray-200 p-4">
-      <h3>Generate Batch</h3>
+      <h3>Batch genereren</h3>
       <Input
         type="name"
         value={batchName}
@@ -37,7 +37,7 @@ export const GenerateBatchQr = () => {
         max={1000}
         value={amount}
         onChange={handleChange}
-        placeholder="Amount"
+        placeholder="Aantal"
         disabled={disabled}
         label="Amount"
       />

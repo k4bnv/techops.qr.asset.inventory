@@ -367,7 +367,7 @@ function SubmittingDialog({
     >
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Adding to location</AlertDialogTitle>
+          <AlertDialogTitle>Aan locatie toevoegen</AlertDialogTitle>
           <AlertDialogDescription asChild>
             <div className="flex flex-col gap-4">
               <SubmissionState

@@ -91,7 +91,7 @@ export async function getLocationNotes({
     if (!location) {
       throw new ShelfError({
         cause: null,
-        message: "Location not found or access denied",
+        message: "Locatie niet gevonden of toegang geweigerd",
         additionalData: { locationId, organizationId },
         label,
         status: 404,

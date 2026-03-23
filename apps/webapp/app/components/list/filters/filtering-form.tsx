@@ -1,1 +1,1 @@
-export const FilteringForm = () => <div>Here comes the filters</div>;
+export const FilteringForm = () => <div>Filters komen hier</div>;

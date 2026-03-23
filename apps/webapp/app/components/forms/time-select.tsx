@@ -176,7 +176,7 @@ export const TimeSelect: FC<TimeSelectProps> = ({
   defaultValue,
   onValueChange,
   disabled = false,
-  placeholder = "Select time",
+  placeholder = "Tijd selecteren",
   required = false,
   className,
   error,

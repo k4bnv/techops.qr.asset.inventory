@@ -26,7 +26,7 @@ import { requirePermission } from "~/utils/roles.server";
 import { zodFieldIsRequired } from "~/utils/zod";
 
 export const UpdateTagFormSchema = z.object({
-  name: z.string().min(3, "Name is required"),
+  name: z.string().min(3, "Naam is vereist"),
   description: z.string(),
   color: z
     .string()
@@ -110,7 +110,7 @@ export async function action({ context, request, params }: LoaderFunctionArgs) {
 
     sendNotification({
       title: "Tag Updated",
-      message: "Your tag has been updated successfully",
+      message: "Uw tag is succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });
@@ -150,7 +150,7 @@ export default function EditTag() {
               defaultValue={tag.name}
             />
             <Input
-              label="Description"
+              label="Beschrijving"
               placeholder="Description (optional)"
               name={zo.fields.description()}
               disabled={disabled}
@@ -182,7 +182,7 @@ export default function EditTag() {
               labelKey="label"
               valueKey="value"
               label="Use for"
-              placeholder="Select use for"
+              placeholder="Selecteer gebruiksdoel"
               tooltip={{
                 title: "Use for",
                 content:

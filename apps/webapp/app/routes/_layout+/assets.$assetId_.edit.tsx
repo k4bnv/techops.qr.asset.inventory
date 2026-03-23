@@ -232,8 +232,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Asset updated",
-      message: "Your asset has been updated successfully",
+      title: "Asset bijgewerkt",
+      message: "Uw asset is succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

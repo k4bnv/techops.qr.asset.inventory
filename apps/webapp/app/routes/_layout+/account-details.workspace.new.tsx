@@ -255,10 +255,10 @@ export async function action({ context, request }: ActionFunctionArgs) {
     const addonLinkFailed = auditLinkFailed || barcodeLinkFailed;
 
     sendNotification({
-      title: "Workspace created",
+      title: "Werkruimte aangemaakt",
       message: addonLinkFailed
-        ? "Your workspace was created, but we couldn't activate some add-ons. An admin will contact you shortly to resolve this."
-        : "Your workspace has been created successfully",
+        ? "Uw werkruimte is aangemaakt, maar we konden sommige add-ons niet activeren. Een beheerder neemt binnenkort contact met u op."
+        : "Uw werkruimte is succesvol aangemaakt",
       icon: addonLinkFailed
         ? { name: "trash", variant: "error" }
         : { name: "success", variant: "success" },
@@ -276,7 +276,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
 }
 
 export const handle = {
-  breadcrumb: () => "New workspace",
+  breadcrumb: () => "Nieuwe werkruimte",
 };
 
 export default function NewWorkspace() {

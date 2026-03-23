@@ -169,8 +169,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Kit removed",
-          message: "Kit and its assets have been removed from this location",
+          title: "Kit verwijderd",
+          message: "Kit en zijn assets zijn verwijderd uit deze locatie",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -196,7 +196,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         if (resolvedKitIds.length === 0) {
           return payload({
             success: true,
-            message: "No kits matched the current selection",
+            message: "Geen kits komen overeen met de huidige selectie",
           });
         }
 
@@ -210,7 +210,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Kits removed",
+          title: "Kits verwijderd",
           message: `${resolvedKitIds.length} kit(s) and their assets removed from this location`,
           icon: { name: "success", variant: "success" },
           senderId: userId,
@@ -269,14 +269,14 @@ export default function LocationKits() {
                       queryKey: "name",
                       deletedAt: null,
                     }}
-                    label="Filter by custodian"
-                    placeholder="Search team members"
+                    label="Filteren op beheerder"
+                    placeholder="Teamleden zoeken"
                     initialDataKey="teamMembers"
                     countKey="totalTeamMembers"
                     renderItem={(item) => resolveTeamMemberName(item, true)}
                     withoutValueItem={{
                       id: "without-custody",
-                      name: "Without custody",
+                      name: "Zonder beheerder",
                     }}
                   />
                 </div>
@@ -327,7 +327,7 @@ export default function LocationKits() {
                   iconClassName="size-4"
                   content={
                     <>
-                      <h6>Kit custody</h6>
+                      <h6>Kitbeheer</h6>
                       <p>
                         This column shows if a user has custody of the kit
                         either via direct assignment or via a booking. If you

@@ -254,7 +254,7 @@ export function EditBookingForm({ booking, action }: BookingFormData) {
                           ? "Your booking has assets that are already booked for the desired period. You need to resolve that before you can reserve"
                           : isProcessing || isLoadingWorkingHours
                           ? undefined
-                          : "You need to add assets to your booking before you can reserve it",
+                          : "U moet assets toevoegen aan uw reservering voordat u deze kunt reserveren",
                       }
                     : false
                 }
@@ -264,7 +264,7 @@ export function EditBookingForm({ booking, action }: BookingFormData) {
                 className="grow whitespace-nowrap"
                 size="sm"
               >
-                {isBase ? "Request reservation" : "Reserve"}
+                {isBase ? "Reservering aanvragen" : "Reserveren"}
               </Button>
             ) : null}
 
@@ -328,7 +328,7 @@ export function EditBookingForm({ booking, action }: BookingFormData) {
           {id ? (
             <input type="hidden" name="id" defaultValue={id} key={id} />
           ) : null}
-          <h3>Booking details</h3>
+          <h3>Reserveringsdetails</h3>
           <div
             className={tw(
               "flex flex-col gap-3 lg:flex-row",

@@ -437,7 +437,7 @@ export async function parseFileFormData({
     if (sizeLimitError) {
       throw new ShelfError({
         cause,
-        title: "File too large",
+        title: "Bestand te groot",
         message: `Image file size exceeds maximum allowed size of ${
           maxFileSize / (1024 * 1024)
         }MB`,

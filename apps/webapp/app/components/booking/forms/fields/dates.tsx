@@ -171,7 +171,7 @@ export function WorkingHoursInfo({
     return (
       <InfoBox className={tw("py-2", className)}>
         <div className="flex items-center gap-2">
-          <div>Loading working hours</div>
+          <div>Werktijden laden</div>
           <Spinner className="mt-1 size-4" />
         </div>
       </InfoBox>
@@ -227,24 +227,24 @@ export function WorkingHoursInfo({
     <InfoBox className={tw("py-2", className)}>
       {loading ? (
         <div className="flex items-center gap-2">
-          <div>Loading working hours</div>
+          <div>Werktijden laden</div>
           <Spinner className="mt-1 size-4" />
         </div>
       ) : (
         <div className="mt-1 text-sm text-gray-600">
           <p>
-            <strong>Working days:</strong>{" "}
+            <strong>Werkdagen:</strong>{" "}
             {workingDays.length > 0 ? workingDays.join(", ") : "None"}
           </p>
           {hasUniformHours ? (
             <p>
-              <strong>Working hours:</strong>{" "}
+              <strong>Werktijden:</strong>{" "}
               <TimeDisplay time={workingDaySchedules[0].openTime} /> -{" "}
               <TimeDisplay time={workingDaySchedules[0].closeTime} />
             </p>
           ) : (
             <p>
-              <strong>Working hours:</strong> Vary by day
+              <strong>Werktijden:</strong> Varieert per dag
             </p>
           )}
           {workingHours.overrides.length > 0 && (

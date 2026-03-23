@@ -120,7 +120,7 @@ export function BookingAssetsColumn() {
               ? "Booking is cancelled. You cannot change the assets anymore"
               : cantManageAssetsAsBase
               ? "You are unable to add assets at this point because the booking is already reserved. Cancel this booking and create another one if you need to make changes."
-              : "You need to select a start and end date and save your booking before you can add assets to your booking",
+              : "U moet een start- en einddatum selecteren en uw reservering opslaan voordat u assets kunt toevoegen",
           }
         : false,
     [isCompleted, isArchived, isCancelled, cantManageAssetsAsBase]
@@ -178,10 +178,10 @@ export function BookingAssetsColumn() {
               <EmptyState
                 className="py-10"
                 customContent={{
-                  title: "Start by defining a booking period",
+                  title: "Begin met het definiëren van een reserveringsperiode",
                   text: "Assets added to your booking will show up here. Scan tags or search for assets to add to your booking.",
                   newButtonRoute: manageAssetsUrl,
-                  newButtonContent: "Add assets",
+                  newButtonContent: "Assets toevoegen",
                   buttonProps: {
                     disabled: manageAssetsButtonDisabled,
                   },

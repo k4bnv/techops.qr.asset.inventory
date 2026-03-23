@@ -130,7 +130,7 @@ export const ImportContent = () => {
         Deze functie heeft de volgende beperkingen:
         <ul className="list-inside list-disc pl-4">
           <li>
-            <b>Bestaande code</b> - de QR-code moet al aanwezig zijn in shelf
+            <b>Bestaande code</b> - de QR-code moet al aanwezig zijn in het systeem
           </li>
           <li>
             <b>Geen dubbele codes</b> - de qrId moet uniek zijn voor elk asset

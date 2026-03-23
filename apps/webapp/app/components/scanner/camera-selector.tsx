@@ -48,10 +48,10 @@ export function CameraSelector({
             "gap-2 py-[7px] text-[12px] font-normal",
             open ? "bg-gray-50" : ""
           )}
-          aria-label="Switch camera"
+          aria-label="Camera wisselen"
         >
           <SwitchCamera className="size-4" />
-          {showLabel && <span>Switch camera</span>}
+          {showLabel && <span>Camera wisselen</span>}
         </Button>
       </PopoverTrigger>
       <PopoverPortal>

@@ -46,7 +46,7 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 import { resolveTeamMemberName } from "~/utils/user";
 
-export const meta = () => [{ title: appendToMetaTitle("Assign custody") }];
+export const meta = () => [{ title: appendToMetaTitle("Beheer toewijzen") }];
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -158,7 +158,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       AssignCustodySchema,
       {
         additionalData: { userId, assetId },
-        message: "Please select a team member",
+        message: "Selecteer een teamlid",
         shouldBeCaptured: false,
       }
     );
@@ -196,7 +196,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     }).catch((cause) => {
       throw new ShelfError({
         cause,
-        title: "Team member not found",
+        title: "Teamlid niet gevonden",
         message: "The selected team member could not be found.",
         additionalData: { userId, assetId, custodianId },
         label: "Assets",
@@ -210,7 +210,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     if (isSelfService && custodianTeamMember.userId !== user.id) {
       throw new ShelfError({
         cause: null,
-        title: "Action not allowed",
+        title: "Actie niet toegestaan",
         message: "Self user can only assign custody to themselves only.",
         additionalData: { userId, assetId, custodianId },
         label: "Assets",
@@ -340,10 +340,10 @@ export default function Custody() {
                 deletedAt: null,
               }}
               fieldName="custodian"
-              contentLabel="Team members"
+              contentLabel="Teamleden"
               initialDataKey="teamMembers"
               countKey="totalTeamMembers"
-              placeholder="Select a team member"
+              placeholder="Selecteer een teamlid"
               allowClear
               closeOnSelect
               showSearch={!isSelfService}

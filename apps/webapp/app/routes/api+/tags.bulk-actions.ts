@@ -45,7 +45,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
 
         sendNotification({
           title: "Tags deleted",
-          message: "Your tags has been deleted successfully",
+          message: "Uw tags zijn succesvol verwijderd",
           icon: { name: "trash", variant: "error" },
           senderId: userId,
         });

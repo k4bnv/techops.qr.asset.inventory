@@ -95,7 +95,7 @@ export const loader = async ({ request, context }: LoaderFunctionArgs) => {
     if (isPersonalOrg(currentOrganization)) {
       throw new ShelfError({
         cause: null,
-        title: "Not allowed",
+        title: "Niet toegestaan",
         message:
           "You cannot use bookings in a personal workspaces. Please create a Team workspace to create bookings.",
         label: "Booking",
@@ -163,7 +163,7 @@ export const loader = async ({ request, context }: LoaderFunctionArgs) => {
       isSelfServiceOrBase,
       userId,
       searchFieldTooltip: {
-        title: "Search your bookings",
+        title: "Uw reserveringen doorzoeken",
         text: parseMarkdownToReact(bookingsSearchFieldTooltipText),
       },
     });

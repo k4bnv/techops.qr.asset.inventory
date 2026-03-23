@@ -88,6 +88,7 @@ export const CodePreview = ({
     organization?.showShelfBranding
   );
   const [isAddBarcodeDialogOpen, setIsAddBarcodeDialogOpen] = useState(false);
+  const [labelLayout, setLabelLayout] = useState<"square" | "continuous">("square");
 
   // Build available codes list
   const availableCodes: CodeType[] = useMemo(() => {
@@ -324,6 +325,7 @@ export const CodePreview = ({
             qrIdDisplayPreference={organization?.qrIdDisplayPreference}
             sequentialId={sequentialId}
             showShelfBranding={resolvedShowShelfBranding}
+            layout={labelLayout}
           />
         ) : selectedCode?.type === "barcode" ? (
           <BarcodeLabel
@@ -331,13 +333,41 @@ export const CodePreview = ({
             data={selectedCode.barcodeData}
             title={item.name}
             showShelfBranding={resolvedShowShelfBranding}
+            layout={labelLayout}
           />
         ) : null}
       </div>
 
       {/* Actions */}
       <When truthy={!hideButton && !!selectedCode}>
-        <div className="mt-8 flex w-full items-center gap-3 border-t-[1.1px] border-[#E3E4E8] px-4 py-3">
+        <div className="flex w-full items-center justify-between px-4 pt-6">
+          <span className="text-sm font-medium text-gray-700">Label Layout:</span>
+          <div className="flex gap-4">
+            <label className="flex items-center gap-2 text-sm text-gray-600">
+              <input
+                type="radio"
+                name="labelLayout"
+                value="square"
+                checked={labelLayout === "square"}
+                onChange={() => setLabelLayout("square")}
+                className="text-blue-600 focus:ring-blue-500"
+              />
+              Square
+            </label>
+            <label className="flex items-center gap-2 text-sm text-gray-600">
+              <input
+                type="radio"
+                name="labelLayout"
+                value="continuous"
+                checked={labelLayout === "continuous"}
+                onChange={() => setLabelLayout("continuous")}
+                className="text-blue-600 focus:ring-blue-500"
+              />
+              Continuous (24mm)
+            </label>
+          </div>
+        </div>
+        <div className="mt-6 flex w-full items-center gap-3 border-t-[1.1px] border-[#E3E4E8] px-4 py-3">
           <Button
             type="button"
             icon="download"
@@ -385,6 +415,7 @@ interface QrLabelProps {
   qrIdDisplayPreference?: string;
   sequentialId?: string | null;
   showShelfBranding?: boolean;
+  layout?: "square" | "continuous";
 }
 
 export const QrLabel = React.forwardRef<HTMLDivElement, QrLabelProps>(
@@ -395,57 +426,138 @@ export const QrLabel = React.forwardRef<HTMLDivElement, QrLabelProps>(
       qrIdDisplayPreference,
       sequentialId,
       showShelfBranding = true,
+      layout = "square",
     } = props ?? {};
+
+    const isContinuous = layout === "continuous";
+
     return (
       <div
         style={{
-          width: "300px",
-          aspectRatio: 1 / 1,
+          width: isContinuous ? "400px" : "300px",
+          height: isContinuous ? "120px" : undefined,
+          aspectRatio: isContinuous ? undefined : "1 / 1",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          gap: "12px",
+          justifyContent: isContinuous ? "flex-start" : "center",
+          flexDirection: isContinuous ? "row" : "column",
+          gap: isContinuous ? "16px" : "8px",
           borderRadius: "4px",
-          border: "5px solid #E3E4E8",
-          padding: "24px 17px 24px 17px",
+          border: "2px solid #E3E4E8",
+          padding: isContinuous ? "8px 16px" : "8px",
           backgroundColor: "white",
+          boxSizing: "border-box",
         }}
         ref={ref}
       >
-        <div
-          style={{
-            fontSize: "12px",
-            fontWeight: 600,
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap",
-            maxWidth: "100%",
-            color: "black",
-            textAlign: "center",
-          }}
-        >
-          {title}
-        </div>
-        <figure className="qr-code flex justify-center">
-          <img
-            src={data?.qr?.src}
-            alt={`${data?.qr?.size}-shelf-qr-code.png`}
-          />
-        </figure>
-        <div style={{ width: "100%", textAlign: "center", fontSize: "12px" }}>
-          <div style={{ fontWeight: 600 }}>
-            {qrIdDisplayPreference === "SAM_ID" && sequentialId
-              ? sequentialId
-              : data?.qr?.id}
-          </div>
-        </div>
+        {isContinuous ? (
+          <>
+            <figure
+              className="qr-code flex h-full shrink-0 items-center justify-center p-0 m-0"
+              style={{ padding: 0, margin: 0 }}
+            >
+              <img
+                src={data?.qr?.src}
+                alt={`${data?.qr?.size}-shelf-qr-code.png`}
+                style={{
+                  height: "100%",
+                  width: "auto",
+                  objectFit: "contain",
+                  maxHeight: "100px",
+                  display: "block",
+                  padding: 0,
+                  margin: 0,
+                }}
+              />
+            </figure>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                flex: 1,
+                minWidth: 0,
+                textAlign: "left",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "16px",
+                  fontWeight: 700,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  color: "black",
+                }}
+              >
+                {title}
+              </div>
+              <div
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 600,
+                  color: "black",
+                  marginTop: "4px",
+                }}
+              >
+                {qrIdDisplayPreference === "SAM_ID" && sequentialId
+                  ? sequentialId
+                  : data?.qr?.id}
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div
+              style={{
+                fontSize: "14px",
+                fontWeight: 700,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                maxWidth: "100%",
+                color: "black",
+                textAlign: "center",
+              }}
+            >
+              {title}
+            </div>
+            <figure
+              className="qr-code flex w-full flex-1 items-center justify-center p-0 m-0 min-h-[150px]"
+              style={{ minHeight: "150px", padding: 0, margin: 0 }}
+            >
+              <img
+                src={data?.qr?.src}
+                alt={`${data?.qr?.size}-shelf-qr-code.png`}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "contain",
+                  display: "block",
+                  padding: 0,
+                  margin: 0,
+                }}
+              />
+            </figure>
+            <div
+              style={{
+                width: "100%",
+                textAlign: "center",
+                fontSize: "14px",
+                fontWeight: 600,
+              }}
+            >
+              {qrIdDisplayPreference === "SAM_ID" && sequentialId
+                ? sequentialId
+                : data?.qr?.id}
+            </div>
+          </>
+        )}
       </div>
     );
   }
 );
 
-// Barcode Label Component (new)
 interface BarcodeLabelProps {
   data?: {
     type: BarcodeType;
@@ -453,41 +565,45 @@ interface BarcodeLabelProps {
   };
   title: string;
   showShelfBranding?: boolean;
+  layout?: "square" | "continuous";
 }
 
 export const BarcodeLabel = React.forwardRef<HTMLDivElement, BarcodeLabelProps>(
   function BarcodeLabel(props, ref) {
-    const { data, title, showShelfBranding = true } = props ?? {};
+    const { data, title, showShelfBranding = true, layout = "square" } = props ?? {};
+
+    const isContinuous = layout === "continuous";
 
     if (!data) return null;
 
     return (
       <div
         style={{
-          width: "300px",
-          minHeight: "300px",
+          width: isContinuous ? "400px" : "300px",
+          minHeight: isContinuous ? "120px" : "300px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          flexDirection: "column",
-          gap: "12px",
+          flexDirection: isContinuous ? "row" : "column",
+          gap: isContinuous ? "16px" : "12px",
           borderRadius: "4px",
-          border: "5px solid #E3E4E8",
-          padding: "24px 17px 24px 17px",
+          border: "2px solid #E3E4E8",
+          padding: isContinuous ? "8px 16px" : "8px",
           backgroundColor: "white",
+          boxSizing: "border-box",
         }}
         ref={ref}
       >
         <div
           style={{
-            fontSize: "12px",
-            fontWeight: 600,
+            fontSize: "14px",
+            fontWeight: 700,
             overflow: "hidden",
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
-            maxWidth: "100%",
+            maxWidth: isContinuous ? "40%" : "100%",
             color: "black",
-            textAlign: "center",
+            textAlign: isContinuous ? "left" : "center",
           }}
         >
           {title}
@@ -495,18 +611,25 @@ export const BarcodeLabel = React.forwardRef<HTMLDivElement, BarcodeLabelProps>(
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: isContinuous ? "flex-end" : "center",
             alignItems: "center",
             flexGrow: 1,
+            minWidth: 0,
           }}
         >
           <BarcodeDisplay
             type={data.type}
             value={data.value}
-            maxWidth="250px"
+            maxWidth={isContinuous ? "180px" : "250px"}
           />
         </div>
-        <div style={{ width: "100%", textAlign: "center", fontSize: "12px" }}>
+        <div
+          style={{
+            width: isContinuous ? "auto" : "100%",
+            textAlign: isContinuous ? "left" : "center",
+            fontSize: "12px",
+          }}
+        >
           <div style={{ fontWeight: 600 }}>
             {data.type}:{" "}
             <div

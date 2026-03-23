@@ -15,7 +15,7 @@ import {
 } from "~/utils/permissions/permission.data";
 import { requirePermission } from "~/utils/roles.server";
 
-const title = "New category";
+const title = "Nieuwe categorie";
 
 export async function loader({ context, request }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -71,8 +71,8 @@ export async function action({ context, request }: LoaderFunctionArgs) {
     });
 
     sendNotification({
-      title: "Category created",
-      message: "Your category has been created successfully",
+      title: "Categorie aangemaakt",
+      message: "Uw categorie is succesvol aangemaakt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

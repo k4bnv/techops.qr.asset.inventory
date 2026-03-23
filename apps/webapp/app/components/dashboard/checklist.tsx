@@ -27,7 +27,7 @@ export default function OnboardingChecklist() {
         >
           Welcome
         </Heading>
-        <SubHeading>Complete all tasks to unlock your dashboard.</SubHeading>
+        <SubHeading>Voltooi alle taken om uw dashboard te ontgrendelen.</SubHeading>
       </div>
       <div className="mb-8">
         <div className="mb-4">

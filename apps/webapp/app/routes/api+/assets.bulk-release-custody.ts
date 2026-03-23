@@ -76,7 +76,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
 
     sendNotification({
       title: "Assets are no longer in custody",
-      message: "These assets are available again.",
+      message: "Deze assets zijn weer beschikbaar.",
       icon: { name: "success", variant: "success" },
       senderId: userId,
     });

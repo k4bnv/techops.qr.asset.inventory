@@ -77,7 +77,7 @@ export async function resolveUserAndOrgForSsoCallback({
       if (authUser?.app_metadata?.provider === "email") {
         throw new ShelfError({
           cause: null,
-          title: "User already exists",
+          title: "Gebruiker bestaat al",
           message:
             "It looks like the email you're using is linked to a personal account in TechOps. Please contact our support team to update your personal workspace to a different email account.",
           label: "Auth",

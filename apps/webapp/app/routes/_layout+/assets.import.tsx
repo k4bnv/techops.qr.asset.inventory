@@ -47,7 +47,7 @@ export const action = async ({ context, request }: ActionFunctionArgs) => {
     if (csvData.length < 2) {
       throw new ShelfError({
         cause: null,
-        message: "CSV file is empty",
+        message: "CSV-bestand is leeg",
         additionalData: { intent },
         label: "Assets",
         shouldBeCaptured: false,
@@ -88,7 +88,7 @@ export const loader = async ({ context, request }: LoaderFunctionArgs) => {
 
     return payload({
       header: {
-        title: "Import assets",
+        title: "Assets importeren",
       },
     });
   } catch (cause) {
@@ -102,7 +102,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 ];
 
 export const handle = {
-  breadcrumb: () => <Link to="/import">Import</Link>,
+  breadcrumb: () => <Link to="/import">Importeren</Link>,
 };
 
 export default function AssetsImport() {

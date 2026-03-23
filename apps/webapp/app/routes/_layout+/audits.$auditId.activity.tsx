@@ -101,8 +101,8 @@ export default function AuditActivity() {
             <div className="mb-4 inline-flex size-8 items-center justify-center  rounded-full bg-primary-100 p-2 text-primary-600">
               <NoPermissionsIcon />
             </div>
-            <h5>Insufficient permissions</h5>
-            <p>You are not allowed to view audit activity</p>
+            <h5>Onvoldoende rechten</h5>
+            <p>U heeft geen toestemming om auditactiviteit te bekijken</p>
           </div>
         </div>
       )}

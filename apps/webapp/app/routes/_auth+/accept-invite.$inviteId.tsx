@@ -60,7 +60,7 @@ export async function loader({ context, params }: LoaderFunctionArgs) {
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          title: "Invite not found",
+          title: "Uitnodiging niet gevonden",
           message:
             "The invitation you are trying to accept is either not found or expired",
           label: "Invite",
@@ -209,7 +209,7 @@ export default function AcceptInvite() {
           </div>
         ) : (
           <div>
-            <h2>Accept invite</h2>
+            <h2>Uitnodiging accepteren</h2>
             <p className="mt-2">
               <strong>{inviter}</strong> invites you to join TechOps as a member
               of <strong>{workspace}’s</strong> workspace.
@@ -222,7 +222,7 @@ export default function AcceptInvite() {
               />
 
               <Button type="submit" disabled={disabled || error}>
-                {disabled ? "Validating token..." : "Accept invite"}
+                {disabled ? "Validating token..." : "Uitnodiging accepteren"}
               </Button>
             </Form>
           </div>

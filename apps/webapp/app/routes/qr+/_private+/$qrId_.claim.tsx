@@ -53,7 +53,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          title: "Code not found",
+          title: "Code niet gevonden",
           message:
             "The code you are trying to claim is not available for claiming.",
           additionalData: { qrId, currentOrganization },
@@ -68,7 +68,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
 
     return payload({
       header: {
-        title: "Claim QR code for your organization",
+        title: "QR-code claimen voor uw organisatie",
       },
       qrId,
       organizations,

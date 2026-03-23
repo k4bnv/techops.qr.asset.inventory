@@ -15,7 +15,7 @@ import { useDisabled } from "~/hooks/use-disabled";
 import { dateForDateTimeInputValue } from "~/utils/date-fns";
 
 export const EditAuditSchema = z.object({
-  name: z.string().trim().min(1, "Audit name is required"),
+  name: z.string().trim().min(1, "Auditnaam is required"),
   description: z
     .string()
     .max(1000, "Description must be 1000 characters or fewer")
@@ -100,7 +100,7 @@ export function EditAuditDialog({
         onClose={onClose}
         title={
           <div className="-mb-3 w-full pb-6">
-            <h3>Edit audit details</h3>
+            <h3>Auditdetails bewerken</h3>
             <p className="text-gray-600">
               Update the name, description, due date, and assignee of this
               audit.
@@ -118,8 +118,8 @@ export function EditAuditDialog({
             <div className="py-4 pr-6">
               <Input
                 name={nameField}
-                label="Audit name"
-                placeholder="Quarterly warehouse audit"
+                label="Auditnaam"
+                placeholder="Kwartaalaudit magazijn"
                 defaultValue={audit.name}
                 error={nameError || actionData?.error}
                 required

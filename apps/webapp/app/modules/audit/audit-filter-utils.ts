@@ -21,35 +21,35 @@ const FILTER_METADATA: Record<AuditFilterType, AuditFilterMetadata> = {
   ALL: {
     label: "All Assets",
     emptyState: {
-      title: "No assets",
+      title: "Geen assets",
       text: "This audit has no assets.",
     },
   },
   EXPECTED: {
     label: "Expected Assets",
     emptyState: {
-      title: "No expected assets",
+      title: "Geen verwachte assets",
       text: "This audit has no assets assigned to it.",
     },
   },
   FOUND: {
     label: "Found Assets",
     emptyState: {
-      title: "No found assets",
+      title: "Geen gevonden assets",
       text: "No assets have been scanned yet. Start scanning to see found assets here.",
     },
   },
   MISSING: {
     label: "Missing Assets",
     emptyState: {
-      title: "No missing assets",
+      title: "Geen ontbrekende assets",
       text: "All expected assets have been found. Great job!",
     },
   },
   UNEXPECTED: {
     label: "Unexpected Assets",
     emptyState: {
-      title: "No unexpected assets",
+      title: "Geen onverwachte assets",
       text: "No unexpected assets were scanned during this audit.",
     },
   },
@@ -67,7 +67,7 @@ export function getAuditFilterMetadata(
   return FILTER_METADATA[normalizedFilter] || FILTER_METADATA.ALL;
 }
 
-export type AuditStatusLabel = "Expected" | "Found" | "Missing" | "Unexpected";
+export type AuditStatusLabel = "Expected" | "Found" | "Missing" | "Onverwacht";
 
 /**
  * Determine the audit status label for an asset based on its audit data.
@@ -98,7 +98,7 @@ export function getAuditStatusLabel(
 
   // Unexpected: Asset that was scanned but not expected
   if (!auditData.expected && auditData.auditStatus === "UNEXPECTED") {
-    return "Unexpected";
+    return "Onverwacht";
   }
 
   // Expected assets with PENDING status:

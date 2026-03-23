@@ -77,7 +77,7 @@ export const validatePermission = async (props: PermissionCheckProps) => {
   if (!res) {
     throw new ShelfError({
       cause: null,
-      title: "Unauthorized",
+      title: "Niet geautoriseerd",
       message: `You have no permission to perform this action`,
       additionalData: { ...props },
       status: 403,

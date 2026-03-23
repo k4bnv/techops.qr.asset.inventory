@@ -20,7 +20,7 @@ import {
 } from "~/utils/permissions/permission.data";
 import { requirePermission } from "~/utils/roles.server";
 
-export const meta = () => [{ title: appendToMetaTitle("Asset notes") }];
+export const meta = () => [{ title: appendToMetaTitle("Assetnotities") }];
 
 export function loader({ params }: LoaderFunctionArgs) {
   const { assetId } = getParams(params, z.object({ assetId: z.string() }));
@@ -52,7 +52,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     if (!asset) {
       throw new ShelfError({
         cause: null,
-        message: "Asset not found or access denied",
+        message: "Asset niet gevonden of toegang geweigerd",
         additionalData: { userId, assetId },
         label: "Assets",
         status: 404,
@@ -72,8 +72,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         );
 
         sendNotification({
-          title: "Note created",
-          message: "Your note has been created successfully",
+          title: "Notitie aangemaakt",
+          message: "Uw notitie is succesvol aangemaakt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -98,8 +98,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         );
 
         sendNotification({
-          title: "Note deleted",
-          message: "Your note has been deleted successfully",
+          title: "Notitie verwijderd",
+          message: "Uw notitie is succesvol verwijderd",
           icon: { name: "trash", variant: "error" },
           senderId: authSession.userId,
         });

@@ -141,8 +141,8 @@ export async function createWorkingHoursOverride({
     if (existingOverride) {
       throw new ShelfError({
         cause: null,
-        title: "Invalid date",
-        message: "An override already exists for this date",
+        title: "Ongeldige datum",
+        message: "Er bestaat al een uitzondering voor deze datum",
         additionalData: { organizationId, date },
         shouldBeCaptured: false,
         label,

@@ -98,7 +98,7 @@ export const filterSchema = z
       return true;
     },
     {
-      message: "Invalid filter configuration",
+      message: "Ongeldige filterconfiguratie",
       path: ["value"],
     }
   );

@@ -39,14 +39,14 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 import { intersected } from "~/utils/utils";
 
-export const meta = () => [{ title: appendToMetaTitle("Add kit to booking") }];
+export const meta = () => [{ title: appendToMetaTitle("Kit toevoegen aan reservering") }];
 
 const updateBookingSchema = z.object({
   bookingId: z.string().transform((val, ctx) => {
     if (!val && val === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Please select a booking",
+        message: "Selecteer een reservering",
       });
       return z.NEVER;
     }
@@ -211,7 +211,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
 
     sendNotification({
       title: "Booking Updated",
-      message: "Your booking has been updated successfully",
+      message: "Uw reservering is succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

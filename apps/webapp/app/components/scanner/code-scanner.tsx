@@ -383,7 +383,7 @@ export const CodeScanner = ({
                 </>
               ) : (
                 <>
-                  <h5>Code detected</h5>
+                  <h5>Code gedetecteerd</h5>
 
                   {typeof scanMessage === "string" ? (
                     <>
@@ -393,7 +393,7 @@ export const CodeScanner = ({
                       <p>{scanMessage || "Scanner paused"}</p>
                     </>
                   ) : (
-                    scanMessage || <p>Scanner paused</p>
+                    scanMessage || <p>Scanner gepauzeerd</p>
                   )}
                 </>
               )}

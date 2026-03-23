@@ -64,8 +64,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Bookings deleted",
-          message: "Your bookings has been deleted successfully",
+          title: "Reserveringen verwijderd",
+          message: "Uw reserveringen zijn succesvol verwijderd",
           icon: { name: "trash", variant: "error" },
           senderId: userId,
         });
@@ -83,8 +83,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Bookings archived",
-          message: "Your bookings has been archived successfully",
+          title: "Reserveringen gearchiveerd",
+          message: "Uw reserveringen zijn succesvol gearchiveerd",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -104,8 +104,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Bookings cancelled",
-          message: "Your bookings has been cancelled successfully",
+          title: "Reserveringen geannuleerd",
+          message: "Uw reserveringen zijn succesvol geannuleerd",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });

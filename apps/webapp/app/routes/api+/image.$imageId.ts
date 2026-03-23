@@ -25,7 +25,7 @@ export async function loader({ context, params }: LoaderFunctionArgs) {
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          title: "Image not found",
+          title: "Afbeelding niet gevonden",
           message:
             "The image you are trying to access does not exist or you do not have permission to access it.",
           additionalData: { userId, imageId },
@@ -48,7 +48,7 @@ export async function loader({ context, params }: LoaderFunctionArgs) {
     if (!orgIds.includes(image.ownerOrgId)) {
       throw new ShelfError({
         cause: null,
-        message: "Unauthorized. This resource doesn't belong to you.",
+        message: "Niet geautoriseerd. Dit resource behoort niet tot u.",
         additionalData: {
           userId,
           imageId,

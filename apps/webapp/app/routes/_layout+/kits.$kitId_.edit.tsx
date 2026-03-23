@@ -185,8 +185,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     }
 
     sendNotification({
-      title: "Kit updated",
-      message: "Your kit has been updated successfully",
+      title: "Kit bijgewerkt",
+      message: "Uw kit is succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

@@ -182,8 +182,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Asset removed",
-          message: "Asset has been removed from this location",
+          title: "Asset verwijderd",
+          message: "Asset is verwijderd uit deze locatie",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -209,7 +209,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         if (resolvedAssetIds.length === 0) {
           return payload({
             success: true,
-            message: "No assets matched the current selection",
+            message: "Geen assets komen overeen met de huidige selectie",
           });
         }
 
@@ -223,7 +223,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Assets removed",
+          title: "Assets verwijderd",
           message: `${resolvedAssetIds.length} asset(s) removed from this location`,
           icon: { name: "success", variant: "success" },
           senderId: userId,
@@ -286,13 +286,13 @@ export default function LocationAssets() {
                       queryKey: "name",
                       deletedAt: null,
                     }}
-                    label="Filter by custodian"
-                    placeholder="Search team members"
+                    label="Filteren op beheerder"
+                    placeholder="Teamleden zoeken"
                     initialDataKey="teamMembers"
                     countKey="totalTeamMembers"
                     withoutValueItem={{
                       id: "without-custody",
-                      name: "Without custody",
+                      name: "Zonder beheerder",
                     }}
                     renderItem={(item) => resolveTeamMemberName(item, true)}
                   />
@@ -342,7 +342,7 @@ export default function LocationAssets() {
                   iconClassName="size-4"
                   content={
                     <>
-                      <h6>Asset custody</h6>
+                      <h6>Assetbeheer</h6>
                       <p>
                         This column shows if a user has custody of the asset
                         either via direct assignment or via a booking. If you
@@ -360,8 +360,8 @@ export default function LocationAssets() {
             </>
           }
           customEmptyStateContent={{
-            title: "There are currently no assets at the location",
-            text: "Add assets in this location",
+            title: "Er zijn momenteel geen assets op deze locatie",
+            text: "Voeg assets toe aan deze locatie",
             newButtonRoute: "manage-assets",
             newButtonContent: "Add asset",
           }}

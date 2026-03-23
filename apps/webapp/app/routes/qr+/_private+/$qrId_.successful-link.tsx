@@ -45,7 +45,7 @@ export const loader = async ({ context, params }: LoaderFunctionArgs) => {
         throw new ShelfError({
           cause,
           message: "The QR you are trying to access does not exist.",
-          title: "QR not found",
+          title: "QR niet gevonden",
           label: "QR",
           status: 404,
         });
@@ -53,7 +53,7 @@ export const loader = async ({ context, params }: LoaderFunctionArgs) => {
 
     return payload({
       header: {
-        title: "Successfully linked asset to QR code",
+        title: "Asset succesvol gekoppeld aan QR-code",
       },
       qr,
     });
@@ -81,7 +81,7 @@ export default function QrSuccessfullLink() {
         <span className="mb-2.5 flex size-12 items-center justify-center rounded-full bg-success-50 p-2 text-success-600">
           <LinkIcon />
         </span>
-        <h3>Succesfully linked</h3>
+        <h3>Succesvol gekoppeld</h3>
         <p>
           Your {type} <b>{normalizedName}</b> has been linked with this QR code.
         </p>

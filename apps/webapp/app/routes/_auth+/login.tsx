@@ -85,7 +85,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
             error(
               new ShelfError({
                 cause: null,
-                message: "Invalid request",
+                message: "Ongeldig verzoek",
                 label: "Request validation",
                 shouldBeCaptured: false,
                 status: 400,

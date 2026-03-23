@@ -34,7 +34,7 @@ const checkoutReminder = async ({ data }: PgBoss.Job<SchedulerData>) => {
     .catch((cause) => {
       throw new ShelfError({
         cause,
-        message: "Booking not found",
+        message: "Reservering niet gevonden",
         additionalData: { data, work: data.eventType },
         label: "Booking",
       });
@@ -82,7 +82,7 @@ const checkinReminder = async ({ data }: PgBoss.Job<SchedulerData>) => {
     .catch((cause) => {
       throw new ShelfError({
         cause,
-        message: "Booking not found",
+        message: "Reservering niet gevonden",
         additionalData: { data, work: data.eventType },
         label: "Booking",
       });
@@ -127,7 +127,7 @@ const overdueHandler = async ({ data }: PgBoss.Job<SchedulerData>) => {
     .catch((cause) => {
       throw new ShelfError({
         cause,
-        message: "Booking update failed",
+        message: "Reserveringsbijwerking mislukt",
         additionalData: { data, work: data.eventType },
         label: "Booking",
       });

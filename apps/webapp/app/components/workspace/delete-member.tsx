@@ -73,7 +73,7 @@ const DeleteMemberContent = ({ id }: { id: TeamMember["id"] }) => {
   return (
     <AlertDialogContent className="relative">
       <AlertDialogHeader className="mb-8">
-        <AlertDialogTitle>Delete team member</AlertDialogTitle>
+        <AlertDialogTitle>Teamlid verwijderen</AlertDialogTitle>
         <AlertDialogDescription>
           After deleting a team member you will no longer be able to give them
           custody over an asset.
@@ -115,7 +115,7 @@ const UnableToDeleteMemberContent = ({
 }) => (
   <AlertDialogContent className="relative">
     <AlertDialogHeader className="mb-8">
-      <AlertDialogTitle>Unable to delete team member</AlertDialogTitle>
+      <AlertDialogTitle>Kan teamlid niet verwijderen</AlertDialogTitle>
       <AlertDialogDescription>
         The team member you are trying to delete has custody over{" "}
         {custodiesCount} assets. Please release custody or check-in those assets

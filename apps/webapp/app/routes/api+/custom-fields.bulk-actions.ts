@@ -77,8 +77,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Custom fields activated",
-          message: "Your custom fields have been activated successfully",
+          title: "Aangepaste velden geactiveerd",
+          message: "Uw aangepaste velden zijn succesvol geactiveerd",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -105,8 +105,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Custom fields deactivated",
-          message: "Your custom fields have been deactivated successfully",
+          title: "Aangepaste velden gedeactiveerd",
+          message: "Uw aangepaste velden zijn succesvol gedeactiveerd",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });

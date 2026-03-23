@@ -77,7 +77,7 @@ import {
 } from "~/utils/permissions/permission.data";
 import { requirePermission } from "~/utils/roles.server";
 
-export const meta = () => [{ title: appendToMetaTitle("Manage kits") }];
+export const meta = () => [{ title: appendToMetaTitle("Kits beheren") }];
 
 export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
@@ -212,12 +212,12 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     return payload({
       header: {
         title: `Manage kits for '${booking?.name}'`,
-        subHeading: "Fill up the booking with the kits of your choice",
+        subHeading: "Vul de reservering met de gewenste kits",
       },
-      searchFieldLabel: "Search kits",
+      searchFieldLabel: "Kits zoeken",
       searchFieldTooltip: {
-        title: "Search your kit database",
-        text: "Search kits based on name or description",
+        title: "Doorzoek uw kitdatabase",
+        text: "Kits zoeken op naam of beschrijving",
       },
       showSidebar: true,
       noScroll: true,
@@ -433,13 +433,13 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     // Send email to custodian about kit changes
     const kitChanges: string[] = [];
     if (newAssetIds.length > 0) {
-      kitChanges.push("Kits were added to the booking");
+      kitChanges.push("Kits zijn toegevoegd aan de reservering");
     }
     if (removedKitIds.length > 0) {
-      kitChanges.push("Kits were removed from the booking");
+      kitChanges.push("Kits zijn verwijderd uit de reservering");
     }
     if (kitChanges.length > 0) {
-      kitChanges.push("View booking activity for full details");
+      kitChanges.push("Bekijk reserveringsactiviteit voor volledige details");
       void sendBookingUpdatedEmail({
         bookingId,
         organizationId,
@@ -591,7 +591,7 @@ export default function AddKitsToBooking() {
           }}
           emptyStateClassName="py-10"
           customEmptyStateContent={{
-            title: "You haven't created any kits yet.",
+            title: "U heeft nog geen kits aangemaakt.",
             text: "What are you waiting for? Create your first kit now!",
             newButtonRoute: "/kits/new",
             newButtonContent: "New kit",
@@ -602,7 +602,7 @@ export default function AddKitsToBooking() {
           headerChildren={
             <>
               <Th></Th>
-              <Th>Description</Th>
+              <Th>Beschrijving</Th>
               <Th>Location</Th>
               <Th>Assets</Th>
             </>

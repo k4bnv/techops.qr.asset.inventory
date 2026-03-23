@@ -622,7 +622,7 @@ export async function getTeamMember({
 
     throw new ShelfError({
       cause,
-      title: "Team member not found",
+      title: "Teamlid niet gevonden",
       message: "The selected team member could not be found.",
       additionalData: { id, organizationId },
       label,
@@ -743,7 +743,7 @@ async function fixTeamMembersNames(teamMembers: TeamMemberWithUserData[]) {
     Logger.error(
       new ShelfError({
         cause: null,
-        message: "Team members with empty names found",
+        message: "Teamleden met lege namen gevonden",
         additionalData: { teamMembersWithEmptyNames },
         label,
       })

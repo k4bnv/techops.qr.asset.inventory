@@ -531,7 +531,7 @@ export async function validateBarcodeUniqueness(
       };
     } else if (duplicateIndexes.has(i)) {
       validationErrors[`barcodes[${i}].value`] = {
-        message: "This barcode value is duplicated in the form",
+        message: "Deze barcodewaarde is gedupliceerd in het formulier",
       };
     }
   }
@@ -818,7 +818,7 @@ export async function parseBarcodesFromImportData({
     if (duplicateBarcodes.length > 0) {
       throw new ShelfError({
         cause: null,
-        title: "Duplicate barcodes in import data",
+        title: "Dubbele barcodes in importgegevens",
         message:
           "Some barcodes appear multiple times in the import data. Each barcode must be unique.",
         additionalData: { duplicateBarcodes },

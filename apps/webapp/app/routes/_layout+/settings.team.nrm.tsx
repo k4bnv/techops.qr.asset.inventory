@@ -145,7 +145,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
           .catch((cause) => {
             throw new ShelfError({
               cause,
-              message: "Failed to delete team member",
+              message: "Kon teamlid niet verwijderen",
               additionalData: { teamMemberId, userId, organizationId },
               label: "Team",
             });
@@ -156,7 +156,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
       default: {
         throw new ShelfError({
           cause: null,
-          message: "Invalid action",
+          message: "Ongeldige actie",
           additionalData: { intent },
           label: "Team",
         });

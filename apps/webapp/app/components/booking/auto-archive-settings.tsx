@@ -23,7 +23,7 @@ export const AutoArchiveToggleSchema = z.object({
 export const AutoArchiveDaysSchema = z.object({
   autoArchiveDays: z.coerce
     .number()
-    .int("Must be a whole number")
+    .int("Moet een geheel getal zijn")
     .min(1, "Must be at least 1 day")
     .max(365, "Cannot exceed 365 days"),
 });

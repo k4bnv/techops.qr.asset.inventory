@@ -17,7 +17,7 @@ import { requirePermission } from "~/utils/roles.server";
 
 const AddAssetsToAuditSchema = z.object({
   auditId: z.string().min(1, "Audit ID is required"),
-  assetIds: z.array(z.string()).min(1, "At least one asset must be selected"),
+  assetIds: z.array(z.string()).min(1, "Er moet minimaal één asset worden geselecteerd"),
 });
 
 export async function action({ request, context }: ActionFunctionArgs) {
@@ -76,7 +76,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
       throw badRequest("No assets selected", {
         additionalData: {
           validationErrors: {
-            assetIds: { message: "At least one asset must be selected" },
+            assetIds: { message: "Er moet minimaal één asset worden geselecteerd" },
           },
         },
       });

@@ -69,7 +69,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
     if (disableSSO) {
       throw new ShelfError({
         cause: null,
-        title: "SSO is disabled",
+        title: "SSO is uitgeschakeld",
         message:
           "For more information, please contact your workspace administrator.",
         label: "User onboarding",

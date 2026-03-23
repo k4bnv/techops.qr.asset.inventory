@@ -73,7 +73,7 @@ export default function TeamMembersSelector({
         <UserIcon className="size-4 text-gray-500" />
         <input
           type="text"
-          placeholder="Find team members"
+          placeholder="Teamleden zoeken"
           className="flex-1 border-none p-0 focus:border-none focus:ring-0"
           value={searchQuery}
           onChange={(event) => {

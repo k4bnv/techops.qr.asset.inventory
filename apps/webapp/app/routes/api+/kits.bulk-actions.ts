@@ -73,7 +73,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
 
         sendNotification({
           title: "Kits deleted",
-          message: "Your kits has been deleted successfully",
+          message: "Uw kits zijn succesvol verwijderd",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -95,8 +95,8 @@ export async function action({ request, context }: ActionFunctionArgs) {
         }).catch((cause) => {
           throw new ShelfError({
             cause,
-            title: "Team member not found",
-            message: "The selected team member could not be found.",
+            title: "Teamlid niet gevonden",
+            message: "Het geselecteerde teamlid kon niet worden gevonden.",
             additionalData: { userId, kitIds, custodian },
             label: "Kit",
             status: 404,
@@ -107,7 +107,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
           throw new ShelfError({
             cause: null,
             title: "Action not allowed",
-            message: "Self user can only assign custody to themselves only.",
+            message: "U kunt bewaring alleen aan uzelf toewijzen.",
             additionalData: { userId, kitIds, custodian },
             label: "Kit",
             status: 403,
@@ -150,7 +150,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
             throw new ShelfError({
               cause: null,
               title: "Action not allowed",
-              message: "Self user can release custody of themselves only.",
+              message: "U kunt bewaring alleen van uzelf vrijgeven.",
               additionalData: { userId, kitIds },
               label: "Kit",
               status: 403,
@@ -168,7 +168,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
 
         sendNotification({
           title: "Kits are no longer in custody",
-          message: "These kits are available again.",
+          message: "Deze kits zijn weer beschikbaar.",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -192,7 +192,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
 
         sendNotification({
           title: "Kits location updated",
-          message: "These kits location has been updated successfully.",
+          message: "De locatie van deze kits is succesvol bijgewerkt.",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });

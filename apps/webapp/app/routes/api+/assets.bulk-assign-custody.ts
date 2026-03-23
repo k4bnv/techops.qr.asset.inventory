@@ -51,8 +51,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
     }).catch((cause) => {
       throw new ShelfError({
         cause,
-        title: "Team member not found",
-        message: "The selected team member could not be found.",
+        title: "Teamlid niet gevonden",
+        message: "Het geselecteerde teamlid kon niet worden gevonden.",
         additionalData: { userId, assetIds, custodian },
         label: "Assets",
         status: 404,
@@ -66,7 +66,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
       throw new ShelfError({
         cause: null,
         title: "Action not allowed",
-        message: "Self user can only assign custody to themselves only.",
+        message: "U kunt bewaring alleen aan uzelf toewijzen.",
         additionalData: { userId, assetIds, custodian },
         label: "Assets",
         status: 403,

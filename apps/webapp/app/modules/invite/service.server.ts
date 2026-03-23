@@ -456,7 +456,7 @@ export async function checkUserAndInviteMatch({
   if (user?.email !== invite?.inviteeEmail) {
     throw new ShelfError({
       cause: null,
-      title: "Wrong user",
+      title: "Verkeerde gebruiker",
       message:
         "Your user's email doesn't match with the invited user so you cannot accept the invite. If you already have a user, make sure that you are logged in with the correct user. If the issue persists, feel free to contact support.",
       label: "Invite",
@@ -599,14 +599,14 @@ export async function bulkInviteUsers({
     const messageResult = processInvitationMessage(extraMessage);
     if (!messageResult.success) {
       sendNotification({
-        title: "Invalid invitation message",
+        title: "Ongeldig uitnodigingsbericht",
         message: messageResult.error || "The invitation message is invalid",
         icon: { name: "x", variant: "error" },
         senderId: userId,
       });
       throw new ShelfError({
         cause: null,
-        message: messageResult.error || "Invalid invitation message",
+        message: messageResult.error || "Ongeldig uitnodigingsbericht",
         additionalData: { extraMessage },
         label,
       });
@@ -685,7 +685,7 @@ export async function bulkInviteUsers({
     /* All emails are already invited */
     if (existingInvites.length === emails.length) {
       sendNotification({
-        title: "Users already invited",
+        title: "Gebruikers zijn al uitgenodigd",
         message:
           "All users in csv file are already invited to the organization.",
         icon: { name: "success", variant: "error" },
@@ -703,7 +703,7 @@ export async function bulkInviteUsers({
     /* All emails are already in organization */
     if (existingUsers.length === emails.length) {
       sendNotification({
-        title: "Users already member of organization",
+        title: "Gebruikers zijn al lid van de organisatie",
         message: "All user in csv file are already part of your organization.",
         icon: { name: "success", variant: "error" },
         senderId: userId,
@@ -865,7 +865,7 @@ export async function bulkInviteUsers({
     }
 
     sendNotification({
-      title: "Successfully invited users",
+      title: "Gebruikers succesvol uitgenodigd",
       message: `${createdInvites.length} user(s) have been invited successfully. They will receive an email in which they can complete their registration.`,
       icon: { name: "success", variant: "success" },
       senderId: userId,

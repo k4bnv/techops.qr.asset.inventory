@@ -34,7 +34,7 @@ export function LinkDialog({
     >
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Edit link</AlertDialogTitle>
+          <AlertDialogTitle>Link bewerken</AlertDialogTitle>
           <AlertDialogDescription>
             Enter the URL for the selected text.
           </AlertDialogDescription>
@@ -90,7 +90,7 @@ export function RawBlockDialog({
     >
       <AlertDialogContent className="max-w-2xl">
         <AlertDialogHeader>
-          <AlertDialogTitle>Edit raw Markdoc block</AlertDialogTitle>
+          <AlertDialogTitle>Ruwe Markdoc-blok bewerken</AlertDialogTitle>
           <AlertDialogDescription>
             Unsupported Markdoc content is preserved as raw blocks. Updating the
             source will replace the block contents.

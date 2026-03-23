@@ -175,7 +175,7 @@ export default function KitOverview() {
               iconClassName="size-4"
               content={
                 <>
-                  <h6>Total value</h6>
+                  <h6>Totale waarde</h6>
                   <p>
                     A sum of all assets' values in this kit. If no assets are
                     present, this will be zero.
@@ -209,7 +209,7 @@ export default function KitOverview() {
                 iconClassName="size-4"
                 content={
                   <>
-                    <h6>Barcodes support</h6>
+                    <h6>Barcode-ondersteuning</h6>
                     <p>
                       Want to know more about barcodes? Check out our knowledge
                       base article on{" "}

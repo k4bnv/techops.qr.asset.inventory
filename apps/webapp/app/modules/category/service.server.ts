@@ -192,7 +192,7 @@ export async function getCategory({
   } catch (cause) {
     throw new ShelfError({
       cause,
-      title: "Category not found",
+      title: "Categorie niet gevonden",
       message:
         "The category you are trying to access does not exist or you do not have permission to access it.",
       additionalData: { id, organizationId },

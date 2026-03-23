@@ -434,7 +434,7 @@ export async function getAsset<T extends Prisma.AssetInclude | undefined>({
 
       throw new ShelfError({
         cause: null,
-        title: "Asset not found",
+        title: "Asset niet gevonden",
         message: "",
         additionalData: {
           model: "asset",
@@ -454,7 +454,7 @@ export async function getAsset<T extends Prisma.AssetInclude | undefined>({
     const isShelfError = isLikeShelfError(cause);
     throw new ShelfError({
       cause,
-      title: "Asset not found",
+      title: "Asset niet gevonden",
       message:
         "The asset you are trying to access does not exist or you do not have permission to access it.",
       additionalData: {
@@ -1520,7 +1520,7 @@ export async function updateAsset({
           newCategory: asset.category
             ? {
                 id: asset.category.id,
-                name: asset.category.name ?? "Unnamed category",
+                name: asset.category.name ?? "Naamloze categorie",
                 color: asset.category.color ?? "#575757",
               }
             : null,

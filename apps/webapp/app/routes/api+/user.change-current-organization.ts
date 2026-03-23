@@ -31,7 +31,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
     if (!membership) {
       throw new ShelfError({
         cause: null,
-        message: "You are not a member of this organization.",
+        message: "U bent geen lid van deze organisatie.",
         status: 403,
         label: "Organization",
       });

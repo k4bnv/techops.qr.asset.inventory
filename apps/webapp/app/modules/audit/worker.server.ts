@@ -26,7 +26,7 @@ const reminder24h = async ({ data }: PgBoss.Job<AuditSchedulerData>) => {
     .catch((cause) => {
       throw new ShelfError({
         cause,
-        message: "Audit not found",
+        message: "Audit niet gevonden",
         additionalData: { data, work: data.eventType },
         label: "Audit",
       });
@@ -71,7 +71,7 @@ const reminder4h = async ({ data }: PgBoss.Job<AuditSchedulerData>) => {
     .catch((cause) => {
       throw new ShelfError({
         cause,
-        message: "Audit not found",
+        message: "Audit niet gevonden",
         additionalData: { data, work: data.eventType },
         label: "Audit",
       });
@@ -116,7 +116,7 @@ const reminder1h = async ({ data }: PgBoss.Job<AuditSchedulerData>) => {
     .catch((cause) => {
       throw new ShelfError({
         cause,
-        message: "Audit not found",
+        message: "Audit niet gevonden",
         additionalData: { data, work: data.eventType },
         label: "Audit",
       });
@@ -161,7 +161,7 @@ const overdueNotice = async ({ data }: PgBoss.Job<AuditSchedulerData>) => {
     .catch((cause) => {
       throw new ShelfError({
         cause,
-        message: "Audit not found",
+        message: "Audit niet gevonden",
         additionalData: { data, work: data.eventType },
         label: "Audit",
       });
@@ -225,7 +225,7 @@ export const registerAuditWorkers = async () => {
         Logger.error(
           new ShelfError({
             cause: null,
-            message: "Wrong event type received for the scheduled worker",
+            message: "Verkeerd gebeurtenistype ontvangen voor de geplande werker",
             additionalData: { job },
             label: "Audit",
           })

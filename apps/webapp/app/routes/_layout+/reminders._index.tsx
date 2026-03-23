@@ -50,9 +50,9 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       page,
       perPage,
       totalPages,
-      searchFieldLabel: "Search reminders",
+      searchFieldLabel: "Herinneringen zoeken",
       searchFieldTooltip: {
-        title: "Search reminders",
+        title: "Herinneringen doorzoeken",
         text: "Search reminders by reminder name, message, asset name or team member name. Separate your keywords by a comma(,) to search with OR condition. For example: searching 'Laptop, maintenance' will find reminders matching any of these terms.",
       },
       search,

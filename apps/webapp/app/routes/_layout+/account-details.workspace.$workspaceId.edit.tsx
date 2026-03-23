@@ -315,8 +315,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Workspace updated",
-          message: "Your workspace  has been updated successfully",
+          title: "Werkruimte bijgewerkt",
+          message: "Uw werkruimte is succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -348,8 +348,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Workspace updated",
-          message: "Your workspace  has been updated successfully",
+          title: "Werkruimte bijgewerkt",
+          message: "Uw werkruimte is succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -360,7 +360,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         if (role !== OrganizationRoles.OWNER) {
           throw new ShelfError({
             cause: null,
-            title: "Permission denied",
+            title: "Geen toestemming",
             message: "You are not allowed to edit SSO settings.",
             label: "Settings",
           });
@@ -396,8 +396,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Workspace updated",
-          message: "Your workspace has been updated successfully",
+          title: "Werkruimte bijgewerkt",
+          message: "Uw werkruimte is succesvol bijgewerkt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -407,7 +407,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       default: {
         throw new ShelfError({
           cause: null,
-          message: "Invalid action",
+          message: "Ongeldige actie",
           additionalData: { intent },
           label: "Team",
         });
@@ -422,7 +422,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
 
 export default function WorkspaceEditPage() {
   const name = useAtomValue(dynamicTitleAtom);
-  const hasName = name !== "Untitled workspace";
+  const hasName = name !== "Naamloze werkruimte";
   const {
     organization,
     admins,

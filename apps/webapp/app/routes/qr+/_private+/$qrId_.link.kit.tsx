@@ -78,7 +78,7 @@ export const loader = async ({
     if (qr?.assetId || qr?.kitId) {
       throw new ShelfError({
         message: "This QR code is already linked to an asset or a kit.",
-        title: "QR already linked",
+        title: "QR al gekoppeld",
         label: "QR",
         status: 403,
         cause: null,
@@ -138,7 +138,7 @@ export const loader = async ({
 
     return payload({
       header: {
-        title: "Link with existing asset",
+        title: "Koppelen aan bestaande kit",
         subHeading: "Choose an asset to link with this QR tag.",
       },
       qrId,
@@ -151,7 +151,7 @@ export const loader = async ({
       modelName,
       searchFieldLabel: "Search kits",
       searchFieldTooltip: {
-        title: "Search your kits database",
+        title: "Zoek in uw kitdatabase",
         text: "Search kits based on name or description.",
       },
       teamMembers,
@@ -266,7 +266,7 @@ export default function QrLinkExisting() {
           /** Clicking on the row will add the current asset to the atom of selected assets */
           navigate={handleSelectKit}
           customEmptyStateContent={{
-            title: "You haven't added any kits yet.",
+            title: "U heeft nog geen kits toegevoegd.",
             text: "What are you waiting for? Create your first kit now!",
             newButtonRoute: `/kits/new?qrId=${qrId}`,
             newButtonContent: "Create new kit and link",

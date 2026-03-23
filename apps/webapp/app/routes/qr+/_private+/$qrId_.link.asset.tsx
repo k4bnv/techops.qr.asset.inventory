@@ -78,7 +78,7 @@ export const loader = async ({
     if (qr?.assetId || qr?.kitId) {
       throw new ShelfError({
         message: "This QR code is already linked to an asset or a kit.",
-        title: "QR already linked",
+        title: "QR al gekoppeld",
         label: "QR",
         status: 403,
         cause: null,
@@ -118,7 +118,7 @@ export const loader = async ({
 
     if (!assets) {
       throw new ShelfError({
-        title: "Assets not found",
+        title: "Assets niet gevonden",
         message:
           "The assets you are trying to access do not exist or you do not have permission to access them.",
         additionalData: { qrId, organizationId, userId },
@@ -134,7 +134,7 @@ export const loader = async ({
     return data(
       payload({
         header: {
-          title: "Link with existing asset",
+          title: "Koppelen aan bestaand asset",
           subHeading: "Choose an asset to link with this QR tag.",
         },
         qrId,
@@ -151,7 +151,7 @@ export const loader = async ({
         modelName,
         searchFieldLabel: "Search assets",
         searchFieldTooltip: {
-          title: "Search your asset database",
+          title: "Zoek in uw assetdatabase",
           text: "Search assets based on asset name or description, category, tag, location, custodian name. Simply separate your keywords by a space: 'Laptop lenovo 2020'.",
         },
         totalCategories,
@@ -307,7 +307,7 @@ export default function QrLinkExisting() {
           /** Clicking on the row will add the current asset to the atom of selected assets */
           navigate={handleSelectAsset}
           customEmptyStateContent={{
-            title: "You haven't added any assets yet.",
+            title: "U heeft nog geen assets toegevoegd.",
             text: "What are you waiting for? Create your first asset now!",
             newButtonRoute: `/assets/new?qrId=${qrId}`,
             newButtonContent: "Create new asset and link",

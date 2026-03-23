@@ -88,7 +88,7 @@ const ASSET_SCHEDULER_EVENT_HANDLERS: Record<
       if (!owner) {
         throw new ShelfError({
           cause: null,
-          message: "No owner found",
+          message: "Geen eigenaar gevonden",
           label: "Asset Scheduler",
         });
       }

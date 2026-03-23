@@ -27,7 +27,7 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 import { resolveTeamMemberName } from "~/utils/user";
 
-export const meta = () => [{ title: appendToMetaTitle("Release custody") }];
+export const meta = () => [{ title: appendToMetaTitle("Beheer vrijgeven") }];
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -148,7 +148,7 @@ export const action = async ({
       if (custodyRecord?.custodian?.userId !== user.id) {
         throw new ShelfError({
           cause: null,
-          title: "Action not allowed",
+          title: "Actie niet toegestaan",
           message:
             "Self service user can only release custody of assets assigned to their user.",
           additionalData: { userId, assetId },
@@ -237,7 +237,7 @@ export default function Custody() {
           <UserXIcon />
         </div>
         <div className="mb-5">
-          <h4>Release custody of asset</h4>
+          <h4>Beheer van asset vrijgeven</h4>
           <p>
             Are you sure you want to release{" "}
             {isSelfService ? (

@@ -128,7 +128,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Assets added",
+      title: "Assets toegevoegd",
       message: "All the scanned assets has been successfully added to booking.",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,

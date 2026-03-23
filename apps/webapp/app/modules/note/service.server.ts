@@ -148,7 +148,7 @@ export async function createBulkKitChangeNotes({
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          message: "User not found",
+          message: "Gebruiker niet gevonden",
           additionalData: { userId },
           label,
         });

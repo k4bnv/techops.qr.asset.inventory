@@ -185,7 +185,7 @@ function ConditionalDropdown() {
                   disabled={partialCheckinDisabled}
                 >
                   <PackageCheck className="mr-2 inline size-5" />
-                  <span>Check in selected items</span>
+                  <span>Geselecteerde items inchecken</span>
                 </Button>
               </DropdownMenuItem>
             )}

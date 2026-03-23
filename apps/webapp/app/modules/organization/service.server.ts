@@ -96,7 +96,7 @@ export async function getOrganizationsBySsoDomain(emailDomain: string) {
     if (!emailDomain) {
       throw new ShelfError({
         cause: null,
-        message: "Email domain is required",
+        message: "E-maildomein is vereist",
         additionalData: { emailDomain },
         label: "SSO",
       });

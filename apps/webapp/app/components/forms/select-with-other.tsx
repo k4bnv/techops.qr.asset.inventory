@@ -75,7 +75,7 @@ export function SelectWithOther({
   options,
   error,
   defaultValue,
-  placeholder = "Select an option",
+  placeholder = "Selecteer een optie",
   required,
   children,
   otherInputLabel,

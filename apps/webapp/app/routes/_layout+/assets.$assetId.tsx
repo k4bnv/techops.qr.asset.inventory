@@ -158,7 +158,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
 
         sendNotification({
           title: "Asset deleted",
-          message: "Your asset has been deleted successfully",
+          message: "Uw asset is succesvol verwijderd",
           icon: { name: "trash", variant: "error" },
           senderId: authSession.userId,
         });
@@ -180,7 +180,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "QR Relinked",
+          title: "QR opnieuw gekoppeld",
           message: "A new qr code has been linked to your asset.",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
@@ -214,7 +214,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Reminder created",
+          title: "Herinnering aangemaakt",
           message: "A reminder for you asset has been created successfully.",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
@@ -228,7 +228,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
           formData,
           z.object({
             barcodeType: z.nativeEnum(BarcodeType),
-            barcodeValue: z.string().min(1, "Barcode value is required"),
+            barcodeValue: z.string().min(1, "Barcodewaarde is vereist"),
           })
         );
 
@@ -256,8 +256,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
           });
 
           sendNotification({
-            title: "Barcode added",
-            message: "Barcode has been added to your asset successfully",
+            title: "Barcode toegevoegd",
+            message: "Barcode is succesvol aan uw asset toegevoegd",
             icon: { name: "success", variant: "success" },
             senderId: authSession.userId,
           });

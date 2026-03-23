@@ -35,7 +35,7 @@ export function loader({ context, request }: LoaderFunctionArgs) {
         Logger.error(
           new ShelfError({
             cause,
-            message: "Failed to send SSE notification",
+            message: "Verzenden van SSE-melding mislukt",
             additionalData: { userId: authSession.userId },
             label: "Notification",
           })

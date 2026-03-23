@@ -22,7 +22,7 @@ import { requirePermission } from "~/utils/roles.server";
 
 const paramsSchema = z.object({ bookingId: z.string() });
 
-export const meta = () => [{ title: appendToMetaTitle("Duplicate booking") }];
+export const meta = () => [{ title: appendToMetaTitle("Reservering dupliceren") }];
 
 export async function loader({ request, context, params }: LoaderFunctionArgs) {
   const { userId } = context.getSession();
@@ -75,7 +75,7 @@ export async function action({ request, context, params }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Booking duplicated",
+      title: "Reservering gedupliceerd",
       senderId: userId,
       icon: { name: "success", variant: "success" },
       message: `Booking "${newBooking.name}" has been duplicated.`,

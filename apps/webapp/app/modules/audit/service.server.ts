@@ -381,7 +381,7 @@ export async function updateAuditSession({
     if (!currentAudit) {
       throw new ShelfError({
         cause: null,
-        message: "Audit not found",
+        message: "Audit niet gevonden",
         additionalData: { id, organizationId },
         label: "Audit",
         status: 404,
@@ -615,7 +615,7 @@ export async function getAuditSessionDetails({
     if (!session) {
       throw new ShelfError({
         cause: null,
-        message: "Audit session not found",
+        message: "Auditsessie niet gevonden",
         additionalData: { id, organizationId },
         status: 404,
         label,
@@ -635,7 +635,7 @@ export async function getAuditSessionDetails({
 
       throw new ShelfError({
         cause: null,
-        title: "Audit not found",
+        title: "Audit niet gevonden",
         message: "",
         additionalData: {
           id,
@@ -995,7 +995,7 @@ export async function recordAuditScan(
     if (!session) {
       throw new ShelfError({
         cause: null,
-        message: "Audit session not found",
+        message: "Auditsessie niet gevonden",
         additionalData: { auditSessionId, organizationId },
         status: 404,
         label,
@@ -1196,7 +1196,7 @@ export async function getAuditScans({
     if (!session) {
       throw new ShelfError({
         cause: null,
-        message: "Audit session not found",
+        message: "Auditsessie niet gevonden",
         additionalData: { auditSessionId, organizationId },
         status: 404,
         label,
@@ -1342,7 +1342,7 @@ export async function completeAuditSession({
       if (!session) {
         throw new ShelfError({
           cause: null,
-          message: "Audit session not found",
+          message: "Auditsessie niet gevonden",
           additionalData: { sessionId, organizationId },
           status: 404,
           label,
@@ -1352,7 +1352,7 @@ export async function completeAuditSession({
       if (session.status === AuditStatus.COMPLETED) {
         throw new ShelfError({
           cause: null,
-          message: "Audit session is already completed",
+          message: "Auditsessie is al voltooid",
           additionalData: { sessionId },
           status: 400,
           label,
@@ -1686,7 +1686,7 @@ export function requireAuditAssigneeForBaseSelfService({
     if (!isAssignee) {
       throw new ShelfError({
         cause: null,
-        title: "Unauthorized",
+        title: "Niet geautoriseerd",
         message: "You don't have permission to view this audit",
         additionalData: { auditId, userId },
         status: 403,
@@ -1751,7 +1751,7 @@ export async function cancelAuditSession({
     if (!auditSession) {
       throw new ShelfError({
         cause: null,
-        message: "Audit not found",
+        message: "Audit niet gevonden",
         additionalData: { auditSessionId, organizationId },
         label,
         status: 404,
@@ -1762,7 +1762,7 @@ export async function cancelAuditSession({
     if (auditSession.createdById !== userId) {
       throw new ShelfError({
         cause: null,
-        message: "Only the audit creator can cancel the audit",
+        message: "Alleen de auditmaker kan de audit annuleren",
         additionalData: {
           auditSessionId,
           userId,
@@ -1907,7 +1907,7 @@ export async function addAssetsToAudit({
       if (!audit) {
         throw new ShelfError({
           cause: null,
-          message: "Audit not found",
+          message: "Audit niet gevonden",
           additionalData: { auditId, organizationId },
           label,
           status: 404,
@@ -1917,7 +1917,7 @@ export async function addAssetsToAudit({
       if (audit.status !== AuditStatus.PENDING) {
         throw new ShelfError({
           cause: null,
-          message: "Can only add assets to pending audits",
+          message: "Kan alleen assets toevoegen aan openstaande audits",
           additionalData: { auditId, status: audit.status },
           label,
           status: 400,
@@ -2022,7 +2022,7 @@ export async function removeAssetFromAudit({
       if (!audit) {
         throw new ShelfError({
           cause: null,
-          message: "Audit not found",
+          message: "Audit niet gevonden",
           additionalData: { auditId, organizationId },
           label,
           status: 404,
@@ -2032,7 +2032,7 @@ export async function removeAssetFromAudit({
       if (audit.status !== AuditStatus.PENDING) {
         throw new ShelfError({
           cause: null,
-          message: "Can only remove assets from pending audits",
+          message: "Kan alleen assets verwijderen uit openstaande audits",
           additionalData: { auditId, status: audit.status },
           label,
           status: 400,
@@ -2048,7 +2048,7 @@ export async function removeAssetFromAudit({
       if (!auditAsset) {
         throw new ShelfError({
           cause: null,
-          message: "Audit asset not found",
+          message: "Auditasset niet gevonden",
           additionalData: { auditAssetId },
           label,
           status: 404,
@@ -2120,7 +2120,7 @@ export async function removeAssetsFromAudit({
       if (!audit) {
         throw new ShelfError({
           cause: null,
-          message: "Audit not found",
+          message: "Audit niet gevonden",
           additionalData: { auditId, organizationId },
           label,
           status: 404,
@@ -2130,7 +2130,7 @@ export async function removeAssetsFromAudit({
       if (audit.status !== AuditStatus.PENDING) {
         throw new ShelfError({
           cause: null,
-          message: "Can only remove assets from pending audits",
+          message: "Kan alleen assets verwijderen uit openstaande audits",
           additionalData: { auditId, status: audit.status },
           label,
           status: 400,

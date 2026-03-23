@@ -29,7 +29,7 @@ import When from "../when/when";
 export const NewKitFormSchema = z.object({
   name: z
     .string()
-    .min(2, "Name is required")
+    .min(2, "Naam is vereist")
     .transform((value) => value.trim()),
   description: z
     .string()
@@ -132,7 +132,7 @@ export default function KitsForm({
         </FormRow>
 
         <FormRow
-          rowLabel="Description"
+          rowLabel="Beschrijving"
           subHeading={
             <p>
               Briefly describe what is included and/or what is will be used for.
@@ -145,7 +145,7 @@ export default function KitsForm({
           <Input
             inputType="textarea"
             maxLength={1000}
-            label={"Description"}
+            label={"Beschrijving"}
             name={zo.fields.description()}
             defaultValue={description || ""}
             hideLabel

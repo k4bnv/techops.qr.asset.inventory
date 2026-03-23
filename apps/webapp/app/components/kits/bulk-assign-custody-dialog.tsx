@@ -55,10 +55,10 @@ export default function BulkAssignCustodyDialog() {
                   deletedAt: null,
                 }}
                 fieldName="custodian"
-                contentLabel="Team members"
+                contentLabel="Teamleden"
                 initialDataKey="teamMembers"
                 countKey="totalTeamMembers"
-                placeholder="Select a team member"
+                placeholder="Selecteer een teamlid"
                 closeOnSelect
                 transformItem={(item) => ({
                   ...item,

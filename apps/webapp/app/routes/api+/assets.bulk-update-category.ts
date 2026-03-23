@@ -52,7 +52,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
 
     sendNotification({
       title: "Assets updated",
-      message: "Your asset's categories have been successfully updated",
+      message: "De categorieën van uw asset zijn succesvol bijgewerkt",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

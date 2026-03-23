@@ -103,20 +103,20 @@ function createOnboardingSchema({
     .object({
       username: z
         .string()
-        .min(4, { message: "Must be at least 4 characters long" }),
-      firstName: z.string().min(1, { message: "First name is required" }),
-      lastName: z.string().min(1, { message: "Last name is required" }),
+        .min(4, { message: "Moet minimaal 4 tekens lang zijn" }),
+      firstName: z.string().min(1, { message: "Voornaam is vereist" }),
+      lastName: z.string().min(1, { message: "Achternaam is vereist" }),
       password: userSignedUpWithPassword
         ? z.string().optional()
-        : z.string().min(8, "Password is too short. Minimum 8 characters."),
+        : z.string().min(8, "Wachtwoord is te kort. Minimaal 8 tekens."),
       confirmPassword: userSignedUpWithPassword
         ? z.string().optional()
-        : z.string().min(8, "Password is too short. Minimum 8 characters."),
+        : z.string().min(8, "Wachtwoord is te kort. Minimaal 8 tekens."),
       referralSource: shouldCollectBusinessIntel
-        ? z.string().min(5, "Field is required.")
+        ? z.string().min(5, "Veld is vereist.")
         : z.string().optional().nullable(),
       jobTitle: shouldCollectBusinessIntel
-        ? requiredTrimmedField("Role is required")
+        ? requiredTrimmedField("Functie is vereist")
         : optionalTrimmedField,
       teamSize: optionalTrimmedField,
       companyName: optionalTrimmedField,
@@ -141,7 +141,7 @@ function createOnboardingSchema({
         if (password !== confirmPassword) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: "Password and confirm password must match",
+            message: "Wachtwoord en bevestig wachtwoord moeten overeenkomen",
             path: ["confirmPassword"],
           });
         }
@@ -156,7 +156,7 @@ function createOnboardingSchema({
           ) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
-              message: "Team size is required",
+              message: "Teamgrootte is vereist",
               path: ["teamSize"],
             });
           }
@@ -167,7 +167,7 @@ function createOnboardingSchema({
           ) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
-              message: "Company or organization is required",
+              message: "Bedrijf of organisatie is vereist",
               path: ["companyName"],
             });
           }
@@ -278,9 +278,9 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       createdWithInvite,
     });
 
-    const title = "Set up your account";
+    const title = "Account instellen";
     const subHeading =
-      "You are almost ready to use TechOps. We just need some basic information to get you started.";
+      "U bent bijna klaar om TechOps te gebruiken. We hebben nog wat basisinformatie nodig om u op weg te helpen.";
 
     return payload({
       title,
@@ -550,18 +550,18 @@ export default function Onboarding() {
 
         <div className="md:flex md:gap-6">
           <Input
-            label="First name"
+            label="Voornaam"
             autoComplete="given-name"
             required
             data-test-id="firstName"
             type="text"
-            placeholder="Zaans"
+            placeholder="Jan"
             name={zo.fields.firstName()}
             error={zo.errors.firstName()?.message}
             className="mb-5 md:mb-0 md:flex-1"
           />
           <Input
-            label="Last name"
+            label="Achternaam"
             autoComplete="family-name"
             required
             data-test-id="lastName"
@@ -574,8 +574,8 @@ export default function Onboarding() {
         </div>
         <div>
           <Input
-            label="Username"
-            addOn="shelf.nu/"
+            label="Gebruikersnaam"
+            addOn="techops.nl/"
             autoComplete="username"
             required
             type="text"
@@ -594,7 +594,7 @@ export default function Onboarding() {
           <>
             <PasswordInput
               required
-              label="Password"
+              label="Wachtwoord"
               placeholder="********"
               data-test-id="password"
               name={zo.fields.password()}
@@ -606,7 +606,7 @@ export default function Onboarding() {
 
             <PasswordInput
               required
-              label="Confirm password"
+              label="Bevestig wachtwoord"
               data-test-id="confirmPassword"
               placeholder="********"
               name={zo.fields.confirmPassword()}
@@ -621,7 +621,7 @@ export default function Onboarding() {
           <>
             <Input
               required
-              label="How did you hear about us?"
+              label="Hoe heeft u ons gevonden?"
               placeholder="Twitter, Reddit, ChatGPT, Google, etc..."
               name={zo.fields.referralSource()}
               defaultValue={referralSourceDefault}
@@ -629,14 +629,14 @@ export default function Onboarding() {
             />
 
             <SelectWithOther
-              label="What's your role?"
+              label="Wat is uw functie?"
               name={zo.fields.jobTitle()}
               options={ROLE_OPTIONS}
               required
               error={zo.errors.jobTitle()?.message}
               defaultValue={jobTitleDefault}
-              otherInputLabel="Specify your role"
-              otherInputPlaceholder="Tell us about your role"
+              otherInputLabel="Geef uw functie op"
+              otherInputPlaceholder="Vertel ons over uw functie"
               onValueChange={(value) => {
                 setIsPersonalUse(value === "Personal use");
               }}
@@ -644,21 +644,21 @@ export default function Onboarding() {
 
             <When truthy={!isPersonalUse && requireCompanyName}>
               <SelectWithOther
-                label="How many people will use this?"
+                label="Hoeveel personen gaan dit gebruiken?"
                 name={zo.fields.teamSize()}
                 options={TEAM_SIZE_OPTIONS}
                 required
                 error={zo.errors.teamSize()?.message}
                 defaultValue={teamSizeDefault}
-                otherInputLabel="Specify team size"
-                otherInputPlaceholder="Enter your team size"
+                otherInputLabel="Geef teamgrootte op"
+                otherInputPlaceholder="Voer uw teamgrootte in"
               />
             </When>
 
             <When truthy={!isPersonalUse && requireCompanyName}>
               <Input
-                label="Company/Organization"
-                placeholder="TechOps Inc."
+                label="Bedrijf/Organisatie"
+                placeholder="TechOps B.V."
                 name={zo.fields.companyName()}
                 error={zo.errors.companyName()?.message}
                 defaultValue={companyNameDefault}
@@ -684,7 +684,7 @@ export default function Onboarding() {
                 className="flex w-full items-center justify-between rounded-md border border-gray-200 bg-gray-50 px-4 py-3 text-left font-medium text-gray-700 hover:bg-gray-100"
               >
                 <span>
-                  Help us customize TechOps
+                  Help ons TechOps aan te passen
                   <span className="ml-1 text-sm font-normal text-gray-500">
                     (optional)
                   </span>
@@ -700,32 +700,32 @@ export default function Onboarding() {
             <CollapsibleContent>
               <div className="mt-4 grid gap-5 md:grid-cols-2">
                 <SelectWithOther
-                  label="What will you primarily track?"
+                  label="Wat gaat u voornamelijk bijhouden?"
                   name={zo.fields.primaryUseCase()}
                   options={PRIMARY_USE_CASE_OPTIONS}
                   defaultValue={businessIntel?.primaryUseCase ?? null}
-                  otherInputLabel="Tell us what you'll track"
-                  otherInputPlaceholder="Describe your use case"
-                  placeholder="Select an option"
+                  otherInputLabel="Vertel ons wat u gaat bijhouden"
+                  otherInputPlaceholder="Beschrijf uw gebruikssituatie"
+                  placeholder="Selecteer een optie"
                 />
                 <SelectWithOther
-                  label="How do you currently track assets?"
+                  label="Hoe houdt u momenteel assets bij?"
                   name={zo.fields.currentSolution()}
                   options={CURRENT_SOLUTION_OPTIONS}
                   defaultValue={businessIntel?.currentSolution ?? null}
-                  otherInputLabel="Share your current solution"
-                  otherInputPlaceholder="Let us know what you use today"
-                  placeholder="Select an option"
+                  otherInputLabel="Deel uw huidige oplossing"
+                  otherInputPlaceholder="Laat ons weten wat u nu gebruikt"
+                  placeholder="Selecteer een optie"
                 />
                 <div className="md:col-span-2">
                   <SelectWithOther
-                    label="When do you need this working?"
+                    label="Wanneer heeft u dit nodig?"
                     name={zo.fields.timeline()}
                     options={TIMELINE_OPTIONS}
                     defaultValue={businessIntel?.timeline ?? null}
-                    otherInputLabel="Specify your timeline"
-                    otherInputPlaceholder="Tell us about your timeline"
-                    placeholder="Select an option"
+                    otherInputLabel="Geef uw tijdlijn op"
+                    otherInputPlaceholder="Vertel ons over uw tijdlijn"
+                    placeholder="Selecteer een optie"
                   />
                 </div>
               </div>
@@ -740,7 +740,7 @@ export default function Onboarding() {
             width="full"
             disabled={disabled}
           >
-            Submit
+            Indienen
           </Button>
         </div>
       </Form>

@@ -74,17 +74,17 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          title: "User not found",
+          title: "Gebruiker niet gevonden",
           message:
-            "The user you are trying to access does not exist or you do not have permission to access it.",
+            "De gebruiker die u probeert te openen bestaat niet of u heeft geen toestemming om toegang te krijgen.",
           additionalData: { userId, organizationId },
           label: "Settings",
         });
       });
 
     const modelName = {
-      singular: "Workspace",
-      plural: "Workspaces",
+      singular: "Werkruimte",
+      plural: "Werkruimtes",
     };
 
     /** Get the organization that are owned by the current uer */
@@ -105,7 +105,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       items: organizations,
       totalItems: organizations.length,
       modelName,
-      title: "Workspace",
+      title: "Werkruimtes",
     });
   } catch (cause) {
     const reason = makeShelfError(cause, { userId });
@@ -132,7 +132,7 @@ export default function WorkspacePage() {
     <div>
       <div className="w-full">
         <div className="mb-2.5 flex items-center justify-between bg-white md:rounded md:border md:border-gray-200 md:px-6 md:py-5">
-          <h2 className=" text-lg text-gray-900">Workspaces</h2>
+          <h2 className=" text-lg text-gray-900">Werkruimtes</h2>
 
           <Button
             to="new"
@@ -141,18 +141,18 @@ export default function WorkspacePage() {
             data-test-id="createNewWorkspaceButton"
             variant="primary"
           >
-            New workspace
+            Nieuwe werkruimte
           </Button>
         </div>
         <div className="flex-1 overflow-x-auto rounded border bg-white">
           <Table>
             <ListHeader>
-              <Th className="whitespace-nowrap">Owner</Th>
+              <Th className="whitespace-nowrap">Eigenaar</Th>
               <Th>Type</Th>
               <Th>Assets</Th>
-              <Th>Locations</Th>
-              <Th className="whitespace-nowrap">Team members</Th>
-              <Th>Actions</Th>
+              <Th>Locaties</Th>
+              <Th className="whitespace-nowrap">Teamleden</Th>
+              <Th>Acties</Th>
             </ListHeader>
             <tbody>
               {organizations.map((org) => (

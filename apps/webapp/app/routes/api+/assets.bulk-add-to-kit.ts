@@ -81,7 +81,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
     sendNotification({
       icon: { name: "success", variant: "success" },
       senderId: userId,
-      title: "Bulk assets added to kit",
+      title: "Assets in bulk aan kit toegevoegd",
       message: `Successfully added ${assetIds.length} assets to kit "${updatedKit.name}".`,
     });
 

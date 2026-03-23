@@ -36,7 +36,7 @@ export function BookingStatistics({
 }) {
   return (
     <div className="m-0">
-      <h3>Booking statistics</h3>
+      <h3>Reserveringsstatistieken</h3>
       <div className="mt-4 flex flex-col gap-4">
         <Separator />
         <div className="flex items-center justify-between">
@@ -98,7 +98,7 @@ export function BookingStatistics({
           <div className="text-right">
             <ItemsWithViewMore
               items={allCategories}
-              emptyMessage="No categories"
+              emptyMessage="Geen categorieën"
               renderItem={(category) => (
                 <CategoryBadge category={category} key={category.id} />
               )}

@@ -230,7 +230,7 @@ export async function getCustomField<
 
       throw new ShelfError({
         cause: null,
-        title: "Custom field not found",
+        title: "Aangepast veld niet gevonden",
         message: "",
         additionalData: {
           model: "customField",
@@ -250,7 +250,7 @@ export async function getCustomField<
     const isShelfError = isLikeShelfError(cause);
     throw new ShelfError({
       cause,
-      title: "Custom field not found",
+      title: "Aangepast veld niet gevonden",
       message:
         "The custom field you are trying to access does not exist or you do not have permission to access it.",
       additionalData: {

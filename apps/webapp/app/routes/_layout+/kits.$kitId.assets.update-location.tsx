@@ -17,7 +17,7 @@ import {
 } from "~/utils/permissions/permission.data";
 import { requirePermission } from "~/utils/roles.server";
 
-export const meta = () => [{ title: appendToMetaTitle("Update kit location") }];
+export const meta = () => [{ title: appendToMetaTitle("Kitlocatie bijwerken") }];
 
 const ParamsSchema = z.object({ kitId: z.string() });
 
@@ -89,7 +89,7 @@ export async function action({ params, request, context }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Location updated",
+      title: "Locatie bijgewerkt",
       message: "Your kit's location has been updated successfully",
       icon: { name: "success", variant: "success" },
       senderId: userId,
@@ -113,7 +113,7 @@ export default function UpdateKitLocation() {
           <MapPinIcon />
         </div>
         <div className="mb-5">
-          <h4>Update location</h4>
+          <h4>Locatie bijwerken</h4>
           <p>
             Adjust the location of{" "}
             <span className="font-medium">{kit.name}</span>.

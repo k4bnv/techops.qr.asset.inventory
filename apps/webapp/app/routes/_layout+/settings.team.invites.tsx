@@ -60,7 +60,7 @@ export async function loader({ request, context }: LoaderFunctionArgs) {
     if (!organization) {
       throw new ShelfError({
         cause: null,
-        message: "Organization not found",
+        message: "Organisatie niet gevonden",
         additionalData: { organizationId, userId },
         label: "Team",
       });

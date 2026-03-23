@@ -98,7 +98,7 @@ export function FieldSelector({
   };
 
   const displayText = filter.isNew
-    ? "Select column"
+    ? "Selecteer kolom"
     : parseColumnName(fieldName);
 
   return (
@@ -124,7 +124,7 @@ export function FieldSelector({
             <Search className="ml-4 size-4 text-gray-500" />
             <input
               ref={searchInputRef}
-              placeholder="Search column..."
+              placeholder="Kolom zoeken..."
               className="border-0 px-4 py-2 pl-2 text-[14px] focus:border-0 focus:ring-0"
               value={searchQuery}
               onChange={handleSearch}

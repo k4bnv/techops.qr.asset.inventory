@@ -67,14 +67,14 @@ import {
 import { requirePermission } from "~/utils/roles.server";
 import { tw } from "~/utils/tw";
 
-export const meta = () => [{ title: appendToMetaTitle("Manage kit assets") }];
+export const meta = () => [{ title: appendToMetaTitle("Kitassets beheren") }];
 
 type LoaderData = typeof loader;
 
 const ASSET_KIT_FILTERS = [
-  { label: "All assets", value: "ALL" },
-  { label: "Not in any kit", value: "NOT_IN_KIT" },
-  { label: "In other kits", value: "IN_OTHER_KITS" },
+  { label: "Alle assets", value: "ALL" },
+  { label: "Niet in een kit", value: "NOT_IN_KIT" },
+  { label: "In andere kits", value: "IN_OTHER_KITS" },
 ];
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
@@ -147,9 +147,9 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
         title: `Add assets for ${kit.name}`,
         subHeading: "Fill up the kit with the assets of your choice.",
       },
-      searchFieldLabel: "Search assets",
+      searchFieldLabel: "Assets zoeken",
       searchFieldTooltip: {
-        title: "Search your asset database",
+        title: "Doorzoek uw assetdatabase",
         text: "Search assets based on asset name or description, category, tag, location, custodian name. Simply separate your keywords by a space: 'Laptop lenovo 2020'.",
       },
       showSidebar: true,
@@ -277,7 +277,7 @@ export default function ManageAssetsInKit() {
                   name="assetKitFilter"
                   items={ASSET_KIT_FILTERS}
                   defaultValue="ALL"
-                  placeholder="Filter by kit"
+                  placeholder="Filteren op kit"
                 />
               </div>
             ),
@@ -292,7 +292,7 @@ export default function ManageAssetsInKit() {
             </div>
           }
           model={{ name: "category", queryKey: "name" }}
-          label="Filter by category"
+          label="Filteren op categorie"
           initialDataKey="categories"
           countKey="totalCategories"
         />
@@ -303,7 +303,7 @@ export default function ManageAssetsInKit() {
             </div>
           }
           model={{ name: "tag", queryKey: "name" }}
-          label="Filter by tags"
+          label="Filteren op tags"
           initialDataKey="tags"
           countKey="totalTags"
         />
@@ -421,18 +421,18 @@ export default function ManageAssetsInKit() {
                   )}
                   {kit.location ? (
                     <p className="mb-3">
-                      <strong>Location Update Notice:</strong> Adding assets to
-                      this kit will automatically update their location to{" "}
+                      <strong>Melding locatiewijziging:</strong> Het toevoegen van assets aan
+                      deze kit zal automatisch hun locatie bijwerken naar{" "}
                       <strong>{kit.location.name}</strong>.
                     </p>
                   ) : (
                     <p className="mb-3">
-                      <strong>Location Update Notice:</strong> Adding assets to
-                      this kit will remove their current location since this kit
-                      has no location assigned.
+                      <strong>Melding locatiewijziging:</strong> Het toevoegen van assets aan
+                      deze kit zal hun huidige locatie verwijderen omdat deze kit
+                      geen locatie heeft toegewezen.
                     </p>
                   )}
-                  <p>Are you sure you want to continue?</p>
+                  <p>Weet u zeker dat u wilt doorgaan?</p>
                 </div>
 
                 <AlertDialogFooter>

@@ -103,7 +103,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Successfully updated columns",
+          title: "Kolommen succesvol bijgewerkt",
           message:
             "The columns have been successfully updated. The changes will be reflected in the asset index.",
           icon: { name: "success", variant: "success" },

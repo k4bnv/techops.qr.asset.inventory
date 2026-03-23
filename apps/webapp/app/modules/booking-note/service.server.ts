@@ -144,7 +144,7 @@ export async function getBookingNotes({
     if (!booking) {
       throw new ShelfError({
         cause: null,
-        message: "Booking not found or access denied",
+        message: "Reservering niet gevonden of toegang geweigerd",
         additionalData: { bookingId, organizationId },
         label,
         shouldBeCaptured: false,

@@ -180,7 +180,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 ];
 
 export const handle = {
-  breadcrumb: () => "Overview",
+  breadcrumb: () => "Overzicht",
 };
 
 export async function action({ context, request, params }: ActionFunctionArgs) {
@@ -217,8 +217,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       });
 
       sendNotification({
-        title: "Asset availability status updated successfully",
-        message: "Your asset's availability for booking has been updated",
+        title: "Beschikbaarheidsstatus bijgewerkt",
+        message: "De beschikbaarheid van uw asset voor reserveringen is bijgewerkt",
         icon: { name: "success", variant: "success" },
         senderId: authSession.userId,
       });
@@ -423,17 +423,9 @@ export default function AssetOverview() {
                           iconClassName="size-4"
                           content={
                             <>
-                              <h6>Barcodes support</h6>
+                              <h6>Barcode-ondersteuning</h6>
                               <p>
-                                Want to know more about barcodes? Check out our
-                                knowledge base article on{" "}
-                                <Button
-                                  variant="link"
-                                  target="_blank"
-                                  to="https://www.shelf.nu/knowledge-base/alternative-barcodes"
-                                >
-                                  barcode support
-                                </Button>
+                                Wilt u meer weten over barcodes? Neem contact op met uw beheerder voor meer informatie over barcode-ondersteuning.
                               </p>
                             </>
                           }
@@ -480,7 +472,7 @@ export default function AssetOverview() {
           {customFieldsValues?.length > 0 ? (
             <>
               <TextualDivider
-                text="Custom fields"
+                text="Aangepaste velden"
                 className="mb-8 pt-3 lg:hidden"
               />
               <Card className="my-3 px-[-4] py-[-5] md:border">
@@ -574,8 +566,8 @@ export default function AssetOverview() {
                     required
                     title={
                       !canUpdateAvailability
-                        ? "You do not have the permissions to change availability"
-                        : "Toggle availability"
+                        ? "U heeft geen toestemming om de beschikbaarheid te wijzigen"
+                        : "Beschikbaarheid wijzigen"
                     }
                   />
                   <input type="hidden" value="toggle" name="intent" />

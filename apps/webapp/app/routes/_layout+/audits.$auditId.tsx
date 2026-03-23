@@ -133,7 +133,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
 
     throw new ShelfError({
       cause: null,
-      message: "Invalid action intent",
+      message: "Ongeldige actie-intent",
       additionalData: { intent },
       label,
       status: 400,
@@ -207,7 +207,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
       if (!isAssignee) {
         throw new ShelfError({
           cause: null,
-          title: "Access denied",
+          title: "Toegang geweigerd",
           message: "You are not assigned to this audit.",
           additionalData: { auditId, userId },
           status: 403,
@@ -303,7 +303,7 @@ export default function AuditDetailsPage() {
               variant={"secondary"}
               type={"button"}
             >
-              {hasScans ? "Continue scanning" : "Start scanning"}
+              {hasScans ? "Doorgaan met scannen" : "Beginnen met scannen"}
             </Button>
           )}
 

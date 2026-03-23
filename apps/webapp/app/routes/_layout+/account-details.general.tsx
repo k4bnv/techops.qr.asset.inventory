@@ -175,7 +175,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
         if (parsedData.type !== "updateUserContact")
           throw new ShelfError({
             cause: null,
-            message: "Invalid payload type",
+            message: "Ongeldig payload type",
             label: "User",
           });
 
@@ -204,20 +204,20 @@ export async function action({ context, request }: ActionFunctionArgs) {
         if (parsedData.type !== "deleteUser")
           throw new Error("Invalid payload type");
 
-        let reason = "No reason provided";
+        let reason = "Geen reden opgegeven";
         if ("reason" in parsedData && parsedData.reason) {
           reason = parsedData?.reason;
         }
 
         sendEmail({
           to: ADMIN_EMAIL || `"TechOps" <updates@emails.shelf.nu>`,
-          subject: "Delete account request",
+          subject: "Verzoek tot accountverwijdering",
           text: `User with id ${userId} and email ${parsedData.email} has requested to delete their account. \n User: ${SERVER_URL}/admin-dashboard/${userId} \n\n Reason: ${reason}\n\n`,
         });
 
         sendEmail({
           to: parsedData.email,
-          subject: "Delete account request received",
+          subject: "Verzoek tot accountverwijdering ontvangen",
           text: `We have received your request to delete your account. It will be processed within 72 hours.\n\n Kind regards,\nthe TechOps team \n\n`,
         });
 
@@ -268,10 +268,10 @@ export async function action({ context, request }: ActionFunctionArgs) {
           const emailExists = generateError.code === "email_exists";
           throw new ShelfError({
             cause: generateError,
-            ...(emailExists && { title: "Email is already taken." }),
+            ...(emailExists && { title: "E-mailadres is al in gebruik." }),
             message: emailExists
-              ? "Please choose a different email address which is not already in use."
-              : "Failed to initiate email change",
+              ? "Kies een ander e-mailadres dat nog niet in gebruik is."
+              : "Kon e-mailwijziging niet starten",
             additionalData: { userId, newEmail },
             label: "Auth",
             shouldBeCaptured: !emailExists,
@@ -326,7 +326,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
         if (verifyError) {
           throw new ShelfError({
             cause: verifyError,
-            message: "Invalid or expired verification code",
+            message: "Ongeldige of verlopen verificatiecode",
             additionalData: { userId },
             label: "Auth",
           });

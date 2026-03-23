@@ -124,7 +124,7 @@ function ConditionalDropdown() {
             >
               <BulkUpdateDialogTrigger
                 type="trash"
-                label="Remove from audit"
+                label="Verwijderen uit audit"
                 onClick={closeMenu}
               />
             </DropdownMenuItem>

@@ -6,7 +6,7 @@ import { Button } from "../shared/button";
 
 export const KitBulkLocationUpdateSchema = z.object({
   kitIds: z.array(z.string()).min(1),
-  newLocationId: z.string({ required_error: "Please select a location" }),
+  newLocationId: z.string({ required_error: "Selecteer een locatie" }),
 });
 
 export default function KitBulkLocationUpdateDialog() {
@@ -37,7 +37,7 @@ export default function KitBulkLocationUpdateDialog() {
 
           <div className="mb-6 rounded-md border border-blue-200 bg-blue-50 p-3">
             <p className="text-sm text-blue-800">
-              <strong>Location Update Notice:</strong> Changing kit locations
+              <strong>Let op locatiewijziging:</strong> Het wijzigen van kitlocaties
               will also automatically update the location of all assets within
               those kits.
             </p>

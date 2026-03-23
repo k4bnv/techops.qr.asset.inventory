@@ -516,7 +516,7 @@ function SubmittingDialog({
     >
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Releasing custody</AlertDialogTitle>
+          <AlertDialogTitle>Bewaring vrijgeven</AlertDialogTitle>
           <AlertDialogDescription asChild>
             <div className="flex flex-col gap-4">
               <SubmissionState
@@ -565,7 +565,7 @@ function SubmissionState({
     return (
       <div className="flex flex-row gap-2">
         <Spinner />
-        <TextLoader text={`Releasing custody from ${type}s`} />
+        <TextLoader text={`Bewaring vrijgeven from ${type}s`} />
       </div>
     );
   } else if (status === "success") {

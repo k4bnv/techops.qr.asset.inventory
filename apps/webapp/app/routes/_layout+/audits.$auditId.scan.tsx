@@ -100,7 +100,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     if (!auditSession) {
       throw new ShelfError({
         cause: null,
-        message: "Audit session not found",
+        message: "Auditsessie niet gevonden",
         additionalData: { auditId, organizationId },
         label: "Audit",
         status: 404,
@@ -250,7 +250,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
 
     throw new ShelfError({
       cause: null,
-      message: "Invalid action intent",
+      message: "Ongeldige actie-intent",
       additionalData: { intent },
       label: "Audit",
       status: 400,
@@ -339,7 +339,7 @@ export default function AuditSessionRoute() {
   useEffect(() => {
     if (duplicateScan) {
       showNotification({
-        title: "Already scanned",
+        title: "Al gescand",
         message: `Asset "${duplicateScan.assetTitle}" has already been scanned`,
         icon: { name: "scan", variant: "gray" },
         senderId: null,

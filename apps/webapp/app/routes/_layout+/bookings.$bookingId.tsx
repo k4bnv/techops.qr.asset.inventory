@@ -191,8 +191,8 @@ const AddToCalendar = () => {
           <TooltipContent side="bottom">
             <p className="text-xs">
               {disabled
-                ? "Not possible to add to calendar due to booking status"
-                : "Download this booking as a calendar event"}
+                ? "Kan niet aan kalender worden toegevoegd vanwege reserveringsstatus"
+                : "Deze reservering downloaden als agenda-evenement"}
             </p>
           </TooltipContent>
         </Tooltip>

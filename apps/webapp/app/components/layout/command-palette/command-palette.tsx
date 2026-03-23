@@ -133,7 +133,7 @@ const NAVIGATION_COMMANDS: QuickCommand[] = [
   {
     id: "assets",
     label: "Assets",
-    description: "Browse and manage all assets",
+    description: "Bladeren en beheren van alle assets",
     href: "/assets",
     keywords: ["inventory", "items", "equipment"],
     icon: CompassIcon,
@@ -141,15 +141,15 @@ const NAVIGATION_COMMANDS: QuickCommand[] = [
   {
     id: "kits",
     label: "Kits",
-    description: "Browse and manage asset kits",
+    description: "Bladeren en beheren van asset kits",
     href: "/kits",
     keywords: ["packages", "bundles", "collections"],
     icon: PackageIcon,
   },
   {
     id: "bookings",
-    label: "Bookings",
-    description: "View upcoming and past bookings",
+    label: "Reserveringen",
+    description: "Bekijk aankomende en eerdere reserveringen",
     href: "/bookings",
     keywords: ["reservations", "schedule", "calendar"],
     icon: CalendarIcon,
@@ -159,7 +159,7 @@ const NAVIGATION_COMMANDS: QuickCommand[] = [
   {
     id: "audits",
     label: "Audits",
-    description: "View and manage inventory audits",
+    description: "Bekijk en beheer inventarisaudits",
     href: "/audits",
     keywords: ["audits", "audit", "inventory", "check", "verify"],
     icon: ClipboardCheckIcon,
@@ -168,7 +168,7 @@ const NAVIGATION_COMMANDS: QuickCommand[] = [
   {
     id: "team",
     label: "Team",
-    description: "Manage team members and roles",
+    description: "Teamleden en rollen beheren",
     href: "/settings/team/users",
     keywords: ["users", "members", "people"],
     icon: UserPlus2Icon,
@@ -177,8 +177,8 @@ const NAVIGATION_COMMANDS: QuickCommand[] = [
   },
   {
     id: "settings",
-    label: "Settings",
-    description: "Adjust organization preferences",
+    label: "Instellingen",
+    description: "Organisatievoorkeuren aanpassen",
     href: "/settings",
     keywords: ["preferences", "configuration"],
     icon: SettingsIcon,
@@ -186,8 +186,8 @@ const NAVIGATION_COMMANDS: QuickCommand[] = [
   },
   {
     id: "home",
-    label: "Home",
-    description: "See analytics and key metrics",
+    label: "Startpagina",
+    description: "Bekijk analyses en kernstatistieken",
     href: "/home",
     keywords: ["overview", "analytics", "dashboard"],
     icon: HomeIcon,
@@ -198,8 +198,8 @@ const NAVIGATION_COMMANDS: QuickCommand[] = [
 const ACTION_COMMANDS: QuickAction[] = [
   {
     id: "create-asset",
-    label: "Create asset",
-    description: "Add a new asset to your inventory",
+    label: "Asset aanmaken",
+    description: "Nieuw asset toevoegen aan uw inventaris",
     href: "/assets/new",
     keywords: ["new", "asset", "inventory"],
     icon: FilePlus2Icon,
@@ -207,8 +207,8 @@ const ACTION_COMMANDS: QuickAction[] = [
   },
   {
     id: "create-kit",
-    label: "Create kit",
-    description: "Bundle assets into a new kit",
+    label: "Kit aanmaken",
+    description: "Assets bundelen in een nieuwe kit",
     href: "/kits/new",
     keywords: ["new", "kit", "inventory", "collection"],
     icon: PackageIcon,
@@ -216,8 +216,8 @@ const ACTION_COMMANDS: QuickAction[] = [
   },
   {
     id: "create-booking",
-    label: "Create booking",
-    description: "Reserve assets for a new booking",
+    label: "Reservering aanmaken",
+    description: "Assets reserveren voor een nieuwe boeking",
     href: "/bookings/new",
     keywords: ["book", "reservation", "calendar"],
     icon: CalendarIcon,
@@ -225,8 +225,8 @@ const ACTION_COMMANDS: QuickAction[] = [
   },
   {
     id: "invite-user",
-    label: "Invite user",
-    description: "Send an invite to a teammate",
+    label: "Gebruiker uitnodigen",
+    description: "Uitnodiging sturen naar een teamlid",
     href: "/settings/team/invites",
     keywords: ["team", "user", "invite"],
     icon: UserPlus2Icon,
@@ -661,7 +661,7 @@ export function CommandPalette() {
       <CommandInput
         value={query}
         onValueChange={setQuery}
-        placeholder="Search assets, audits, kits, bookings, locations, team members..."
+        placeholder="Zoek assets, audits, kits, reserveringen, locaties, teamleden..."
         autoFocus
         className="my-4 rounded border-gray-100"
       />
@@ -669,14 +669,14 @@ export function CommandPalette() {
         <CommandEmpty>
           {isSearching ? (
             <span className="flex items-center gap-2 text-gray-500">
-              <Spinner className="size-4" /> Searching...
+              <Spinner className="size-4" /> Zoeken...
             </span>
           ) : errorMessage ? (
             <span className="text-error-600">
-              {errorMessage || "Something went wrong"}
+              {errorMessage || "Er is iets misgegaan"}
             </span>
           ) : (
-            "No results found"
+            "Geen resultaten gevonden"
           )}
         </CommandEmpty>
 
@@ -712,6 +712,7 @@ export function CommandPalette() {
 
         {auditResults.length > 0 ? (
           <CommandGroup heading="Audits">
+
             {auditResults.map((audit) => (
               <CommandItem
                 key={audit.id}
@@ -762,7 +763,7 @@ export function CommandPalette() {
         ) : null}
 
         {bookingResults.length > 0 ? (
-          <CommandGroup heading="Bookings">
+          <CommandGroup heading="Reserveringen">
             {bookingResults.map((booking) => (
               <CommandItem
                 key={booking.id}
@@ -793,7 +794,7 @@ export function CommandPalette() {
         ) : null}
 
         {locationResults.length > 0 ? (
-          <CommandGroup heading="Locations">
+          <CommandGroup heading="Locaties">
             {locationResults.map((location) => (
               <CommandItem
                 key={location.id}
@@ -818,7 +819,7 @@ export function CommandPalette() {
         ) : null}
 
         {teamMemberResults.length > 0 ? (
-          <CommandGroup heading="Team Members">
+          <CommandGroup heading="Teamleden">
             {teamMemberResults.map((member) => (
               <CommandItem
                 key={member.id}
@@ -841,7 +842,7 @@ export function CommandPalette() {
         ) : null}
 
         {navigationResults.length > 0 ? (
-          <CommandGroup heading="Navigation">
+          <CommandGroup heading="Navigatie">
             {navigationResults.map((command) => (
               <CommandItem
                 key={command.id}
@@ -872,7 +873,7 @@ export function CommandPalette() {
         ) : null}
 
         {actionResults.length > 0 ? (
-          <CommandGroup heading="Quick actions">
+          <CommandGroup heading="Snelle acties">
             {actionResults.map((command) => (
               <CommandItem
                 key={command.id}

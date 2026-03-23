@@ -115,7 +115,7 @@ export const BookingOverviewPDF = ({
             <div className="grow">
               {isFetchingBookings ? (
                 <div className="flex h-full flex-col items-center justify-center gap-2">
-                  <div>Generating PDF preview...</div>
+                  <div>PDF-voorbeeld genereren...</div>
                   <div>
                     <Spinner />
                   </div>

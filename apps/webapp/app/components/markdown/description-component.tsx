@@ -170,5 +170,5 @@ export function DescriptionComponent({
   }
 
   // Fallback for edge cases
-  return <span>Description updated</span>;
+  return <span>Beschrijving bijgewerkt</span>;
 }

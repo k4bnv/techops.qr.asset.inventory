@@ -22,8 +22,8 @@ export function validateAuditEnabled(
   if (!organizationHasAuditsEnabled(organization)) {
     throw new ShelfError({
       cause: null,
-      title: "Audits not enabled",
-      message: "Audit functionality is not enabled for this workspace",
+      title: "Audits niet ingeschakeld",
+      message: "Auditfunctionaliteit is niet ingeschakeld voor deze werkruimte",
       status: 403,
       additionalData,
       label: "Audit",

@@ -50,7 +50,7 @@ export function ScanDetails({
               </p>
             </div>
             <div className="flex justify-between py-2">
-              <p>Coordinates</p>
+              <p>Coördinaten</p>
               <p>{lastScan.coordinates}</p>
             </div>
             <div className="flex justify-between py-2">

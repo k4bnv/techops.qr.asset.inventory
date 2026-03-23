@@ -69,7 +69,7 @@ export function formatFilterSummary(
   columns: Column[],
   lookupData?: FilterLookupData
 ): string {
-  if (!query) return "No filters or sorting";
+  if (!query) return "Geen filters of sortering";
 
   try {
     // Parse filters
@@ -83,7 +83,7 @@ export function formatFilterSummary(
     const sorts = parseSorting(query);
 
     if (filters.length === 0 && sorts.length === 0 && !searchQuery) {
-      return "No filters or sorting";
+      return "Geen filters of sortering";
     }
 
     // Format filters
@@ -122,7 +122,7 @@ export function formatFilterSummary(
     return parts.join(" | ");
   } catch {
     // If parsing fails, return a generic message
-    return "Custom filters and sorting";
+    return "Aangepaste filters en sortering";
   }
 }
 
@@ -134,8 +134,8 @@ function formatFieldName(name: string): string {
   // Handle special cases
   const specialCases: Record<string, string> = {
     mainImage: "Image",
-    availableToBook: "Available to book",
-    customField: "Custom field",
+    availableToBook: "Beschikbaar voor boeking",
+    customField: "Aangepast veld",
   };
 
   if (specialCases[name]) return specialCases[name];
@@ -205,12 +205,12 @@ function formatSingleValue(
 
   // Handle special filter values for custody, location, and kit
   const specialValues: Record<string, string> = {
-    "in-custody": "In custody",
-    "without-custody": "Without custody",
-    "in-location": "In a location",
-    "without-location": "Without location",
+    "in-custody": "In beheer",
+    "without-custody": "Zonder beheerder",
+    "in-location": "In een locatie",
+    "without-location": "Zonder locatie",
     "in-kit": "In a kit",
-    "without-kit": "Without kit",
+    "without-kit": "Zonder kit",
   };
   if (specialValues[valueStr]) {
     return specialValues[valueStr];

@@ -71,7 +71,7 @@ export const StartAuditSchema = BaseAuditSchema.extend({
     return hasAssetIds || hasContext;
   },
   {
-    message: "Either assetIds or context parameters must be provided",
+    message: "AssetIds of contextparameters moeten worden opgegeven",
   }
 );
 
@@ -150,10 +150,10 @@ export async function action({ request, context }: ActionFunctionArgs) {
         }).toJSDate()
       : undefined;
     if (dueDateUTC && dueDateUTC <= new Date()) {
-      throw badRequest("Due date must be in the future.", {
+      throw badRequest("Vervaldatum moet in de toekomst liggen.", {
         additionalData: {
           validationErrors: {
-            dueDate: { message: "Due date must be in the future" },
+            dueDate: { message: "Vervaldatum moet in de toekomst liggen" },
           },
         },
       });

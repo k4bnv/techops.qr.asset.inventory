@@ -145,7 +145,7 @@ export async function fetchAllAuditPdfRelatedData(
     if (!session) {
       throw new ShelfError({
         cause: null,
-        message: "Audit session not found",
+        message: "Auditsessie niet gevonden",
         status: 404,
         label: "Audit",
       });
@@ -160,8 +160,8 @@ export async function fetchAllAuditPdfRelatedData(
       if (!isAssignee) {
         throw new ShelfError({
           cause: null,
-          title: "Unauthorized",
-          message: "You don't have permission to view this audit",
+          title: "Niet geautoriseerd",
+          message: "U heeft geen toestemming om deze audit te bekijken",
           status: 403,
           label: "Audit",
         });
@@ -267,7 +267,7 @@ export async function fetchAllAuditPdfRelatedData(
     if (!organization) {
       throw new ShelfError({
         cause: null,
-        message: "Organization not found",
+        message: "Organisatie niet gevonden",
         status: 404,
         label: "Organization",
       });

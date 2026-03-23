@@ -12,7 +12,7 @@ export function mapAuthSession(
   if (!supabaseAuthSession.user.email) {
     throw new ShelfError({
       cause: null,
-      message: "User should have an email",
+      message: "Gebruiker moet een e-mailadres hebben",
       additionalData: {
         userId: supabaseAuthSession.user.id,
       },

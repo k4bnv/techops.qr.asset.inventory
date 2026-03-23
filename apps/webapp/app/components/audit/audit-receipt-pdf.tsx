@@ -89,7 +89,7 @@ export const AuditReceiptPDF = ({
         title={
           <div className="mx-auto w-full max-w-[210mm] border p-4 text-center">
             <h3>Generate audit receipt for "{audit.name}"</h3>
-            <p>You can preview the receipt and then download the PDF.</p>
+            <p>U kunt de ontvangstbevestiging bekijken en daarna de PDF downloaden.</p>
             {!isFetchingReceipt && (
               <div className="mt-4">
                 <Button type="button" onClick={handlePrint}>
@@ -104,7 +104,7 @@ export const AuditReceiptPDF = ({
           <div className="grow">
             {isFetchingReceipt ? (
               <div className="flex h-full flex-col items-center justify-center gap-2">
-                <div>Generating receipt preview...</div>
+                <div>Bewijsontvangst bekijken...</div>
                 <div>
                   <Spinner />
                 </div>

@@ -103,8 +103,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         );
 
         sendNotification({
-          title: "Note created",
-          message: "Your note has been created successfully",
+          title: "Notitie aangemaakt",
+          message: "Uw notitie is succesvol aangemaakt",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -133,8 +133,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Note deleted",
-          message: "Your note has been deleted successfully",
+          title: "Notitie verwijderd",
+          message: "Uw notitie is succesvol verwijderd",
           icon: { name: "success", variant: "success" },
           senderId: userId,
         });
@@ -175,8 +175,8 @@ export default function BookingActivity() {
             <div className="mb-4 inline-flex size-8 items-center justify-center  rounded-full bg-primary-100 p-2 text-primary-600">
               <NoPermissionsIcon />
             </div>
-            <h5>Insufficient permissions</h5>
-            <p>You are not allowed to view booking notes</p>
+            <h5>Onvoldoende rechten</h5>
+            <p>U heeft geen toestemming om reserveringsnotities te bekijken</p>
           </div>
         </div>
       )}

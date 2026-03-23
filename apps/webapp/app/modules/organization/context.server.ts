@@ -110,7 +110,7 @@ async function getSelectedOrganizationUncached({
   if (!currentOrganization) {
     throw new ShelfError({
       cause: null,
-      title: "No organization",
+      title: "Geen organisatie",
       message:
         "You do not have access to any organization. Please contact support.",
       status: 403,

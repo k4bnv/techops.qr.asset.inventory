@@ -53,7 +53,7 @@ export async function loader({ context, request }: ActionFunctionArgs) {
       throw new ShelfError({
         cause: null,
         status: 400,
-        message: "No asset id provided.",
+        message: "Geen asset-ID opgegeven.",
         shouldBeCaptured: false,
         label: "Assets",
       });

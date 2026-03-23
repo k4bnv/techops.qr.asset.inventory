@@ -87,7 +87,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     if (isPersonalOrg(currentOrganization)) {
       throw new ShelfError({
         cause: null,
-        title: "Not allowed",
+        title: "Niet toegestaan",
         message:
           "U kunt geen reserveringen gebruiken in een persoonlijke werkruimte. Maak a.u.b. een Team werkruimte aan om reserveringen te maken.",
         label: "Booking",

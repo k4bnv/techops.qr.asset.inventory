@@ -135,7 +135,7 @@ export async function loader({ request, params, context }: LoaderFunctionArgs) {
     if (!barcode.assetId && !barcode.kitId) {
       throw new ShelfError({
         cause: null,
-        message: "Barcode is not linked to any asset or kit",
+        message: "Barcode is niet gekoppeld aan een asset of kit",
         additionalData: { value, shouldSendNotification: false },
         shouldBeCaptured: false,
         label: "Barcode",

@@ -25,7 +25,7 @@ export function CustodianField({
 }) {
   return (
     <FormRow
-      rowLabel="Description"
+      rowLabel="Beschrijving"
       className="mobile-styling-only border-b-0 p-0"
     >
       <label
@@ -51,7 +51,7 @@ export function CustodianField({
           deletedAt: null,
         }}
         fieldName="custodian"
-        contentLabel="Team members"
+        contentLabel="Teamleden"
         initialDataKey="teamMembersForForm"
         countKey="totalTeamMembers"
         placeholder="Select a team member"

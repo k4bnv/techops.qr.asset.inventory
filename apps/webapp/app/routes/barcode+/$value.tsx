@@ -58,7 +58,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     if (!barcode) {
       throw new ShelfError({
         cause: null,
-        title: "Barcode not found",
+        title: "Barcode niet gevonden",
         message:
           "This barcode doesn't exist or it doesn't belong to your current organization.",
         additionalData: { value, shouldSendNotification: false },
@@ -80,7 +80,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     if (!organizationsIds.includes(barcode.organizationId)) {
       throw new ShelfError({
         cause: null,
-        message: "You don't have permission to access this barcode.",
+        message: "U heeft geen toestemming om toegang te krijgen tot deze barcode.",
         additionalData: { value, shouldSendNotification: false },
         label: "Barcode",
         shouldBeCaptured: false,
@@ -103,7 +103,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     if (!barcode.assetId && !barcode.kitId) {
       throw new ShelfError({
         cause: null,
-        message: "This barcode is not linked to any asset or kit.",
+        message: "Deze barcode is niet gekoppeld aan een asset of kit.",
         additionalData: { value, shouldSendNotification: false },
         label: "Barcode",
         shouldBeCaptured: false,

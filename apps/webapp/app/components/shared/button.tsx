@@ -319,7 +319,7 @@ export const Button = React.forwardRef<HTMLElement, ButtonProps>(
           </HoverCardTrigger>
           <HoverCardContent side="left">
             <h5 className="text-left text-[14px]">
-              {disabledTitle || "Action disabled"}
+              {disabledTitle || "Actie uitgeschakeld"}
             </h5>
             <p className="text-left text-[14px]">{disabledReason}</p>
           </HoverCardContent>

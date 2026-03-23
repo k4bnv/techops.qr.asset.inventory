@@ -123,7 +123,7 @@ const BarcodesInput = forwardRef<BarcodesInputRef, BarcodesInputProps>(
       barcodes.forEach((barcode, index) => {
         // If a barcode row exists, value is required
         if (!barcode.value.trim()) {
-          errors[index] = "Barcode value is required";
+          errors[index] = "Barcodewaarde is vereist";
           return;
         }
 
@@ -140,7 +140,7 @@ const BarcodesInput = forwardRef<BarcodesInputRef, BarcodesInputProps>(
           barcode.value
         );
         if (values.has(normalizedValue)) {
-          errors[index] = "Duplicate barcode values are not allowed";
+          errors[index] = "Dubbele barcodewaarden zijn niet toegestaan";
           return;
         }
 
@@ -242,7 +242,7 @@ const BarcodesInput = forwardRef<BarcodesInputRef, BarcodesInputProps>(
                           <span className="ml-2 text-text-md">
                             {BARCODE_TYPE_OPTIONS.find(
                               (opt) => opt.value === barcode.type
-                            )?.label || "Select barcode type"}
+                            )?.label || "Selecteer barcodetype"}
                           </span>
                           <BarcodeTypeTooltip type={barcode.type} />
                         </Button>
@@ -309,7 +309,7 @@ const BarcodesInput = forwardRef<BarcodesInputRef, BarcodesInputProps>(
                     disabled={disabled}
                     name={valueName(i)}
                     value={barcode.value}
-                    placeholder="Enter barcode value"
+                    placeholder="Barcodewaarde invoeren"
                     onChange={(e) => {
                       barcodes[i].value = normalizeBarcodeValue(
                         barcodes[i].type,
@@ -353,7 +353,7 @@ const BarcodesInput = forwardRef<BarcodesInputRef, BarcodesInputProps>(
             ]);
           }}
         >
-          {barcodes.length === 0 ? "Add barcode" : "Add another barcode"}
+          {barcodes.length === 0 ? "Barcode toevoegen" : "Nog een barcode toevoegen"}
         </Button>
       </div>
     );

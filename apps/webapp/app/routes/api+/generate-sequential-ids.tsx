@@ -38,7 +38,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
       return data(
         payload({
           success: false,
-          message: "You don't have permission to run this migration.",
+          message: "U heeft geen toestemming om deze migratie uit te voeren.",
         }),
         { status: 403 }
       );

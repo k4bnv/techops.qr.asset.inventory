@@ -16,7 +16,7 @@ export function id(length?: number) {
       Logger.error(
         new ShelfError({
           cause: null,
-          message: "Id is too short",
+          message: "ID is te kort",
           additionalData: { length },
           label: "DB",
         })
@@ -58,7 +58,7 @@ export function id(length?: number) {
   } catch (cause) {
     const e = new ShelfError({
       cause,
-      message: "Id generation failed",
+      message: "ID-generatie mislukt",
       label: "DB",
     });
     Logger.error(e);

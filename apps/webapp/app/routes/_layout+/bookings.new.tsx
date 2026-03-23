@@ -66,9 +66,9 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
     if (isPersonalOrg(currentOrganization)) {
       throw new ShelfError({
         cause: null,
-        title: "Not allowed",
+        title: "Niet toegestaan",
         message:
-          "You can't create bookings for personal workspaces. Please create a Team workspace to create bookings.",
+          "U kunt geen reserveringen aanmaken voor persoonlijke werkruimtes. Maak een Teamwerkruimte aan om reserveringen te maken.",
         label: "Booking",
         shouldBeCaptured: false,
       });
@@ -174,8 +174,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
     }).catch((cause) => {
       throw new ShelfError({
         cause,
-        title: "Team member not found",
-        message: "The selected team member could not be found.",
+        title: "Teamlid niet gevonden",
+        message: "Het geselecteerde teamlid kon niet worden gevonden.",
         additionalData: { userId, custodian },
         label: "Booking",
         status: 404,
@@ -189,7 +189,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
     if (isSelfServiceOrBase && custodianFromDb.userId !== userId) {
       throw new ShelfError({
         cause: null,
-        message: "Self user can assign booking to themselves only.",
+        message: "Een basisgebruiker kan een reservering alleen aan zichzelf toewijzen.",
         label: "Booking",
       });
     }
@@ -229,8 +229,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Booking saved",
-      message: "Your booking has been saved successfully",
+      title: "Reservering opgeslagen",
+      message: "Uw reservering is succesvol opgeslagen",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

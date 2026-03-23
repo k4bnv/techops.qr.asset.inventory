@@ -40,7 +40,7 @@ export function AvailabilitySelect({ label = "assets" }: { label?: string }) {
         className="text-left text-base text-gray-500 md:mt-0 md:max-w-fit"
         aria-label="Select availability"
       >
-        <SelectValue placeholder="Select availability" />
+        <SelectValue placeholder="Selecteer beschikbaarheid" />
       </SelectTrigger>
 
       <SelectContent

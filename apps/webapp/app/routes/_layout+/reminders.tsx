@@ -9,7 +9,7 @@ export function loader() {
 }
 
 export const handle = {
-  breadcrumb: () => <Link to="/reminders">Reminders</Link>,
+  breadcrumb: () => <Link to="/reminders">Herinneringen</Link>,
 };
 
 export default function RemindersPage() {

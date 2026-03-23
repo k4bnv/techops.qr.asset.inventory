@@ -177,7 +177,7 @@ export function StartAuditFromContextDialog({
           onClick={openDialog}
         >
           <span className="flex items-center gap-2">
-            <Icon icon="start-audit" /> Create audit
+            <Icon icon="start-audit" /> Audit aanmaken
           </span>
         </Button>
       ) : null}
@@ -189,7 +189,7 @@ export function StartAuditFromContextDialog({
           onClose={closeDialog}
           title={
             <div className="-mb-3 w-full pb-6">
-              <h3>Create audit</h3>
+              <h3>Audit aanmaken</h3>
               <p className="text-gray-600">{getDescriptionText()}</p>
             </div>
           }
@@ -258,7 +258,7 @@ export function StartAuditFromContextDialog({
                         disabled={isSubmitting}
                         className="rounded-sm checked:bg-primary focus-within:ring-primary checked:hover:bg-primary checked:focus:bg-primary"
                       />
-                      <span>Include assets from child locations</span>
+                      <span>Assets van onderliggende locaties opnemen</span>
                     </label>
                   </div>
                 )}
@@ -290,7 +290,7 @@ export function StartAuditFromContextDialog({
                 Cancel
               </Button>
               <Button type="submit" variant="primary" disabled={isSubmitting}>
-                {isSubmitting ? "Creating..." : "Create audit"}
+                {isSubmitting ? "Creating..." : "Audit aanmaken"}
               </Button>
             </div>
           </fetcher.Form>

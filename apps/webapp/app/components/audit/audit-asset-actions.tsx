@@ -105,12 +105,12 @@ export function AuditAssetActions({
         variant="secondary"
         size="xs"
         className="relative"
-        title="Add comment"
+        title="Opmerking toevoegen"
         to={`${auditAssetId}/details`}
       >
         <span className="flex items-center gap-1">
           <MessageSquarePlus className="inline-block size-4" />
-          <span>Add comment</span>
+          <span>Opmerking toevoegen</span>
           {totalCount > 0 && (
             <span className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-gray-300 text-[10px] font-medium text-gray-800">
               {totalCount}

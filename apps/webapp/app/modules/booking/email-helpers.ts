@@ -313,7 +313,7 @@ export async function sendBookingUpdatedEmail({
     Logger.error(
       new ShelfError({
         cause,
-        message: "Failed to send booking updated email",
+        message: "Verzenden van reserveringsbijwerking-e-mail mislukt",
         additionalData: { bookingId },
         label: "Booking",
       })

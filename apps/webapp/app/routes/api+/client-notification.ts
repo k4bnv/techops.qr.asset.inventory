@@ -6,10 +6,10 @@ import { makeShelfError } from "~/utils/error";
 import { payload, error, parseData } from "~/utils/http.server";
 
 export const ClientNotificationSchema = z.object({
-  title: z.string().min(4, { message: "Title is required" }),
+  title: z.string().min(4, { message: "Titel is vereist" }),
   message: z
     .string()
-    .min(10, { message: "Message is required" })
+    .min(10, { message: "Bericht is vereist" })
     .optional()
     .nullable(),
   icon: z.custom<NotificationIcon>(),

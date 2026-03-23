@@ -576,7 +576,7 @@ export async function getKit<T extends Prisma.KitInclude | undefined>({
 
       throw new ShelfError({
         cause: null,
-        title: "Kit not found",
+        title: "Kit niet gevonden",
         message: "",
         additionalData: {
           model: "kit",
@@ -597,7 +597,7 @@ export async function getKit<T extends Prisma.KitInclude | undefined>({
 
     throw new ShelfError({
       cause,
-      title: "Kit not found",
+      title: "Kit niet gevonden",
       message:
         "The kit you are trying to access does not exist or you do not have permission to access it.",
       additionalData: {
@@ -911,7 +911,7 @@ export async function updateKitsWithBookingCustodians<T extends Kit>(
         Logger.error(
           new ShelfError({
             cause: null,
-            message: "Could not find custodian for kit",
+            message: "Kon beheerder voor kit niet vinden",
             additionalData: { kit },
             label,
           })
@@ -1595,7 +1595,7 @@ export async function updateKitLocation({
     if (!kit) {
       throw new ShelfError({
         cause: null,
-        message: "Kit not found",
+        message: "Kit niet gevonden",
         label,
       });
     }
@@ -2030,7 +2030,7 @@ export async function updateKitAssets({
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          message: "Kit not found",
+          message: "Kit niet gevonden",
           additionalData: { kitId, userId, organizationId },
           status: 404,
           label: "Kit",

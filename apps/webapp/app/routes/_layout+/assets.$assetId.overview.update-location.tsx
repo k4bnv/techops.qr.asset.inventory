@@ -28,7 +28,7 @@ import {
 } from "~/utils/permissions/permission.data";
 import { requirePermission } from "~/utils/roles.server";
 
-export const meta = () => [{ title: appendToMetaTitle("Update location") }];
+export const meta = () => [{ title: appendToMetaTitle("Locatie bijwerken") }];
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
   const authSession = context.getSession();
@@ -103,7 +103,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
     });
 
     sendNotification({
-      title: "Location updated",
+      title: "Locatie bijgewerkt",
       message: "Your asset's location has been updated successfully",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
@@ -133,8 +133,8 @@ export default function Custody() {
             <LocationMarkerIcon />
           </div>
           <div className="mb-5">
-            <h4>Update location</h4>
-            <p>Adjust the location of this asset.</p>
+            <h4>Locatie bijwerken</h4>
+            <p>Pas de locatie van dit asset aan.</p>
           </div>
           <div className=" relative z-50 mb-8">
             <LocationSelect locationId={asset.locationId} isBulk={false} />

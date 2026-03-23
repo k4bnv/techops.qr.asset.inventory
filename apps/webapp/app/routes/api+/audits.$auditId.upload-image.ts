@@ -45,7 +45,7 @@ export async function action({ request, params, context }: ActionFunctionArgs) {
     if (!audit || audit.organizationId !== organizationId) {
       throw new ShelfError({
         cause: null,
-        message: "Audit not found or access denied",
+        message: "Audit niet gevonden of toegang geweigerd",
         additionalData: { userId, auditId },
         label: "Audit",
         status: 404,
@@ -85,8 +85,8 @@ export async function action({ request, params, context }: ActionFunctionArgs) {
     }
 
     sendNotification({
-      title: "Image uploaded",
-      message: "Your audit image has been uploaded",
+      title: "Afbeelding geüpload",
+      message: "Uw auditafbeelding is geüpload",
       icon: { name: "success", variant: "success" },
       senderId: authSession.userId,
     });

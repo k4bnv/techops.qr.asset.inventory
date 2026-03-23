@@ -264,8 +264,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         }
 
         sendNotification({
-          title: "Kit deleted",
-          message: "Your kit has been deleted successfully",
+          title: "Kit verwijderd",
+          message: "Uw kit is succesvol verwijderd",
           icon: { name: "trash", variant: "error" },
           senderId: authSession.userId,
         });
@@ -317,8 +317,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Asset removed",
-          message: "Your asset has been removed from the kit",
+          title: "Asset verwijderd",
+          message: "Uw asset is verwijderd uit de kit",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -331,7 +331,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
           formData,
           z.object({
             barcodeType: z.nativeEnum(BarcodeType),
-            barcodeValue: z.string().min(1, "Barcode value is required"),
+            barcodeValue: z.string().min(1, "Barcodewaarde is vereist"),
           })
         );
 
@@ -359,8 +359,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
           });
 
           sendNotification({
-            title: "Barcode added",
-            message: "Barcode has been added to your kit successfully",
+            title: "Barcode toegevoegd",
+            message: "Barcode is succesvol aan uw kit toegevoegd",
             icon: { name: "success", variant: "success" },
             senderId: authSession.userId,
           });

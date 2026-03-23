@@ -45,7 +45,7 @@ export async function action({ request, context }: ActionFunctionArgs) {
 
         sendNotification({
           title: "Categories deleted",
-          message: "Your categories has been deleted successfully",
+          message: "Uw categorieën zijn succesvol verwijderd",
           icon: { name: "trash", variant: "error" },
           senderId: userId,
         });

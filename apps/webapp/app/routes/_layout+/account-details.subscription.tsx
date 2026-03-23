@@ -131,11 +131,11 @@ export async function loader({ context }: LoaderFunctionArgs) {
     });
 
     return payload({
-      title: `Subscriptions`,
+      title: `Abonnementen`,
       subTitle:
         customer?.subscriptions.data.length === 0
-          ? "Pick an account plan that fits your workflow."
-          : "Manage your account plan.",
+          ? "Kies een accountplan dat bij uw werkstroom past."
+          : "Beheer uw accountplan.",
       tier: user.tierId,
       tierLimit,
       prices,
@@ -207,7 +207,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
       if (user.usedFreeTrial) {
         throw new ShelfError({
           cause: null,
-          message: "You have already used your free trial.",
+          message: "U heeft uw gratis proefperiode al gebruikt.",
           label: "Subscription",
           shouldBeCaptured: false,
           status: 400,
@@ -267,7 +267,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => [
 
 export const handle = {
   breadcrumb: () => (
-    <Link to="/account-details/subscription">Subscription</Link>
+    <Link to="/account-details/subscription">Abonnement</Link>
   ),
 };
 
@@ -317,22 +317,22 @@ export default function SubscriptionPage() {
           <InfoIcon />
         </div>
         <p className="text-[14px] font-medium text-gray-700">
-          You’re currently using the{" "}
+          U gebruikt momenteel de{" "}
           {isEnterprise ? (
             <>
-              <span className="font-semibold">ENTERPRISE</span> version
+              <span className="font-semibold">ENTERPRISE</span>-versie
             </>
           ) : (
             <>
-              <span className="font-semibold">CUSTOM</span> plan
+              <span className="font-semibold">AANGEPASTE</span> plan
             </>
           )}{" "}
-          of TechOps.
+          van TechOps.
           <br />
-          {isEnterprise && <>That means you have a custom plan. </>}
-          To get more information about your plan, please{" "}
+          {isEnterprise && <>Dat betekent dat u een aangepast plan heeft. </>}
+          Voor meer informatie over uw plan, neem contact op met{" "}
           <CrispButton variant="link" className="inline w-auto">
-            contact support
+            ondersteuning
           </CrispButton>
           .
         </p>
@@ -356,12 +356,12 @@ export default function SubscriptionPage() {
                     <InfoIcon />
                   </div>
                   <p className="text-[14px] font-medium text-gray-700">
-                    You're currently using the{" "}
-                    <span className="font-semibold">FREE</span> version of TechOps
+                    U gebruikt momenteel de{" "}
+                    <span className="font-semibold">GRATIS</span> versie van TechOps
                   </p>
                 </div>
                 <h3 className="text-text-lg font-semibold">
-                  Choose your workspace plan
+                  Kies uw werkruimteplan
                 </h3>
                 <PricingTable prices={prices} />
               </>
@@ -374,11 +374,11 @@ export default function SubscriptionPage() {
                     </div>
                     <div>
                       <p className="text-[14px] font-medium text-gray-700">
-                        You have no workspace plan
+                        U heeft geen werkruimteplan
                       </p>
                       <p className="text-[13px] text-gray-500">
-                        Upgrade to a workspace plan to unlock the full potential
-                        of TechOps alongside your add-ons.
+                        Upgrade naar een werkruimteplan om het volledige potentieel
+                        van TechOps samen met uw add-ons te benutten.
                       </p>
                     </div>
                   </div>
@@ -388,7 +388,7 @@ export default function SubscriptionPage() {
                     className="whitespace-nowrap"
                     onClick={() => setPricingOpen(true)}
                   >
-                    View workspace plans
+                    Werkruimteplannen bekijken
                   </Button>
                 </div>
                 <DialogPortal>
@@ -398,7 +398,7 @@ export default function SubscriptionPage() {
                     className="h-[90vh] w-[90vw]"
                     title={
                       <h3 className="text-text-lg font-semibold">
-                        Choose your workspace plan
+                        Kies uw werkruimteplan
                       </h3>
                     }
                   >
@@ -418,7 +418,7 @@ export default function SubscriptionPage() {
             <p className="text-sm text-gray-600">{subTitle}</p>
           </div>
           {!hasNoSubscription && (
-            <CustomerPortalForm buttonText="Manage subscriptions" />
+            <CustomerPortalForm buttonText="Abonnementen beheren" />
           )}
         </div>
 

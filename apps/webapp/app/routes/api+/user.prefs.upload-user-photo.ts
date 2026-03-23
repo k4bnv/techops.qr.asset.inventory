@@ -45,7 +45,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
     if (!profilePicture || profilePicture === "") {
       throw new ShelfError({
         cause: null,
-        message: "Something went wrong. Please refresh and try again",
+        message: "Er is iets misgegaan. Vernieuw de pagina en probeer het opnieuw",
         label: "File storage",
       });
     }

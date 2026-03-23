@@ -113,7 +113,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
     if (!qr.organizationId) {
       throw new ShelfError({
         cause: null,
-        title: "Unclaimed QR code",
+        title: "Niet geclaimed QR-code",
         message:
           "This QR isn't claimed by an organization so it cannot be reported as found. If you think this is a mistake, please contact support.",
         label: "QR",

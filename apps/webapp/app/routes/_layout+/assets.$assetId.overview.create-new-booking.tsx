@@ -23,7 +23,7 @@ import {
 } from "~/utils/permissions/permission.data";
 import { requirePermission } from "~/utils/roles.server";
 
-export const meta = () => [{ title: appendToMetaTitle("Create new booking") }];
+export const meta = () => [{ title: appendToMetaTitle("Nieuwe reservering aanmaken") }];
 
 export async function loader({ context, request, params }: LoaderFunctionArgs) {
   const searchParams = getCurrentSearchParams(request);
@@ -45,7 +45,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     if (isPersonalOrg(currentOrganization)) {
       throw new ShelfError({
         cause: null,
-        title: "Not allowed",
+        title: "Niet toegestaan",
         message:
           "You can't create bookings for personal workspaces. Please create a Team workspace to create bookings.",
         label: "Booking",

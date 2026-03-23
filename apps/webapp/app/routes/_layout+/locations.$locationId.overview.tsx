@@ -122,7 +122,7 @@ export default function LocationOverview() {
               iconClassName="size-4"
               content={
                 <>
-                  <h6>Total value</h6>
+                  <h6>Totale waarde</h6>
                   <p>
                     A sum of all assets' values stored at this location. If no
                     assets are present, this will be zero.

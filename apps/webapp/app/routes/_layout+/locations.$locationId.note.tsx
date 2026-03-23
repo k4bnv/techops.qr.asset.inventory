@@ -69,8 +69,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Note created",
-          message: "Your location note has been created successfully",
+          title: "Notitie aangemaakt",
+          message: "Uw locatienotitie is succesvol aangemaakt",
           icon: { name: "success", variant: "success" },
           senderId: authSession.userId,
         });
@@ -104,8 +104,8 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         });
 
         sendNotification({
-          title: "Note deleted",
-          message: "Your location note has been deleted successfully",
+          title: "Notitie verwijderd",
+          message: "Uw locatienotitie is succesvol verwijderd",
           icon: { name: "trash", variant: "error" },
           senderId: authSession.userId,
         });
@@ -137,7 +137,7 @@ async function assertLocationBelongsToOrganization({
   if (!location || location.organizationId !== organizationId) {
     throw new ShelfError({
       cause: null,
-      message: "Location not found or access denied",
+      message: "Locatie niet gevonden of toegang geweigerd",
       status: 404,
       additionalData: { locationId, organizationId },
       label: "Location",

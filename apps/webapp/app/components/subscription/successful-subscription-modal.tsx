@@ -109,7 +109,7 @@ function AreYouSureModal({ shouldBlock }: { shouldBlock: boolean }) {
               <BellIcon />
             </span>
           </div>
-          <AlertDialogTitle>Leaving page</AlertDialogTitle>
+          <AlertDialogTitle>Pagina verlaten</AlertDialogTitle>
           <AlertDialogDescription>
             You just got your{" "}
             <span className="font-semibold">

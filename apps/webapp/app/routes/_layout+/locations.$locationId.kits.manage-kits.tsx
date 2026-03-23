@@ -93,7 +93,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          title: "Location not found",
+          title: "Locatie niet gevonden",
           message:
             "The location you are trying to access does not exist or you do not have permission to access it.",
           additionalData: { locationId, userId, organizationId },
@@ -364,16 +364,16 @@ export default function ManageLocationKits() {
                 <MapPin />
               </span>
             </div>
-            <AlertDialogTitle>Location Update notice</AlertDialogTitle>
+            <AlertDialogTitle>Let op locatiewijziging</AlertDialogTitle>
             <AlertDialogDescription>
               Changing kit locations will also automatically update the location
               of all assets within those kits.
               {selectedBulkItemsCount !== locationKitsCount && (
                 <div>
-                  <strong>This action will affect:</strong>
+                  <strong>Deze actie heeft invloed op:</strong>
                   <ul className="mt-2 list-inside list-disc">
-                    <li>All assets in kits being added to this location</li>
-                    <li>All assets in kits being removed from this location</li>
+                    <li>Alle assets in kits die aan deze locatie worden toegevoegd</li>
+                    <li>Alle assets in kits die van deze locatie worden verwijderd</li>
                   </ul>
                 </div>
               )}

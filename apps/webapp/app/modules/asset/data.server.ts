@@ -232,7 +232,7 @@ export async function simpleModeLoader({
         : `Your inventory`
       : currentOrganization?.name
       ? `${currentOrganization?.name}'s inventory`
-      : "Your inventory",
+      : "Uw inventaris",
   };
 
   const modelName = {
@@ -274,9 +274,9 @@ export async function simpleModeLoader({
           entity: PermissionEntity.asset,
           action: PermissionAction.import,
         })),
-      searchFieldLabel: "Search assets",
+      searchFieldLabel: "Assets zoeken",
       searchFieldTooltip: {
-        title: "Search your asset database",
+        title: "Zoek in uw assetdatabase",
         text: parseMarkdownToReact(searchFieldTooltipText),
       },
       totalCategories,
@@ -492,7 +492,7 @@ export async function advancedModeLoader({
         : `Your inventory`
       : currentOrganization?.name
       ? `${currentOrganization?.name}'s inventory`
-      : "Your inventory",
+      : "Uw inventaris",
   };
 
   const modelName = {
@@ -532,9 +532,9 @@ export async function advancedModeLoader({
           entity: PermissionEntity.asset,
           action: PermissionAction.import,
         })),
-      searchFieldLabel: "Search assets",
+      searchFieldLabel: "Assets zoeken",
       searchFieldTooltip: {
-        title: "Search your asset database",
+        title: "Zoek in uw assetdatabase",
         text: parseMarkdownToReact(searchFieldTooltipText),
       },
       filters,

@@ -94,7 +94,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     if (!auditAsset) {
       throw new ShelfError({
         cause: null,
-        message: "Audit asset not found",
+        message: "Auditasset niet gevonden",
         additionalData: { auditAssetId, organizationId },
         label: "Audit",
         status: 404,
@@ -152,7 +152,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
 
     const header = {
       title: auditAsset.asset.title,
-      subHeading: "Notes and images",
+      subHeading: "Notities en afbeeldingen",
     };
 
     return payload({
@@ -196,7 +196,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       if (!content?.trim()) {
         throw new ShelfError({
           cause: null,
-          message: "Note content is required",
+          message: "Inhoud van notitie is vereist",
           additionalData: { auditAssetId },
           label: "Audit",
           status: 400,
@@ -281,7 +281,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       if (files.length === 0) {
         throw new ShelfError({
           cause: null,
-          message: "No image files found in the request",
+          message: "Geen afbeeldingsbestanden gevonden in het verzoek",
           additionalData: { auditAssetId },
           label: "Audit Image",
           status: 400,
@@ -368,7 +368,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       if (files.length === 0) {
         throw new ShelfError({
           cause: null,
-          message: "No image files found in the request",
+          message: "Geen afbeeldingsbestanden gevonden in het verzoek",
           additionalData: { auditAssetId },
           label: "Audit Image",
           status: 400,
@@ -408,7 +408,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         if (!existingNote) {
           throw new ShelfError({
             cause: null,
-            message: "Note not found",
+            message: "Notitie niet gevonden",
             additionalData: { noteId },
             label: "Audit Image",
             status: 404,
@@ -471,7 +471,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
 
     throw new ShelfError({
       cause: null,
-      message: "Invalid intent",
+      message: "Ongeldige intent",
       additionalData: { intent },
       label: "Audit",
       status: 400,

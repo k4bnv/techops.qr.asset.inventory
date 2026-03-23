@@ -99,7 +99,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
       .catch((cause) => {
         throw new ShelfError({
           cause,
-          title: "Location not found",
+          title: "Locatie niet gevonden",
           message:
             "The location you are trying to access does not exist or you do not have permission to access it.",
           additionalData: { locationId, userId, organizationId },
@@ -311,8 +311,8 @@ export default function AddAssetsToLocation() {
             </div>
           }
           model={{ name: "category", queryKey: "name" }}
-          label="Filter by category"
-          placeholder="Search categories"
+          label="Filteren op categorie"
+          placeholder="Categorieën zoeken"
           initialDataKey="categories"
           countKey="totalCategories"
         />
@@ -323,7 +323,7 @@ export default function AddAssetsToLocation() {
             </div>
           }
           model={{ name: "tag", queryKey: "name" }}
-          label="Filter by tag"
+          label="Filteren op tag"
           initialDataKey="tags"
           countKey="totalTags"
         />
@@ -334,7 +334,7 @@ export default function AddAssetsToLocation() {
             </div>
           }
           model={{ name: "location", queryKey: "name" }}
-          label="Filter by location"
+          label="Filteren op locatie"
           initialDataKey="locations"
           countKey="totalLocations"
           renderItem={({ metadata }) => (
