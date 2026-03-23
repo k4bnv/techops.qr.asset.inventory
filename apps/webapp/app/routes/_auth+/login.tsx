@@ -92,7 +92,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
     const { sessionStorage } = await import("~/../server/session");
     const session = await sessionStorage.getSession(request.headers.get("Cookie"));
-    session.set("user", authSession);
+    session.set("auth", authSession);
 
     return data(null, {
       status: 303,
