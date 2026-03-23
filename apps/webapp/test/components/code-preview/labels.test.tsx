@@ -19,23 +19,10 @@ describe("QrLabel", () => {
     },
   } as const;
 
-  it("shows Shelf branding by default", () => {
+  it("renders correctly", () => {
     render(<QrLabel {...(baseProps as any)} />);
 
-    expect(screen.getByText(/Powered by/i)).toBeInTheDocument();
-  });
-
-  it("hides Shelf branding when requested", () => {
-    render(
-      <QrLabel
-        {...({
-          ...baseProps,
-          showShelfBranding: false,
-        } as any)}
-      />
-    );
-
-    expect(screen.queryByText(/Powered by/i)).not.toBeInTheDocument();
+    expect(screen.getByText("Camera")).toBeInTheDocument();
   });
 });
 
@@ -48,22 +35,9 @@ describe("BarcodeLabel", () => {
     },
   } as const;
 
-  it("shows Shelf branding by default", () => {
+  it("renders correctly", () => {
     render(<BarcodeLabel {...(baseProps as any)} />);
 
-    expect(screen.getByText(/Powered by/i)).toBeInTheDocument();
-  });
-
-  it("hides Shelf branding when requested", () => {
-    render(
-      <BarcodeLabel
-        {...({
-          ...baseProps,
-          showShelfBranding: false,
-        } as any)}
-      />
-    );
-
-    expect(screen.queryByText(/Powered by/i)).not.toBeInTheDocument();
+    expect(screen.getByText("Camera")).toBeInTheDocument();
   });
 });

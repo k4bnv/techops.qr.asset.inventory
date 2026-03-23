@@ -44,15 +44,10 @@ describe("audit image service", () => {
       const mockFile = new File(["test"], "test.jpg", { type: "image/jpeg" });
       mockFormData.append("auditImage", mockFile);
 
-      // Mock parseFileFormData to return FormData with image and thumbnail paths
+      // Mock parseFileFormData to return FormData with an image ID
       const mockReturnFormData = new FormData();
-      mockReturnFormData.append(
-        "image",
-        JSON.stringify({
-          path: "org-1/audits/audit-1/image-123.jpg",
-          thumbnailPath: "org-1/audits/audit-1/image-123-thumbnail.jpg",
-        })
-      );
+      mockReturnFormData.append("image", "img-123");
+      mockReturnFormData.append("thumbnail", "img-123-thumb");
       vi.mocked(parseFileFormData).mockResolvedValue(mockReturnFormData);
 
       vi.mocked(db.auditImage.count).mockResolvedValue(0);
@@ -85,6 +80,8 @@ describe("audit image service", () => {
           bucketName: "files",
           generateThumbnail: true,
           thumbnailSize: 108,
+          userId: "user-1",
+          ownerOrgId: "org-1",
         })
       );
 

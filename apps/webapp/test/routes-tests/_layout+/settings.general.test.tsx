@@ -447,9 +447,9 @@ describe("settings.general action", () => {
       createActionArgs({ context: mockContext, request, params: {} })
     );
 
-    // Verify branding is turned back ON
+    // Verify branding stays OFF due to white-label override
     expect(updateOrganizationMock).toHaveBeenCalledWith(
-      expect.objectContaining({ showShelfBranding: true })
+      expect.objectContaining({ showShelfBranding: false })
     );
   });
 

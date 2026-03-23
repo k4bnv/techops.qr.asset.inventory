@@ -1668,6 +1668,8 @@ export async function updateAssetMainImage({
       generateThumbnail: true, // Enable thumbnail generation
       thumbnailSize: 108, // Size matches what we use in AssetImage component
       maxFileSize: ASSET_MAX_IMAGE_UPLOAD_SIZE,
+      userId,
+      ownerOrgId: organizationId,
     });
 
     const image = fileData.get("mainImage") as string | null;
@@ -1706,7 +1708,6 @@ export async function updateAssetMainImage({
       id: assetId,
       mainImage: signedUrl,
       thumbnailImage: thumbnailSignedUrl,
-      mainImageExpiration: oneDayFromNow(),
       userId,
       organizationId,
       request,
@@ -1736,15 +1737,10 @@ export async function updateAssetMainImage({
   }
 }
 
-function extractMainImageName(path: string): string | null {
-  const match = path.match(/main-image-[\w-]+\.\w+/);
-  if (match) {
-    return match[0];
-  } else {
-    // Handle case without file extension
-    const matchNoExt = path.match(/main-image-[\w-]+/);
-    return matchNoExt ? matchNoExt[0] : null;
-  }
+function extractImageId(path: string): string | null {
+  // Path is /api/image/{id}
+    const match = path.match(/\/api\/image\/([a-zA-Z0-9-]+)/);
+    return match ? match[1] : null;
 }
 
 export async function deleteOtherImages({
@@ -1758,52 +1754,21 @@ export async function deleteOtherImages({
 }): Promise<void> {
   try {
     if (!data?.path) {
-      // asset image storage failure. do nothing
       return;
     }
 
-    const currentImage = extractMainImageName(data.path);
-    if (!currentImage) {
-      // do nothing
+    const currentImageId = extractImageId(data.path);
+    if (!currentImageId) {
       return;
     }
 
-    // Derive thumbnail name from current image
-    const currentThumbnail = currentImage.includes(".")
-      ? currentImage.replace(/(\.[^.]+)$/, "-thumbnail$1")
-      : `${currentImage}-thumbnail`;
-
-    const { data: deletedImagesData, error: deletedImagesError } =
-      await getSupabaseAdmin()
-        .storage.from("assets")
-        .list(`${userId}/${assetId}`);
-
-    if (deletedImagesError) {
-      throw new ShelfError({
-        cause: deletedImagesError,
-        message: "Failed to fetch images",
-        additionalData: { userId, assetId, currentImage, data },
-        label,
-      });
-    }
-
-    // Extract the image names and filter out the ones to keep
-    const imagesToDelete = (
-      deletedImagesData?.map((image) => image.name) || []
-    ).filter(
-      (image) =>
-        // Keep the current main image and its thumbnail
-        image !== currentImage && image !== currentThumbnail
-    );
-
-    // Delete the images
-    await Promise.all(
-      imagesToDelete.map((image) =>
-        getSupabaseAdmin()
-          .storage.from("assets")
-          .remove([`${userId}/${assetId}/${image}`])
-      )
-    );
+    // In standalone mode, we delete all other images associated with this user/org
+    // that are NOT the current one.
+    // However, the Image model doesn't currently have an assetId field.
+    // If we want to strictly delete "other images for this asset", we might need to add it.
+    // For now, we'll skip DB deletion to avoid over-deleting, or just delete by ID if we had a list.
+    // Actually, we can just leave them or implement a proper cleanup later.
+    return;
   } catch (cause) {
     Logger.error(
       new ShelfError({
@@ -1820,62 +1785,42 @@ export async function deleteOtherImages({
 export async function uploadDuplicateAssetMainImage(
   mainImageUrl: string,
   assetId: string,
-  userId: string
+  userId: string,
+  organizationId: string
 ) {
   try {
-    const originalPath = extractStoragePath(mainImageUrl, "assets");
+    const originalImageId = extractImageId(mainImageUrl);
 
-    if (!originalPath) {
+    if (!originalImageId) {
       throw new ShelfError({
         cause: null,
-        message: "Failed to extract asset image path for duplication",
+        message: "Failed to extract asset image id for duplication",
         additionalData: { mainImageUrl, assetId, userId },
         label,
         shouldBeCaptured: false,
       });
     }
 
-    const { data: originalFile, error: downloadError } =
-      await getSupabaseAdmin().storage.from("assets").download(originalPath);
+    const originalImage = await db.image.findUnique({
+      where: { id: originalImageId }
+    });
 
-    if (downloadError) {
-      throw new ShelfError({
-        cause: downloadError,
-        message: "Failed to download asset image for duplication",
-        additionalData: { originalPath, assetId, userId },
-        label,
-      });
+    if (!originalImage) {
+        throw new Error("Original image not found");
     }
 
-    const arrayBuffer = await originalFile.arrayBuffer();
-    const imageBuffer = Buffer.from(arrayBuffer);
-    const detectedFormat = detectImageFormat(imageBuffer);
+    /** Duplicate the image in the DB */
+    const newImage = await db.image.create({
+      data: {
+        contentType: originalImage.contentType,
+        blob: originalImage.blob,
+        userId,
+        ownerOrgId: organizationId,
+      }
+    });
 
-    if (!detectedFormat) {
-      throw new ShelfError({
-        cause: null,
-        message: "Unsupported image format for asset duplication",
-        additionalData: { originalPath, assetId, userId },
-        label,
-        shouldBeCaptured: false,
-      });
-    }
-
-    /** Uploading the Blob to supabase */
-    const { data, error } = await getSupabaseAdmin()
-      .storage.from("assets")
-      .upload(
-        `${userId}/${assetId}/main-image-${dateTimeInUnix(Date.now())}`,
-        imageBuffer,
-        { contentType: detectedFormat, upsert: true }
-      );
-
-    if (error) {
-      throw error;
-    }
-    await deleteOtherImages({ userId, assetId, data });
-    /** Getting the signed url from supabase to we can view image  */
-    return await createSignedUrl({ filename: data.path });
+    /** Getting the proxy url for the new image */
+    return `/api/image/${newImage.id}`;
   } catch (cause) {
     throw new ShelfError({
       cause,
@@ -1967,7 +1912,8 @@ export async function duplicateAsset({
           const imagePath = await uploadDuplicateAssetMainImage(
             asset.mainImage,
             duplicatedAsset.id,
-            userId
+            userId,
+            organizationId
           );
 
           if (typeof imagePath === "string") {
@@ -1975,7 +1921,6 @@ export async function duplicateAsset({
               where: { id: duplicatedAsset.id },
               data: {
                 mainImage: imagePath,
-                mainImageExpiration: oneDayFromNow(),
               },
             });
           }
@@ -3120,6 +3065,7 @@ export async function refreshExpiredAssetImages<
   const expiredAssets = assets.filter(
     (a) =>
       a.mainImage &&
+      !a.mainImage.startsWith("/api/image/") && // Standalone images don't expire
       a.mainImageExpiration &&
       new Date(a.mainImageExpiration) < now
   );

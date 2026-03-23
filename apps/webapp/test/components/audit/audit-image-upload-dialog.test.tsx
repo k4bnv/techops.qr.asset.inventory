@@ -99,7 +99,9 @@ describe("AuditImageUploadDialog", () => {
       render(<AuditImageUploadDialog {...defaultProps} />);
 
       expect(
-        screen.getByPlaceholderText("Add a note about these images...")
+        screen.getByPlaceholderText(
+          "Voeg een opmerking toe over deze afbeeldingen..."
+        )
       ).toBeInTheDocument();
     });
 

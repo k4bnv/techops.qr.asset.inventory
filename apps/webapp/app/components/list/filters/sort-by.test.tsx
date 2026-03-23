@@ -65,7 +65,7 @@ describe("SortBy", () => {
       render(<SortBy {...defaultProps} />);
 
       const orderBySelect = screen.getByDisplayValue("Date created");
-      const orderDirectionSelect = screen.getByDisplayValue("Descending");
+      const orderDirectionSelect = screen.getByDisplayValue("Aflopend");
 
       expect(orderBySelect).toBeInTheDocument();
       expect(orderDirectionSelect).toBeInTheDocument();
@@ -78,7 +78,7 @@ describe("SortBy", () => {
       render(<SortBy {...defaultProps} />);
 
       const orderBySelect = screen.getByDisplayValue("Date created");
-      const orderDirectionSelect = screen.getByDisplayValue("Descending");
+      const orderDirectionSelect = screen.getByDisplayValue("Aflopend");
 
       expect(orderBySelect).toHaveValue("createdAt");
       expect(orderDirectionSelect).toHaveValue("desc");
@@ -98,7 +98,7 @@ describe("SortBy", () => {
 
       render(<SortBy {...defaultProps} />);
 
-      const orderDirectionSelect = screen.getByDisplayValue("Descending");
+      const orderDirectionSelect = screen.getByDisplayValue("Aflopend");
       expect(orderDirectionSelect).toHaveValue("desc");
     });
 
@@ -109,7 +109,7 @@ describe("SortBy", () => {
       render(<SortBy {...defaultProps} />);
 
       const orderBySelect = screen.getByDisplayValue("Name");
-      const orderDirectionSelect = screen.getByDisplayValue("Ascending");
+      const orderDirectionSelect = screen.getByDisplayValue("Oplopend");
 
       expect(orderBySelect).toHaveValue("name");
       expect(orderDirectionSelect).toHaveValue("asc");
@@ -120,7 +120,7 @@ describe("SortBy", () => {
 
       render(<SortBy {...defaultProps} />);
 
-      expect(screen.getByText("Sorted by: Status")).toBeInTheDocument();
+      expect(screen.getByText("Gesorteerd op: Status")).toBeInTheDocument();
     });
   });
 
@@ -162,7 +162,7 @@ describe("SortBy", () => {
 
       render(<SortBy {...defaultProps} />);
 
-      const orderDirectionSelect = screen.getByDisplayValue("Descending");
+      const orderDirectionSelect = screen.getByDisplayValue("Aflopend");
       fireEvent.change(orderDirectionSelect, { target: { value: "asc" } });
 
       expect(mockSetSearchParams).toHaveBeenCalledTimes(1);
@@ -211,9 +211,9 @@ describe("SortBy", () => {
 
       render(<SortBy {...defaultProps} />);
 
-      const triggerButton = screen.getByRole("button", { name: /sorted by/i });
+      const triggerButton = screen.getByRole("button", { name: /gesorteerd op/i });
       const orderBySelect = screen.getByDisplayValue("Date created");
-      const orderDirectionSelect = screen.getByDisplayValue("Descending");
+      const orderDirectionSelect = screen.getByDisplayValue("Aflopend");
 
       expect(triggerButton).toBeDisabled();
       expect(orderBySelect).toBeDisabled();
@@ -225,9 +225,9 @@ describe("SortBy", () => {
 
       render(<SortBy {...defaultProps} />);
 
-      const triggerButton = screen.getByRole("button", { name: /sorted by/i });
+      const triggerButton = screen.getByRole("button", { name: /gesorteerd op/i });
       const orderBySelect = screen.getByDisplayValue("Date created");
-      const orderDirectionSelect = screen.getByDisplayValue("Descending");
+      const orderDirectionSelect = screen.getByDisplayValue("Aflopend");
 
       expect(triggerButton).toBeDisabled();
       expect(orderBySelect).toBeDisabled();
@@ -239,9 +239,9 @@ describe("SortBy", () => {
 
       render(<SortBy {...defaultProps} />);
 
-      const triggerButton = screen.getByRole("button", { name: /sorted by/i });
+      const triggerButton = screen.getByRole("button", { name: /gesorteerd op/i });
       const orderBySelect = screen.getByDisplayValue("Date created");
-      const orderDirectionSelect = screen.getByDisplayValue("Descending");
+      const orderDirectionSelect = screen.getByDisplayValue("Aflopend");
 
       expect(triggerButton).not.toBeDisabled();
       expect(orderBySelect).not.toBeDisabled();
@@ -274,7 +274,7 @@ describe("SortBy", () => {
       // (actual className application tested via Playwright as it depends on Radix behavior)
       expect(container.firstChild).toBeTruthy();
       expect(
-        screen.getByRole("button", { name: /sorted by/i })
+        screen.getByRole("button", { name: /gesorteerd op/i })
       ).toBeInTheDocument();
     });
   });

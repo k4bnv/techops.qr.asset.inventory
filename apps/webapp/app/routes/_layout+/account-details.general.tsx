@@ -154,9 +154,15 @@ export async function action({ context, request }: ActionFunctionArgs) {
           id: userId,
         };
 
+        const { currentOrganization } = await getSelectedOrganization({
+          userId,
+          request,
+        });
+
         await updateProfilePicture({
           request,
           userId,
+          organizationId: currentOrganization.id,
         });
 
         /** Update the user */

@@ -141,6 +141,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
       request,
       locationId: id,
       organizationId,
+      userId,
       prevImageUrl: location.imageUrl,
       prevThumbnailUrl: location.thumbnailUrl,
     });

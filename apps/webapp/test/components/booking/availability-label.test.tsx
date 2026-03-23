@@ -101,7 +101,7 @@ describe("AvailabilityLabel", () => {
     );
 
     const user = userEvent.setup();
-    await user.hover(await screen.findByText("Already booked"));
+    await user.hover(await screen.findByText("Al geboekt"));
 
     const links = await screen.findAllByRole("link", {
       name: "New Booking",
@@ -142,7 +142,7 @@ describe("AvailabilityLabel", () => {
     );
 
     const user = userEvent.setup();
-    await user.hover(await screen.findByText("Already booked"));
+    await user.hover(await screen.findByText("Al geboekt"));
 
     const links = await screen.findAllByRole("link", {
       name: "Other Booking",

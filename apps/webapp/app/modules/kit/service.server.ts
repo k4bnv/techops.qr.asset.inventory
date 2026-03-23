@@ -296,6 +296,8 @@ export async function updateKitImage({
         withoutEnlargement: true,
       },
       maxFileSize: ASSET_MAX_IMAGE_UPLOAD_SIZE,
+      userId,
+      ownerOrgId: organizationId,
     });
 
     const image = fileData.get("image") as string;

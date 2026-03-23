@@ -179,7 +179,7 @@ describe("EditorV2", () => {
     });
 
     const dialog = await screen.findByRole("alertdialog", {
-      name: "Edit link",
+      name: "Link bewerken",
     });
     expect(dialog).toBeInTheDocument();
     expect(screen.getByLabelText("URL")).toHaveValue("https://example.com");
@@ -206,7 +206,7 @@ describe("EditorV2", () => {
     });
 
     const dialog = await screen.findByRole("alertdialog", {
-      name: "Edit link",
+      name: "Link bewerken",
     });
     expect(dialog).toBeInTheDocument();
 

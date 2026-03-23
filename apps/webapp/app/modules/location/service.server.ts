@@ -977,12 +977,14 @@ export async function bulkDeleteLocations({
 export async function updateLocationImage({
   organizationId,
   request,
+  userId,
   locationId,
   prevImageUrl,
   prevThumbnailUrl,
 }: {
   organizationId: Organization["id"];
   request: Request;
+  userId: User["id"];
   locationId: Location["id"];
   prevImageUrl?: string | null;
   prevThumbnailUrl?: string | null;
@@ -1003,6 +1005,8 @@ export async function updateLocationImage({
       generateThumbnail: true,
       thumbnailSize: 108,
       maxFileSize: DEFAULT_MAX_IMAGE_UPLOAD_SIZE,
+      userId,
+      ownerOrgId: organizationId,
     });
 
     const image = fileData.get("image") as string | null;
