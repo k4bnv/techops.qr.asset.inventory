@@ -22,7 +22,7 @@ export const SearchForm = ({ className }: { className?: string }) => {
   const disabled = isSearching(navigation);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const label = searchFieldLabel ? searchFieldLabel : `Search by ${singular}`;
+  const label = searchFieldLabel ? searchFieldLabel : `Zoeken op ${singular}`;
 
   /**
    * Clears the search parameter and page parameter from the URL
@@ -79,7 +79,7 @@ export const SearchForm = ({ className }: { className?: string }) => {
             icon={disabled ? "spinner" : "x"}
             variant="tertiary"
             disabled={disabled}
-            title="Clear search"
+            title="Zoekopdracht wissen"
             className="absolute right-3.5 top-1/2 !w-auto -translate-y-1/2 cursor-pointer border-0 p-0 text-gray-400 hover:text-gray-700"
             onClick={clearSearch}
           />

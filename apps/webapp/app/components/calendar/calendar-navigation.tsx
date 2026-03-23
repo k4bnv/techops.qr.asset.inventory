@@ -32,7 +32,7 @@ export function CalendarNavigation({
           variant="secondary"
           className="border-r p-[0.7em] text-gray-500"
           onClick={() => handleCalendarNavigation("prev")}
-          aria-label="Previous month"
+          aria-label="Vorige maand"
         >
           <ChevronLeftIcon className="size-4" />
         </Button>
@@ -41,16 +41,16 @@ export function CalendarNavigation({
           variant="secondary"
           className="border-r px-3 py-2 text-sm font-semibold text-gray-700"
           onClick={() => handleCalendarNavigation("today")}
-          tooltip={"Go to today"}
+          tooltip={"Ga naar vandaag"}
         >
-          Today
+          Vandaag
         </Button>
         <Button
           type="button"
           variant="secondary"
           className="p-[0.7em] text-gray-500"
           onClick={() => handleCalendarNavigation("next")}
-          aria-label="Next month"
+          aria-label="Volgende maand"
         >
           <ChevronRightIcon className="size-4" />
         </Button>

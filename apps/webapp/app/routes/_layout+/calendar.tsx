@@ -58,7 +58,7 @@ export function links() {
 }
 
 export const handle = {
-  breadcrumb: () => <Link to="/calendar">Calendar</Link>,
+  breadcrumb: () => <Link to="/calendar">Kalender</Link>,
 };
 
 export type CalendarExtendedProps = {
@@ -104,7 +104,7 @@ export const loader = async ({ request, context }: LoaderFunctionArgs) => {
     }
 
     const header = {
-      title: `Calendar`,
+      title: `Kalender`,
     };
 
     const searchParams = getCurrentSearchParams(request);
@@ -244,8 +244,8 @@ export default function Calendar() {
       <Header hidePageDescription>
         <CreateBookingDialog
           trigger={
-            <Button type="button" aria-label="new booking">
-              New booking
+            <Button type="button" aria-label="nieuwe reservering">
+              Nieuwe reservering
             </Button>
           }
         />
@@ -277,9 +277,9 @@ export default function Calendar() {
             {isMd ? (
               <ViewButtonGroup
                 views={[
-                  { label: "Month", value: "dayGridMonth" },
+                  { label: "Maand", value: "dayGridMonth" },
                   { label: "Week", value: "timeGridWeek" },
-                  { label: "Day", value: "timeGridDay" },
+                  { label: "Dag", value: "timeGridDay" },
                 ]}
                 currentView={calendarView}
                 onViewChange={handleViewChange}

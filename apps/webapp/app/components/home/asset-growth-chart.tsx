@@ -11,9 +11,9 @@ export default function AssetGrowthChart() {
 
   // Build short month labels: "Mar '25"
   const chartData = assetGrowthData.map(
-    (d: { month: string; year: number; "Total assets": number }) => ({
+    (d: { month: string; year: number; "Totaal aantal assets": number }) => ({
       date: `${d.month.slice(0, 3)} '${String(d.year).slice(2)}`,
-      "Total assets": d["Total assets"],
+      "Totaal aantal assets": d["Totaal aantal assets"],
     })
   );
 
@@ -48,7 +48,7 @@ export default function AssetGrowthChart() {
                 className="h-[180px] w-full"
                 data={chartData}
                 index="date"
-                categories={["Total assets"]}
+                categories={["Totaal aantal assets"]}
                 colors={["orange"]}
                 showAnimation={true}
                 animationDuration={600}

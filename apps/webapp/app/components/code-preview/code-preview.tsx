@@ -341,7 +341,7 @@ export const CodePreview = ({
       {/* Actions */}
       <When truthy={!hideButton && !!selectedCode}>
         <div className="flex w-full items-center justify-between px-4 pt-6">
-          <span className="text-sm font-medium text-gray-700">Label Layout:</span>
+          <span className="text-sm font-medium text-gray-700">Label-indeling:</span>
           <div className="flex gap-4">
             <label className="flex items-center gap-2 text-sm text-gray-600">
               <input
@@ -352,7 +352,7 @@ export const CodePreview = ({
                 onChange={() => setLabelLayout("square")}
                 className="text-blue-600 focus:ring-blue-500"
               />
-              Square
+              Vierkant
             </label>
             <label className="flex items-center gap-2 text-sm text-gray-600">
               <input
@@ -363,7 +363,7 @@ export const CodePreview = ({
                 onChange={() => setLabelLayout("continuous")}
                 className="text-blue-600 focus:ring-blue-500"
               />
-              Continuous (24mm)
+              Continu (24mm)
             </label>
           </div>
         </div>
@@ -377,7 +377,7 @@ export const CodePreview = ({
             variant="secondary"
             className="w-full"
           >
-            Download
+            Downloaden
           </Button>
           <Button
             type="button"
@@ -386,7 +386,7 @@ export const CodePreview = ({
             className="w-full"
             onClick={printCode}
           >
-            Print
+            Afdrukken
           </Button>
         </div>
       </When>

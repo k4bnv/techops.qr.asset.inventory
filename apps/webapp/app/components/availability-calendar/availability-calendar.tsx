@@ -110,9 +110,9 @@ export default function AvailabilityCalendar({
 
           <ViewButtonGroup
             views={[
-              { label: "Month", value: "resourceTimelineMonth" },
+              { label: "Maand", value: "resourceTimelineMonth" },
               { label: "Week", value: "resourceTimelineWeek" },
-              { label: "Day", value: "resourceTimelineDay" },
+              { label: "Dag", value: "resourceTimelineDay" },
             ]}
             currentView={calendarView}
             onViewChange={handleViewChange}
@@ -159,7 +159,7 @@ export default function AvailabilityCalendar({
                       <p>
                         {items.length} {items.length > 1 ? plural : singular}{" "}
                         <span className="text-gray-400">
-                          out of {totalItems}
+                          van {totalItems}
                         </span>
                       </p>
                     ) : (
@@ -233,7 +233,7 @@ function CalendarLoadingFallback() {
     <div className="absolute inset-0 z-10 flex justify-center bg-white/90">
       <div className="flex flex-col items-center gap-4 pt-[300px]">
         <FallbackLoading className="size-16" />
-        <p className="text-sm text-gray-600">Loading calendar...</p>
+        <p className="text-sm text-gray-600">Kalender laden...</p>
       </div>
     </div>
   );

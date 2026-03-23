@@ -32,16 +32,16 @@ interface MonthlyGrowthRow {
 }
 
 const MONTH_NAMES = [
-  "January",
-  "February",
-  "March",
+  "Januari",
+  "Februari",
+  "Maart",
   "April",
-  "May",
-  "June",
-  "July",
-  "August",
+  "Mei",
+  "Juni",
+  "Juli",
+  "Augustus",
   "September",
-  "October",
+  "Oktober",
   "November",
   "December",
 ];
@@ -67,7 +67,7 @@ export function buildMonthlyGrowthData(
     month: string;
     year: number;
     assetsCreated: number;
-    "Total assets": number;
+    "Totaal aantal assets": number;
   }[] = [];
 
   for (let i = 0; i < 12; i++) {
@@ -80,7 +80,7 @@ export function buildMonthlyGrowthData(
       month: MONTH_NAMES[d.getMonth()],
       year: d.getFullYear(),
       assetsCreated,
-      "Total assets": cumulative,
+      "Totaal aantal assets": cumulative,
     });
   }
 
