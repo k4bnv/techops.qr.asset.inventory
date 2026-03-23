@@ -5,6 +5,7 @@ import type {
 } from "react-router";
 import {
   data,
+  redirect,
   useActionData,
   useLoaderData,
   useNavigation,
@@ -21,6 +22,7 @@ import { config } from "~/config/shelf.config";
 import { useSearchParams } from "~/hooks/search-params";
 import { ContinueWithEmailForm } from "~/modules/auth/components/continue-with-email-form";
 import { authenticator } from "~/modules/auth/auth.server";
+import { signInWithEmail } from "~/modules/auth/service.server";
 
 import { appendToMetaTitle } from "~/utils/append-to-meta-title";
 import {
@@ -43,9 +45,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const subHeading = "Welkom terug! Vul uw gegevens hieronder in om in te loggen.";
   const { disableSignup, disableSSO } = config;
 
-  await authenticator.isAuthenticated(request, {
-    successRedirect: "/assets",
-  });
+  const { sessionStorage } = await import("~/../server/session");
+  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
+  if (session.has("user")) {
+    throw redirect("/assets");
+  }
 
   return data(payload({ title, subHeading, disableSignup, disableSSO }));
 }
@@ -69,14 +73,33 @@ export async function action({ request }: ActionFunctionArgs) {
       throw notAllowedMethod(method);
     }
 
-    // Get the form data to extract redirectTo
+    // Get the form data to extract redirectTo, email and password
     const clonedRequest = request.clone();
     const formData = await clonedRequest.formData();
     const redirectTo = (formData.get("redirectTo") as string) || "/assets";
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
-    return await authenticator.authenticate("user-pass", request, {
-      successRedirect: safeRedirect(redirectTo),
-      failureRedirect: "/login",
+    if (!email || !password) {
+      throw new Error("Email and password are required");
+    }
+
+    const authSession = await signInWithEmail(email, password);
+
+    if (!authSession) {
+      throw new Error("Invalid email or password");
+    }
+
+    const { sessionStorage } = await import("~/../server/session");
+    const session = await sessionStorage.getSession(request.headers.get("Cookie"));
+    session.set("user", authSession);
+
+    return data(null, {
+      status: 303,
+      headers: {
+        "Set-Cookie": await sessionStorage.commitSession(session),
+        Location: safeRedirect(redirectTo),
+      },
     });
   } catch (cause) {
     const reason = makeShelfError(
