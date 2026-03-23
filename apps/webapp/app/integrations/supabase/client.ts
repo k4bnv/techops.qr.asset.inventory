@@ -10,7 +10,12 @@ import { isBrowser } from "~/utils/is-browser";
 
 // ⚠️ cloudflare needs you define fetch option : https://github.com/supabase/supabase-js#custom-fetch-implementation
 // Use Remix fetch polyfill for node (See https://remix.run/docs/en/v1/other-api/node)
+let _supabaseClient: ReturnType<typeof createClient> | null = null;
+
 function getSupabaseClient(supabaseKey: string, accessToken?: string) {
+  if (!SUPABASE_URL || !supabaseKey) {
+    return null;
+  }
   const global = accessToken
     ? {
         global: {
@@ -21,7 +26,7 @@ function getSupabaseClient(supabaseKey: string, accessToken?: string) {
       }
     : {};
 
-  return createClient(SUPABASE_URL, supabaseKey, {
+  return createClient(SUPABASE_URL!, supabaseKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,
@@ -30,7 +35,35 @@ function getSupabaseClient(supabaseKey: string, accessToken?: string) {
   });
 }
 
-const supabaseClient = getSupabaseClient(SUPABASE_ANON_PUBLIC);
+const supabaseClient = {
+  get auth() {
+    if (!_supabaseClient) {
+      _supabaseClient = getSupabaseClient(SUPABASE_ANON_PUBLIC!);
+    }
+    if (!_supabaseClient) {
+      throw new Error("Supabase is not configured. Check your environment variables.");
+    }
+    return _supabaseClient.auth;
+  },
+  get storage() {
+    if (!_supabaseClient) {
+      _supabaseClient = getSupabaseClient(SUPABASE_ANON_PUBLIC!);
+    }
+    if (!_supabaseClient) {
+      throw new Error("Supabase is not configured. Check your environment variables.");
+    }
+    return _supabaseClient.storage;
+  },
+  get from() {
+    if (!_supabaseClient) {
+      _supabaseClient = getSupabaseClient(SUPABASE_ANON_PUBLIC!);
+    }
+    if (!_supabaseClient) {
+      throw new Error("Supabase is not configured. Check your environment variables.");
+    }
+    return _supabaseClient.from;
+  }
+} as unknown as ReturnType<typeof createClient>;
 
 /**
  * Provides a Supabase Admin Client with full admin privileges
@@ -48,7 +81,11 @@ function getSupabaseAdmin() {
       label: "Dev error",
     });
 
-  return getSupabaseClient(SUPABASE_SERVICE_ROLE);
+  const client = getSupabaseClient(SUPABASE_SERVICE_ROLE!);
+  if (!client) {
+    throw new Error("Supabase Admin is not configured. SUPABASE_SERVICE_ROLE is missing.");
+  }
+  return client;
 }
 
 export { getSupabaseAdmin, supabaseClient };
