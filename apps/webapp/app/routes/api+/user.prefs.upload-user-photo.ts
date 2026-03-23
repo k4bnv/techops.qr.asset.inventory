@@ -21,11 +21,24 @@ export async function action({ context, request }: ActionFunctionArgs) {
     assertIsPost(request);
 
     const user = await getUserByID(userId, {
-      select: { id: true, profilePicture: true } satisfies Prisma.UserSelect,
+      select: { 
+        id: true, 
+        profilePicture: true,
+        lastSelectedOrganizationId: true,
+        userOrganizations: {
+          select: { organizationId: true },
+          take: 1
+        }
+      } satisfies Prisma.UserSelect,
     });
 
     /** needed for deleting */
     const previousProfilePictureUrl = user.profilePicture;
+    const ownerOrgId = user.lastSelectedOrganizationId ?? user.userOrganizations[0]?.organizationId;
+
+    if (!ownerOrgId) {
+      throw new Error("User has no organization");
+    }
 
     const formData = await parseFileFormData({
       request,
@@ -37,6 +50,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
         withoutEnlargement: true,
       },
       maxFileSize: DEFAULT_MAX_IMAGE_UPLOAD_SIZE,
+      userId,
+      ownerOrgId,
     });
 
     const profilePicture = formData.get("file") as string;

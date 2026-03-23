@@ -16,6 +16,7 @@ import { config } from "~/config/shelf.config";
 import { useSearchParams } from "~/hooks/search-params";
 import { ContinueWithEmailForm } from "~/modules/auth/components/continue-with-email-form";
 import { signUpWithEmailPass } from "~/modules/auth/service.server";
+import { authenticator } from "~/modules/auth/auth.server";
 import { findUserByEmail } from "~/modules/user/service.server";
 import { appendToMetaTitle } from "~/utils/append-to-meta-title";
 import {
@@ -34,32 +35,27 @@ import {
 import { validEmail } from "~/utils/misc";
 import { validateNonSSOSignup } from "~/utils/sso.server";
 
-export function loader({ context }: LoaderFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const title = "Account aanmaken";
   const subHeading = "Begin uw reis met TechOps";
   const { disableSignup } = config;
 
-  try {
-    if (disableSignup) {
-      throw new ShelfError({
-        cause: null,
-        title: "Aanmelden is uitgeschakeld",
-        message:
-          "Neem contact op met uw werkruimtebeheerder voor meer informatie.",
-        label: "User onboarding",
-        status: 403,
-        shouldBeCaptured: false,
-      });
-    }
-    if (context.isAuthenticated) {
-      return redirect("/assets");
-    }
-
-    return data(payload({ title, subHeading }));
-  } catch (cause) {
-    const reason = makeShelfError(cause);
-    throw data(error(reason), { status: reason.status });
+  if (disableSignup) {
+    throw new ShelfError({
+      cause: null,
+      title: "Aanmelden is uitgeschakeld",
+      message: "Neem contact op met uw werkruimtebeheerder voor meer informatie.",
+      label: "User onboarding",
+      status: 403,
+      shouldBeCaptured: false,
+    });
   }
+
+  await authenticator.isAuthenticated(request, {
+    successRedirect: "/assets",
+  });
+
+  return data(payload({ title, subHeading }));
 }
 
 const JoinFormSchema = z
@@ -92,41 +88,37 @@ export async function action({ request }: ActionFunctionArgs) {
   try {
     const method = getActionMethod(request);
 
-    switch (getActionMethod(request)) {
-      case "POST": {
-        const { email, password } = parseData(
-          await request.formData(),
-          JoinFormSchema,
-          { shouldBeCaptured: false }
-        );
-        // Block signup if domain uses SSO
-        await validateNonSSOSignup(email);
-
-        const existingUser = await findUserByEmail(email);
-
-        if (existingUser) {
-          throw new ShelfError({
-            cause: null,
-            message: "Gebruiker met dit e-mailadres bestaat al, log in plaats daarvan in",
-            additionalData: {
-              email,
-            },
-            label: "User onboarding",
-            shouldBeCaptured: false,
-            status: 409,
-          });
-        }
-
-        // Sign up with the provided email and password
-        await signUpWithEmailPass(email, password);
-
-        return redirect(
-          `/otp?email=${encodeURIComponent(email)}&mode=confirm_signup`
-        );
-      }
+    if (method !== "POST") {
+      throw notAllowedMethod(method);
     }
 
-    throw notAllowedMethod(method);
+    const { email, password, redirectTo } = parseData(
+      await request.formData(),
+      JoinFormSchema,
+      { shouldBeCaptured: false }
+    );
+    // Block signup if domain uses SSO
+    await validateNonSSOSignup(email);
+
+    const existingUser = await findUserByEmail(email);
+
+    if (existingUser) {
+      throw new ShelfError({
+        cause: null,
+        message:
+          "Gebruiker met dit e-mailadres bestaat al, log in plaats daarvan in",
+        additionalData: { email },
+        label: "User onboarding",
+        shouldBeCaptured: false,
+        status: 409,
+      });
+    }
+
+    // Sign up with the provided email and password
+    await signUpWithEmailPass(email, password);
+
+    // After successful signup, redirect to login page with success message
+    return redirect(`/login?registered=true&redirectTo=${encodeURIComponent(redirectTo || "/assets")}`);
   } catch (cause) {
     const reason = makeShelfError(
       cause,
@@ -147,7 +139,7 @@ export default function Join() {
   const redirectTo = searchParams.get("redirectTo") ?? undefined;
   const navigation = useNavigation();
   const disabled = isFormProcessing(navigation.state);
-  const data = useActionData<typeof action>();
+  const actionData = useActionData<typeof action>();
 
   return (
     <div className="flex min-h-full flex-col justify-center">
@@ -165,7 +157,7 @@ export default function Join() {
               autoComplete="email"
               disabled={disabled}
               inputClassName="w-full"
-              error={zo.errors.email()?.message || data?.error.message}
+              error={zo.errors.email()?.message || actionData?.error?.message}
             />
           </div>
 

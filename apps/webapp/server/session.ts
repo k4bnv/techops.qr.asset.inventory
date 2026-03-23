@@ -8,6 +8,7 @@ export type AuthSession = {
   email: string;
   expiresIn: number;
   expiresAt: number;
+  organizationId?: string;
 };
 
 export const authSessionKey = "auth";
@@ -31,3 +32,5 @@ export function createSessionStorage() {
     },
   });
 }
+
+export const sessionStorage = createSessionStorage();

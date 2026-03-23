@@ -40,6 +40,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
       newFileName: `feedback/${userId}/${dateTimeInUnix(Date.now())}`,
       bucketName: "files",
       maxFileSize: DEFAULT_MAX_IMAGE_UPLOAD_SIZE,
+      userId,
+      ownerOrgId: currentOrganization.id,
     });
 
     const screenshotPath = formData.get("screenshot") as string | null;

@@ -42,6 +42,7 @@ model User {
   profilePicture        String?
   usedFreeTrial         Boolean @default(false)
   onboarded             Boolean @default(false)
+  passwordHash          String?
   customerId            String? @unique // Stripe customer id
   sso                   Boolean @default(false)
   createdWithInvite     Boolean @default(false) // Set to true if the user was created by being invited to a workspace

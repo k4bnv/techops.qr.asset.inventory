@@ -1080,9 +1080,11 @@ async function getUsers({
 export async function updateProfilePicture({
   request,
   userId,
+  organizationId,
 }: {
   request: Request;
   userId: User["id"];
+  organizationId: Organization["id"];
 }) {
   try {
     const user = await getUserByID(userId, {
@@ -1100,6 +1102,8 @@ export async function updateProfilePicture({
         withoutEnlargement: true,
       },
       maxFileSize: DEFAULT_MAX_IMAGE_UPLOAD_SIZE,
+      userId,
+      ownerOrgId: organizationId,
     });
 
     const profilePicture = fileData.get("profile-picture") as string;
