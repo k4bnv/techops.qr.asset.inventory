@@ -3,11 +3,13 @@ import { data, Form, useLoaderData } from "react-router";
 import { Switch } from "~/components/forms/switch";
 import { Button } from "~/components/shared/button";
 import {
+  NAV_ITEM_KEYS,
+  NAV_ITEM_LABELS,
+  type NavItemKey,
+} from "~/modules/app-settings/constants";
+import {
   getNavSettings,
   updateNavSettings,
-  NAV_ITEM_LABELS,
-  NAV_ITEM_KEYS,
-  type NavItemKey,
 } from "~/modules/app-settings/service.server";
 import { appendToMetaTitle } from "~/utils/append-to-meta-title";
 import { sendNotification } from "~/utils/emitter/send-notification.server";
