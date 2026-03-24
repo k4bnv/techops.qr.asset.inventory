@@ -276,6 +276,51 @@ export async function assertWillExceedCustomFieldLimit({
 }
 /** End Custom Fields */
 
+/** Assets */
+export const canCreateMoreAssets = ({
+  tierLimit,
+  totalAssets,
+}: {
+  tierLimit: { maxAssets: number } | null | undefined;
+  totalAssets: number;
+}) => {
+  if (!premiumIsEnabled) return true;
+  // 0 means unlimited
+  if (!tierLimit?.maxAssets) return true;
+  return totalAssets < tierLimit.maxAssets;
+};
+
+export async function assertUserCanCreateMoreAssets({
+  organizationId,
+  organizations,
+}: {
+  organizationId: Organization["id"];
+  organizations: {
+    id: string;
+    type: OrganizationType;
+    name: string;
+    imageId: string | null;
+    userId: string;
+  }[];
+}) {
+  const [tierLimit, totalAssets] = await Promise.all([
+    getOrganizationTierLimit({ organizationId, organizations }),
+    db.asset.count({ where: { organizationId } }),
+  ]);
+
+  if (!canCreateMoreAssets({ tierLimit, totalAssets })) {
+    throw new ShelfError({
+      cause: null,
+      title: "Limiet bereikt",
+      message: `U heeft het maximale aantal assets (${tierLimit?.maxAssets}) bereikt voor uw abonnement.`,
+      additionalData: { organizationId },
+      label,
+      shouldBeCaptured: false,
+    });
+  }
+}
+/** End Assets */
+
 /** Organizations */
 export const canCreateMoreOrganizations = ({
   tierLimit,
@@ -284,7 +329,10 @@ export const canCreateMoreOrganizations = ({
   tierLimit: { maxOrganizations: number } | null | undefined;
   totalOrganizations: number;
 }) => {
-  return true;
+  if (!premiumIsEnabled) return true;
+  // maxOrganizations 1 means only the default personal workspace
+  if (!tierLimit?.maxOrganizations) return true;
+  return totalOrganizations < tierLimit.maxOrganizations;
 };
 /**
  * Fetches user and calls {@link canCreateMoreOrganizations};.
@@ -365,22 +413,26 @@ export function assertCanUseBookings(
 }
 
 /**
- * This validates if more users can be invited to organization
- * It simply checks the organization type
+ * This validates if more users can be invited to organization.
+ * Checks org type and the canInviteTeamMembers tier limit.
  */
 export async function assertUserCanInviteUsersToWorkspace({
   organizationId,
+  organizations,
 }: {
   organizationId: Organization["id"];
+  organizations?: {
+    id: string;
+    type: OrganizationType;
+    name: string;
+    imageId: string | null;
+    userId: string;
+  }[];
 }) {
-  /** Get the tier limit and check if they can export */
-  // const tierLimit = await getUserTierLimit(userId);
   const org = await db.organization
     .findUniqueOrThrow({
       where: { id: organizationId },
-      select: {
-        type: true,
-      },
+      select: { type: true },
     })
     .catch((cause) => {
       throw new ShelfError({
@@ -401,6 +453,24 @@ export async function assertUserCanInviteUsersToWorkspace({
       label,
       shouldBeCaptured: false,
     });
+  }
+
+  if (premiumIsEnabled && organizations) {
+    const tierLimit = await getOrganizationTierLimit({
+      organizationId,
+      organizations,
+    });
+    if (tierLimit && "canInviteTeamMembers" in tierLimit && !tierLimit.canInviteTeamMembers) {
+      throw new ShelfError({
+        cause: null,
+        title: "Niet toegestaan",
+        message:
+          "Uw abonnement staat het uitnodigen van teamleden niet toe.",
+        status: 403,
+        label,
+        shouldBeCaptured: false,
+      });
+    }
   }
 }
 /** End Team Features */

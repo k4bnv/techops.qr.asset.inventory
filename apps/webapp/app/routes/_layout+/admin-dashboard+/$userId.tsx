@@ -96,6 +96,13 @@ export const loader = async ({ context, params }: LoaderFunctionArgs) => {
         customTierLimit: {
           select: {
             maxOrganizations: true,
+            maxAssets: true,
+            maxCustomFields: true,
+            canImportAssets: true,
+            canExportAssets: true,
+            canImportNRM: true,
+            canHideShelfBranding: true,
+            canInviteTeamMembers: true,
             isEnterprise: true,
           },
         },
@@ -291,28 +298,32 @@ export const action = async ({
         break;
       }
       case "updateCustomTierDetails": {
-        const { maxOrganizations, isEnterprise } = parseData(
+        const parsed = parseData(
           await request.formData(),
           z.object({
-            maxOrganizations: z.string().transform((val) => +val),
-            isEnterprise: z
-              .string()
-              .optional()
-              .transform((val) => (val === "on" ? true : false)),
+            maxOrganizations: z.string().transform((v) => Math.max(1, parseInt(v) || 1)),
+            maxAssets: z.string().transform((v) => Math.max(0, parseInt(v) || 0)),
+            maxCustomFields: z.string().transform((v) => Math.max(0, parseInt(v) || 0)),
+            canImportAssets: z.string().optional().transform((v) => v === "on"),
+            canExportAssets: z.string().optional().transform((v) => v === "on"),
+            canImportNRM: z.string().optional().transform((v) => v === "on"),
+            canHideShelfBranding: z.string().optional().transform((v) => v === "on"),
+            canInviteTeamMembers: z.string().optional().transform((v) => v === "on"),
+            isEnterprise: z.string().optional().transform((v) => v === "on"),
           })
         );
 
         await db.customTierLimit.upsert({
           where: { userId: shelfUserId },
-          create: {
-            userId: shelfUserId,
-            maxOrganizations,
-            isEnterprise,
-          },
-          update: {
-            maxOrganizations,
-            isEnterprise,
-          },
+          create: { userId: shelfUserId, ...parsed },
+          update: parsed,
+        });
+
+        sendNotification({
+          title: "Custom tier bijgewerkt",
+          message: "De limieten voor deze gebruiker zijn opgeslagen.",
+          icon: { name: "check", variant: "success" },
+          senderId: userId,
         });
 
         break;
@@ -714,53 +725,98 @@ function BooleanToggleForm({
 function CustomTierDetailsForm({
   customTierLimit,
 }: {
-  customTierLimit: Pick<CustomTierLimit, "maxOrganizations" | "isEnterprise">;
+  customTierLimit: Pick<
+    CustomTierLimit,
+    | "maxOrganizations"
+    | "maxAssets"
+    | "maxCustomFields"
+    | "canImportAssets"
+    | "canExportAssets"
+    | "canImportNRM"
+    | "canHideShelfBranding"
+    | "canInviteTeamMembers"
+    | "isEnterprise"
+  >;
 }) {
   return (
     <div>
-      <h4>Custom tier details</h4>
-      <p>
-        NOTE: We have more fields but for custom tier for now, the only relevant
-        one is number of workspaces so I only added this to form so we can ship
-        faster. Fields that are not added are: <b>canImportAssets</b>,
-        <b>canExportAssets</b>, <b>maxCustomFields</b>
-      </p>
-      <Form method="post">
-        <FormRow
-          rowLabel="Is Enterprise?"
-          className="block border-b-0 pb-0 [&>div]:lg:basis-auto"
-        >
-          <div className="flex items-center gap-3">
-            <Switch
-              name={"isEnterprise"}
-              defaultChecked={customTierLimit.isEnterprise}
+      <h4 className="mb-3 font-semibold">Custom tier limieten</h4>
+
+      <Form method="post" className="space-y-3">
+        {/* Numeric limits */}
+        <div className="space-y-2">
+          <div>
+            <label className="mb-1 block text-xs font-medium text-gray-600">
+              Max assets <span className="text-gray-400">(0 = onbeperkt)</span>
+            </label>
+            <Input
+              label="Max assets"
+              name="maxAssets"
+              type="number"
+              min={0}
+              hideLabel
+              className="w-full"
+              defaultValue={customTierLimit.maxAssets}
             />
           </div>
-        </FormRow>
+          <div>
+            <label className="mb-1 block text-xs font-medium text-gray-600">
+              Max werkruimtes{" "}
+              <span className="text-gray-400">(incl. persoonlijk)</span>
+            </label>
+            <Input
+              label="Max werkruimtes"
+              name="maxOrganizations"
+              type="number"
+              min={1}
+              hideLabel
+              className="w-full"
+              defaultValue={customTierLimit.maxOrganizations}
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-xs font-medium text-gray-600">
+              Max aangepaste velden{" "}
+              <span className="text-gray-400">(0 = geen)</span>
+            </label>
+            <Input
+              label="Max aangepaste velden"
+              name="maxCustomFields"
+              type="number"
+              min={0}
+              hideLabel
+              className="w-full"
+              defaultValue={customTierLimit.maxCustomFields}
+            />
+          </div>
+        </div>
 
-        <FormRow
-          rowLabel={"Max workspaces (organizations)"}
-          className="block border-b-0 pb-0 [&>div]:lg:basis-auto"
-          subHeading={
-            "How many workspaces should this user be allowed to create/own? Keep in mind that the user always has 1 Personal workspace so you need to do the desired number + 1."
-          }
-          required
-        >
-          <Input
-            label="Max workspaces (organizations)"
-            name="maxOrganizations"
-            type="number"
-            min={1}
-            max={1000}
-            hideLabel
-            className="disabled my-2 w-full"
-            defaultValue={customTierLimit.maxOrganizations}
-            required
-          />
-        </FormRow>
+        {/* Boolean permissions */}
+        <div className="space-y-2 border-t pt-3">
+          {(
+            [
+              ["canInviteTeamMembers", "Teamleden uitnodigen"],
+              ["canImportAssets", "Assets importeren"],
+              ["canExportAssets", "Assets exporteren"],
+              ["canImportNRM", "NRM importeren"],
+              ["canHideShelfBranding", "Branding verbergen"],
+              ["isEnterprise", "Enterprise"],
+            ] as const
+          ).map(([field, label]) => (
+            <div key={field} className="flex items-center justify-between">
+              <span className="text-sm text-gray-700">{label}</span>
+              <Switch
+                name={field}
+                defaultChecked={
+                  customTierLimit[field as keyof typeof customTierLimit] as boolean
+                }
+              />
+            </div>
+          ))}
+        </div>
 
         <Button type="submit" name="intent" value="updateCustomTierDetails">
-          Save
+          Opslaan
         </Button>
       </Form>
     </div>

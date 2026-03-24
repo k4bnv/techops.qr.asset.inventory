@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   type Organization,
   type Currency,
@@ -18,6 +19,7 @@ import { tw } from "~/utils/tw";
 import { zodFieldIsRequired } from "~/utils/zod";
 import CurrencySelector from "./currency-selector";
 import QrIdDisplayPreferenceSelector from "./qr-id-display-preference-selector";
+import { QrLabel } from "../code-preview/code-preview";
 import FormRow from "../forms/form-row";
 import { InnerLabel } from "../forms/inner-label";
 import Input from "../forms/input";
@@ -171,7 +173,7 @@ const WorkspaceGeneralEditForms = ({
           >
             <InnerLabel hideLg>Valuta</InnerLabel>
             <CurrencySelector
-              defaultValue={currency || "USD"}
+              defaultValue={currency || "EUR"}
               name={zo.fields.currency()}
             />
           </FormRow>
@@ -195,46 +197,10 @@ const WorkspaceGeneralEditForms = ({
           </FormRow>
         </div>
 
-        <FormRow
-          rowLabel={"Label branding"}
-          className={"border-b-0"}
-          subHeading={
-            <p>
-                Beheer of de "Powered by TechOps"-voettekst op QR- en streepjescodelabels verschijnt.
-              </p>
-          }
-        >
-          <div className="flex items-center gap-3">
-            <input
-              type="hidden"
-              name={zo.fields.showShelfBranding()}
-              value="off"
-            />
-            <Switch
-              id="showShelfBranding"
-              name={zo.fields.showShelfBranding()}
-              defaultChecked={organization.showShelfBranding ?? false}
-              disabled={false}
-              aria-labelledby="showShelfBranding-label"
-              aria-describedby="showShelfBranding-desc"
-            />
-            <div>
-              <label
-                id="showShelfBranding-label"
-                htmlFor="showShelfBranding"
-                className="cursor-pointer text-[14px] font-medium text-gray-700"
-              >
-                TechOps-branding op labels weergeven
-              </label>
-              <p
-                id="showShelfBranding-desc"
-                className="text-[14px] text-gray-600"
-              >
-                Schakel TechOps-branding in of uit op downloadbare QR- en streepjescodelabels.
-              </p>
-            </div>
-          </div>
-        </FormRow>
+        <LabelBrandingRow
+          zo={zo}
+          organization={organization}
+        />
 
         <div className="text-right">
           <Button
@@ -535,3 +501,72 @@ const WorkspaceSSOEditForm = ({ className }: Props) => {
     </fetcher.Form>
   ) : null;
 };
+
+/** Label branding row with live toggle preview */
+function LabelBrandingRow({
+  zo,
+  organization,
+}: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  zo: any;
+  organization: { showShelfBranding: boolean; imageId?: string | null };
+}) {
+  const [showLogo, setShowLogo] = useState(organization.showShelfBranding ?? false);
+  const logoSrc = organization.imageId ? `/api/image/${organization.imageId}` : null;
+
+  return (
+    <FormRow
+      rowLabel={"Logo op labels"}
+      className={"border-b-0"}
+      subHeading={
+        <p>
+          Toon het logo van uw werkruimte op QR- en streepjescodelabels. Stel
+          de hoofdafbeelding in via het veld hierboven.
+        </p>
+      }
+    >
+      <div className="space-y-4">
+        <div className="flex items-center gap-3">
+          <input
+            type="hidden"
+            name={zo.fields.showShelfBranding()}
+            value="off"
+          />
+          <Switch
+            id="showShelfBranding"
+            name={zo.fields.showShelfBranding()}
+            defaultChecked={showLogo}
+            onCheckedChange={setShowLogo}
+            aria-labelledby="showShelfBranding-label"
+          />
+          <label
+            id="showShelfBranding-label"
+            htmlFor="showShelfBranding"
+            className="cursor-pointer text-[14px] font-medium text-gray-700"
+          >
+            Werkruimte-logo op labels weergeven
+          </label>
+        </div>
+
+        {/* Live preview */}
+        <div>
+          <p className="mb-2 text-xs text-gray-500">Voorbeeldweergave label:</p>
+          <div className="inline-block scale-75 origin-top-left">
+            <QrLabel
+              title="Voorbeeld asset"
+              data={{ qr: { id: "QR-PREVIEW", src: "/static/images/qr-placeholder.png" } }}
+              showShelfBranding={showLogo}
+              orgLogoSrc={logoSrc}
+              layout="square"
+            />
+          </div>
+          {!logoSrc && showLogo && (
+            <p className="mt-1 text-xs text-amber-600">
+              Upload een hoofdafbeelding hierboven om het logo op labels te tonen.
+            </p>
+          )}
+        </div>
+      </div>
+    </FormRow>
+  );
+}

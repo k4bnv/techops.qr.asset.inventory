@@ -65,11 +65,19 @@ export type NavItem =
   | ButtonNavItem;
 
 export function useSidebarNavItems() {
-  const { isAdmin, canUseBookings, subscription, unreadUpdatesCount } =
+  const { isAdmin, canUseBookings, subscription, unreadUpdatesCount, navSettings } =
     useLoaderData<typeof loader>();
   const { isBaseOrSelfService } = useUserRoleHelper();
   const currentOrganization = useCurrentOrganization();
   const isPersonalOrganization = isPersonalOrg(currentOrganization);
+
+  // Helper: resolve URL - use customUrl if set, otherwise fallback
+  const url = (key: keyof typeof navSettings, fallback: string) =>
+    navSettings?.[key]?.customUrl || fallback;
+
+  // Helper: is item visible per admin settings (null-safe, default true)
+  const nav = (key: keyof typeof navSettings) =>
+    navSettings?.[key]?.visible !== false;
 
   const bookingDisabled = useMemo(() => {
     if (canUseBookings) {
@@ -107,59 +115,62 @@ export function useSidebarNavItems() {
     {
       type: "child",
       title: "Startpagina",
-      to: "/home",
+      to: url("home", "/home"),
       Icon: HomeIcon,
-      hidden: isBaseOrSelfService,
+      hidden: !nav("home") || isBaseOrSelfService,
     },
     {
       type: "child",
       title: "Assets",
-      to: "/assets",
+      to: url("assets", "/assets"),
       Icon: PackageOpenIcon,
+      hidden: !nav("assets"),
     },
     {
       type: "child",
       title: "Kits",
-      to: "/kits",
+      to: url("kits", "/kits"),
       Icon: Package,
+      hidden: !nav("kits"),
     },
     {
       type: "child",
       title: "Categorieën",
-      to: "/categories",
+      to: url("categories", "/categories"),
       Icon: BoxesIcon,
-      hidden: isBaseOrSelfService,
+      hidden: !nav("categories") || isBaseOrSelfService,
     },
-
     {
       type: "child",
       title: "Tags",
-      to: "/tags",
+      to: url("tags", "/tags"),
       Icon: TagsIcon,
-      hidden: isBaseOrSelfService,
+      hidden: !nav("tags") || isBaseOrSelfService,
     },
     {
       type: "child",
       title: "Locaties",
-      to: "/locations",
+      to: url("locations", "/locations"),
       Icon: MapPinIcon,
-      hidden: isBaseOrSelfService,
+      hidden: !nav("locations") || isBaseOrSelfService,
     },
     {
       type: "child",
       title: "Audits",
-      to: "/audits",
+      to: url("audits", "/audits"),
       Icon: ClipboardCheckIcon,
+      hidden: !nav("audits"),
     },
     {
       type: "parent",
       title: "Reserveringen",
       Icon: CalendarRangeIcon,
       disabled: bookingDisabled,
+      hidden: !nav("bookings"),
       children: [
         {
           title: "Bekijk Reserveringen",
-          to: "/bookings",
+          to: url("bookings", "/bookings"),
           disabled: bookingDisabled,
         },
         {
@@ -173,8 +184,8 @@ export function useSidebarNavItems() {
       type: "child",
       title: "Herinneringen",
       Icon: AlarmClockIcon,
-      hidden: isBaseOrSelfService,
-      to: "/reminders",
+      hidden: !nav("reminders") || isBaseOrSelfService,
+      to: url("reminders", "/reminders"),
     },
     {
       type: "label",
@@ -185,7 +196,7 @@ export function useSidebarNavItems() {
       type: "parent",
       title: "Team",
       Icon: UsersRoundIcon,
-      hidden: isBaseOrSelfService,
+      hidden: !nav("team") || isBaseOrSelfService,
       children: [
         {
           title: "Gebruikers",
@@ -207,7 +218,7 @@ export function useSidebarNavItems() {
       type: "parent",
       title: "Werkruimte-instellingen",
       Icon: SettingsIcon,
-      hidden: isBaseOrSelfService,
+      hidden: !nav("workspaceSettings") || isBaseOrSelfService,
       children: [
         {
           title: "Algemeen",
@@ -230,8 +241,9 @@ export function useSidebarNavItems() {
     {
       type: "child",
       title: "QR Scanner",
-      to: "/scanner",
+      to: url("scanner", "/scanner"),
       Icon: ScanBarcodeIcon,
+      hidden: !nav("scanner"),
     },
     {
       type: "button",

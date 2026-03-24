@@ -684,7 +684,7 @@ model Organization {
 
   owner    User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   userId   String
-  currency Currency @default(USD)
+  currency Currency @default(EUR)
 
   members TeamMember[]
   assets  Asset[]
@@ -843,6 +843,8 @@ model TierLimit {
   canHideShelfBranding Boolean  @default(false)
   maxCustomFields      Int      @default(0)
   maxOrganizations     Int      @default(1)
+  maxAssets            Int      @default(0) // 0 = unlimited
+  canInviteTeamMembers Boolean  @default(true)
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 }
@@ -858,6 +860,8 @@ model CustomTierLimit {
   canHideShelfBranding Boolean  @default(true)
   maxCustomFields      Int      @default(1000)
   maxOrganizations     Int      @default(1)
+  maxAssets            Int      @default(0) // 0 = unlimited
+  canInviteTeamMembers Boolean  @default(true)
   isEnterprise         Boolean  @default(false) // Set this to true for enterprise users. It is used to control some visuals in the app
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
@@ -1663,4 +1667,13 @@ model RoleChangeLog {
 
   @@index([userId, organizationId])
   @@index([organizationId, createdAt])
+}
+
+/// Site-wide configuration key/value store for admin-managed settings.
+/// Each record holds a JSON value for a named config key.
+model SiteConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     Json     @default("{}")
+  updatedAt DateTime @updatedAt
 }

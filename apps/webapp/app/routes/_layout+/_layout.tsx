@@ -50,6 +50,7 @@ import {
 } from "~/modules/organization/context.server";
 import { getUnreadCountForUser } from "~/modules/update/service.server";
 import { getUserByID } from "~/modules/user/service.server";
+import { getNavSettings } from "~/modules/app-settings/service.server";
 import { getWorkingHoursForOrganization } from "~/modules/working-hours/service.server";
 import styles from "~/styles/layout/index.css?url";
 import { appendToMetaTitle } from "~/utils/append-to-meta-title";
@@ -184,9 +185,10 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       });
     }
 
-    const [bookingSettings, workingHoursRaw] = await Promise.all([
+    const [bookingSettings, workingHoursRaw, navSettings] = await Promise.all([
       getBookingSettingsForOrganization(currentOrganization.id),
       getWorkingHoursForOrganization(currentOrganization.id),
+      getNavSettings(),
     ]);
 
     const workingHours = workingHoursRaw;
@@ -210,6 +212,7 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
         canUseBookings: canUseBookings(currentOrganization),
         canUseAudits: canUseAudits(currentOrganization),
         unreadUpdatesCount,
+        navSettings,
         hasUnpaidInvoice: user.hasUnpaidInvoice,
         warnForNoPaymentMethod: user.warnForNoPaymentMethod,
         needsSequentialIdMigration,

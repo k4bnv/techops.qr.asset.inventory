@@ -45,6 +45,8 @@ const items = [
   { to: "move-location-images", content: "Move location images" },
   { to: "generate-locations", content: "Generate locations" },
   { to: "test-supabase-rls", content: "Test Supabase RLS" },
+  { to: "nav-settings", content: "Navigatie" },
+  { to: "tier-limits", content: "Tier-limieten" },
 ];
 
 export default function Area51Page() {

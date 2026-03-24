@@ -37,6 +37,7 @@ import {
   PermissionEntity,
 } from "~/utils/permissions/permission.data";
 import { requirePermission } from "~/utils/roles.server";
+import { assertUserCanCreateMoreAssets } from "~/utils/subscription.server";
 import { slugify } from "~/utils/slugify";
 
 const title = "Nieuwe asset";
@@ -116,12 +117,14 @@ export async function action({ context, request }: LoaderFunctionArgs) {
   try {
     assertIsPost(request);
 
-    const { organizationId, canUseBarcodes } = await requirePermission({
+    const { organizationId, organizations, canUseBarcodes } = await requirePermission({
       userId,
       request,
       entity: PermissionEntity.asset,
       action: PermissionAction.create,
     });
+
+    await assertUserCanCreateMoreAssets({ organizationId, organizations });
 
     /** Here we need to clone the request as we need 2 different streams:
      * 1. Access form data for creating asset

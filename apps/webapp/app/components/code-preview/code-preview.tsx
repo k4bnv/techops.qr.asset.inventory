@@ -415,6 +415,7 @@ interface QrLabelProps {
   qrIdDisplayPreference?: string;
   sequentialId?: string | null;
   showShelfBranding?: boolean;
+  orgLogoSrc?: string | null;
   layout?: "square" | "continuous";
 }
 
@@ -426,8 +427,11 @@ export const QrLabel = React.forwardRef<HTMLDivElement, QrLabelProps>(
       qrIdDisplayPreference,
       sequentialId,
       showShelfBranding = true,
+      orgLogoSrc,
       layout = "square",
     } = props ?? {};
+
+    const showLogo = showShelfBranding && !!orgLogoSrc;
 
     const isContinuous = layout === "continuous";
 
@@ -504,6 +508,14 @@ export const QrLabel = React.forwardRef<HTMLDivElement, QrLabelProps>(
                   ? sequentialId
                   : data?.qr?.id}
               </div>
+              {showLogo && (
+                <img
+                  src={orgLogoSrc!}
+                  alt="Werkruimte-logo"
+                  style={{ maxHeight: "28px", maxWidth: "80px", objectFit: "contain", marginTop: "4px" }}
+                  crossOrigin="anonymous"
+                />
+              )}
             </div>
           </>
         ) : (
@@ -551,6 +563,16 @@ export const QrLabel = React.forwardRef<HTMLDivElement, QrLabelProps>(
                 ? sequentialId
                 : data?.qr?.id}
             </div>
+            {showLogo && (
+              <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "4px" }}>
+                <img
+                  src={orgLogoSrc!}
+                  alt="Werkruimte-logo"
+                  style={{ maxHeight: "32px", maxWidth: "120px", objectFit: "contain" }}
+                  crossOrigin="anonymous"
+                />
+              </div>
+            )}
           </>
         )}
       </div>
@@ -565,12 +587,14 @@ interface BarcodeLabelProps {
   };
   title: string;
   showShelfBranding?: boolean;
+  orgLogoSrc?: string | null;
   layout?: "square" | "continuous";
 }
 
 export const BarcodeLabel = React.forwardRef<HTMLDivElement, BarcodeLabelProps>(
   function BarcodeLabel(props, ref) {
-    const { data, title, showShelfBranding = true, layout = "square" } = props ?? {};
+    const { data, title, showShelfBranding = true, orgLogoSrc, layout = "square" } = props ?? {};
+    const showLogo = showShelfBranding && !!orgLogoSrc;
 
     const isContinuous = layout === "continuous";
 
@@ -651,6 +675,16 @@ export const BarcodeLabel = React.forwardRef<HTMLDivElement, BarcodeLabelProps>(
             </div>
           </div>
         </div>
+        {showLogo && (
+          <div style={{ width: isContinuous ? "auto" : "100%", display: "flex", justifyContent: isContinuous ? "flex-end" : "center" }}>
+            <img
+              src={orgLogoSrc!}
+              alt="Werkruimte-logo"
+              style={{ maxHeight: "28px", maxWidth: "80px", objectFit: "contain" }}
+              crossOrigin="anonymous"
+            />
+          </div>
+        )}
       </div>
     );
   }
