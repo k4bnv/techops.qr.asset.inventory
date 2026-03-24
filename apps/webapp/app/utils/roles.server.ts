@@ -2,6 +2,7 @@ import type { SsoDetails } from "@prisma/client";
 import { OrganizationRoles, Roles } from "@prisma/client";
 import { db } from "~/database/db.server";
 import { getSelectedOrganization } from "~/modules/organization/context.server";
+import { ADMIN_EMAIL } from "~/utils/env";
 import { ShelfError } from "./error";
 import type {
   PermissionAction,
@@ -27,11 +28,24 @@ export async function requireUserWithPermission(name: Roles, userId: string) {
 }
 
 export async function requireAdmin(userId: string) {
+  // Allow access if this user's email matches the configured ADMIN_EMAIL env var
+  if (ADMIN_EMAIL) {
+    const user = await db.user.findFirst({
+      where: { id: userId, email: ADMIN_EMAIL.toLowerCase() },
+      select: { id: true },
+    });
+    if (user) return user;
+  }
   return requireUserWithPermission(Roles["ADMIN"], userId);
 }
 
 export async function isAdmin(context: Record<string, any>) {
   const authSession = context.getSession();
+
+  // Allow access if the session email matches ADMIN_EMAIL env var
+  if (ADMIN_EMAIL && authSession.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+    return true;
+  }
 
   const user = await db.user.findFirst({
     where: {

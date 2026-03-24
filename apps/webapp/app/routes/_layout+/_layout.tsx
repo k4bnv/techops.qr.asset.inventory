@@ -59,6 +59,7 @@ import {
   setCookie,
   userPrefs,
 } from "~/utils/cookies.server";
+import { ADMIN_EMAIL } from "~/utils/env";
 import { isLikeShelfError, makeShelfError, ShelfError } from "~/utils/error";
 import { isRouteError } from "~/utils/http";
 import { payload, error } from "~/utils/http.server";
@@ -147,7 +148,9 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
       userId: authSession.userId,
       request,
     });
-    const isAdmin = user?.roles.some((role) => role.name === Roles["ADMIN"]);
+    const isAdmin =
+      (ADMIN_EMAIL && user?.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase()) ||
+      user?.roles.some((role) => role.name === Roles["ADMIN"]);
 
     // Get current user's organization role for updates filtering
     const currentOrganizationUserRoles = user?.userOrganizations.find(
