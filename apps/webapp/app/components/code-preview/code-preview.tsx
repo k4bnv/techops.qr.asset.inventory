@@ -353,56 +353,164 @@ export const CodePreview = ({
 
       {/* Actions */}
       <When truthy={!hideButton && !!selectedCode}>
-        <div className="flex w-full items-center justify-between px-4 pt-6">
-          <span className="text-sm font-medium text-gray-700">Label-indeling:</span>
-          <div className="flex gap-4">
-            <label className="flex items-center gap-2 text-sm text-gray-600">
-              <input
-                type="radio"
-                name="labelLayout"
-                value="square"
-                checked={labelLayout === "square"}
-                onChange={() => setLabelLayout("square")}
-                className="text-blue-600 focus:ring-blue-500"
-              />
-              Vierkant
-            </label>
-            <label className="flex items-center gap-2 text-sm text-gray-600">
-              <input
-                type="radio"
-                name="labelLayout"
-                value="continuous"
-                checked={labelLayout === "continuous"}
-                onChange={() => setLabelLayout("continuous")}
-                className="text-blue-600 focus:ring-blue-500"
-              />
-              Continu (24mm)
-            </label>
+        {/* Size / layout selector */}
+        <div className="px-4 pt-4">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-gray-500">
+            Labelformaat
+          </span>
+          <div className="grid grid-cols-2 gap-2">
+            {([
+              { value: "square",     label: "Vierkant (24×24 mm)",   layout: "square" },
+              { value: "continuous", label: "Continu (100×24 mm)",  layout: "continuous" },
+            ] as { value: string; label: string; layout: "square" | "continuous" }[]).map(
+              (opt) => (
+                <label
+                  key={opt.value}
+                  className={tw(
+                    "flex cursor-pointer items-center gap-2 rounded border px-3 py-2 text-sm",
+                    labelLayout === opt.layout
+                      ? "border-primary bg-primary-50 text-primary font-medium"
+                      : "border-gray-300 text-gray-600 hover:bg-gray-50"
+                  )}
+                >
+                  <input
+                    type="radio"
+                    name="labelLayout"
+                    value={opt.layout}
+                    checked={labelLayout === opt.layout}
+                    onChange={() => setLabelLayout(opt.layout)}
+                    className="hidden"
+                  />
+                  {opt.label}
+                </label>
+              )
+            )}
           </div>
         </div>
-        <div className="mt-6 flex w-full items-center gap-3 border-t-[1.1px] border-[#E3E4E8] px-4 py-3">
+
+        {/* Export actions */}
+        <div className="mt-4 border-t-[1.1px] border-[#E3E4E8] px-4 py-3 space-y-2">
+          <span className="block text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+            Exporteren / Afdrukken
+          </span>
+
+          {/* Row 1: PNG download + Print */}
+          <div className="flex gap-2">
+            <Button
+              type="button"
+              icon="download"
+              onClick={downloadCode}
+              download={fileName}
+              ref={downloadBtnRef}
+              variant="secondary"
+              className="flex-1"
+            >
+              PNG
+            </Button>
+            <Button
+              type="button"
+              icon="print"
+              variant="secondary"
+              className="flex-1"
+              onClick={printCode}
+            >
+              Afdrukken
+            </Button>
+          </div>
+
+          {/* Row 2: SVG + P-touch LBX */}
+          <div className="flex gap-2">
+            <Button
+              type="button"
+              variant="secondary"
+              className="flex-1 text-xs"
+              onClick={() => {
+                if (!captureDivRef.current) return;
+                const el = captureDivRef.current;
+                const w = el.offsetWidth;
+                const h = el.offsetHeight;
+                const html = el.outerHTML;
+                const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">
+                  <foreignObject width="100%" height="100%">
+                    <div xmlns="http://www.w3.org/1999/xhtml">${html}</div>
+                  </foreignObject>
+                </svg>`;
+                const blob = new Blob([svg], { type: "image/svg+xml" });
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(blob);
+                a.download = fileName.replace(".png", ".svg");
+                a.click();
+              }}
+            >
+              SVG
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              className="flex-1 text-xs"
+              title="Openen in Brother P-touch Editor"
+              onClick={() => {
+                if (!selectedCode) return;
+                const qrId = selectedCode.type === "qr" ? selectedCode.id : item.name;
+                const isCont = labelLayout === "continuous";
+                // Dimensions in mm * 100 (P-touch units)
+                const W = isCont ? 10000 : 2400;
+                const H = 2400;
+                const lbx = `<?xml version="1.0" encoding="UTF-8"?>
+<ped:CutInfo xmlns:ped="http://schemas.brother.com/bpac/2007">
+  <ped:Tape Width="${isCont ? "100" : "24"}" Height="24" MediaType="ContinuousTape" Color="White"/>
+  <ped:Objects>
+    <ped:BarcodeObject Top="100" Left="100" Width="${isCont ? "2200" : "2200"}" Height="2200"
+      BarcodeType="QRCode" Data="${qrId}" ErrorCorrectionLevel="M" CellSize="3"/>
+    <ped:TextObject Top="2350" Left="100" Width="${isCont ? "5000" : "2200"}" Height="600"
+      FontName="Arial" FontSize="8pt" Bold="false">${item.name}</ped:TextObject>
+  </ped:Objects>
+</ped:CutInfo>`;
+                const blob = new Blob([lbx], { type: "application/xml" });
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(blob);
+                a.download = `${item.name}-label.lbx`;
+                a.click();
+              }}
+            >
+              P-touch (.lbx)
+            </Button>
+          </div>
+
+          {/* Row 3: ZPL (Zebra) */}
           <Button
             type="button"
-            icon="download"
-            onClick={downloadCode}
-            download={fileName}
-            ref={downloadBtnRef}
             variant="secondary"
-            className="w-full"
+            className="w-full text-xs"
+            title="ZPL voor Zebra labelprinters"
+            onClick={() => {
+              if (!selectedCode) return;
+              const qrId = selectedCode.type === "qr" ? selectedCode.id : item.name;
+              const isCont = labelLayout === "continuous";
+              // ZPL for 2.4cm x 2.4cm (or 10cm x 2.4cm) at 203dpi
+              const dotW = isCont ? 800 : 192;
+              const dotH = 192;
+              const zpl = [
+                "^XA",
+                `^PW${dotW}`,
+                `^LL${dotH}`,
+                "^FO10,10",
+                `^BQN,2,3^FDMM,A${qrId}^FS`,
+                isCont ? `^FO220,60^A0N,28,28^FD${item.name}^FS` : `^FO10,155^A0N,18,18^FD${item.name}^FS`,
+                "^XZ",
+              ].join("\n");
+              const blob = new Blob([zpl], { type: "text/plain" });
+              const a = document.createElement("a");
+              a.href = URL.createObjectURL(blob);
+              a.download = `${item.name}-label.zpl`;
+              a.click();
+            }}
           >
-            Downloaden
-          </Button>
-          <Button
-            type="button"
-            icon="print"
-            variant="secondary"
-            className="w-full"
-            onClick={printCode}
-          >
-            Afdrukken
+            ZPL exporteren (Zebra-printer)
           </Button>
         </div>
       </When>
+
 
       {/* Add Barcode Dialog */}
       <AddBarcodeDialog
