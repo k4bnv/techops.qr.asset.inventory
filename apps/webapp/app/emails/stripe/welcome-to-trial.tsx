@@ -67,9 +67,9 @@ Start populating your inventory to see TechOps in action. Try our QR code featur
 Collaboration is key. Add your colleagues to truly experience the power of TechOps.
 
 Explore Key Features:
-- Custom Fields: Tailor TechOps to your specific needs - https://www.shelf.nu/knowledge-base/custom-field-types-in-shelf
-- Bookings: Efficiently manage equipment reservations - https://www.shelf.nu/knowledge-base/use-case-scenarios-explaing-our-bookings-feature
-- Kits: Group related assets for easier management - https://www.shelf.nu/features/kits
+- Custom Fields: Tailor TechOps to your specific needs - https://www.techops.nl/knowledge-base/custom-field-types-in-shelf
+- Bookings: Efficiently manage equipment reservations - https://www.techops.nl/knowledge-base/use-case-scenarios-explaing-our-bookings-feature
+- Kits: Group related assets for easier management - https://www.techops.nl/features/kits
 
 Need help? Check out our Knowledge Base for quick answers, or reach out to us at ${SUPPORT_EMAIL}.
 
@@ -147,7 +147,7 @@ function WelcomeToTrialEmailTemplate({
 
           <Text style={{ ...styles.p }}>
             <Link
-              href="https://www.shelf.nu/knowledge-base/custom-field-types-in-shelf"
+              href="https://www.techops.nl/knowledge-base/custom-field-types-in-shelf"
               style={{ color: emailPrimaryColor }}
             >
               Custom Fields
@@ -157,7 +157,7 @@ function WelcomeToTrialEmailTemplate({
 
           <Text style={{ ...styles.p }}>
             <Link
-              href="https://www.shelf.nu/knowledge-base/use-case-scenarios-explaing-our-bookings-feature"
+              href="https://www.techops.nl/knowledge-base/use-case-scenarios-explaing-our-bookings-feature"
               style={{ color: emailPrimaryColor }}
             >
               Bookings
@@ -167,7 +167,7 @@ function WelcomeToTrialEmailTemplate({
 
           <Text style={{ ...styles.p }}>
             <Link
-              href="https://www.shelf.nu/features/kits"
+              href="https://www.techops.nl/features/kits"
               style={{ color: emailPrimaryColor }}
             >
               Kits

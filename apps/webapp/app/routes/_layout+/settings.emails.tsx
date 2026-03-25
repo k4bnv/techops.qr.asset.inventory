@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LogoForEmail } from "~/emails/logo";
 import { OrganizationType } from "@prisma/client";
 import type {
   ActionFunctionArgs,
@@ -296,7 +297,7 @@ function EmailPreview({
         <p>
           <span className="text-gray-400">Van:</span>{" "}
           <span className="text-gray-700">
-            TechOps &lt;notifications@shelf.nu&gt;
+            TechOps &lt;notifications@techops.nl&gt;
           </span>
         </p>
         <p>
@@ -306,7 +307,7 @@ function EmailPreview({
         <p>
           <span className="text-gray-400">Onderwerp:</span>{" "}
           <span className="text-gray-700">
-            ✅ Reservering voor Jane Doe - shelf.nu
+            ✅ Reservering voor Jane Doe - techops.nl
           </span>
         </p>
       </div>
@@ -339,11 +340,7 @@ function EmailPreview({
                 marginBottom: "32px",
               }}
             >
-              <img
-                src="/static/images/logo-full-color(x2).png"
-                alt="TechOps logo"
-                style={{ height: "32px", width: "auto" }}
-              />
+              <LogoForEmail />
             </div>
 
             {/* Email heading */}

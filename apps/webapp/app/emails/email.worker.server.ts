@@ -6,7 +6,7 @@ import type { EmailPayloadType } from "./types";
 import { SMTP_FROM, SUPPORT_EMAIL } from "../utils/env";
 
 /** Domain used for soft-deleted user email addresses */
-export const SOFT_DELETED_EMAIL_DOMAIN = "@deleted.shelf.nu";
+export const SOFT_DELETED_EMAIL_DOMAIN = "@deleted.techops.nl";
 
 // every node will execute 5 jobs(teamSize) every 3 minutes(newJobCheckIntervalSeconds),
 // increase teamSize if you need better concurrency
@@ -64,7 +64,7 @@ export const triggerEmail = async ({
   try {
     // send mail with defined transport object
     await transporter.sendMail({
-      from: from || SMTP_FROM || `"TechOps" <hello@example.com>`, // sender address
+      from: from || SMTP_FROM || `"TechOps" <notifications@techops.nl>`, // sender address
       replyTo: replyTo || SUPPORT_EMAIL, // reply to
       to, // list of receivers
       subject, // Subject line

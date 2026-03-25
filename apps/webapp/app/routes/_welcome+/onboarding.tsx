@@ -454,8 +454,8 @@ export async function action({ context, request }: ActionFunctionArgs) {
     if (config.sendOnboardingEmail) {
       /** Send onboarding email */
       sendEmail({
-        from: SMTP_FROM || `"Carlos from shelf.nu" <carlos@emails.shelf.nu>`,
-        replyTo: "carlos@shelf.nu",
+        from: SMTP_FROM || `"Carlos from TechOps" <carlos@emails.techops.nl>`,
+        replyTo: "carlos@techops.nl",
         to: user.email,
         subject: "🏷️ Welcome to TechOps - can I ask you a question?",
         text: onboardingEmailText({ firstName: user.firstName as string }),

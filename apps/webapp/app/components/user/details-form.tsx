@@ -140,7 +140,7 @@ export function UserDetailsForm({
           <Input
             label="Gebruikersnaam"
             hideLabel={true}
-            addOn="shelf.nu/"
+            addOn="app.techops.nl/"
             type="text"
             name={zo.fields.username()}
             defaultValue={user?.username || undefined}
