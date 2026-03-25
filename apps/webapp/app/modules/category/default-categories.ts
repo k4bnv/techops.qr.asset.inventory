@@ -5,44 +5,44 @@ export const defaultUserCategories: Pick<
   "name" | "description" | "color"
 >[] = [
   {
-    name: "Office Equipment",
+    name: "Kantoorartikelen",
     description:
-      "Items that are used for office work, such as computers, printers, scanners, phones, etc.",
+      "Artikelen die worden gebruikt voor kantoorwerk, zoals computers, printers, scanners, telefoons, enz.",
     color: "#ab339f",
   },
   {
-    name: "Cables",
+    name: "Kabels",
     description:
-      "Wires that connect devices or transmit signals, such as power cords, ethernet cables, HDMI cables, etc.",
+      "Draden die apparaten verbinden of signalen verzenden, zoals netsnoeren, ethernetkabels, HDMI-kabels, enz.",
     color: "#0dec5d",
   },
   {
-    name: "Machinery",
+    name: "Machines",
     description:
-      "Equipment that performs mechanical tasks, such as drills, saws, lathes, etc.",
+      "Apparatuur die mechanische taken uitvoert, zoals boren, zagen, draaibank, enz.",
     color: "#efa578",
   },
   {
-    name: "Inventory",
+    name: "Voorraad",
     description:
-      "Goods that are stored or sold by a business, such as raw materials, finished products, spare parts, etc.",
+      "Goederen die door een bedrijf worden opgeslagen of verkocht, zoals grondstoffen, eindproducten, reserveonderdelen, enz.",
     color: "#376dd8",
   },
   {
-    name: "Furniture",
+    name: "Meubilair",
     description:
-      "Items that are used for sitting, working, or storing things, such as chairs, desks, shelves, cabinets, etc.",
+      "Artikelen die worden gebruikt om te zitten, werken of dingen op te bergen, zoals stoelen, bureaus, planken, kasten, enz.",
     color: "#88a59e",
   },
   {
-    name: "Supplies",
+    name: "Benodigdheden",
     description:
-      "Items that are consumed or used up in a process, such as paper, ink, pens, tools, etc.",
+      "Artikelen die worden verbruikt of opgebruikt in een proces, zoals papier, inkt, pennen, gereedschap, enz.",
     color: "#acbf01",
   },
   {
-    name: "Other",
-    description: "Any other items that do not fit into the above categories.",
+    name: "Overig",
+    description: "Alle andere items die niet in de bovenstaande categorieën passen.",
     color: "#48ecfc",
   },
 ];

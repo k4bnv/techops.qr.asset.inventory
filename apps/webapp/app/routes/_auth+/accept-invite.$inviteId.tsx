@@ -199,10 +199,9 @@ export default function AcceptInvite() {
         {error ? (
           <div>
             <h2>{error.title}</h2>
-            <p
-              className="mx-4 mb-3 mt-2 md:mx-[-200px]"
-              dangerouslySetInnerHTML={{ __html: error.message }}
-            />
+            <p className="mx-4 mb-3 mt-2 whitespace-pre-wrap md:mx-[-200px]">
+              {error.message}
+            </p>
             <Button to="/" variant={"secondary"}>
               Back to home
             </Button>

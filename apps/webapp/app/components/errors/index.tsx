@@ -48,22 +48,8 @@ export const ErrorContent = ({ className }: ErrorContentProps) => {
     );
   }
 
-  // Creating a string with <br/> tags for line breaks
-  const messageHtml = { __html: message.split("\n").join("<br/>") };
-
-  return (
-    <div
-      className={tw(
-        "flex size-full h-dvh items-center justify-center",
-        className
-      )}
-    >
-      <div className="flex flex-col items-center text-center">
-        <span className="mb-5 size-14 text-primary">
-          <ErrorIcon />
-        </span>
         <h2 className="mb-2">{title}</h2>
-        <p className="max-w-[550px]" dangerouslySetInnerHTML={messageHtml} />
+        <p className="max-w-[550px] whitespace-pre-wrap">{message}</p>
         {traceId && <p className="text-gray-400">(Trace id: {traceId})</p>}
         {sentryEventId && (
           <p className="text-gray-400">(Error ID: {sentryEventId})</p>

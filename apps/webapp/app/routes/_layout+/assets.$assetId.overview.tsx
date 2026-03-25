@@ -152,7 +152,7 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
       : asset.customFields;
 
     const header: HeaderData = {
-      title: `${asset.title}'s overview`,
+      title: `${asset.title}'s overzicht`,
     };
 
     return payload({
@@ -307,7 +307,7 @@ export default function AssetOverview() {
               ) : null}
               <li className="w-full border-b-[1.1px] border-b-gray-100 p-4 last:border-b-0 md:flex">
                 <span className="w-1/4 text-[14px] font-medium text-gray-900">
-                  Created
+                  Gemaakt op
                 </span>
                 <div className="mt-1 w-3/5 text-gray-600 md:mt-0">
                   <DateS date={asset.createdAt} includeTime />
@@ -317,7 +317,7 @@ export default function AssetOverview() {
               {asset?.category ? (
                 <li className="w-full border-b-[1.1px] border-b-gray-100 p-4 last:border-b-0 md:flex">
                   <span className="w-1/4 text-[14px] font-medium text-gray-900">
-                    Category
+                    Categorie
                   </span>
                   <div className="mt-1 text-gray-600 md:mt-0 md:w-3/5">
                     <Badge color={asset.category?.color} withDot={false}>
@@ -328,11 +328,11 @@ export default function AssetOverview() {
               ) : (
                 <li className="w-full border-b-[1.1px] border-b-gray-100 p-4 last:border-b-0 md:flex">
                   <span className="w-1/4 text-[14px] font-medium text-gray-900">
-                    Category
+                    Categorie
                   </span>
                   <div className="mt-1 text-gray-600 md:mt-0 md:w-3/5">
                     <Badge color={"#808080"} withDot={false}>
-                      Uncategorized
+                      Niet gecategoriseerd
                     </Badge>
                   </div>
                 </li>
@@ -340,7 +340,7 @@ export default function AssetOverview() {
               {location ? (
                 <li className="w-full border-b-[1.1px] border-b-gray-100 p-4 last:border-b-0 md:flex">
                   <span className="w-1/4 text-[14px] font-medium text-gray-900">
-                    Location
+                    Locatie
                   </span>
                   <div className="-ml-2 mt-1 text-gray-600 md:mt-0 md:w-3/5">
                     <LocationBadge
@@ -361,7 +361,7 @@ export default function AssetOverview() {
               {asset?.description ? (
                 <li className="w-full border-b-[1.1px] border-b-gray-100 p-4 last:border-b-0 md:flex">
                   <span className="w-1/4 text-[14px] font-medium text-gray-900">
-                    Description
+                    Beschrijving
                   </span>
                   <div className="mt-1 whitespace-pre-wrap text-gray-600 md:mt-0 md:w-3/5">
                     {asset.description}
@@ -390,7 +390,7 @@ export default function AssetOverview() {
               {asset?.organization && asset.valuation ? (
                 <li className="w-full border-b-[1.1px] border-b-gray-100 p-4 last:border-b-0 md:flex">
                   <span className="w-1/4 text-[14px] font-medium text-gray-900">
-                    Value
+                    Waarde
                   </span>
                   <div className="-ml-2 md:w-3/5">
                     <div className="ml-2 mt-1 text-gray-600 md:mt-0 md:w-3/5">
@@ -454,7 +454,7 @@ export default function AssetOverview() {
                         >
                           <div className="flex flex-col items-center gap-1 text-gray-400">
                             <Icon icon="lock" />
-                            <span className="text-xs">Hidden</span>
+                            <span className="text-xs">Verborgen</span>
                           </div>
                         </div>
                       ))}
@@ -551,10 +551,10 @@ export default function AssetOverview() {
                 <div className="flex justify-between gap-3">
                   <div>
                     <p className="text-[14px] font-medium text-gray-700">
-                      Available for bookings
+                      Beschikbaar voor boekingen
                     </p>
                     <p className="text-[12px] text-gray-600">
-                      Asset is available for being used in bookings
+                      Asset is beschikbaar om te worden gebruikt in boekingen
                     </p>
                   </div>
                   <Switch
@@ -589,7 +589,7 @@ export default function AssetOverview() {
 
                 <div>
                   <h3 className="mb-1 text-sm font-semibold">
-                    Included in kit
+                    Inbegrepen in kit
                   </h3>
                   <Button
                     to={`/kits/${asset.kitId}`}

@@ -153,6 +153,16 @@ function handleBotRequest(
           const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set("X-Frame-Options", "DENY");
+          responseHeaders.set("X-Content-Type-Options", "nosniff");
+          responseHeaders.set(
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains"
+          );
+          responseHeaders.set(
+            "Content-Security-Policy",
+            "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.useclarity.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https:; font-src 'self' data:;"
+          );
 
           resolve(
             new Response(stream, {
@@ -199,6 +209,16 @@ function handleBrowserRequest(
           const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set("X-Frame-Options", "DENY");
+          responseHeaders.set("X-Content-Type-Options", "nosniff");
+          responseHeaders.set(
+            "Strict-Transport-Security",
+            "max-age=31536000; includeSubDomains"
+          );
+          responseHeaders.set(
+            "Content-Security-Policy",
+            "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.useclarity.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https:; font-src 'self' data:;"
+          );
 
           resolve(
             new Response(stream, {
