@@ -25,16 +25,16 @@ export default function OnboardingChecklist() {
           as="h2"
           className="break-all text-display-xs font-semibold md:text-display-sm"
         >
-          Welcome
+          Welkom
         </Heading>
         <SubHeading>Voltooi alle taken om uw dashboard te ontgrendelen.</SubHeading>
       </div>
       <div className="mb-8">
         <div className="mb-4">
-          <h4 className=" text-lg font-semibold">Stay organized</h4>
+          <h4 className=" text-lg font-semibold">Blijf georganiseerd</h4>
           <p className="text-[14px] text-gray-600">
-            Organizing your assets improves overview and unlocks the power of
-            our filters and search bar.
+            Het organiseren van uw assets verbetert het overzicht en ontgrendelt
+            de kracht van onze filters en zoekbalk.
           </p>
         </div>
         <ul className="onboarding-checklist -mx-1 xl:flex xl:flex-wrap">
@@ -52,10 +52,10 @@ export default function OnboardingChecklist() {
                 <div className="text-[14px]">
                   <div className="mb-3">
                     <h6 className="font-medium text-gray-700">
-                      Create your first asset
+                      Maak uw eerste asset aan
                     </h6>
                     <p className=" text-gray-600">
-                      Each asset gets it’s own encrypted QR tag.
+                      Elk asset krijgt zijn eigen versleutelde QR-tag.
                     </p>
                   </div>
                   <div className="flex gap-3">
@@ -64,10 +64,10 @@ export default function OnboardingChecklist() {
                       target="_blank"
                       className=" font-semibold text-gray-600"
                     >
-                      Learn more
+                      Meer info
                     </Link>
                     <Button variant="link" to="/assets/new">
-                      New asset
+                      Nieuw asset
                     </Button>
                   </div>
                 </div>
@@ -91,11 +91,11 @@ export default function OnboardingChecklist() {
                 <div className="text-[14px]">
                   <div className="mb-3">
                     <h6 className="font-medium text-gray-700">
-                      Create a custom category
+                      Maak een aangepaste categorie
                     </h6>
                     <p className=" text-gray-600">
-                      View, edit or delete our default categories and build your
-                      own.
+                      Bekijk, bewerk of verwijder onze standaardcategorieën en
+                      maak uw eigen categorieën.
                     </p>
                   </div>
                   <div className="flex gap-3">
@@ -104,10 +104,10 @@ export default function OnboardingChecklist() {
                       target="_blank"
                       className=" font-semibold text-gray-600"
                     >
-                      Learn more
+                      Meer info
                     </Link>
                     <Button variant="link" to="/categories/new">
-                      New category
+                      Nieuwe categorie
                     </Button>
                   </div>
                 </div>
@@ -130,15 +130,15 @@ export default function OnboardingChecklist() {
                 </div>
                 <div className="text-[14px]">
                   <div className="mb-3">
-                    <h6 className="font-medium text-gray-700">Create a tag</h6>
+                    <h6 className="font-medium text-gray-700">Maak een tag</h6>
                     <p className=" text-gray-600">
-                      Tags are small pieces of information that can be added to
-                      assets.
+                      Tags zijn kleine stukjes informatie die aan assets kunnen
+                      worden toegevoegd.
                     </p>
                   </div>
                   <div className="flex gap-3">
                     <Button variant="link" to="/tags/new">
-                      New tag
+                      Nieuwe tag
                     </Button>
                   </div>
                 </div>
@@ -152,10 +152,10 @@ export default function OnboardingChecklist() {
       </div>
       <div className="mb-8">
         <div className="mb-4">
-          <h4 className=" text-lg font-semibold">Team, custody and bookings</h4>
+          <h4 className=" text-lg font-semibold">Team, beheer en reserveringen</h4>
           <p className="text-[14px] text-gray-600">
-            Assign custody to your team members. Consider upgrading to Team to
-            invite other users to your workspace.
+            Wijs beheer toe aan uw teamleden. Overweeg te upgraden naar Team om
+            andere gebruikers uit te nodigen voor uw werkruimte.
           </p>
         </div>
         <ul className="onboarding-checklist -mx-1 xl:flex xl:flex-wrap">
@@ -173,11 +173,11 @@ export default function OnboardingChecklist() {
                 <div className="text-[14px]">
                   <div className="mb-3">
                     <h6 className="font-medium text-gray-700">
-                      Add a team member
+                      Voeg een teamlid toe
                     </h6>
                     <p className=" text-gray-600">
-                      Track who has custody over an asset by adding your team
-                      members to shelf.
+                      Houd bij wie een asset beheert door uw teamleden toe te
+                      voegen aan TechOps.
                     </p>
                   </div>
                   <div className="flex gap-3">
@@ -186,10 +186,10 @@ export default function OnboardingChecklist() {
                       target="_blank"
                       className=" font-semibold text-gray-600"
                     >
-                      Learn more
+                      Meer info
                     </Link>
                     <Button variant="link" to="/settings/team">
-                      New team member
+                      Nieuw teamlid
                     </Button>
                   </div>
                 </div>
@@ -213,11 +213,11 @@ export default function OnboardingChecklist() {
                 <div className="text-[14px]">
                   <div className="mb-3">
                     <h6 className="font-medium text-gray-700">
-                      Assign custody over an asset
+                      Wijs beheer toe aan een asset
                     </h6>
                     <p className=" text-gray-600">
-                      View, edit or delete our default categories and build your
-                      own.
+                      Bekijk, bewerk of verwijder onze standaardcategorieën en
+                      maak uw eigen categorieën.
                     </p>
                   </div>
                   <div className="flex gap-3">
@@ -226,7 +226,7 @@ export default function OnboardingChecklist() {
                       target="_blank"
                       className=" font-semibold text-gray-600"
                     >
-                      Learn more
+                      Meer info
                     </Link>
                   </div>
                 </div>
@@ -240,10 +240,10 @@ export default function OnboardingChecklist() {
       </div>
       <div className="mb-8">
         <div className="mb-4">
-          <h4 className=" text-lg font-semibold">Customize your experience</h4>
+          <h4 className=" text-lg font-semibold">Pas uw ervaring aan</h4>
           <p className="text-[14px] text-gray-600">
-            Optimize your workflow and use TechOps in way that works for you and
-            your organizations.
+            Optimaliseer uw workflow en gebruik TechOps op een manier die werkt
+            voor u en uw organisatie.
           </p>
         </div>
         <ul className="onboarding-checklist -mx-1 xl:flex xl:flex-wrap">
@@ -261,10 +261,10 @@ export default function OnboardingChecklist() {
                 <div className="text-[14px]">
                   <div className="mb-3">
                     <h6 className="font-medium text-gray-700">
-                      Create a custom field
+                      Maak een aangepast veld
                     </h6>
                     <p className=" text-gray-600">
-                      Improve your asset database with custom field types.
+                      Verbeter uw asset-database met aangepaste veldtypen.
                     </p>
                   </div>
                   <div className="flex gap-3">
@@ -273,10 +273,10 @@ export default function OnboardingChecklist() {
                       target="_blank"
                       className=" font-semibold text-gray-600"
                     >
-                      Learn more
+                      Meer info
                     </Link>
                     <Button variant="link" to="/settings/custom-fields/new">
-                      New custom field
+                      Nieuw aangepast veld
                     </Button>
                   </div>
                 </div>
@@ -294,7 +294,7 @@ export default function OnboardingChecklist() {
       >
         <input type="hidden" name="skipOnboardingChecklist" value="skipped" />
         <Button variant="link" type="submit">
-          Skip tour, continue to dashboard
+          Rondleiding overslaan, ga naar dashboard
         </Button>
       </fetcher.Form>
     </div>
