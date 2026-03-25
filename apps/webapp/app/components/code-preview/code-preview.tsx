@@ -236,8 +236,16 @@ export const CodePreview = ({
   const printCode = useReactToPrint({
     contentRef: captureDivRef,
     pageStyle: labelLayout === "continuous"
-      ? `@page { size: 100mm 24mm; margin: 0; } body { margin: 0; padding: 0; } div { box-sizing: border-box; }`
-      : `@page { size: 24mm 24mm; margin: 0; } body { margin: 0; padding: 0; } div { box-sizing: border-box; }`,
+      ? `
+        @page { size: 100mm 24mm; margin: 0; }
+        html, body { margin: 0; padding: 0; width: 100mm; height: 24mm; overflow: hidden; }
+        body > div { width: 100mm !important; height: 24mm !important; overflow: hidden !important; page-break-after: avoid !important; page-break-inside: avoid !important; }
+      `
+      : `
+        @page { size: 24mm 24mm; margin: 0; }
+        html, body { margin: 0; padding: 0; width: 24mm; height: 24mm; overflow: hidden; }
+        body > div { width: 24mm !important; height: 24mm !important; overflow: hidden !important; page-break-after: avoid !important; page-break-inside: avoid !important; transform-origin: top left; transform: scale(0.0793); }
+      `,
     onBeforePrint: () => {
       const container = captureDivRef.current;
       if (!container) return Promise.resolve();

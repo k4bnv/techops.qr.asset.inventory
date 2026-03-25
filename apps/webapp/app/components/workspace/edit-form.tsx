@@ -198,6 +198,7 @@ const WorkspaceGeneralEditForms = ({
         </div>
 
         <LabelBrandingRow
+          zo={zo}
           organization={organization}
         />
 
@@ -501,36 +502,47 @@ const WorkspaceSSOEditForm = ({ className }: Props) => {
   ) : null;
 };
 
-/** Label branding row — shows workspace name on label preview (logo not used on small B&W stickers) */
+/** Label branding row — toggle for showing workspace name on QR labels */
 function LabelBrandingRow({
+  zo,
   organization,
 }: {
-  zo?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  zo: any;
   organization: { showShelfBranding: boolean; imageId?: string | null; name: string };
 }) {
+  const [showName, setShowName] = useState(organization.showShelfBranding ?? true);
+
   return (
     <FormRow
       rowLabel={"Naam op labels"}
       className={"border-b-0"}
       subHeading={
         <p>
-          De naam van uw werkruimte wordt automatisch op QR-labels weergegeven.
+          Toon de naam van uw werkruimte op QR- en streepjescodelabels.
         </p>
       }
     >
-      <div className="space-y-4">
-        {/* Live preview */}
-        <div>
-          <p className="mb-2 text-xs text-gray-500">Voorbeeldweergave label:</p>
-          <div className="inline-block scale-75 origin-top-left">
-            <QrLabel
-              title="Voorbeeld asset"
-              data={{ qr: { id: "QR-PREVIEW", src: "/static/images/qr-placeholder.png" } }}
-              orgName={organization.name}
-              layout="square"
-            />
-          </div>
-        </div>
+      <div className="flex items-center gap-3">
+        <input
+          type="hidden"
+          name={zo.fields.showShelfBranding()}
+          value="off"
+        />
+        <Switch
+          id="showShelfBranding"
+          name={zo.fields.showShelfBranding()}
+          defaultChecked={showName}
+          onCheckedChange={setShowName}
+          aria-labelledby="showShelfBranding-label"
+        />
+        <label
+          id="showShelfBranding-label"
+          htmlFor="showShelfBranding"
+          className="cursor-pointer text-[14px] font-medium text-gray-700"
+        >
+          Werkruimte-naam op labels weergeven
+        </label>
       </div>
     </FormRow>
   );
