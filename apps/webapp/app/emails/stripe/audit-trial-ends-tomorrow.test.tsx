@@ -18,8 +18,8 @@ vi.mock("~/utils/logger", () => ({
 
 // why: env vars are read at import time; shelf.config.ts also imports from this module
 vi.mock("~/utils/env", () => ({
-  SERVER_URL: "https://app.shelf.nu",
-  SUPPORT_EMAIL: "support@shelf.nu",
+  SERVER_URL: "https://app.techops.nl",
+  SUPPORT_EMAIL: "support@techops.nl",
   SEND_ONBOARDING_EMAIL: false,
   ENABLE_PREMIUM_FEATURES: false,
   FREE_TRIAL_DAYS: "7",
@@ -44,10 +44,10 @@ describe("auditTrialEndsTomorrowEmailText", () => {
       hasPaymentMethod: true,
       trialEndDate,
     });
-    expect(text).toContain("ACTION REQUIRED");
-    expect(text).toContain("charged tomorrow");
+    expect(text).toContain("ACTIE VEREIST");
+    expect(text).toContain("morgen in rekening gebracht");
     expect(text).toContain(
-      "automatically charged at the regular subscription rate"
+      "automatisch kosten in rekening gebracht tegen het reguliere abonnementstarief"
     );
   });
 
@@ -57,8 +57,8 @@ describe("auditTrialEndsTomorrowEmailText", () => {
       hasPaymentMethod: false,
       trialEndDate,
     });
-    expect(text).toContain("paused");
-    expect(text).toContain("add a payment method");
+    expect(text).toContain("gepauzeerd");
+    expect(text).toContain("voegt u een betalingsmethode toe");
   });
 
   it("formats trialEndDate correctly", () => {
@@ -67,7 +67,7 @@ describe("auditTrialEndsTomorrowEmailText", () => {
       hasPaymentMethod: true,
       trialEndDate,
     });
-    expect(text).toContain("March 24, 2026");
+    expect(text).toContain("24 maart 2026");
   });
 
   it("includes firstName in greeting when provided", () => {
@@ -76,7 +76,7 @@ describe("auditTrialEndsTomorrowEmailText", () => {
       hasPaymentMethod: true,
       trialEndDate,
     });
-    expect(text).toMatch(/^Hey Bob,/);
+    expect(text).toMatch(/^Hoi Bob,/);
   });
 });
 
@@ -97,7 +97,7 @@ describe("sendAuditTrialEndsTomorrowEmail", () => {
     expect(mockSendEmail).toHaveBeenCalledWith(
       expect.objectContaining({
         to: "alice@example.com",
-        subject: "Your Audits trial ends tomorrow — auto-charge reminder",
+        subject: "Uw proefperiode voor Audits eindigt morgen — herinnering voor automatische afschrijving",
       })
     );
   });
@@ -113,7 +113,7 @@ describe("sendAuditTrialEndsTomorrowEmail", () => {
     expect(mockSendEmail).toHaveBeenCalledOnce();
     expect(mockSendEmail).toHaveBeenCalledWith(
       expect.objectContaining({
-        subject: "Your Audits trial ends tomorrow",
+        subject: "Uw proefperiode voor Audits eindigt morgen",
       })
     );
   });

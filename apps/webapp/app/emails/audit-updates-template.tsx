@@ -83,7 +83,7 @@ export function AuditUpdatesEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Audit update from TechOps Asset Inventory</title>
+        <title>Audit-update van TechOps Asset-inventaris</title>
       </Head>
 
       <Container
@@ -108,14 +108,14 @@ export function AuditUpdatesEmailTemplate({
           </Heading>
           <p style={{ ...styles.p }}>
             <span style={{ color: "#101828", fontWeight: "600" }}>
-              Created by:
+              Gemaakt door:
             </span>{" "}
             {creatorName}
           </p>
           {dueDateFormatted && (
             <p style={{ ...styles.p }}>
               <span style={{ color: "#101828", fontWeight: "600" }}>
-                Due date:
+                Vervaldatum:
               </span>{" "}
               {dueDateFormatted}
             </p>
@@ -123,7 +123,7 @@ export function AuditUpdatesEmailTemplate({
           {completedAt && (
             <p style={{ ...styles.p }}>
               <span style={{ color: "#101828", fontWeight: "600" }}>
-                Completed on:
+                Voltooid op:
               </span>{" "}
               {getDateTimeFormatFromHints(hints, {
                 dateStyle: "medium",
@@ -140,7 +140,7 @@ export function AuditUpdatesEmailTemplate({
           {audit.description && (
             <p style={{ ...styles.p }}>
               <span style={{ color: "#101828", fontWeight: "600" }}>
-                Description:
+                Beschrijving:
               </span>{" "}
               {audit.description}
             </p>
@@ -161,7 +161,7 @@ export function AuditUpdatesEmailTemplate({
                 maxWidth: "240px",
               }}
             >
-              View audit in app
+              Bekijk audit in app
             </Button>
             {receiptUrl && (
               <Button
@@ -175,7 +175,7 @@ export function AuditUpdatesEmailTemplate({
                   maxWidth: "240px",
                 }}
               >
-                Download receipt
+                Download ontvangstbewijs
               </Button>
             )}
           </div>
@@ -199,13 +199,11 @@ export function AuditUpdatesEmailTemplate({
                 color: "#344054",
               }}
             >
-              This email was sent to you because you are the OWNER or ADMIN of
-              the workspace{" "}
+              Deze e-mail is naar u verzonden omdat u de EIGENAAR of BEHEERDER bent van de werkruimte{" "}
               <span style={{ color: "#101828", fontWeight: "600" }}>
                 "{audit.organization.name}"
               </span>
-              . <br /> If you think you weren't supposed to have received this
-              email please contact support.
+              . <br /> Als u denkt dat u deze e-mail niet had mogen ontvangen, neem dan contact op met de klantenservice.
             </p>
           ) : (
             <p
@@ -216,9 +214,9 @@ export function AuditUpdatesEmailTemplate({
                 color: "#71717A",
               }}
             >
-              Thanks,
+              Bedankt,
               <br />
-              The TechOps Team
+              Het TechOps Team
             </p>
           )}
           <p
@@ -229,7 +227,7 @@ export function AuditUpdatesEmailTemplate({
               color: "#344054",
             }}
           >
-            © {new Date().getFullYear()} TechOps Asset Inventory
+            © {new Date().getFullYear()} TechOps Asset-inventaris
           </p>
         </div>
       </Container>

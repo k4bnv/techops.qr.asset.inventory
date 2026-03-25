@@ -29,7 +29,7 @@ export function InvitationEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Invitation to join TechOps</title>
+        <title>Uitnodiging om lid te worden van TechOps</title>
       </Head>
 
       <Container
@@ -39,11 +39,11 @@ export function InvitationEmailTemplate({
 
         <div style={{ paddingTop: "8px" }}>
           <Text style={{ marginBottom: "24px", ...styles.p }}>
-            Howdy,
+            Hallo,
             <br />
-            {invite.inviter.firstName} {invite.inviter.lastName} invites you to
-            join TechOps as a member of {invite.organization.name}
-            's workspace. Click the link to accept the invite:
+            {invite.inviter.firstName} {invite.inviter.lastName} nodigt u uit om
+            lid te worden van TechOps als lid van de werkruimte van {invite.organization.name}
+            . Klik op de link om de uitnodiging te accepteren:
           </Text>
 
           {extraMessage ? (
@@ -64,7 +64,7 @@ export function InvitationEmailTemplate({
                   margin: "0 0 8px 0",
                 }}
               >
-                Message from {invite.inviter.firstName}{" "}
+                Bericht van {invite.inviter.firstName}{" "}
                 {invite.inviter.lastName}:
               </Text>
 
@@ -86,19 +86,19 @@ export function InvitationEmailTemplate({
             href={`${SERVER_URL}/accept-invite/${invite.id}?token=${token}`}
             style={{ ...styles.button, textAlign: "center" }}
           >
-            Accept the invite
+            Accepteer de uitnodiging
           </Button>
           <Text style={{ ...styles.p, marginBottom: "24px" }}>
-            Once you’re done setting up your account, you'll be able to access
-            the workspace and start exploring features like Asset Explorer,
-            Location Tracking, Collaboration, Custom fields and more. If you
-            have any questions or need assistance, please don't hesitate to
-            contact our support team at {SUPPORT_EMAIL}.
+            Zodra u klaar bent met het instellen van uw account, heeft u toegang
+            tot de werkruimte en kunt u functies verkennen zoals Asset Explorer,
+            Locatiebeheer, Samenwerking, Aangepaste velden en meer. Als u
+            vragen heeft of hulp nodig heeft, aarzel dan niet om contact op te
+            nemen met ons ondersteuningsteam via {SUPPORT_EMAIL}.
           </Text>
 
           <Text style={{ marginBottom: "32px", ...styles.p }}>
-            Thanks, <br />
-            The TechOps team
+            Bedankt, <br />
+            Het TechOps team
           </Text>
 
           <CustomEmailFooter
@@ -106,7 +106,7 @@ export function InvitationEmailTemplate({
           />
 
           <Text style={{ fontSize: "14px", color: "#344054" }}>
-            This is an automatic email sent from TechOps to{" "}
+            Dit is een automatische e-mail verzonden van TechOps naar{" "}
             <span style={{ color: emailPrimaryColor }}>
               {invite.inviteeEmail}
             </span>

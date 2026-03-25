@@ -45,11 +45,11 @@ describe("trialEndsSoonEmailText", () => {
       planName: "Team",
       trialEndDate,
     });
-    expect(text).toContain("ACTION REQUIRED");
+    expect(text).toContain("ACTIE VEREIST");
     expect(text).toContain(
-      "automatically charged at the regular subscription rate"
+      "automatisch kosten in rekening gebracht tegen het reguliere abonnementstarief"
     );
-    expect(text).toContain("TechOps Team");
+    expect(text).toContain("Het TechOps Team");
   });
 
   it("shows upgrade message when hasPaymentMethod is false", () => {
@@ -59,9 +59,9 @@ describe("trialEndsSoonEmailText", () => {
       planName: "Team",
       trialEndDate,
     });
-    expect(text).not.toContain("ACTION REQUIRED");
-    expect(text).toContain("TechOps Team trial");
-    expect(text).toContain("upgrade to a paid plan");
+    expect(text).not.toContain("ACTIE VEREIST");
+    expect(text).toContain("TechOps Team-proefperiode");
+    expect(text).toContain("overstappen naar een betaald abonnement");
   });
 
   it("includes planName in the text", () => {
@@ -71,7 +71,7 @@ describe("trialEndsSoonEmailText", () => {
       planName: "Plus",
       trialEndDate,
     });
-    expect(text).toContain("TechOps Plus trial");
+    expect(text).toContain("TechOps Plus-proefperiode");
   });
 
   it("formats trialEndDate correctly", () => {
@@ -81,7 +81,7 @@ describe("trialEndsSoonEmailText", () => {
       planName: "Team",
       trialEndDate,
     });
-    expect(text).toContain("March 24, 2026");
+    expect(text).toContain("24 maart 2026");
   });
 
   it("includes firstName in greeting when provided", () => {
@@ -91,7 +91,7 @@ describe("trialEndsSoonEmailText", () => {
       planName: "Team",
       trialEndDate,
     });
-    expect(text).toMatch(/^Hey Bob,/);
+    expect(text).toMatch(/^Hoi Bob,/);
   });
 });
 
@@ -113,7 +113,7 @@ describe("sendTrialEndsSoonEmail", () => {
     expect(mockSendEmail).toHaveBeenCalledWith(
       expect.objectContaining({
         to: "alice@example.com",
-        subject: "Your TechOps Team trial ends in 3 days — auto-charge reminder",
+        subject: "Uw TechOps Team-proefperiode eindigt over 3 dagen — herinnering voor automatische afschrijving",
       })
     );
   });
@@ -130,7 +130,7 @@ describe("sendTrialEndsSoonEmail", () => {
     expect(mockSendEmail).toHaveBeenCalledOnce();
     expect(mockSendEmail).toHaveBeenCalledWith(
       expect.objectContaining({
-        subject: "Your TechOps Plus trial is ending soon",
+        subject: "Uw TechOps Plus-proefperiode loopt binnenkort af",
       })
     );
   });

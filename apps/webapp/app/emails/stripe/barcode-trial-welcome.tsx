@@ -28,7 +28,7 @@ export const sendBarcodeTrialWelcomeEmail = async ({
   hasPaymentMethod,
 }: BarcodeTrialWelcomeProps) => {
   try {
-    const subject = "Your 7-day Barcodes trial is now active!";
+    const subject = "Uw proefperiode van 7 dagen voor Barcodes is nu actief!";
     const html = await barcodeTrialWelcomeEmailHtml({
       firstName,
       hasPaymentMethod,
@@ -46,7 +46,7 @@ export const sendBarcodeTrialWelcomeEmail = async ({
       new ShelfError({
         cause,
         message:
-          "Something went wrong while sending the barcode trial welcome email",
+          "Er is iets misgegaan bij het verzenden van de welkomst-e-mail voor de proefperiode van Barcodes",
         additionalData: { email },
         label: "User",
       })
@@ -60,25 +60,25 @@ export const barcodeTrialWelcomeEmailText = ({
 }: {
   firstName?: string | null;
   hasPaymentMethod?: boolean;
-}) => `Hey${firstName ? ` ${firstName}` : ""},
+}) => `Hoi${firstName ? ` ${firstName}` : ""},
 
-Great news - your 7-day Barcodes trial is now active! You have full access to all barcode features starting today.
+Goed nieuws - uw proefperiode van 7 dagen voor Barcodes is nu actief! U heeft vanaf vandaag volledige toegang tot alle barcodefuncties.
 
-Here's what you can do with Barcodes:
+Dit is wat u kunt doen met Barcodes:
 
 ${BARCODE_ADDON.features.map((f) => `- ${f}`).join("\n")}
 
-Get started now: ${SERVER_URL}/settings/general
+Begin nu: ${SERVER_URL}/settings/general
 ${
   hasPaymentMethod
-    ? `\nImportant: Because you already have a payment method on file, your subscription will automatically continue after the 7-day trial ends. If you decide Barcodes isn't for you, you can cancel anytime before the trial ends from your subscription settings to avoid being charged.\n\nManage your subscription: ${SERVER_URL}/account-details/subscription`
+    ? `\nBelangrijk: Omdat u al een betalingsmethode heeft geregistreerd, wordt uw abonnement automatisch voortgezet na afloop van de proefperiode van 7 dagen. Als u besluit dat Barcodes niets voor u is, kunt u op elk moment voordat de proefperiode eindigt annuleren via uw abonnementsinstellingen om kosten te voorkomen.\n\nBeheer uw abonnement: ${SERVER_URL}/account-details/subscription`
     : ""
 }
 
-If you have any questions, feel free to reach out to us at ${SUPPORT_EMAIL}. We're happy to help!
+Als u vragen heeft, neem dan gerust contact met ons op via ${SUPPORT_EMAIL}. We helpen u graag!
 
-Happy labeling,
-The TechOps Team
+Veel plezier met labelen,
+Het TechOps Team
 `;
 
 function BarcodeTrialWelcomeEmailTemplate({
@@ -93,7 +93,7 @@ function BarcodeTrialWelcomeEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Your 7-day Barcodes trial is now active!</title>
+        <title>Uw proefperiode van 7 dagen voor Barcodes is nu actief!</title>
       </Head>
 
       <Container style={{ padding: "32px 16px", maxWidth: "100%" }}>
@@ -101,16 +101,16 @@ function BarcodeTrialWelcomeEmailTemplate({
 
         <div style={{ paddingTop: "8px" }}>
           <Text style={{ ...styles.p }}>
-            Hey{firstName ? ` ${firstName}` : ""},
+            Hoi{firstName ? ` ${firstName}` : ""},
           </Text>
 
           <Text style={{ ...styles.p }}>
-            Great news - your <strong>7-day Barcodes trial</strong> is now
-            active! You have full access to all barcode features starting today.
+            Goed nieuws - uw <strong>proefperiode van 7 dagen voor Barcodes</strong> is nu
+            actief! U heeft vanaf vandaag volledige toegang tot alle barcodefuncties.
           </Text>
 
           <Text style={{ ...styles.h2 }}>
-            Here's what you can do with Barcodes:
+            Dit is wat u kunt doen met Barcodes:
           </Text>
 
           <ul style={{ ...styles.li, paddingLeft: "20px" }}>
@@ -130,7 +130,7 @@ function BarcodeTrialWelcomeEmailTemplate({
               marginBottom: "24px",
             }}
           >
-            Explore Barcodes
+            Ontdek Barcodes
           </Button>
 
           {hasPaymentMethod ? (
@@ -143,28 +143,29 @@ function BarcodeTrialWelcomeEmailTemplate({
                 padding: "16px",
               }}
             >
-              <strong>Important:</strong> Because you already have a payment
-              method on file, your subscription will automatically continue
-              after the 7-day trial ends. If you decide Barcodes isn't for you,
-              you can cancel anytime before the trial ends from your{" "}
+              <strong>Belangrijk:</strong> Omdat u al een betalingsmethode heeft
+              geregistreerd, wordt uw abonnement automatisch voortgezet na
+              afloop van de proefperiode van 7 dagen. Als u besluit dat Barcodes
+              niets voor u is, kunt u op elk moment voordat de proefperiode
+              eindigt annuleren via uw{" "}
               <Link
                 href={`${SERVER_URL}/account-details/subscription`}
                 style={{ color: emailPrimaryColor }}
               >
-                subscription settings
+                abonnementsinstellingen
               </Link>{" "}
-              to avoid being charged.
+              om kosten te voorkomen.
             </Text>
           ) : null}
 
           <Text style={{ marginTop: "24px", ...styles.p }}>
-            If you have any questions, feel free to reach out to us at{" "}
-            {SUPPORT_EMAIL}. We're happy to help!
+            Als u vragen heeft, neem dan gerust contact met ons op via{" "}
+            {SUPPORT_EMAIL}. We helpen u graag!
           </Text>
 
           <Text style={{ marginTop: "24px", ...styles.p }}>
-            Happy labeling, <br />
-            The TechOps Team
+            Veel plezier met labelen, <br />
+            Het TechOps Team
           </Text>
         </div>
       </Container>

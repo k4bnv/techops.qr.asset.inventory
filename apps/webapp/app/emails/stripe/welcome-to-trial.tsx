@@ -25,7 +25,7 @@ export const sendTeamTrialWelcomeEmail = async ({
   email,
 }: TeamTrialWelcomeProps) => {
   try {
-    const subject = "Your TechOps Team Trial is Ready - Next Steps";
+    const subject = "Uw TechOps Team Trial is klaar - Volgende stappen";
     const html = await welcomeToTrialEmailHtml({ firstName });
     const text = welcomeToTrialEmailText({ firstName });
 
@@ -39,7 +39,7 @@ export const sendTeamTrialWelcomeEmail = async ({
     Logger.error(
       new ShelfError({
         cause,
-        message: "Something went wrong while sending the welcome email",
+        message: "Er is iets misgegaan bij het verzenden van de welkomst-e-mail",
         additionalData: { email },
         label: "User",
       })
@@ -51,32 +51,32 @@ export const welcomeToTrialEmailText = ({
   firstName,
 }: {
   firstName?: string | null;
-}) => `Hey${firstName ? ` ${firstName}` : ""},
+}) => `Hoi${firstName ? ` ${firstName}` : ""},
 
-Carlos Virreira here, Co-founder of TechOps Asset Management, Inc. I'm thrilled to inform you that your TechOps Team Trial has been activated! This is an excellent step towards more efficient asset management for your team.
+Carlos Virreira hier, medeoprichter van TechOps Asset Management. Ik ben blij om je te laten weten dat je TechOps Team Trial is geactiveerd! Dit is een uitstekende stap naar efficiënter asset management voor je team.
 
-To get started with your trial:
+Om aan de slag te gaan met je trial:
 
-1. Create Your Team Workspace
-Visit ${SERVER_URL}/account-details/workspace to see all your workspaces. Click "NEW WORKSPACE" to create your team workspace.
+1. Maak je teamwerkruimte aan
+Bezoek ${SERVER_URL}/account-details/workspace om al je werkruimtes te zien. Klik op "NIEUWE WERKRUIMTE" om je teamwerkruimte aan te maken.
 
-2. Add Your First Assets
-Start populating your inventory to see TechOps in action. Try our QR code feature for easy asset tracking.
+2. Voeg je eerste assets toe
+Begin met het vullen van je inventaris om TechOps in actie te zien. Probeer onze QR-codefunctie voor eenvoudige asset tracking.
 
-3. Invite Team Members
-Collaboration is key. Add your colleagues to truly experience the power of TechOps.
+3. Nodig teamleden uit
+Samenwerking is de sleutel. Voeg je collega's toe om de kracht van TechOps echt te ervaren.
 
-Explore Key Features:
-- Custom Fields: Tailor TechOps to your specific needs - https://www.techops.nl/knowledge-base/custom-field-types-in-shelf
-- Bookings: Efficiently manage equipment reservations - https://www.techops.nl/knowledge-base/use-case-scenarios-explaing-our-bookings-feature
-- Kits: Group related assets for easier management - https://www.techops.nl/features/kits
+Ontdek de belangrijkste functies:
+- Aangepaste velden: Pas TechOps aan je specifieke behoeften aan - https://www.techops.nl/knowledge-base/custom-field-types-in-shelf
+- Boekingen: Beheer reserveringen van apparatuur efficiënt - https://www.techops.nl/knowledge-base/use-case-scenarios-explaing-our-bookings-feature
+- Kits: Groepeer gerelateerde assets voor eenvoudiger beheer - https://www.techops.nl/features/kits
 
-Need help? Check out our Knowledge Base for quick answers, or reach out to us at ${SUPPORT_EMAIL}.
+Hulp nodig? Bekijk onze Knowledge Base voor snelle antwoorden, of neem contact met ons op via ${SUPPORT_EMAIL}.
 
-Remember, your trial gives you full access to all premium features. Make the most of it!
+Vergeet niet dat je trial volledige toegang geeft tot alle premium functies. Haal er het meeste uit!
 
-Happy asset tracking,
-The TechOps Team
+Veel plezier met asset tracking,
+Het TechOps Team
 `;
 
 function WelcomeToTrialEmailTemplate({
@@ -89,7 +89,7 @@ function WelcomeToTrialEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Your TechOps Team Trial is Ready - Next Steps</title>
+        <title>Uw TechOps Team Trial is klaar - Volgende stappen</title>
       </Head>
 
       <Container style={{ padding: "32px 16px", maxWidth: "100%" }}>
@@ -97,37 +97,37 @@ function WelcomeToTrialEmailTemplate({
 
         <div style={{ paddingTop: "8px" }}>
           <Text style={{ ...styles.p }}>
-            Hey{firstName ? ` ${firstName}` : ""},
+            Hoi${firstName ? ` ${firstName}` : ""},
           </Text>
 
           <Text style={{ ...styles.p }}>
-            Carlos Virreira here, Co-founder of TechOps Asset Management, Inc. I'm
-            thrilled to inform you that your <strong>TechOps Team Trial</strong>{" "}
-            has been activated! This is an excellent step towards more efficient
-            asset management for your team.
+            Carlos Virreira hier, medeoprichter van TechOps Asset Management. Ik
+            ben blij om je te laten weten dat je <strong>TechOps Team Trial</strong>{" "}
+            is geactiveerd! Dit is een uitstekende stap naar efficiënter
+            asset management voor je team.
           </Text>
 
-          <Text style={{ ...styles.h2 }}>To get started with your trial:</Text>
+          <Text style={{ ...styles.h2 }}>Om aan de slag te gaan met je trial:</Text>
 
           <ol style={{ ...styles.li, paddingLeft: "20px" }}>
             <li style={{ marginBottom: "12px" }}>
-              <strong>Create Your Team Workspace:</strong> Visit your{" "}
+              <strong>Maak je teamwerkruimte aan:</strong> Bezoek je{" "}
               <Link
                 href={`${SERVER_URL}/account-details/workspace`}
                 style={{ color: emailPrimaryColor }}
               >
-                workspace settings
+                werkruimte-instellingen
               </Link>{" "}
-              and click "NEW WORKSPACE" to create your team workspace.
+              en klik op "NIEUWE WERKRUIMTE" om je teamwerkruimte aan te maken.
             </li>
             <li style={{ marginBottom: "12px" }}>
-              <strong>Add Your First Assets:</strong> Start populating your
-              inventory to see TechOps in action. Try our QR code feature for easy
-              asset tracking.
+              <strong>Voeg je eerste assets toe:</strong> Begin met het vullen van
+              je inventaris om TechOps in actie te zien. Probeer onze
+              QR-codefunctie voor eenvoudige asset tracking.
             </li>
             <li style={{ marginBottom: "12px" }}>
-              <strong>Invite Team Members:</strong> Collaboration is key. Add
-              your colleagues to truly experience the power of TechOps.
+              <strong>Nodig teamleden uit:</strong> Samenwerking is de sleutel.
+              Voeg je collega's toe om de kracht van TechOps echt te ervaren.
             </li>
           </ol>
 
@@ -140,19 +140,19 @@ function WelcomeToTrialEmailTemplate({
               marginBottom: "24px",
             }}
           >
-            Create your workspace
+            Maak je werkruimte aan
           </Button>
 
-          <Text style={{ ...styles.h2 }}>Explore Key Features:</Text>
+          <Text style={{ ...styles.h2 }}>Ontdek de belangrijkste functies:</Text>
 
           <Text style={{ ...styles.p }}>
             <Link
               href="https://www.techops.nl/knowledge-base/custom-field-types-in-shelf"
               style={{ color: emailPrimaryColor }}
             >
-              Custom Fields
+              Aangepaste velden
             </Link>
-            : Tailor TechOps to your specific needs
+            : Pas TechOps aan je specifieke behoeften aan
           </Text>
 
           <Text style={{ ...styles.p }}>
@@ -160,9 +160,9 @@ function WelcomeToTrialEmailTemplate({
               href="https://www.techops.nl/knowledge-base/use-case-scenarios-explaing-our-bookings-feature"
               style={{ color: emailPrimaryColor }}
             >
-              Bookings
+              Boekingen
             </Link>
-            : Efficiently manage equipment reservations
+            : Beheer reserveringen van apparatuur efficiënt
           </Text>
 
           <Text style={{ ...styles.p }}>
@@ -172,26 +172,26 @@ function WelcomeToTrialEmailTemplate({
             >
               Kits
             </Link>
-            : Group related assets for easier management
+            : Groepeer gerelateerde assets voor eenvoudiger beheer
           </Text>
 
           <Text style={{ marginTop: "24px", ...styles.p }}>
-            Need help? Check out our Knowledge Base for quick answers, or reach
-            out to us at {SUPPORT_EMAIL}.
+            Hulp nodig? Bekijk onze Knowledge Base voor snelle antwoorden, of
+            neem contact met ons op via {SUPPORT_EMAIL}.
           </Text>
 
           <Text style={{ ...styles.p }}>
-            Remember, your trial gives you full access to all premium features.
-            Make the most of it!
+            Vergeet niet dat je trial volledige toegang geeft tot alle premium
+            functies. Haal er het meeste uit!
           </Text>
 
           <Text style={{ marginTop: "24px", ...styles.p }}>
-            Happy asset tracking, <br />
+            Veel plezier met asset tracking, <br />
             Carlos Virreira <br />
-            Co-founder, TechOps Asset Management, Inc.
+            Medeoprichter, TechOps Asset Management
             <br />
-            P.S. Have questions or feedback? I'd love to hear from you. Reply
-            directly to this email, and let's chat!
+            P.S. Heb je vragen of feedback? Ik hoor graag van je. Reageer
+            direct op deze e-mail, en laten we praten!
           </Text>
         </div>
       </Container>

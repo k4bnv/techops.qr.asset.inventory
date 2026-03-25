@@ -10,17 +10,17 @@ export const changeEmailAddressTextEmail = ({
 }: {
   otp: string;
   user: { firstName?: string | null; lastName?: string | null; email: string };
-}) => `Howdy ${user.firstName ? user.firstName : ""} ${
+}) => `Hallo ${user.firstName ? user.firstName : ""} ${
   user.lastName ? user.lastName : ""
 },
 
-Your verification code for email change is: ${otp}
+Uw verificatiecode voor de wijziging van uw e-mailadres is: ${otp}
 
-Don't share this OTP with anyone. Our customer service team will never ask you for your password, OTP, credit card, or banking info.
-This code will expire in 1 hour. If you have not requested this change, please ignore the email and contact support immediately.
+Deel deze code met niemand. Onze klantenservice zal u nooit om uw wachtwoord, OTP, creditcardgegevens of bankgegevens vragen.
+Deze code verloopt over 1 uur. Als u deze wijziging niet heeft aangevraagd, negeer dan deze e-mail en neem onmiddellijk contact op met de klantenservice.
 
-Kind regards,
-the TechOps team`;
+Met vriendelijke groet,
+het TechOps team`;
 
 function ChangeEmailAddressHtmlEmailTemplate({
   otp,
@@ -32,36 +32,37 @@ function ChangeEmailAddressHtmlEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>🔐 Your verification code for email change is: {otp}</title>
+        <title>🔐 Uw verificatiecode voor de wijziging van uw e-mailadres is: {otp}</title>
       </Head>
 
       <Container style={{ maxWidth: "100%" }}>
         <div style={{ paddingTop: "8px" }}>
           <Text style={{ ...styles.p }}>
-            Howdy{" "}
+            Hallo{" "}
             {`${user.firstName ? user.firstName : ""} ${
               user.lastName ? user.lastName : ""
             }`}
             ,
           </Text>
           <Text style={{ ...styles.p }}>
-            Your verification code for email change is:
+            Uw verificatiecode voor de wijziging van uw e-mailadres is:
           </Text>
           <h2>
             <b>{otp}</b>
           </h2>
           <Text style={{ ...styles.p }}>
-            Don't share this OTP with anyone. Our customer service team will
-            never ask you for your password, OTP, credit card, or banking info.
+            Deel deze code met niemand. Onze klantenservice zal u nooit om uw
+            wachtwoord, OTP, creditcardgegevens of bankgegevens vragen.
           </Text>
           <Text style={{ ...styles.p }}>
-            This code will expire in 1 hour. If you have not requested this
-            change, please ignore the email and contact support immediately.
+            Deze code verloopt over 1 uur. Als u deze wijziging niet heeft
+            aangevraagd, negeer dan deze e-mail en neem onmiddellijk contact op
+            met de klantenservice.
             <br />
             <br />
-            Kind regards,
+            Met vriendelijke groet,
             <br />
-            the TechOps team
+            het TechOps team
           </Text>
         </div>
       </Container>

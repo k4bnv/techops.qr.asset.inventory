@@ -32,8 +32,8 @@ export const sendTrialEndsSoonEmail = async ({
 }: TrialEndsSoonProps) => {
   try {
     const subject = hasPaymentMethod
-      ? `Your TechOps ${planName} trial ends in 3 days — auto-charge reminder`
-      : `Your TechOps ${planName} trial is ending soon`;
+      ? `Uw TechOps ${planName}-proefperiode eindigt over 3 dagen — herinnering voor automatische afschrijving`
+      : `Uw TechOps ${planName}-proefperiode loopt binnenkort af`;
     const html = await trialEndsSoonEmailHtml({
       firstName,
       hasPaymentMethod,
@@ -57,7 +57,8 @@ export const sendTrialEndsSoonEmail = async ({
     Logger.error(
       new ShelfError({
         cause,
-        message: "Something went wrong while sending the trial ends soon email",
+        message:
+          "Er is iets misgegaan bij het verzenden van de e-mail over de proefperiode die binnenkort afloopt",
         additionalData: { email },
         label: "User",
       })
@@ -76,36 +77,36 @@ export const trialEndsSoonEmailText = ({
   planName: string;
   trialEndDate: Date;
 }) => {
-  const dateStr = trialEndDate.toLocaleDateString("en-US", {
+  const dateStr = trialEndDate.toLocaleDateString("nl-NL", {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
 
   if (hasPaymentMethod) {
-    return `Hey${firstName ? ` ${firstName}` : ""},
+    return `Hoi${firstName ? ` ${firstName}` : ""},
 
-ACTION REQUIRED: You will be automatically charged when your trial ends.
+ACTIE VEREIST: Kosten worden automatisch in rekening gebracht wanneer uw proefperiode eindigt.
 
-Your TechOps ${planName} trial ends on ${dateStr}. Because you have a payment method on file, you will be automatically charged at the regular subscription rate when the trial ends. To avoid being charged, cancel from your subscription settings before the trial ends: ${SERVER_URL}/account-details/subscription
+Uw TechOps ${planName}-proefperiode eindigt op ${dateStr}. Omdat u een betalingsmethode heeft geregistreerd, worden er automatisch kosten in rekening gebracht tegen het reguliere abonnementstarief wanneer de proefperiode eindigt. Om kosten te voorkomen, kunt u annuleren via uw abonnementsinstellingen voordat de proefperiode eindigt: ${SERVER_URL}/account-details/subscription
 
-If you'd like to keep your TechOps ${planName} plan, no action is needed - everything will transition seamlessly.
+Als u uw TechOps ${planName}-abonnement wilt behouden, is er geen actie vereist - alles wordt naadloos overgezet.
 
-If you have any questions, feel free to reach out to us at ${SUPPORT_EMAIL}. We're happy to help!
+Als u vragen heeft, neem dan gerust contact met ons op via ${SUPPORT_EMAIL}. We helpen u graag!
 
-The TechOps Team
+Het TechOps Team
 `;
   }
 
-  return `Hey${firstName ? ` ${firstName}` : ""},
+  return `Hoi${firstName ? ` ${firstName}` : ""},
 
-Your TechOps ${planName} trial ends on ${dateStr}. To keep access to your premium features, upgrade to a paid plan before the trial expires: ${SERVER_URL}/account-details/subscription
+Uw TechOps ${planName}-proefperiode eindigt op ${dateStr}. Om toegang te houden tot uw premiumfuncties, kunt u overstappen naar een betaald abonnement voordat de proefperiode verloopt: ${SERVER_URL}/account-details/subscription
 
-Don't worry - your data won't be deleted. Once you subscribe, everything will be right where you left it.
+Maak u geen zorgen - uw gegevens worden niet verwijderd. Zodra u zich abonneert, staat alles weer precies waar u het heeft achtergelaten.
 
-If you have any questions, feel free to reach out to us at ${SUPPORT_EMAIL}. We're happy to help!
+Als u vragen heeft, neem dan gerust contact met ons op via ${SUPPORT_EMAIL}. We helpen u graag!
 
-The TechOps Team
+Het TechOps Team
 `;
 };
 
@@ -122,7 +123,7 @@ function TrialEndsSoonEmailTemplate({
 }) {
   const { emailPrimaryColor } = config;
 
-  const dateStr = trialEndDate.toLocaleDateString("en-US", {
+  const dateStr = trialEndDate.toLocaleDateString("nl-NL", {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -131,7 +132,7 @@ function TrialEndsSoonEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Your TechOps {planName} trial is ending soon</title>
+        <title>Uw TechOps ${planName}-proefperiode loopt binnenkort af</title>
       </Head>
 
       <Container style={{ padding: "32px 16px", maxWidth: "100%" }}>
@@ -139,7 +140,7 @@ function TrialEndsSoonEmailTemplate({
 
         <div style={{ paddingTop: "8px" }}>
           <Text style={{ ...styles.p }}>
-            Hey{firstName ? ` ${firstName}` : ""},
+            Hoi{firstName ? ` ${firstName}` : ""},
           </Text>
 
           {hasPaymentMethod ? (
@@ -154,19 +155,20 @@ function TrialEndsSoonEmailTemplate({
                 }}
               >
                 <strong>
-                  Action required if you don't want to be charged.
+                  Actie vereist als u geen kosten in rekening gebracht wilt krijgen.
                 </strong>{" "}
-                Your TechOps {planName} trial ends on <strong>{dateStr}</strong>.
-                Because you have a payment method on file, you will be
-                automatically charged at the regular subscription rate when the
-                trial ends. To avoid being charged, cancel from your{" "}
+                Uw TechOps ${planName}-proefperiode eindigt op <strong>{dateStr}</strong>.
+                Omdat u een betalingsmethode heeft geregistreerd, worden er
+                automatisch kosten in rekening gebracht tegen het reguliere
+                abonnementstarief wanneer de proefperiode eindigt. Om kosten te
+                voorkomen, kunt u annuleren via uw{" "}
                 <Link
                   href={`${SERVER_URL}/account-details/subscription`}
                   style={{ color: emailPrimaryColor }}
                 >
-                  subscription settings
+                  abonnementsinstellingen
                 </Link>{" "}
-                before the trial ends.
+                voordat de proefperiode eindigt.
               </Text>
 
               <Button
@@ -178,24 +180,24 @@ function TrialEndsSoonEmailTemplate({
                   marginBottom: "24px",
                 }}
               >
-                Manage subscription
+                Abonnement beheren
               </Button>
 
               <Text style={{ ...styles.p }}>
-                If you'd like to keep your TechOps {planName} plan, no action is
-                needed — everything will transition seamlessly.
+                Als u uw TechOps ${planName}-abonnement wilt behouden, is er geen
+                actie vereist — alles wordt naadloos overgezet.
               </Text>
             </>
           ) : (
             <>
               <Text style={{ ...styles.p }}>
-                Your <strong>TechOps {planName} trial</strong> ends on{" "}
+                Uw <strong>TechOps ${planName}-proefperiode</strong> eindigt op{" "}
                 <strong>{dateStr}</strong>.
               </Text>
 
               <Text style={{ ...styles.p }}>
-                To keep access to your premium features, upgrade to a paid plan
-                before the trial expires:
+                Om toegang te houden tot uw premiumfuncties, kunt u overstappen
+                naar een betaald abonnement voordat de proefperiode verloopt:
               </Text>
 
               <Button
@@ -207,22 +209,23 @@ function TrialEndsSoonEmailTemplate({
                   marginBottom: "24px",
                 }}
               >
-                View plans
+                Plannen bekijken
               </Button>
 
               <Text style={{ ...styles.p }}>
-                Don't worry — your data won't be deleted. Once you subscribe,
-                everything will be right where you left it.
+                Maak u geen zorgen — uw gegevens worden niet verwijderd. Zodra u
+                zich abonneert, staat alles weer precies waar u het heeft
+                achtergelaten.
               </Text>
             </>
           )}
 
           <Text style={{ marginTop: "24px", ...styles.p }}>
-            If you have any questions, feel free to reach out to us at{" "}
-            {SUPPORT_EMAIL}. We're happy to help!
+            Als u vragen heeft, neem dan gerust contact met ons op via{" "}
+            {SUPPORT_EMAIL}. We helpen u graag!
           </Text>
 
-          <Text style={{ marginTop: "24px", ...styles.p }}>The TechOps Team</Text>
+          <Text style={{ marginTop: "24px", ...styles.p }}>Het TechOps Team</Text>
         </div>
       </Container>
     </Html>

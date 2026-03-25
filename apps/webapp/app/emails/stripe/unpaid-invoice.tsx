@@ -35,16 +35,16 @@ export const unpaidInvoiceAdminText = ({
 }: AdminEmailProps) => {
   const name = [user.firstName, user.lastName].filter(Boolean).join(" ");
 
-  return `A Stripe invoice event requires attention.
+  return `Een Stripe-factuurgebeurtenis vereist aandacht.
 
-Event: ${eventType}
-User: ${name || "Unknown"} (${user.email})
-Invoice: https://dashboard.stripe.com/invoices/${invoiceId}
-User Dashboard: ${SERVER_URL}/admin-dashboard/${user.id}
+Gebeurtenis: ${eventType}
+Gebruiker: ${name || "Onbekend"} (${user.email})
+Factuur: https://dashboard.stripe.com/invoices/${invoiceId}
+Gebruikersdashboard: ${SERVER_URL}/admin-dashboard/${user.id}
 
-Please review the user's subscription status in the Stripe dashboard.
+Controleer de abonnementsstatus van de gebruiker in het Stripe-dashboard.
 
-— TechOps System
+— TechOps Systeem
 `;
 };
 
@@ -97,7 +97,7 @@ export const sendUnpaidInvoiceUserEmail = async ({
       new ShelfError({
         cause,
         message:
-          "Something went wrong while sending the unpaid invoice user email",
+          "Er is iets misgegaan bij het verzenden van de e-mail voor de onbetaalde factuur",
         additionalData: { customerEmail },
         label: "User",
       })
@@ -111,22 +111,22 @@ export const unpaidInvoiceUserText = ({
   amountDue,
   dueDate,
 }: UserEmailProps) => {
-  const greeting = customerName ? `Hey ${customerName}` : "Hey there";
+  const greeting = customerName ? `Hoi ${customerName}` : "Beste klant";
 
   return `${greeting},
 
-We wanted to let you know that we weren't able to process your recent payment for your TechOps subscription.
+We willen u laten weten dat we uw recente betaling voor uw TechOps-abonnement niet hebben kunnen verwerken.
 
-Subscription: ${subscriptionName}
-Amount due: ${amountDue}${dueDate ? `\nDue date: ${dueDate}` : ""}
+Abonnement: ${subscriptionName}
+Verschuldigd bedrag: ${amountDue}${dueDate ? `\nVervaldatum: ${dueDate}` : ""}
 
-Don't worry - these things happen! To keep your subscription active and avoid any interruption to your service, please update your payment information.
+Maak u geen zorgen - dit kan gebeuren! Om uw abonnement actief te houden en eventuele onderbrekingen van uw service te voorkomen, verzoeken wij u uw betalingsgegevens bij te werken.
 
-Update your payment method: ${SERVER_URL}/account-details/subscription
+Bijwerken van uw betalingsmethode: ${SERVER_URL}/account-details/subscription
 
-If you have any questions, feel free to reach out to us at ${SUPPORT_EMAIL}. We're happy to help!
+Als u vragen heeft, neem dan gerust contact met ons op via ${SUPPORT_EMAIL}. We helpen u graag!
 
-The TechOps Team
+Het TechOps Team
 `;
 };
 
@@ -141,7 +141,7 @@ function UnpaidInvoiceUserEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Action needed: Payment issue with your TechOps subscription</title>
+        <title>Actie vereist: Betalingsprobleem met uw TechOps-abonnement</title>
       </Head>
 
       <Container style={{ padding: "32px 16px", maxWidth: "100%" }}>
@@ -149,12 +149,12 @@ function UnpaidInvoiceUserEmailTemplate({
 
         <div style={{ paddingTop: "8px" }}>
           <Text style={{ ...styles.p }}>
-            Hey{customerName ? ` ${customerName}` : " there"},
+            Hoi{customerName ? ` ${customerName}` : ""},
           </Text>
 
           <Text style={{ ...styles.p }}>
-            We wanted to let you know that we weren't able to process your
-            recent payment for your TechOps subscription.
+            We willen u laten weten dat we uw recente betaling voor uw
+            TechOps-abonnement niet hebben kunnen verwerken.
           </Text>
 
           <Text
@@ -166,21 +166,21 @@ function UnpaidInvoiceUserEmailTemplate({
               padding: "16px",
             }}
           >
-            <strong>Subscription:</strong> {subscriptionName}
+            <strong>Abonnement:</strong> {subscriptionName}
             <br />
-            <strong>Amount due:</strong> {amountDue}
+            <strong>Verschuldigd bedrag:</strong> {amountDue}
             {dueDate ? (
               <>
                 <br />
-                <strong>Due date:</strong> {dueDate}
+                <strong>Vervaldatum:</strong> {dueDate}
               </>
             ) : null}
           </Text>
 
           <Text style={{ ...styles.p }}>
-            Don't worry - these things happen! To keep your subscription active
-            and avoid any interruption to your service, please update your
-            payment information.
+            Maak u geen zorgen - dit kan gebeuren! Om uw abonnement actief te
+            houden en eventuele onderbrekingen van uw service te voorkomen,
+            verzoeken wij u uw betalingsgegevens bij te werken.
           </Text>
 
           <Button
@@ -192,26 +192,26 @@ function UnpaidInvoiceUserEmailTemplate({
               marginBottom: "24px",
             }}
           >
-            Update payment method
+            Betalingsmethode bijwerken
           </Button>
 
           <Text style={{ ...styles.p }}>
-            If you need help, you can also manage your subscription from your{" "}
+            Als u hulp nodig heeft, kunt u uw abonnement ook beheren via uw{" "}
             <Link
               href={`${SERVER_URL}/account-details/subscription`}
               style={{ color: emailPrimaryColor }}
             >
-              subscription settings
+              abonnementsinstellingen
             </Link>
             .
           </Text>
 
           <Text style={{ marginTop: "24px", ...styles.p }}>
-            If you have any questions, feel free to reach out to us at{" "}
-            {SUPPORT_EMAIL}. We're happy to help!
+            Als u vragen heeft, neem dan gerust contact met ons op via{" "}
+            {SUPPORT_EMAIL}. We helpen u graag!
           </Text>
 
-          <Text style={{ marginTop: "24px", ...styles.p }}>The TechOps Team</Text>
+          <Text style={{ marginTop: "24px", ...styles.p }}>Het TechOps Team</Text>
         </div>
       </Container>
     </Html>

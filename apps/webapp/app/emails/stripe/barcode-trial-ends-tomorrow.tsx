@@ -30,8 +30,8 @@ export const sendBarcodeTrialEndsTomorrowEmail = async ({
 }: BarcodeTrialEndsTomorrowProps) => {
   try {
     const subject = hasPaymentMethod
-      ? "Your Barcodes trial ends tomorrow — auto-charge reminder"
-      : "Your Barcodes trial ends tomorrow";
+      ? "Uw proefperiode voor Barcodes eindigt morgen — herinnering voor automatische afschrijving"
+      : "Uw proefperiode voor Barcodes eindigt morgen";
     const html = await barcodeTrialEndsTomorrowEmailHtml({
       firstName,
       hasPaymentMethod,
@@ -54,7 +54,7 @@ export const sendBarcodeTrialEndsTomorrowEmail = async ({
       new ShelfError({
         cause,
         message:
-          "Something went wrong while sending the barcode trial ends tomorrow email",
+          "Er is iets misgegaan bij het verzenden van de e-mail over de Barcodes-proefperiode die morgen afloopt",
         additionalData: { email },
         label: "User",
       })
@@ -71,36 +71,36 @@ export const barcodeTrialEndsTomorrowEmailText = ({
   hasPaymentMethod: boolean;
   trialEndDate: Date;
 }) => {
-  const dateStr = trialEndDate.toLocaleDateString("en-US", {
+  const dateStr = trialEndDate.toLocaleDateString("nl-NL", {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
 
   if (hasPaymentMethod) {
-    return `Hey${firstName ? ` ${firstName}` : ""},
+    return `Hoi${firstName ? ` ${firstName}` : ""},
 
-ACTION REQUIRED: You will be charged tomorrow. Your 7-day Barcodes trial ends tomorrow (${dateStr}). Because you have a payment method on file, you will be automatically charged at the regular subscription rate. To avoid being charged, cancel now from your subscription settings: ${SERVER_URL}/account-details/subscription
+ACTIE VEREIST: Kosten worden morgen in rekening gebracht. Uw proefperiode van 7 dagen voor Barcodes eindigt morgen (${dateStr}). Omdat u een betalingsmethode heeft geregistreerd, worden er automatisch kosten in rekening gebracht tegen het reguliere abonnementstarief. Om kosten te voorkomen, kunt u nu annuleren via uw abonnementsinstellingen: ${SERVER_URL}/account-details/subscription
 
-If you'd like to keep using Barcodes, no action is needed - everything will transition seamlessly.
+Als u Barcodes wilt blijven gebruiken, is er geen actie vereist - alles wordt naadloos overgezet.
 
-If you have any questions, feel free to reach out to us at ${SUPPORT_EMAIL}. We're happy to help!
+Als u vragen heeft, neem dan gerust contact met ons op via ${SUPPORT_EMAIL}. We helpen u graag!
 
-The TechOps Team
+Het TechOps Team
 `;
   }
 
-  return `Hey${firstName ? ` ${firstName}` : ""},
+  return `Hoi${firstName ? ` ${firstName}` : ""},
 
-Your 7-day Barcodes trial ends tomorrow (${dateStr}). Since you don't have a payment method on file, your Barcodes access will be paused when the trial ends.
+Uw proefperiode van 7 dagen voor Barcodes eindigt morgen (${dateStr}). Omdat u geen betalingsmethode heeft geregistreerd, wordt uw toegang tot Barcodes gepauzeerd wanneer de proefperiode eindigt.
 
-To keep using Barcodes without interruption, add a payment method before the trial expires: ${SERVER_URL}/account-details/subscription
+Om Barcodes zonder onderbreking te blijven gebruiken, voegt u een betalingsmethode toe voordat de proefperiode verloopt: ${SERVER_URL}/account-details/subscription
 
-Don't worry - your barcode data won't be deleted. Once you subscribe, everything will be right where you left it.
+Maak u geen zorgen - uw barcodegegevens worden niet verwijderd. Zodra u zich abonneert, staat alles weer precies waar u het heeft achtergelaten.
 
-If you have any questions, feel free to reach out to us at ${SUPPORT_EMAIL}. We're happy to help!
+Als u vragen heeft, neem dan gerust contact met ons op via ${SUPPORT_EMAIL}. We helpen u graag!
 
-The TechOps Team
+Het TechOps Team
 `;
 };
 
@@ -115,7 +115,7 @@ function BarcodeTrialEndsTomorrowEmailTemplate({
 }) {
   const { emailPrimaryColor } = config;
 
-  const dateStr = trialEndDate.toLocaleDateString("en-US", {
+  const dateStr = trialEndDate.toLocaleDateString("nl-NL", {
     month: "long",
     day: "numeric",
     year: "numeric",
@@ -124,7 +124,7 @@ function BarcodeTrialEndsTomorrowEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Your Barcodes trial ends tomorrow</title>
+        <title>Uw proefperiode voor Barcodes eindigt morgen</title>
       </Head>
 
       <Container style={{ padding: "32px 16px", maxWidth: "100%" }}>
@@ -132,7 +132,7 @@ function BarcodeTrialEndsTomorrowEmailTemplate({
 
         <div style={{ paddingTop: "8px" }}>
           <Text style={{ ...styles.p }}>
-            Hey{firstName ? ` ${firstName}` : ""},
+            Hoi{firstName ? ` ${firstName}` : ""},
           </Text>
 
           {hasPaymentMethod ? (
@@ -146,16 +146,17 @@ function BarcodeTrialEndsTomorrowEmailTemplate({
                   padding: "16px",
                 }}
               >
-                <strong>You will be charged tomorrow.</strong> Your 7-day
-                Barcodes trial ends tomorrow ({dateStr}). Because you have a
-                payment method on file, you will be automatically charged at the
-                regular subscription rate. To avoid being charged, cancel now
-                from your{" "}
+                <strong>Kosten worden morgen in rekening gebracht.</strong> Uw
+                proefperiode van 7 dagen voor Barcodes eindigt morgen ({dateStr}).
+                Omdat u een betalingsmethode heeft geregistreerd, worden er
+                automatisch kosten in rekening gebracht tegen het reguliere
+                abonnementstarief. Om kosten te voorkomen, kunt u nu annuleren
+                via uw{" "}
                 <Link
                   href={`${SERVER_URL}/account-details/subscription`}
                   style={{ color: emailPrimaryColor }}
                 >
-                  subscription settings
+                  abonnementsinstellingen
                 </Link>
                 .
               </Text>
@@ -169,29 +170,30 @@ function BarcodeTrialEndsTomorrowEmailTemplate({
                   marginBottom: "24px",
                 }}
               >
-                Manage subscription
+                Abonnement beheren
               </Button>
 
               <Text style={{ ...styles.p }}>
-                If you'd like to keep using Barcodes, no action is needed —
-                everything will transition seamlessly.
+                Als u Barcodes wilt blijven gebruiken, is er geen actie vereist —
+                alles wordt naadloos overgezet.
               </Text>
             </>
           ) : (
             <>
               <Text style={{ ...styles.p }}>
-                Your <strong>7-day Barcodes trial</strong> ends{" "}
-                <strong>tomorrow</strong> ({dateStr}).
+                Uw <strong>proefperiode van 7 dagen voor Barcodes</strong> eindigt{" "}
+                <strong>morgen</strong> ({dateStr}).
               </Text>
 
               <Text style={{ ...styles.p }}>
-                Since you don't have a payment method on file, your Barcodes
-                access will be <strong>paused</strong> when the trial ends.
+                Omdat u geen betalingsmethode heeft geregistreerd, wordt uw
+                toegang tot Barcodes <strong>gepauzeerd</strong> wanneer de
+                proefperiode eindigt.
               </Text>
 
               <Text style={{ ...styles.p }}>
-                To keep using Barcodes without interruption, add a payment
-                method before the trial expires:
+                Om Barcodes zonder onderbreking te blijven gebruiken, voegt u een
+                betalingsmethode toe voordat de proefperiode verloopt:
               </Text>
 
               <Button
@@ -203,22 +205,23 @@ function BarcodeTrialEndsTomorrowEmailTemplate({
                   marginBottom: "24px",
                 }}
               >
-                Add payment method
+                Betalingsmethode toevoegen
               </Button>
 
               <Text style={{ ...styles.p }}>
-                Don't worry — your barcode data won't be deleted. Once you
-                subscribe, everything will be right where you left it.
+                Maak u geen zorgen — uw barcodegegevens worden niet verwijderd.
+                Zodra u zich abonneert, staat alles weer precies waar u het
+                heeft achtergelaten.
               </Text>
             </>
           )}
 
           <Text style={{ marginTop: "24px", ...styles.p }}>
-            If you have any questions, feel free to reach out to us at{" "}
-            {SUPPORT_EMAIL}. We're happy to help!
+            Als u vragen heeft, neem dan gerust contact met ons op via{" "}
+            {SUPPORT_EMAIL}. We helpen u graag!
           </Text>
 
-          <Text style={{ marginTop: "24px", ...styles.p }}>The TechOps Team</Text>
+          <Text style={{ marginTop: "24px", ...styles.p }}>Het TechOps Team</Text>
         </div>
       </Container>
     </Html>

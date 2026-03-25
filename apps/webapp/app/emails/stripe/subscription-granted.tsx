@@ -31,7 +31,7 @@ export const sendSubscriptionGrantedEmail = async ({
   email,
 }: SendSubscriptionGrantedEmailProps) => {
   try {
-    const subject = "Your TechOps subscription is now active";
+    const subject = "Uw TechOps-abonnement is nu actief";
     const html = await subscriptionGrantedHtml({
       customerName,
       subscriptionName,
@@ -49,7 +49,7 @@ export const sendSubscriptionGrantedEmail = async ({
       new ShelfError({
         cause,
         message:
-          "Something went wrong while sending the subscription granted email",
+          "Er is iets misgegaan bij het verzenden van de e-mail over het geactiveerde abonnement",
         additionalData: { email },
         label: "User",
       })
@@ -61,27 +61,27 @@ export const subscriptionGrantedText = ({
   customerName,
   subscriptionName,
 }: SubscriptionGrantedEmailProps) => {
-  const greeting = customerName ? `Hey ${customerName}` : "Hey there";
+  const greeting = customerName ? `Hoi ${customerName}` : "Hoi";
 
   return `${greeting},
 
-Great news! Your ${subscriptionName} subscription is now active.
+Goed nieuws! Uw ${subscriptionName}-abonnement is nu actief.
 
-You now have access to all the features included in your plan:
+U heeft nu toegang tot alle functies die in uw pakket zijn inbegrepen:
 
-- Unlimited custom fields to tailor TechOps to your needs
-- Team workspaces for seamless collaboration
-- Advanced asset management features
-- Priority support
+- Onbeperkt aantal aangepaste velden om TechOps af te stemmen op uw behoeften
+- Teamwerkruimtes voor naadloze samenwerking
+- Geavanceerde functies voor activabeheer
+- Prioriteitsondersteuning
 
-Get started: ${SERVER_URL}
+Begin nu: ${SERVER_URL}
 
-You can manage your subscription anytime from your subscription settings:
+U kunt uw abonnement op elk moment beheren via uw abonnementsinstellingen:
 ${SERVER_URL}/account-details/subscription
 
-If you have any questions, feel free to reach out to us at ${SUPPORT_EMAIL}. We're happy to help!
+Als u vragen heeft, neem dan gerust contact met ons op via ${SUPPORT_EMAIL}. We helpen u graag!
 
-The TechOps Team
+Het TechOps Team
 `;
 };
 
@@ -94,7 +94,7 @@ function SubscriptionGrantedEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Your TechOps subscription is now active</title>
+        <title>Uw TechOps-abonnement is nu actief</title>
       </Head>
 
       <Container style={{ padding: "32px 16px", maxWidth: "100%" }}>
@@ -102,30 +102,30 @@ function SubscriptionGrantedEmailTemplate({
 
         <div style={{ paddingTop: "8px" }}>
           <Text style={{ ...styles.p }}>
-            Hey{customerName ? ` ${customerName}` : " there"},
+            Hoi{customerName ? ` ${customerName}` : ""},
           </Text>
 
           <Text style={{ ...styles.p }}>
-            Great news! Your <strong>{subscriptionName}</strong> subscription is
-            now active. You have access to all the features included in your
-            plan.
+            Goed nieuws! Uw <strong>{subscriptionName}</strong>-abonnement is
+            nu actief. U heeft toegang tot alle functies die in uw pakket zijn
+            inbegrepen.
           </Text>
 
           <Text style={{ ...styles.h2 }}>
-            Here's what's included in your plan:
+            Dit is wat er is inbegrepen in uw pakket:
           </Text>
 
           <ul style={{ ...styles.li, paddingLeft: "20px" }}>
             <li style={{ marginBottom: "8px" }}>
-              Unlimited custom fields to tailor TechOps to your needs
+              Onbeperkt aantal aangepaste velden om TechOps af te stemmen op uw behoeften
             </li>
             <li style={{ marginBottom: "8px" }}>
-              Team workspaces for seamless collaboration
+              Teamwerkruimtes voor naadloze samenwerking
             </li>
             <li style={{ marginBottom: "8px" }}>
-              Advanced asset management features
+              Geavanceerde functies voor activabeheer
             </li>
-            <li style={{ marginBottom: "8px" }}>Priority support</li>
+            <li style={{ marginBottom: "8px" }}>Prioriteitsondersteuning</li>
           </ul>
 
           <Button
@@ -137,26 +137,26 @@ function SubscriptionGrantedEmailTemplate({
               marginBottom: "24px",
             }}
           >
-            Go to your workspace
+            Ga naar uw werkruimte
           </Button>
 
           <Text style={{ ...styles.p }}>
-            You can manage your subscription anytime from your{" "}
+            U kunt uw abonnement op elk moment beheren via uw{" "}
             <Link
               href={`${SERVER_URL}/account-details/subscription`}
               style={{ color: emailPrimaryColor }}
             >
-              subscription settings
+              abonnementsinstellingen
             </Link>
             .
           </Text>
 
           <Text style={{ marginTop: "24px", ...styles.p }}>
-            If you have any questions, feel free to reach out to us at{" "}
-            {SUPPORT_EMAIL}. We're happy to help!
+            Als u vragen heeft, neem dan gerust contact met ons op via{" "}
+            {SUPPORT_EMAIL}. We helpen u graag!
           </Text>
 
-          <Text style={{ marginTop: "24px", ...styles.p }}>The TechOps Team</Text>
+          <Text style={{ marginTop: "24px", ...styles.p }}>Het TechOps Team</Text>
         </div>
       </Container>
     </Html>

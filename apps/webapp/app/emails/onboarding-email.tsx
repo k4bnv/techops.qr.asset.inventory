@@ -5,21 +5,21 @@ export const onboardingEmailText = ({
   firstName,
 }: {
   firstName: string;
-}) => `Hi ${firstName},
+}) => `Hoi ${firstName},
 
-Thrilled to have you on board at TechOps! I'm Carlos Virreira, one of the co-founders, and I'm excited to learn more about your needs as an asset management professional.
+Geweldig dat je erbij bent bij TechOps! Ik ben Carlos Virreira, een van de medeoprichters, en ik ben benieuwd naar jouw behoeften als professional op het gebied van asset management.
 
-How do you plan to use TechOps Asset Inventory? 
+Hoe ben je van plan TechOps Asset-inventaris te gebruiken? 
 
-What features are essential for you in an asset management system? 
+Welke functies zijn essentieel voor jou in een asset management systeem? 
 
-Your input is key as we fine-tune TechOps Asset Inventory for professionals like yourself.
+Jouw input is essentieel voor ons bij het verfijnen van TechOps Asset-inventaris voor professionals zoals jijzelf.
 
-Feel free to hit reply and share anything in your mind. All mails reach my personal inbox and I love receiving mails.
+Voel je vrij om te antwoorden en alles te delen wat je bezighoudt. Alle e-mails komen in mijn persoonlijke inbox terecht en ik vind het geweldig om e-mails te ontvangen.
 
-Greetings from The Netherlands,
+Groeten uit Nederland,
 
 Carlos Virreira
-Founder & Vision Lead
-TechOps Asset Management, Inc.
+Oprichter & Vision Lead
+TechOps Asset Management
 `;

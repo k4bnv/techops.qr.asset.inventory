@@ -5,18 +5,18 @@ import type { BookingForEmail } from "../types";
 export const UserFooter = ({ booking }: { booking: BookingForEmail }) => (
   <>
     <Text style={{ fontSize: "14px", color: "#344054" }}>
-      This email was sent to {booking.custodianUser!.email} because it is part
-      of the workspace{" "}
+      Deze e-mail is verzonden naar {booking.custodianUser!.email} omdat deze
+      deel uitmaakt van de werkruimte{" "}
       <span style={{ color: "#101828", fontWeight: "600" }}>
         "{booking.organization.name}"
       </span>
-      . <br /> If you think you weren’t supposed to have received this email
-      please contact the owner ({booking.organization.owner.email}) of the
-      workspace.
+      . <br /> Als u denkt dat u deze e-mail niet had mogen ontvangen, neem dan
+      contact op met de eigenaar ({booking.organization.owner.email}) van de
+      werkruimte.
     </Text>
     <Text style={{ marginBottom: "32px", fontSize: "14px", color: "#344054" }}>
       {" "}
-      © {new Date().getFullYear()} TechOps Asset Inventory
+      © {new Date().getFullYear()} TechOps Asset-inventaris
     </Text>
   </>
 );
@@ -25,17 +25,17 @@ export const UserFooter = ({ booking }: { booking: BookingForEmail }) => (
 export const AdminFooter = ({ booking }: { booking: BookingForEmail }) => (
   <>
     <Text style={{ fontSize: "14px", color: "#344054" }}>
-      This email was sent to you because you are the OWNER or ADMIN of the
-      workspace{" "}
+      Deze e-mail is naar u verzonden omdat u de EIGENAAR of BEHEERDER bent van
+      de werkruimte{" "}
       <span style={{ color: "#101828", fontWeight: "600" }}>
         "{booking.organization.name}"
       </span>
-      . <br /> If you think you weren’t supposed to have received this email
-      please contact support.
+      . <br /> Als u denkt dat u deze e-mail niet had mogen ontvangen, neem dan
+      contact op met de klantenservice.
     </Text>
     <Text style={{ marginBottom: "32px", fontSize: "14px", color: "#344054" }}>
       {" "}
-      © {new Date().getFullYear()} TechOps Asset Inventory
+      © {new Date().getFullYear()} TechOps Asset-inventaris
     </Text>
   </>
 );

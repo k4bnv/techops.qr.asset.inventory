@@ -24,7 +24,7 @@ export function RoleChangeEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Your role has been changed</title>
+        <title>Uw rol is gewijzigd</title>
       </Head>
 
       <Container
@@ -34,27 +34,28 @@ export function RoleChangeEmailTemplate({
 
         <div style={{ paddingTop: "8px" }}>
           <Text style={{ marginBottom: "24px", ...styles.p }}>
-            Howdy,
+            Hallo,
             <br />
-            Your role in <strong>{orgName}</strong> has been changed from{" "}
-            <strong>{previousRole}</strong> to <strong>{newRole}</strong>.
+            Uw rol in <strong>{orgName}</strong> is gewijzigd van{" "}
+            <strong>{previousRole}</strong> naar <strong>{newRole}</strong>.
           </Text>
 
           <Text style={{ ...styles.p, marginBottom: "24px" }}>
-            If you think this is a mistake, please contact the workspace
-            administrator. If you have any questions or need assistance, please
-            don't hesitate to contact our support team at {SUPPORT_EMAIL}.
+            Als u denkt dat dit een vergissing is, neem dan contact op met de
+            beheerder van de werkruimte. Als u vragen heeft of hulp nodig heeft,
+            aarzel dan niet om contact op te nemen met ons ondersteuningsteam
+            via {SUPPORT_EMAIL}.
           </Text>
 
           <Text style={{ marginBottom: "32px", ...styles.p }}>
-            Thanks, <br />
-            The TechOps team
+            Bedankt, <br />
+            Het TechOps team
           </Text>
 
           <CustomEmailFooter footerText={customEmailFooter} />
 
           <Text style={{ fontSize: "14px", color: "#344054" }}>
-            This is an automatic email sent from TechOps to{" "}
+            Dit is een automatische e-mail verzonden van TechOps naar{" "}
             <span style={{ color: emailPrimaryColor }}>{recipientEmail}</span>.
           </Text>
         </div>

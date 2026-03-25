@@ -54,7 +54,7 @@ export function BookingUpdatesEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>Bookings update from TechOps Asset Inventory</title>
+        <title>Boekingen-update van TechOps Asset-inventaris</title>
       </Head>
 
       <Container
@@ -85,17 +85,17 @@ export function BookingUpdatesEmailTemplate({
           </Heading>
           <p style={{ ...styles.p }}>
             <span style={{ color: "#101828", fontWeight: "600" }}>
-              Custodian:
+              Beheerder:
             </span>{" "}
             {`${booking.custodianUser?.firstName} ${booking.custodianUser?.lastName}` ||
               booking.custodianTeamMember?.name}
           </p>
           <p style={{ ...styles.p }}>
-            <span style={{ color: "#101828", fontWeight: "600" }}>From:</span>{" "}
+            <span style={{ color: "#101828", fontWeight: "600" }}>Van:</span>{" "}
             {fromDate}
           </p>
           <p style={{ ...styles.p }}>
-            <span style={{ color: "#101828", fontWeight: "600" }}>To:</span>{" "}
+            <span style={{ color: "#101828", fontWeight: "600" }}>Tot:</span>{" "}
             {toDate}
           </p>
         </div>
@@ -119,7 +119,7 @@ export function BookingUpdatesEmailTemplate({
                 marginBottom: "12px",
               }}
             >
-              Booked items:
+              Geboekte items:
             </p>
             {assets
               .slice(0, BOOKING_EMAIL_ASSETS_DISPLAY_LIMIT)
@@ -164,12 +164,12 @@ export function BookingUpdatesEmailTemplate({
                   marginTop: "8px",
                 }}
               >
-                and {assets.length - BOOKING_EMAIL_ASSETS_DISPLAY_LIMIT} more —{" "}
+                en nog {assets.length - BOOKING_EMAIL_ASSETS_DISPLAY_LIMIT} —{" "}
                 <a
                   href={`${SERVER_URL}/bookings/${booking.id}?orgId=${booking.organizationId}`}
                   style={{ color: "#EF6820" }}
                 >
-                  View full booking
+                  Bekijk volledige boeking
                 </a>
               </p>
             )}
@@ -194,7 +194,7 @@ export function BookingUpdatesEmailTemplate({
                 fontWeight: "600",
               }}
             >
-              Cancellation reason
+              Reden van annulering
             </p>
             <p style={{ ...styles.p, margin: "0" }}>{cancellationReason}</p>
           </div>
@@ -219,7 +219,7 @@ export function BookingUpdatesEmailTemplate({
                 marginBottom: "8px",
               }}
             >
-              What changed:
+              Wat er is veranderd:
             </p>
             <ul style={{ margin: "0", paddingLeft: "20px" }}>
               {changes.map((change, i) => (
@@ -240,7 +240,7 @@ export function BookingUpdatesEmailTemplate({
               marginBottom: "32px",
             }}
           >
-            View booking in app
+            Bekijk boeking in app
           </Button>
         )}
 

@@ -44,9 +44,9 @@ describe("barcodeTrialEndsSoonEmailText", () => {
       hasPaymentMethod: true,
       trialEndDate,
     });
-    expect(text).toContain("ACTION REQUIRED");
+    expect(text).toContain("ACTIE VEREIST");
     expect(text).toContain(
-      "automatically charged at the regular subscription rate"
+      "automatisch kosten in rekening gebracht tegen het reguliere abonnementstarief"
     );
   });
 
@@ -56,8 +56,8 @@ describe("barcodeTrialEndsSoonEmailText", () => {
       hasPaymentMethod: false,
       trialEndDate,
     });
-    expect(text).toContain("paused");
-    expect(text).toContain("add a payment method");
+    expect(text).toContain("gepauzeerd");
+    expect(text).toContain("voegt u een betalingsmethode toe");
   });
 
   it("formats trialEndDate correctly", () => {
@@ -66,7 +66,7 @@ describe("barcodeTrialEndsSoonEmailText", () => {
       hasPaymentMethod: true,
       trialEndDate,
     });
-    expect(text).toContain("March 24, 2026");
+    expect(text).toContain("24 maart 2026");
   });
 
   it("includes firstName in greeting when provided", () => {
@@ -75,7 +75,7 @@ describe("barcodeTrialEndsSoonEmailText", () => {
       hasPaymentMethod: true,
       trialEndDate,
     });
-    expect(text).toMatch(/^Hey Bob,/);
+    expect(text).toMatch(/^Hoi Bob,/);
   });
 });
 
@@ -96,7 +96,7 @@ describe("sendBarcodeTrialEndsSoonEmail", () => {
     expect(mockSendEmail).toHaveBeenCalledWith(
       expect.objectContaining({
         to: "alice@example.com",
-        subject: "Your Barcodes trial ends in 3 days — auto-charge reminder",
+        subject: "Uw proefperiode voor Barcodes eindigt over 3 dagen — herinnering voor automatische afschrijving",
       })
     );
   });

@@ -31,11 +31,11 @@ export const sendFeedbackEmail = async ({
   screenshotUrl,
 }: FeedbackEmailProps) => {
   try {
-    const typeLabel = type === "issue" ? "Issue" : "Idea";
+    const typeLabel = type === "issue" ? "Probleem" : "Idee";
     const sanitized = message.replace(/[\r\n\t]+/g, " ").trim();
     const subjectPreview =
       sanitized.length > 50 ? `${sanitized.slice(0, 50)}...` : sanitized;
-    const subject = `New feedback [${typeLabel}]: ${subjectPreview}`;
+    const subject = `Nieuwe feedback [${typeLabel}]: ${subjectPreview}`;
 
     const html = await feedbackEmailHtml({
       userName,
@@ -66,7 +66,7 @@ export const sendFeedbackEmail = async ({
     Logger.error(
       new ShelfError({
         cause,
-        message: "Something went wrong while sending the feedback email",
+        message: "Er is iets misgegaan bij het verzenden van de feedback-e-mail",
         additionalData: { userEmail, type },
         label: "Email",
       })
@@ -82,15 +82,15 @@ export const feedbackEmailText = ({
   message,
   screenshotUrl,
 }: FeedbackEmailProps) => {
-  const typeLabel = type === "issue" ? "Issue" : "Idea";
+  const typeLabel = type === "issue" ? "Probleem" : "Idee";
 
-  return `New feedback received
+  return `Nieuwe feedback ontvangen
 
 Type: ${typeLabel}
-From: ${userName} (${userEmail})
-Organization: ${organizationName}
+Van: ${userName} (${userEmail})
+Organisatie: ${organizationName}
 
-Message:
+Bericht:
 ${message}
 ${screenshotUrl ? `\nScreenshot: ${screenshotUrl}` : ""}
 `;
@@ -104,7 +104,7 @@ function FeedbackEmailTemplate({
   message,
   screenshotUrl,
 }: FeedbackEmailProps) {
-  const typeLabel = type === "issue" ? "Issue" : "Idea";
+  const typeLabel = type === "issue" ? "Probleem" : "Idee";
   const typeBgColor = type === "issue" ? "#FEE2E2" : "#DBEAFE";
   const typeBorderColor = type === "issue" ? "#FECACA" : "#BFDBFE";
   const typeTextColor = type === "issue" ? "#991B1B" : "#1E40AF";
@@ -112,14 +112,14 @@ function FeedbackEmailTemplate({
   return (
     <Html>
       <Head>
-        <title>New feedback received</title>
+        <title>Nieuwe feedback ontvangen</title>
       </Head>
 
       <Container style={{ padding: "32px 16px", maxWidth: "100%" }}>
         <LogoForEmail />
 
         <div style={{ paddingTop: "8px" }}>
-          <Text style={{ ...styles.h2 }}>New feedback received</Text>
+          <Text style={{ ...styles.h2 }}>Nieuwe feedback ontvangen</Text>
 
           <div
             style={{
@@ -161,7 +161,7 @@ function FeedbackEmailTemplate({
                 color: "#6B7280",
               }}
             >
-              <strong>From:</strong>{" "}
+              <strong>Van:</strong>{" "}
               <Link href={`mailto:${userEmail}`} style={{ color: "#2563EB" }}>
                 {userName}
               </Link>{" "}
@@ -175,11 +175,11 @@ function FeedbackEmailTemplate({
                 color: "#6B7280",
               }}
             >
-              <strong>Organization:</strong> {organizationName}
+              <strong>Organisatie:</strong> {organizationName}
             </Text>
           </div>
 
-          <Text style={{ ...styles.p, fontWeight: "600" }}>Message:</Text>
+          <Text style={{ ...styles.p, fontWeight: "600" }}>Bericht:</Text>
           <div
             style={{
               backgroundColor: "#FFFFFF",
@@ -204,7 +204,7 @@ function FeedbackEmailTemplate({
             <Text style={{ ...styles.p }}>
               <strong>Screenshot:</strong>{" "}
               <Link href={screenshotUrl} style={{ color: "#2563EB" }}>
-                View screenshot
+                Bekijk screenshot
               </Link>
             </Text>
           ) : null}
