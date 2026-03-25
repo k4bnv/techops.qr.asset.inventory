@@ -13,8 +13,9 @@ import {
 
 import { useZorm } from "react-zorm";
 import { z } from "zod";
-import { Form } from "~/components/custom-form";
+import { db } from "~/database/db.server";
 
+import { Form } from "~/components/custom-form";
 import Input from "~/components/forms/input";
 import PasswordInput from "~/components/forms/password-input";
 import { Button } from "~/components/shared/button";
@@ -49,13 +50,19 @@ import { validEmail } from "~/utils/misc";
 export function loader({ context }: LoaderFunctionArgs) {
   const title = "Inloggen";
   const subHeading = "Welkom terug! Vul uw gegevens hieronder in om in te loggen.";
-  const { disableSignup, disableSSO } = config;
+  const { disableSSO } = config;
 
   if (context.isAuthenticated) {
     return redirect("/assets");
   }
 
-  return data(payload({ title, subHeading, disableSignup, disableSSO }));
+  return db.siteConfig
+    .findUnique({ where: { key: "disableSignup" } })
+    .then((row) => {
+      const dbDisableSignup = (row?.value as { value: boolean } | null)?.value;
+      const disableSignup = dbDisableSignup !== undefined ? dbDisableSignup : config.disableSignup;
+      return data(payload({ title, subHeading, disableSignup, disableSSO }));
+    });
 }
 
 const LoginFormSchema = z.object({
@@ -267,6 +274,14 @@ export default function IndexLoginForm() {
           <ContinueWithEmailForm mode="login" />
         </div>
         {/* Registration is disabled per user request */}
+        {!disableSignup && (
+          <div className="mt-4 text-center text-sm text-gray-500">
+            Nog geen account?{" "}
+            <Button variant="link" to="/join">
+              Registreer hier
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

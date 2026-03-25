@@ -10,7 +10,9 @@ export type NavItemKey =
   | "reminders"
   | "team"
   | "workspaceSettings"
-  | "scanner";
+  | "scanner"
+  | "feedback"
+  | "support";
 
 export type NavItemSetting = {
   visible: boolean;
@@ -32,6 +34,8 @@ export const NAV_ITEM_LABELS: Record<NavItemKey, string> = {
   team: "Team",
   workspaceSettings: "Werkruimte-instellingen",
   scanner: "QR Scanner",
+  feedback: "Vragen/Feedback",
+  support: "Support",
 };
 
 export const NAV_ITEM_KEYS: NavItemKey[] = [
@@ -47,4 +51,7 @@ export const NAV_ITEM_KEYS: NavItemKey[] = [
   "team",
   "workspaceSettings",
   "scanner",
+  "feedback",
+  "support",
 ];
+

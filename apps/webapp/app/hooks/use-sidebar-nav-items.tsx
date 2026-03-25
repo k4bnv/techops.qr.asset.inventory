@@ -246,12 +246,20 @@ export function useSidebarNavItems() {
       hidden: !nav("scanner"),
     },
     {
-      type: "button",
+      type: "child",
       title: "Vragen/Feedback",
       Icon: MessageCircleIcon,
-      onClick: () => {
-        // Handled by FeedbackNavItem in sidebar-nav.tsx
-      },
+      to: url("feedback", "#"),
+      target: navSettings?.feedback?.customUrl ? "_blank" : undefined,
+      hidden: !nav("feedback"),
+    },
+    {
+      type: "child",
+      title: "Support",
+      Icon: MessageCircleIcon,
+      to: url("support", "#"),
+      target: navSettings?.support?.customUrl ? "_blank" : undefined,
+      hidden: !nav("support"),
     },
   ];
 

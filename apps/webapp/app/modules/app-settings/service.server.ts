@@ -20,6 +20,8 @@ const defaultNavSettings: NavSettings = {
   team: { visible: true, customUrl: null },
   workspaceSettings: { visible: true, customUrl: null },
   scanner: { visible: true, customUrl: null },
+  feedback: { visible: true, customUrl: null },
+  support: { visible: false, customUrl: null },
 };
 
 export async function getNavSettings(): Promise<NavSettings> {
