@@ -27,6 +27,7 @@ export type BulkQrDownloadLoaderData = {
   qrIdDisplayPreference: string;
   showShelfBranding: boolean;
   orgLogoSrc: string | null;
+  orgName: string | null;
 };
 
 /**
@@ -105,6 +106,7 @@ export async function loader({ context, request }: ActionFunctionArgs) {
         orgLogoSrc: currentOrganization.imageId
           ? `/api/image/${currentOrganization.imageId}`
           : null,
+        orgName: currentOrganization.name ?? null,
       })
     );
   } catch (cause) {

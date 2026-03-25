@@ -235,6 +235,9 @@ export const CodePreview = ({
 
   const printCode = useReactToPrint({
     contentRef: captureDivRef,
+    pageStyle: labelLayout === "continuous"
+      ? `@page { size: 100mm 24mm; margin: 0; } body { margin: 0; padding: 0; } div { box-sizing: border-box; }`
+      : `@page { size: 24mm 24mm; margin: 0; } body { margin: 0; padding: 0; } div { box-sizing: border-box; }`,
     onBeforePrint: () => {
       const container = captureDivRef.current;
       if (!container) return Promise.resolve();
@@ -325,6 +328,7 @@ export const CodePreview = ({
             qrIdDisplayPreference={organization?.qrIdDisplayPreference}
             sequentialId={sequentialId}
             showShelfBranding={resolvedShowShelfBranding}
+            orgName={organization?.name}
             layout={labelLayout}
           />
         ) : selectedCode?.type === "barcode" ? (
@@ -333,6 +337,7 @@ export const CodePreview = ({
             data={selectedCode.barcodeData}
             title={item.name}
             showShelfBranding={resolvedShowShelfBranding}
+            orgName={organization?.name}
             layout={labelLayout}
           />
         ) : null}
@@ -416,6 +421,7 @@ interface QrLabelProps {
   sequentialId?: string | null;
   showShelfBranding?: boolean;
   orgLogoSrc?: string | null;
+  orgName?: string | null;
   layout?: "square" | "continuous";
 }
 
@@ -428,10 +434,13 @@ export const QrLabel = React.forwardRef<HTMLDivElement, QrLabelProps>(
       sequentialId,
       showShelfBranding = true,
       orgLogoSrc,
+      orgName,
       layout = "square",
     } = props ?? {};
 
     const showLogo = showShelfBranding && !!orgLogoSrc;
+    // In continuous (24mm) mode: always show orgName text instead of logo (B&W sticker optimised)
+    const showOrgName = !!orgName;
 
     const isContinuous = layout === "continuous";
 
@@ -508,13 +517,20 @@ export const QrLabel = React.forwardRef<HTMLDivElement, QrLabelProps>(
                   ? sequentialId
                   : data?.qr?.id}
               </div>
-              {showLogo && (
-                <img
-                  src={orgLogoSrc!}
-                  alt="Werkruimte-logo"
-                  style={{ maxHeight: "28px", maxWidth: "80px", objectFit: "contain", marginTop: "4px" }}
-                  crossOrigin="anonymous"
-                />
+              {showOrgName && (
+                <div
+                  style={{
+                    fontSize: "10px",
+                    fontWeight: 600,
+                    color: "black",
+                    marginTop: "4px",
+                    letterSpacing: "0.02em",
+                    textTransform: "uppercase",
+                    opacity: 0.6,
+                  }}
+                >
+                  {orgName}
+                </div>
               )}
             </div>
           </>
@@ -563,14 +579,21 @@ export const QrLabel = React.forwardRef<HTMLDivElement, QrLabelProps>(
                 ? sequentialId
                 : data?.qr?.id}
             </div>
-            {showLogo && (
-              <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: "4px" }}>
-                <img
-                  src={orgLogoSrc!}
-                  alt="Werkruimte-logo"
-                  style={{ maxHeight: "32px", maxWidth: "120px", objectFit: "contain" }}
-                  crossOrigin="anonymous"
-                />
+            {showOrgName && (
+              <div
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  color: "black",
+                  marginTop: "4px",
+                  letterSpacing: "0.02em",
+                  textTransform: "uppercase",
+                  opacity: 0.6,
+                }}
+              >
+                {orgName}
               </div>
             )}
           </>
@@ -588,13 +611,15 @@ interface BarcodeLabelProps {
   title: string;
   showShelfBranding?: boolean;
   orgLogoSrc?: string | null;
+  orgName?: string | null;
   layout?: "square" | "continuous";
 }
 
 export const BarcodeLabel = React.forwardRef<HTMLDivElement, BarcodeLabelProps>(
   function BarcodeLabel(props, ref) {
-    const { data, title, showShelfBranding = true, orgLogoSrc, layout = "square" } = props ?? {};
+    const { data, title, showShelfBranding = true, orgLogoSrc, orgName, layout = "square" } = props ?? {};
     const showLogo = showShelfBranding && !!orgLogoSrc;
+    const showOrgName = !!orgName;
 
     const isContinuous = layout === "continuous";
 
@@ -675,14 +700,20 @@ export const BarcodeLabel = React.forwardRef<HTMLDivElement, BarcodeLabelProps>(
             </div>
           </div>
         </div>
-        {showLogo && (
-          <div style={{ width: isContinuous ? "auto" : "100%", display: "flex", justifyContent: isContinuous ? "flex-end" : "center" }}>
-            <img
-              src={orgLogoSrc!}
-              alt="Werkruimte-logo"
-              style={{ maxHeight: "28px", maxWidth: "80px", objectFit: "contain" }}
-              crossOrigin="anonymous"
-            />
+        {showOrgName && (
+          <div
+            style={{
+              width: isContinuous ? "auto" : "100%",
+              textAlign: isContinuous ? "left" : "center",
+              fontSize: "10px",
+              fontWeight: 600,
+              color: "black",
+              letterSpacing: "0.02em",
+              textTransform: "uppercase",
+              opacity: 0.6,
+            }}
+          >
+            {orgName}
           </div>
         )}
       </div>

@@ -41,13 +41,11 @@ const SelectTrigger = React.forwardRef<
 const SelectContent = React.forwardRef<
   ElementRef<typeof SelectPrimitive.Content>,
   ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(function SelectContent({ className, children, ...props }, _ref) {
+>(function SelectContent({ className, children, ...props }, ref) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
-        ref={(ref) =>
-          ref?.addEventListener("touchend", (e) => e.preventDefault())
-        }
+        ref={ref}
         className={tw(
           " relative z-[200] overflow-hidden rounded border border-gray-300 bg-white p-3 shadow-md animate-in fade-in-80",
           className

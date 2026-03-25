@@ -79,7 +79,7 @@ export default function BulkDownloadQrDialog({
     if (!apiResponse) return;
 
     try {
-      const { assets, qrIdDisplayPreference, showShelfBranding, orgLogoSrc } = apiResponse;
+      const { assets, qrIdDisplayPreference, showShelfBranding, orgLogoSrc, orgName } = apiResponse;
 
       const zip = new JSZip();
       const qrFolder = zip.folder("qr-codes");
@@ -94,6 +94,7 @@ export default function BulkDownloadQrDialog({
             sequentialId={asset.sequentialId}
             showShelfBranding={showShelfBranding}
             orgLogoSrc={orgLogoSrc}
+            orgName={orgName}
           />
         )
       );

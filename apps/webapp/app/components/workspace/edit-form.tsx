@@ -198,7 +198,6 @@ const WorkspaceGeneralEditForms = ({
         </div>
 
         <LabelBrandingRow
-          zo={zo}
           organization={organization}
         />
 
@@ -502,52 +501,24 @@ const WorkspaceSSOEditForm = ({ className }: Props) => {
   ) : null;
 };
 
-/** Label branding row with live toggle preview */
+/** Label branding row — shows workspace name on label preview (logo not used on small B&W stickers) */
 function LabelBrandingRow({
-  zo,
   organization,
 }: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  zo: any;
-  organization: { showShelfBranding: boolean; imageId?: string | null };
+  zo?: any;
+  organization: { showShelfBranding: boolean; imageId?: string | null; name: string };
 }) {
-  const [showLogo, setShowLogo] = useState(organization.showShelfBranding ?? false);
-  const logoSrc = organization.imageId ? `/api/image/${organization.imageId}` : null;
-
   return (
     <FormRow
-      rowLabel={"Logo op labels"}
+      rowLabel={"Naam op labels"}
       className={"border-b-0"}
       subHeading={
         <p>
-          Toon het logo van uw werkruimte op QR- en streepjescodelabels. Stel
-          de hoofdafbeelding in via het veld hierboven.
+          De naam van uw werkruimte wordt automatisch op QR-labels weergegeven.
         </p>
       }
     >
       <div className="space-y-4">
-        <div className="flex items-center gap-3">
-          <input
-            type="hidden"
-            name={zo.fields.showShelfBranding()}
-            value="off"
-          />
-          <Switch
-            id="showShelfBranding"
-            name={zo.fields.showShelfBranding()}
-            defaultChecked={showLogo}
-            onCheckedChange={setShowLogo}
-            aria-labelledby="showShelfBranding-label"
-          />
-          <label
-            id="showShelfBranding-label"
-            htmlFor="showShelfBranding"
-            className="cursor-pointer text-[14px] font-medium text-gray-700"
-          >
-            Werkruimte-logo op labels weergeven
-          </label>
-        </div>
-
         {/* Live preview */}
         <div>
           <p className="mb-2 text-xs text-gray-500">Voorbeeldweergave label:</p>
@@ -555,16 +526,10 @@ function LabelBrandingRow({
             <QrLabel
               title="Voorbeeld asset"
               data={{ qr: { id: "QR-PREVIEW", src: "/static/images/qr-placeholder.png" } }}
-              showShelfBranding={showLogo}
-              orgLogoSrc={logoSrc}
+              orgName={organization.name}
               layout="square"
             />
           </div>
-          {!logoSrc && showLogo && (
-            <p className="mt-1 text-xs text-amber-600">
-              Upload een hoofdafbeelding hierboven om het logo op labels te tonen.
-            </p>
-          )}
         </div>
       </div>
     </FormRow>
