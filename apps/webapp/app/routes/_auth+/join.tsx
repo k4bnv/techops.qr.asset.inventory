@@ -50,9 +50,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
     });
   }
 
-  const { sessionStorage } = await import("~/../server/session");
+  const { sessionStorage, authSessionKey } = await import("~/../server/session");
   const session = await sessionStorage.getSession(request.headers.get("Cookie"));
-  if (session.has("user")) {
+  if (session.has(authSessionKey)) {
     throw redirect("/assets");
   }
 

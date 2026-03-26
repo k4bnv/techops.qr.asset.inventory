@@ -46,9 +46,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const subHeading = "Welkom terug! Vul uw gegevens hieronder in om in te loggen.";
   const { disableSSO } = config;
 
-  const { sessionStorage } = await import("~/../server/session");
+  const { sessionStorage, authSessionKey } = await import("~/../server/session");
   const session = await sessionStorage.getSession(request.headers.get("Cookie"));
-  if (session.has("user")) {
+  if (session.has(authSessionKey)) {
     throw redirect("/assets");
   }
 
@@ -97,9 +97,9 @@ export async function action({ request }: ActionFunctionArgs) {
       throw new Error("Invalid email or password");
     }
 
-    const { sessionStorage } = await import("~/../server/session");
+    const { sessionStorage, authSessionKey } = await import("~/../server/session");
     const session = await sessionStorage.getSession(request.headers.get("Cookie"));
-    session.set("user", authSession);
+    session.set(authSessionKey, authSession);
 
     return data(null, {
       status: 303,
