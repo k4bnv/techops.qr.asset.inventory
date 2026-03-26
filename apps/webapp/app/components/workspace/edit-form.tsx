@@ -5,7 +5,6 @@ import {
   OrganizationType,
   type QrIdDisplayPreference,
 } from "@prisma/client";
-import { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { useFetcher, useLoaderData } from "react-router";
 import { useZorm } from "react-zorm";
@@ -98,7 +97,7 @@ const WorkspaceGeneralEditForms = ({
   assetIdPrefix,
   className,
 }: Props) => {
-  const { organization, isPersonalWorkspace, canHideShelfBranding } =
+  const { organization, isPersonalWorkspace } =
     useLoaderData<typeof loader>();
   const [prefixValue, setPrefixValue] = useState(
     assetIdPrefix ?? organization.assetIdPrefix ?? "SAM"

@@ -332,11 +332,6 @@ export async function generateBulkSequentialIdsEfficient(
       `;
 
       totalUpdated += Number(batchResult);
-      console.log(
-        `🔧 DEBUG: Processed batch ${
-          Math.floor(i / BATCH_SIZE) + 1
-        }: ${batchResult} assets updated`
-      );
     }
 
     const result = totalUpdated;
@@ -354,12 +349,6 @@ export async function generateBulkSequentialIdsEfficient(
         GREATEST(${totalAssetsWithIds}, 1)
       )
     `;
-
-    console.log(
-      `Generated bulk sequential IDs for organization ${organizationId}: ${result} assets updated, starting from ${prefix}-${String(
-        startingNumber
-      ).padStart(4, "0")}`
-    );
 
     return Number(result);
   } catch (error) {
