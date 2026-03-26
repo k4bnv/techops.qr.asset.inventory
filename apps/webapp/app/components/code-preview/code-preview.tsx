@@ -555,8 +555,7 @@ export const QrLabel = React.forwardRef<HTMLDivElement, QrLabelProps>(
     } = props ?? {};
 
     const showLogo = showShelfBranding && !!orgLogoSrc;
-    // In continuous (24mm) mode: always show orgName text instead of logo (B&W sticker optimised)
-    const showOrgName = !!orgName;
+    const showOrgName = showShelfBranding && !!orgName;
 
     const isContinuous = layout === "continuous";
 
@@ -735,7 +734,7 @@ export const BarcodeLabel = React.forwardRef<HTMLDivElement, BarcodeLabelProps>(
   function BarcodeLabel(props, ref) {
     const { data, title, showShelfBranding = true, orgLogoSrc, orgName, layout = "square" } = props ?? {};
     const showLogo = showShelfBranding && !!orgLogoSrc;
-    const showOrgName = !!orgName;
+    const showOrgName = showShelfBranding && !!orgName;
 
     const isContinuous = layout === "continuous";
 
