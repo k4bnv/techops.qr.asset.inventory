@@ -13,20 +13,24 @@ import {
 
 import { useZorm } from "react-zorm";
 import { z } from "zod";
-import { db } from "~/database/db.server";
-
 import { Form } from "~/components/custom-form";
+
 import Input from "~/components/forms/input";
 import PasswordInput from "~/components/forms/password-input";
 import { Button } from "~/components/shared/button";
 import { config } from "~/config/shelf.config";
 import { useSearchParams } from "~/hooks/search-params";
 import { ContinueWithEmailForm } from "~/modules/auth/components/continue-with-email-form";
-import { authenticator } from "~/modules/auth/auth.server";
 import { signInWithEmail } from "~/modules/auth/service.server";
 
-import { appendToMetaTitle } from "~/utils/append-to-meta-title";
 import {
+  getSelectedOrganization,
+  setSelectedOrganizationIdCookie,
+} from "~/modules/organization/context.server";
+import { appendToMetaTitle } from "~/utils/append-to-meta-title";
+import { setCookie } from "~/utils/cookies.server";
+import {
+  ShelfError,
   isLikeShelfError,
   isZodValidationError,
   makeShelfError,
@@ -37,28 +41,21 @@ import {
   payload,
   error,
   getActionMethod,
+  parseData,
   safeRedirect,
 } from "~/utils/http.server";
 import { validEmail } from "~/utils/misc";
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export function loader({ context }: LoaderFunctionArgs) {
   const title = "Inloggen";
   const subHeading = "Welkom terug! Vul uw gegevens hieronder in om in te loggen.";
-  const { disableSSO } = config;
+  const { disableSignup, disableSSO } = config;
 
-  const { sessionStorage, authSessionKey } = await import("~/../server/session");
-  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
-  if (session.has(authSessionKey)) {
-    throw redirect("/assets");
+  if (context.isAuthenticated) {
+    return redirect("/assets");
   }
 
-  return db.siteConfig
-    .findUnique({ where: { key: "disableSignup" } })
-    .then((row) => {
-      const dbDisableSignup = (row?.value as { value: boolean } | null)?.value;
-      const disableSignup = dbDisableSignup !== undefined ? dbDisableSignup : config.disableSignup;
-      return data(payload({ title, subHeading, disableSignup, disableSSO }));
-    });
+  return data(payload({ title, subHeading, disableSignup, disableSSO }));
 }
 
 const LoginFormSchema = z.object({
@@ -72,42 +69,87 @@ const LoginFormSchema = z.object({
   redirectTo: z.string().optional(),
 });
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ context, request }: ActionFunctionArgs) {
   try {
     const method = getActionMethod(request);
 
-    if (method !== "POST") {
-      throw notAllowedMethod(method);
+    switch (method) {
+      case "POST": {
+        // Guard against bots sending non-form content types
+        const contentType = request.headers.get("content-type") || "";
+        if (
+          !contentType.includes("application/x-www-form-urlencoded") &&
+          !contentType.includes("multipart/form-data")
+        ) {
+          return data(
+            error(
+              new ShelfError({
+                cause: null,
+                message: "Ongeldig verzoek",
+                label: "Request validation",
+                shouldBeCaptured: false,
+                status: 400,
+              }),
+              false
+            ),
+            { status: 400 }
+          );
+        }
+
+        let formData: FormData;
+        try {
+          formData = await request.formData();
+        } catch (cause) {
+          return data(
+            error(
+              new ShelfError({
+                cause,
+                message: "Invalid request body",
+                label: "Request validation",
+                shouldBeCaptured: false,
+                status: 400,
+              }),
+              false
+            ),
+            { status: 400 }
+          );
+        }
+
+        const { email, password, redirectTo } = parseData(
+          formData,
+          LoginFormSchema,
+          { shouldBeCaptured: false }
+        );
+
+        const authSession = await signInWithEmail(email, password);
+
+        if (!authSession) {
+          return redirect(`/otp?email=${encodeURIComponent(email)}&mode=login`);
+        }
+        const { userId } = authSession;
+
+        /**
+         * The only reason we need to do this is because of the initial login
+         * Theoretically, the user should always have a selected organization cookie as soon as they login for the first time
+         * However we do this check to make sure they are still part of that organization
+         */
+        const { organizationId } = await getSelectedOrganization({
+          userId,
+          request,
+        });
+
+        // Set the auth session and redirect to the assets page
+        context.setSession(authSession);
+
+        return redirect(safeRedirect(redirectTo || "/assets"), {
+          headers: [
+            setCookie(await setSelectedOrganizationIdCookie(organizationId)),
+          ],
+        });
+      }
     }
 
-    // Get the form data to extract redirectTo, email and password
-    const clonedRequest = request.clone();
-    const formData = await clonedRequest.formData();
-    const redirectTo = (formData.get("redirectTo") as string) || "/assets";
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-
-    if (!email || !password) {
-      throw new Error("Email and password are required");
-    }
-
-    const authSession = await signInWithEmail(email, password);
-
-    if (!authSession) {
-      throw new Error("Invalid email or password");
-    }
-
-    const { sessionStorage, authSessionKey } = await import("~/../server/session");
-    const session = await sessionStorage.getSession(request.headers.get("Cookie"));
-    session.set(authSessionKey, authSession);
-
-    return data(null, {
-      status: 303,
-      headers: {
-        "Set-Cookie": await sessionStorage.commitSession(session),
-        Location: safeRedirect(redirectTo),
-      },
-    });
+    throw notAllowedMethod(method);
   } catch (cause) {
     const reason = makeShelfError(
       cause,
@@ -131,7 +173,7 @@ export default function IndexLoginForm() {
   const redirectTo = searchParams.get("redirectTo") ?? undefined;
   const acceptedInvite = searchParams.get("acceptedInvite");
   const passwordReset = searchParams.get("password_reset");
-  const actionData = useActionData<typeof action>();
+  const data = useActionData<typeof action>();
 
   const navigation = useNavigation();
   const disabled = isFormProcessing(navigation.state);
@@ -162,7 +204,7 @@ export default function IndexLoginForm() {
             autoComplete="username"
             disabled={disabled}
             inputClassName="w-full"
-            error={zo.errors.email()?.message || actionData?.error?.message}
+            error={zo.errors.email()?.message || data?.error.message}
           />
         </div>
         <PasswordInput
@@ -173,7 +215,7 @@ export default function IndexLoginForm() {
           autoComplete="current-password"
           disabled={disabled}
           inputClassName="w-full"
-          error={zo.errors.password()?.message || actionData?.error?.message}
+          error={zo.errors.password()?.message || data?.error.message}
         />
         <input type="hidden" name={zo.fields.redirectTo()} value={redirectTo} />
         <Button
@@ -225,14 +267,6 @@ export default function IndexLoginForm() {
           <ContinueWithEmailForm mode="login" />
         </div>
         {/* Registration is disabled per user request */}
-        {!disableSignup && (
-          <div className="mt-4 text-center text-sm text-gray-500">
-            Nog geen account?{" "}
-            <Button variant="link" to="/join">
-              Registreer hier
-            </Button>
-          </div>
-        )}
       </div>
     </div>
   );

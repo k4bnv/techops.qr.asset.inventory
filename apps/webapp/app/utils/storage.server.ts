@@ -1,4 +1,3 @@
-import { Buffer } from "node:buffer";
 import { Readable } from "node:stream";
 
 import {
@@ -37,13 +36,20 @@ export function getPublicFileURL({
   filename: string;
   bucketName?: string;
 }) {
-  // If filename is already a full URL or a relative proxy URL, return it
-  if (filename.startsWith("http") || filename.startsWith("/api/image")) {
-    return filename;
+  try {
+    const { data } = getSupabaseAdmin()
+      .storage.from(bucketName)
+      .getPublicUrl(filename);
+
+    return data.publicUrl;
+  } catch (cause) {
+    throw new ShelfError({
+      cause,
+      message: "Failed to get public file URL",
+      additionalData: { filename, bucketName },
+      label,
+    });
   }
-  
-  // For backwards compatibility or local IDs, return the proxy URL
-  return `/api/image/${filename}`;
 }
 
 export async function createSignedUrl({
@@ -53,8 +59,199 @@ export async function createSignedUrl({
   filename: string;
   bucketName?: string;
 }): Promise<string> {
-  // Standalone mode uses direct proxy URLs, so we just return the public URL
-  return getPublicFileURL({ filename, bucketName });
+  const normalizedFilename = filename.startsWith("/")
+    ? filename.substring(1)
+    : filename;
+  const maxAttempts = 3;
+
+  try {
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      const { data, error } = await getSupabaseAdmin()
+        .storage.from(bucketName)
+        .createSignedUrl(normalizedFilename, 24 * 60 * 60); //24h
+
+      if (!error) {
+        const signedUrl = data?.signedUrl;
+        if (!signedUrl) {
+          throw new ShelfError({
+            cause: null,
+            message: "Supabase did not return a signed URL",
+            additionalData: { filename: normalizedFilename, bucketName },
+            label,
+          });
+        }
+        return signedUrl;
+      }
+
+      // Supabase occasionally responds with HTML on 50x/edge errors, which the client surfaces
+      // as StorageUnknownError with a JSON parse failure. Retry before surfacing it to keep
+      // transient CDN hiccups from bubbling up as user-facing ShelfErrors.
+      const isHtmlError = isSupabaseHtmlError(error);
+      const isFetchFailed = isSupabaseFetchFailedError(error);
+
+      if (isHtmlError || isFetchFailed) {
+        if (attempt < maxAttempts) {
+          Logger.warn(
+            new ShelfError({
+              cause: error,
+              message: isHtmlError
+                ? "Supabase returned a non-JSON response while creating a signed URL. Retrying."
+                : "Supabase request failed while creating a signed URL. Retrying.",
+              additionalData: {
+                filename: normalizedFilename,
+                bucketName,
+                attempt,
+              },
+              label,
+              shouldBeCaptured: false,
+            })
+          );
+          await delay(1000);
+          continue;
+        }
+
+        // All retry attempts exhausted with HTML errors - this is a transient
+        // infrastructure issue that shouldn't spam Sentry
+        throw new ShelfError({
+          cause: error,
+          message:
+            "Supabase is experiencing temporary issues. Using existing URL.",
+          additionalData: {
+            filename: normalizedFilename,
+            bucketName,
+            attempts: maxAttempts,
+            errorType: isHtmlError
+              ? "persistent_html_error"
+              : "persistent_fetch_failed",
+          },
+          label,
+          shouldBeCaptured: false,
+        });
+      }
+
+      // Supabase returns 429 when the storage API is overwhelmed.
+      // Use exponential backoff to give the API time to recover.
+      if (isSupabaseRateLimitError(error)) {
+        if (attempt < maxAttempts) {
+          const backoffMs = Math.pow(2, attempt - 1) * 1000; // 1s, 2s
+          Logger.warn(
+            new ShelfError({
+              cause: error,
+              message:
+                "Supabase rate limit hit while creating a signed URL. Retrying with backoff.",
+              additionalData: {
+                filename: normalizedFilename,
+                bucketName,
+                attempt,
+                backoffMs,
+              },
+              label,
+              shouldBeCaptured: false,
+            })
+          );
+          await delay(backoffMs);
+          continue;
+        }
+
+        // All retries exhausted - this is a transient rate-limit issue
+        // that shouldn't spam Sentry
+        throw new ShelfError({
+          cause: error,
+          message:
+            "Supabase rate limit exceeded. Please try again in a moment.",
+          additionalData: {
+            filename: normalizedFilename,
+            bucketName,
+            attempts: maxAttempts,
+            errorType: "rate_limit_exceeded",
+          },
+          label,
+          shouldBeCaptured: false,
+        });
+      }
+
+      // Supabase returns 5xx (502, 503, 504) on transient infrastructure issues
+      // like gateway timeouts. Use exponential backoff before surfacing.
+      if (isSupabaseServerError(error)) {
+        if (attempt < maxAttempts) {
+          const backoffMs = Math.pow(2, attempt - 1) * 1000; // 1s, 2s
+          Logger.warn(
+            new ShelfError({
+              cause: error,
+              message:
+                "Supabase server error while creating a signed URL. Retrying with backoff.",
+              additionalData: {
+                filename: normalizedFilename,
+                bucketName,
+                attempt,
+                backoffMs,
+              },
+              label,
+              shouldBeCaptured: false,
+            })
+          );
+          await delay(backoffMs);
+          continue;
+        }
+
+        // All retries exhausted - this is a transient server issue
+        // that shouldn't spam Sentry
+        throw new ShelfError({
+          cause: error,
+          message:
+            "Supabase is experiencing temporary issues. Using existing URL.",
+          additionalData: {
+            filename: normalizedFilename,
+            bucketName,
+            attempts: maxAttempts,
+            errorType: "server_error",
+          },
+          label,
+          shouldBeCaptured: false,
+        });
+      }
+
+      throw error;
+    }
+
+    // The loop should always return or throw, but ensure we never fall through.
+    throw new ShelfError({
+      cause: null,
+      message: "Unable to create signed URL after retries.",
+      additionalData: { filename: normalizedFilename, bucketName },
+      label,
+    });
+  } catch (cause) {
+    // If it's already a ShelfError, preserve it (including shouldBeCaptured flag)
+    if (isLikeShelfError(cause)) {
+      throw cause;
+    }
+
+    throw new ShelfError({
+      cause,
+      message:
+        "Something went wrong while creating a signed URL. Please try again. If the issue persists contact support.",
+      additionalData: {
+        filename: normalizedFilename,
+        bucketName,
+        errorName:
+          typeof cause === "object" &&
+          cause !== null &&
+          "name" in cause &&
+          typeof (cause as { name?: unknown }).name === "string"
+            ? (cause as { name: string }).name
+            : undefined,
+        errorMessage:
+          typeof cause === "object" &&
+          cause !== null &&
+          "message" in cause &&
+          typeof (cause as { message?: unknown }).message === "string"
+            ? (cause as { message: string }).message
+            : undefined,
+      },
+      label,
+    });
+  }
 }
 
 export async function uploadFile(
@@ -65,43 +262,46 @@ export async function uploadFile(
     bucketName,
     resizeOptions,
     generateThumbnail = false,
-    thumbnailSize = 108,
+    thumbnailSize = 108, // Default thumbnail size
     upsert = false,
-    userId,
-    ownerOrgId,
   }: UploadOptions & {
     generateThumbnail?: boolean;
     thumbnailSize?: number;
     upsert?: boolean;
-    userId: string;
-    ownerOrgId: string;
   }
 ): Promise<string | { originalPath: string; thumbnailPath: string }> {
   try {
-    const { createFileFromAsyncIterable } = await import("./create-buffer-from-async-iterable");
-    const buffer = await createFileFromAsyncIterable(fileData);
-    const file = await cropImage(
-      (async function* () {
-        yield new Uint8Array(buffer);
-      })(),
-      resizeOptions
-    );
+    // Process original image
+    const file = await cropImage(fileData, resizeOptions);
 
-    const { db } = await import("~/database/db.server");
-    const image = await db.image.create({
-      data: {
-        contentType,
-        blob: Buffer.from(file),
-        userId,
-        ownerOrgId,
-      },
-    });
+    // Upload original file
+    const { data, error } = await getSupabaseAdmin()
+      .storage.from(bucketName)
+      .upload(filename, file, { contentType, upsert });
 
-    const path = `/api/image/${image.id}`;
+    if (error) {
+      throw error;
+    }
 
+    // If thumbnail generation is requested
     if (generateThumbnail) {
+      // Generate a thumbnail filename
+      let thumbFilename: string;
+
+      // Check if the file has an extension
+      if (filename.includes(".")) {
+        // File has extension, add '-thumbnail' before the extension
+        thumbFilename = filename.replace(/(\.[^.]+)$/, "-thumbnail$1");
+      } else {
+        // File has no extension, just append '-thumbnail'
+        thumbFilename = `${filename}-thumbnail`;
+      }
+
+      // Create thumbnail version with Sharp
       const thumbnailFile = await cropImage(
+        // Convert Buffer back to AsyncIterable for consistency
         (async function* () {
+          await Promise.resolve(); // Satisfy eslint requirement
           yield new Uint8Array(file);
         })(),
         {
@@ -112,22 +312,23 @@ export async function uploadFile(
         }
       );
 
-      const thumbImage = await db.image.create({
-        data: {
-          contentType,
-          blob: Buffer.from(thumbnailFile),
-          userId,
-          ownerOrgId,
-        },
-      });
+      // Upload thumbnail
+      const { data: thumbData, error: thumbError } = await getSupabaseAdmin()
+        .storage.from(bucketName)
+        .upload(thumbFilename, thumbnailFile, { contentType, upsert: true });
+
+      if (thumbError) {
+        throw thumbError;
+      }
 
       return {
-        originalPath: path,
-        thumbnailPath: `/api/image/${thumbImage.id}`,
+        originalPath: data.path,
+        thumbnailPath: thumbData.path,
       };
     }
 
-    return path;
+    // Return just the path string for backward compatibility
+    return data.path;
   } catch (cause) {
     const isShelfError = isLikeShelfError(cause);
 
@@ -135,7 +336,7 @@ export async function uploadFile(
       cause,
       message: isShelfError
         ? cause.message
-        : "Something went wrong while uploading the file to DB. Please try again or contact support.",
+        : "Something went wrong while uploading the file. Please try again or contact support.",
       additionalData: { filename, contentType, bucketName },
       label,
       shouldBeCaptured: isShelfError ? cause.shouldBeCaptured : undefined,
@@ -151,8 +352,6 @@ export interface UploadOptions {
   upsert?: boolean;
 }
 
-// ... existing code ...
-
 export async function parseFileFormData({
   request,
   newFileName,
@@ -161,8 +360,6 @@ export async function parseFileFormData({
   generateThumbnail = false,
   thumbnailSize = 108,
   maxFileSize = DEFAULT_MAX_IMAGE_UPLOAD_SIZE,
-  userId,
-  ownerOrgId,
 }: {
   request: Request;
   newFileName: string;
@@ -171,8 +368,6 @@ export async function parseFileFormData({
   generateThumbnail?: boolean;
   thumbnailSize?: number;
   maxFileSize?: number;
-  userId: string;
-  ownerOrgId: string;
 }) {
   try {
     const uploadHandler = async (upload: any) => {
@@ -211,8 +406,6 @@ export async function parseFileFormData({
         resizeOptions,
         generateThumbnail,
         thumbnailSize,
-        userId,
-        ownerOrgId,
       });
 
       // For profile pictures and other cases that don't need thumbnails,
@@ -389,7 +582,7 @@ async function normalizeToAsyncIterable(
  */
 export async function uploadImageFromUrl(
   imageUrl: string,
-  { filename, contentType, bucketName, resizeOptions, userId, ownerOrgId }: UploadOptions & { userId: string; ownerOrgId: string },
+  { filename, contentType, bucketName, resizeOptions }: UploadOptions,
   cache?: LRUCache<string, CachedImage>
 ): Promise<string | null> {
   try {
@@ -403,16 +596,30 @@ export async function uploadImageFromUrl(
         buffer = cached.buffer;
         actualContentType = cached.contentType;
 
-        const { db } = await import("~/database/db.server");
-        const image = await db.image.create({
-          data: {
+        // Upload cached optimized version
+        const { data, error } = await getSupabaseAdmin()
+          .storage.from(bucketName)
+          .upload(filename, buffer, {
             contentType: actualContentType,
-            blob: buffer,
-            userId,
-            ownerOrgId,
-          },
-        });
-        return `/api/image/${image.id}`;
+            upsert: true,
+            metadata: {
+              source: "url",
+              originalUrl: imageUrl,
+            },
+          });
+
+        if (error) {
+          /** Log the error so we are aware if there are some issues with uploading */
+          logUploadError(error, {
+            imageUrl,
+            filename,
+            contentType,
+            bucketName,
+          });
+
+          throw error;
+        }
+        return data.path;
       }
     }
 
@@ -534,33 +741,35 @@ export async function uploadImageFromUrl(
       resizeOptions
     );
 
-    const croppedBuffer = Buffer.from(file);
-
-    const { db } = await import("~/database/db.server");
-    const image = await db.image.create({
-      data: {
+    // Upload to Supabase
+    const { data, error } = await getSupabaseAdmin()
+      .storage.from(bucketName)
+      .upload(filename, file, {
         contentType: actualContentType,
-        blob: croppedBuffer,
-        userId,
-        ownerOrgId,
-      },
-    });
+        upsert: true,
+        metadata: {
+          source: "url",
+          originalUrl: imageUrl,
+        },
+      });
 
-    const path = `/api/image/${image.id}`;
-
-    // After successful upload, cache the optimized version if cache is provided
-    if (cache) {
-      const imageSize = croppedBuffer.length;
-      if (imageSize <= (cache.maxSize ?? 100 * 1024 * 1024) - (cache.calculatedSize || 0)) {
-        cache.set(imageUrl, {
-          buffer: croppedBuffer,
-          contentType: actualContentType,
-          size: imageSize,
-        });
-      }
+    if (error) {
+      /** Log the error so we are aware if there are some issues with uploading */
+      logUploadError(error, {
+        imageUrl,
+        filename,
+        contentType,
+        bucketName,
+      });
+      throw error;
     }
 
-    return path;
+    // After successful upload, cache the optimized version if cache is provided
+    if (cache && data.path) {
+      await cacheOptimizedImage(data.path, imageUrl, cache);
+    }
+
+    return data.path;
   } catch (cause) {
     const isShelfError = isLikeShelfError(cause);
 
@@ -590,7 +799,12 @@ export async function deleteProfilePicture({
   bucketName?: string;
 }) {
   try {
-    if (!url.startsWith("/api/image/") && !url.includes("profile-pictures")) {
+    if (
+      !url.startsWith(
+        `${SUPABASE_URL}/storage/v1/object/public/profile-pictures/`
+      ) ||
+      url === ""
+    ) {
       throw new ShelfError({
         cause: null,
         message: "Invalid file URL",
@@ -599,14 +813,12 @@ export async function deleteProfilePicture({
       });
     }
 
-    const imageId = url.replace("/api/image/", "");
-    const { db } = await import("~/database/db.server");
-    
-    // Check if the id is a valid cuid or uuid before trying to delete
-    if (imageId && !imageId.includes("/")) {
-      await db.image.deleteMany({
-        where: { id: imageId },
-      });
+    const { error } = await getSupabaseAdmin()
+      .storage.from(bucketName)
+      .remove([url.split(`${bucketName}/`)[1]]);
+
+    if (error) {
+      throw error;
     }
   } catch (cause) {
     Logger.error(
@@ -638,11 +850,12 @@ export async function deleteAssetImage({
       });
     }
 
-    const { db } = await import("~/database/db.server");
-    if (path && !path.includes("/")) {
-      await db.image.deleteMany({
-        where: { id: path },
-      });
+    const { error } = await getSupabaseAdmin()
+      .storage.from(bucketName)
+      .remove([path]);
+
+    if (error) {
+      throw error;
     }
 
     return true;
@@ -678,7 +891,11 @@ export function getFileUploadPath({
  */
 export async function removePublicFile({ publicUrl }: { publicUrl: string }) {
   try {
-    if (!publicUrl.startsWith("/api/image/") && !publicUrl.includes(PUBLIC_BUCKET)) {
+    if (
+      !publicUrl.startsWith(
+        `${SUPABASE_URL}/storage/v1/object/public/${PUBLIC_BUCKET}/`
+      )
+    ) {
       throw new ShelfError({
         cause: null,
         message: "Invalid file URL",
@@ -687,13 +904,12 @@ export async function removePublicFile({ publicUrl }: { publicUrl: string }) {
       });
     }
 
-    const imageId = publicUrl.replace("/api/image/", "");
-    const { db } = await import("~/database/db.server");
-    
-    if (imageId && !imageId.includes("/")) {
-      await db.image.deleteMany({
-        where: { id: imageId },
-      });
+    const { error } = await getSupabaseAdmin()
+      .storage.from(PUBLIC_BUCKET)
+      .remove([publicUrl.split(`${PUBLIC_BUCKET}/`)[1]]);
+
+    if (error) {
+      throw error;
     }
   } catch (cause) {
     throw new ShelfError({

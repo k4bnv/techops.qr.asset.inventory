@@ -34,29 +34,32 @@ import {
 import { validEmail } from "~/utils/misc";
 import { validateNonSSOSignup } from "~/utils/sso.server";
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export function loader({ context }: LoaderFunctionArgs) {
   const title = "Account aanmaken";
   const subHeading = "Begin uw reis met TechOps";
   const { disableSignup } = config;
 
-  if (disableSignup) {
-    throw new ShelfError({
-      cause: null,
-      title: "Aanmelden is uitgeschakeld",
-      message: "Neem contact op met uw werkruimtebeheerder voor meer informatie.",
-      label: "User onboarding",
-      status: 403,
-      shouldBeCaptured: false,
-    });
-  }
+  try {
+    if (disableSignup) {
+      throw new ShelfError({
+        cause: null,
+        title: "Aanmelden is uitgeschakeld",
+        message:
+          "Neem contact op met uw werkruimtebeheerder voor meer informatie.",
+        label: "User onboarding",
+        status: 403,
+        shouldBeCaptured: false,
+      });
+    }
+    if (context.isAuthenticated) {
+      return redirect("/assets");
+    }
 
-  const { sessionStorage, authSessionKey } = await import("~/../server/session");
-  const session = await sessionStorage.getSession(request.headers.get("Cookie"));
-  if (session.has(authSessionKey)) {
-    throw redirect("/assets");
+    return data(payload({ title, subHeading }));
+  } catch (cause) {
+    const reason = makeShelfError(cause);
+    throw data(error(reason), { status: reason.status });
   }
-
-  return data(payload({ title, subHeading }));
 }
 
 const JoinFormSchema = z
@@ -89,37 +92,41 @@ export async function action({ request }: ActionFunctionArgs) {
   try {
     const method = getActionMethod(request);
 
-    if (method !== "POST") {
-      throw notAllowedMethod(method);
+    switch (getActionMethod(request)) {
+      case "POST": {
+        const { email, password } = parseData(
+          await request.formData(),
+          JoinFormSchema,
+          { shouldBeCaptured: false }
+        );
+        // Block signup if domain uses SSO
+        await validateNonSSOSignup(email);
+
+        const existingUser = await findUserByEmail(email);
+
+        if (existingUser) {
+          throw new ShelfError({
+            cause: null,
+            message: "Gebruiker met dit e-mailadres bestaat al, log in plaats daarvan in",
+            additionalData: {
+              email,
+            },
+            label: "User onboarding",
+            shouldBeCaptured: false,
+            status: 409,
+          });
+        }
+
+        // Sign up with the provided email and password
+        await signUpWithEmailPass(email, password);
+
+        return redirect(
+          `/otp?email=${encodeURIComponent(email)}&mode=confirm_signup`
+        );
+      }
     }
 
-    const { email, password, redirectTo } = parseData(
-      await request.formData(),
-      JoinFormSchema,
-      { shouldBeCaptured: false }
-    );
-    // Block signup if domain uses SSO
-    await validateNonSSOSignup(email);
-
-    const existingUser = await findUserByEmail(email);
-
-    if (existingUser) {
-      throw new ShelfError({
-        cause: null,
-        message:
-          "Gebruiker met dit e-mailadres bestaat al, log in plaats daarvan in",
-        additionalData: { email },
-        label: "User onboarding",
-        shouldBeCaptured: false,
-        status: 409,
-      });
-    }
-
-    // Sign up with the provided email and password
-    await signUpWithEmailPass(email, password);
-
-    // After successful signup, redirect to login page with success message
-    return redirect(`/login?registered=true&redirectTo=${encodeURIComponent(redirectTo || "/assets")}`);
+    throw notAllowedMethod(method);
   } catch (cause) {
     const reason = makeShelfError(
       cause,
@@ -140,7 +147,7 @@ export default function Join() {
   const redirectTo = searchParams.get("redirectTo") ?? undefined;
   const navigation = useNavigation();
   const disabled = isFormProcessing(navigation.state);
-  const actionData = useActionData<typeof action>();
+  const data = useActionData<typeof action>();
 
   return (
     <div className="flex min-h-full flex-col justify-center">
@@ -158,7 +165,7 @@ export default function Join() {
               autoComplete="email"
               disabled={disabled}
               inputClassName="w-full"
-              error={zo.errors.email()?.message || actionData?.error?.message}
+              error={zo.errors.email()?.message || data?.error.message}
             />
           </div>
 
