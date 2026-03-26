@@ -33,6 +33,7 @@ import {
   updateOrganization,
   updateOrganizationPermissions,
 } from "~/modules/organization/service.server";
+import { setOrganizationSequenceStart } from "~/modules/asset/sequential-id.server";
 import { getOrganizationTierLimit } from "~/modules/tier/service.server";
 import { appendToMetaTitle } from "~/utils/append-to-meta-title";
 import { resolveShowShelfBranding } from "~/utils/branding";
@@ -231,8 +232,15 @@ export async function action({ context, request }: ActionFunctionArgs) {
           additionalData: { userId, organizationId },
         });
 
-        const { name, currency, id, qrIdDisplayPreference, showShelfBranding } =
-          payload;
+        const {
+          name,
+          currency,
+          id,
+          qrIdDisplayPreference,
+          showShelfBranding,
+          assetIdPrefix,
+          assetIdSequenceStart,
+        } = payload;
 
         /** User is allowed to edit his/her current organization only not other organizations. */
         if (currentOrganization.id !== id) {
@@ -286,7 +294,13 @@ export async function action({ context, request }: ActionFunctionArgs) {
           currency,
           qrIdDisplayPreference,
           showShelfBranding: nextShowShelfBranding,
+          ...(assetIdPrefix && { assetIdPrefix }),
         });
+
+        // If a sequence start number is provided, reset the org's sequence
+        if (typeof assetIdSequenceStart === "number") {
+          await setOrganizationSequenceStart(organizationId, assetIdSequenceStart);
+        }
 
         sendNotification({
           title: "Werkruimte bijgewerkt",
@@ -448,6 +462,7 @@ export default function GeneralPage() {
         name={organization.name}
         currency={organization.currency}
         qrIdDisplayPreference={organization.qrIdDisplayPreference}
+        assetIdPrefix={organization.assetIdPrefix}
       />
 
       <Card className={tw("mb-0")}>

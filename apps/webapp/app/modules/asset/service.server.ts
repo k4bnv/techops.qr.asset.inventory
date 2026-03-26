@@ -969,10 +969,17 @@ export async function createAsset({
   let attempts = 0;
   const maxAttempts = 3;
 
+  // Look up the organization's custom prefix
+  const org = await db.organization.findUnique({
+    where: { id: organizationId },
+    select: { assetIdPrefix: true },
+  });
+  const assetPrefix = org?.assetIdPrefix ?? "SAM";
+
   while (attempts < maxAttempts) {
     try {
-      // Generate sequential ID
-      const sequentialId = await getNextSequentialId(organizationId);
+      // Generate sequential ID using the organization's configured prefix
+      const sequentialId = await getNextSequentialId(organizationId, assetPrefix);
 
       /** User connection data */
       const user = {

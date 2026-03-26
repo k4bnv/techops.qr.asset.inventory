@@ -5,6 +5,7 @@ import {
   OrganizationType,
   type QrIdDisplayPreference,
 } from "@prisma/client";
+import { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { useFetcher, useLoaderData } from "react-router";
 import { useZorm } from "react-zorm";
@@ -33,6 +34,7 @@ interface Props {
   name?: Organization["name"];
   currency?: Organization["currency"];
   qrIdDisplayPreference?: Organization["qrIdDisplayPreference"];
+  assetIdPrefix?: Organization["assetIdPrefix"];
   className?: string;
 }
 
@@ -54,12 +56,27 @@ export const EditGeneralWorkspaceSettingsFormSchema = (
         return value === "on";
       })
       .optional(),
+    assetIdPrefix: z
+      .string()
+      .min(1, "Minimaal 1 teken vereist")
+      .max(6, "Maximaal 6 tekens toegestaan")
+      .regex(/^[A-Z]+$/, "Alleen hoofdletters (A-Z) toegestaan")
+      .optional(),
+    assetIdSequenceStart: z
+      .string()
+      .optional()
+      .transform((val) => {
+        if (!val || val.trim() === "") return undefined;
+        const n = parseInt(val, 10);
+        return isNaN(n) || n < 1 ? undefined : n;
+      }),
   });
 
 export const WorkspaceEditForms = ({
   name,
   currency,
   qrIdDisplayPreference,
+  assetIdPrefix,
   className,
 }: Props) => (
   <div className={tw("flex flex-col gap-3", className)}>
@@ -67,6 +84,7 @@ export const WorkspaceEditForms = ({
       name={name}
       currency={currency}
       qrIdDisplayPreference={qrIdDisplayPreference}
+      assetIdPrefix={assetIdPrefix}
     />
     <WorkspacePermissionsEditForm />
     <WorkspaceSSOEditForm />
@@ -77,10 +95,14 @@ const WorkspaceGeneralEditForms = ({
   name,
   currency,
   qrIdDisplayPreference,
+  assetIdPrefix,
   className,
 }: Props) => {
   const { organization, isPersonalWorkspace, canHideShelfBranding } =
     useLoaderData<typeof loader>();
+  const [prefixValue, setPrefixValue] = useState(
+    assetIdPrefix ?? organization.assetIdPrefix ?? "SAM"
+  );
 
   const schema = EditGeneralWorkspaceSettingsFormSchema(isPersonalWorkspace);
   const zo = useZorm("NewQuestionWizardScreen", schema);
@@ -201,6 +223,64 @@ const WorkspaceGeneralEditForms = ({
           zo={zo}
           organization={organization}
         />
+
+        <FormRow
+          rowLabel={"Asset ID prefix"}
+          className={"border-b-0"}
+          subHeading={
+            <p>
+              Stel het letterprefix in voor asset-identificatoren (bijv. <b>AST</b> → AST-0001). Alleen hoofdletters, max. 6 tekens. Nieuwe assets gebruiken dit prefix.
+            </p>
+          }
+        >
+          <div className="flex flex-col gap-1">
+            <InnerLabel hideLg>Asset ID prefix</InnerLabel>
+            <div className="flex items-center gap-2">
+              <Input
+                label="Asset ID prefix"
+                hideLabel
+                name={zo.fields.assetIdPrefix()}
+                error={zo.errors.assetIdPrefix()?.message}
+                className="w-32"
+                value={prefixValue}
+                onChange={(e) =>
+                  setPrefixValue(e.target.value.toUpperCase().replace(/[^A-Z]/g, ""))
+                }
+                placeholder="SAM"
+                maxLength={6}
+                disabled={disabled}
+              />
+              <span className="text-sm text-gray-500">
+                Voorbeeld: <b>{prefixValue || "SAM"}-0001</b>
+              </span>
+            </div>
+          </div>
+        </FormRow>
+
+        <FormRow
+          rowLabel={"Startnummer reeks"}
+          className={"border-b-0"}
+          subHeading={
+            <p>
+              Stel het startnummer in voor nieuwe assets (bijv. <b>100</b> → eerste asset krijgt {prefixValue || "SAM"}-0100). Laat leeg om door te gaan vanaf het huidige nummer. <b>Let op:</b> dit overschrijft de huidige teller.
+            </p>
+          }
+        >
+          <div className="flex flex-col gap-1">
+            <InnerLabel hideLg>Startnummer reeks</InnerLabel>
+            <Input
+              label="Startnummer reeks"
+              hideLabel
+              name={zo.fields.assetIdSequenceStart()}
+              error={zo.errors.assetIdSequenceStart()?.message}
+              className="w-32"
+              type="number"
+              min={1}
+              placeholder="1"
+              disabled={disabled}
+            />
+          </div>
+        </FormRow>
 
         <div className="text-right">
           <Button

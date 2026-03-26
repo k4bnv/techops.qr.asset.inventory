@@ -262,6 +262,7 @@ export async function updateOrganization({
   qrIdDisplayPreference,
   showShelfBranding,
   customEmailFooter,
+  assetIdPrefix,
 }: Pick<Organization, "id"> & {
   currency?: Organization["currency"];
   name?: string;
@@ -276,6 +277,7 @@ export async function updateOrganization({
   qrIdDisplayPreference?: Organization["qrIdDisplayPreference"];
   showShelfBranding?: Organization["showShelfBranding"];
   customEmailFooter?: string | null;
+  assetIdPrefix?: Organization["assetIdPrefix"];
 }) {
   try {
     const data = {
@@ -289,6 +291,7 @@ export async function updateOrganization({
         showShelfBranding,
       }),
       ...(customEmailFooter !== undefined && { customEmailFooter }),
+      ...(assetIdPrefix !== undefined && { assetIdPrefix }),
       ...(ssoDetails && {
         ssoDetails: {
           update: ssoDetails,

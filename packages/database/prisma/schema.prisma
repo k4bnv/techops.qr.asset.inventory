@@ -748,6 +748,9 @@ model Organization {
   // Migration flag to track if sequential IDs have been generated for this organization's existing assets
   hasSequentialIdsMigrated Boolean @default(false)
 
+  // Prefix for Asset IDs in this workspace
+  assetIdPrefix String @default("SAM")
+
   // QR code display preference - which ID to show on QR code labels
   qrIdDisplayPreference QrIdDisplayPreference @default(QR_ID)
 

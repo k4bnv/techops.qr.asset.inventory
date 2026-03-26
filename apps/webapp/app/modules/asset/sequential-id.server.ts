@@ -139,6 +139,39 @@ export async function resetOrganizationSequence(
 }
 
 /**
+ * Sets the organization's asset sequence to start from a specific number.
+ * Useful when admins want to configure a custom starting point (e.g., 100, 1000).
+ *
+ * @param organizationId - The organization ID
+ * @param startNumber - The number the next generated ID should be (e.g., 1 → first asset gets PREFIX-0001)
+ */
+export async function setOrganizationSequenceStart(
+  organizationId: string,
+  startNumber: number
+): Promise<void> {
+  try {
+    // Ensure sequence exists
+    await createOrganizationSequence(organizationId);
+
+    // setval with false means the next nextval() call returns startNumber (not startNumber+1)
+    const setTo = Math.max(1, startNumber - 1);
+    await db.$executeRaw`
+      SELECT setval(
+        'org_' || ${organizationId} || '_asset_sequence',
+        ${setTo},
+        false
+      )
+    `;
+  } catch (error) {
+    console.error(
+      `Failed to set sequence start for organization ${organizationId}:`,
+      error
+    );
+    throw new Error(`Could not set asset sequence start number`);
+  }
+}
+
+/**
  * Checks if an organization has any assets with sequential IDs
  * Used to determine if bulk generation is needed
  *
