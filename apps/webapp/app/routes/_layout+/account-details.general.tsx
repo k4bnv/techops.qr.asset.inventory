@@ -438,6 +438,16 @@ export default function UserPage() {
           </Card>
         </>
       )}
+      <div className="mt-2 text-center text-xs text-gray-400">
+        <a
+          href="/privacy-policy"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-gray-600"
+        >
+          Privacybeleid
+        </a>
+      </div>
     </div>
   );
 }

@@ -236,6 +236,17 @@ export default function Join() {
             </Button>
           </div>
         </div>
+        <div className="mt-4 text-center text-xs text-gray-400">
+          Door te registreren gaat u akkoord met ons{" "}
+          <a
+            href="/privacy-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-gray-600"
+          >
+            Privacybeleid
+          </a>
+        </div>
       </div>
     </div>
   );
