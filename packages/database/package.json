@@ -23,7 +23,8 @@
     "db:deploy-migration:staging": "dotenv -e ../../.env.staging -- prisma migrate deploy && prisma generate",
     "db:deploy-migration:production": "dotenv -e ../../.env.production -- prisma migrate deploy && prisma generate",
     "db:reset": "prisma migrate reset",
-    "db:reset:staging": "dotenv -e ../../.env.staging -- prisma migrate reset"
+    "db:reset:staging": "dotenv -e ../../.env.staging -- prisma migrate reset",
+    "db:seed": "tsx src/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.19.2"
