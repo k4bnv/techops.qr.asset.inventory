@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
-import type { Organization, Currency } from "@prisma/client";
+import type { Organization } from "@prisma/client";
 import { useAtom, useAtomValue } from "jotai";
 import { useActionData, useNavigation } from "react-router";
 import { useZorm } from "react-zorm";
@@ -9,37 +9,27 @@ import { updateDynamicTitleAtom } from "~/atoms/dynamic-title-atom";
 import { defaultValidateFileAtom, fileErrorAtom } from "~/atoms/file";
 import { useSearchParams } from "~/hooks/search-params";
 import { ACCEPT_SUPPORTED_IMAGES } from "~/utils/constants";
-import { ISO_4217_CURRENCIES } from "~/utils/currency";
 import { isFormProcessing } from "~/utils/form";
 import { zodFieldIsRequired } from "~/utils/zod";
 import { Form } from "../custom-form";
 import FormRow from "../forms/form-row";
-import { InnerLabel } from "../forms/inner-label";
 import Input from "../forms/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../forms/select";
 import { Button } from "../shared/button";
 import { Card } from "../shared/card";
 import { Spinner } from "../shared/spinner";
 
 export const NewWorkspaceFormSchema = z.object({
   name: z.string().min(2, "Naam is vereist"),
-  currency: z.custom<Currency>(),
+  currency: z.string(),
 });
 
 /** Pass props of the values to be used as default for the form fields */
 interface Props {
   name?: Organization["name"];
-  currency?: Organization["currency"];
   children?: string | ReactNode;
 }
 
-export const WorkspaceForm = ({ name, currency, children }: Props) => {
+export const WorkspaceForm = ({ name, children }: Props) => {
   const actionData = useActionData<{ error?: any }>();
   const [searchParams] = useSearchParams();
   const navigation = useNavigation();
@@ -123,41 +113,7 @@ export const WorkspaceForm = ({ name, currency, children }: Props) => {
           </div>
         </FormRow>
 
-        <div>
-          <FormRow
-            rowLabel={"Currency"}
-            className={children ? "border-b-0" : ""}
-            subHeading="Choose the currency for your workspace. All ISO 4217 currencies are supported."
-          >
-            <InnerLabel hideLg>Currency</InnerLabel>
-
-            <Select
-              defaultValue={currency || "USD"}
-              disabled={disabled}
-              name={zo.fields.currency()}
-            >
-              <SelectTrigger className="px-3.5 py-3">
-                <SelectValue placeholder="Kies een valuta" />
-              </SelectTrigger>
-              <SelectContent
-                position="popper"
-                className="w-full min-w-[300px]"
-                align="start"
-              >
-                <div className=" max-h-[320px] overflow-auto">
-                  {ISO_4217_CURRENCIES.map((c) => (
-                    <SelectItem value={c.code} key={c.code}>
-                      <span className="mr-4 text-[14px] text-gray-700">
-                        <span className="font-medium">{c.code}</span>
-                        <span className="ml-2 text-gray-500">{c.name}</span>
-                      </span>
-                    </SelectItem>
-                  ))}
-                </div>
-              </SelectContent>
-            </Select>
-          </FormRow>
-        </div>
+        <input type="hidden" name={zo.fields.currency()} value="EUR" />
         <div className="text-right">
           <Button type="submit" disabled={disabled}>
             {disabled ? <Spinner /> : "Save"}

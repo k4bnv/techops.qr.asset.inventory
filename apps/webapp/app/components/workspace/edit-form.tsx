@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   type Organization,
-  type Currency,
   OrganizationType,
   type QrIdDisplayPreference,
 } from "@prisma/client";
@@ -17,7 +16,6 @@ import type { loader } from "~/routes/_layout+/account-details.workspace.$worksp
 import { ACCEPT_SUPPORTED_IMAGES } from "~/utils/constants";
 import { tw } from "~/utils/tw";
 import { zodFieldIsRequired } from "~/utils/zod";
-import CurrencySelector from "./currency-selector";
 import QrIdDisplayPreferenceSelector from "./qr-id-display-preference-selector";
 import { QrLabel } from "../code-preview/code-preview";
 import FormRow from "../forms/form-row";
@@ -31,7 +29,6 @@ import { Spinner } from "../shared/spinner";
 /** Pass props of the values to be used as default for the form fields */
 interface Props {
   name?: Organization["name"];
-  currency?: Organization["currency"];
   qrIdDisplayPreference?: Organization["qrIdDisplayPreference"];
   assetIdPrefix?: Organization["assetIdPrefix"];
   className?: string;
@@ -46,7 +43,7 @@ export const EditGeneralWorkspaceSettingsFormSchema = (
       ? z.string().optional()
       : z.string().min(2, "Naam is vereist"),
     logo: z.any().optional(),
-    currency: z.custom<Currency>(),
+    currency: z.string(),
     qrIdDisplayPreference: z.custom<QrIdDisplayPreference>(),
     showShelfBranding: z
       .union([z.literal("on"), z.literal("off"), z.undefined()])
@@ -73,7 +70,6 @@ export const EditGeneralWorkspaceSettingsFormSchema = (
 
 export const WorkspaceEditForms = ({
   name,
-  currency,
   qrIdDisplayPreference,
   assetIdPrefix,
   className,
@@ -81,7 +77,6 @@ export const WorkspaceEditForms = ({
   <div className={tw("flex flex-col gap-3", className)}>
     <WorkspaceGeneralEditForms
       name={name}
-      currency={currency}
       qrIdDisplayPreference={qrIdDisplayPreference}
       assetIdPrefix={assetIdPrefix}
     />
@@ -92,7 +87,6 @@ export const WorkspaceEditForms = ({
 
 const WorkspaceGeneralEditForms = ({
   name,
-  currency,
   qrIdDisplayPreference,
   assetIdPrefix,
   className,
@@ -186,19 +180,7 @@ const WorkspaceGeneralEditForms = ({
           </div>
         </FormRow>
 
-        <div>
-          <FormRow
-            rowLabel={"Valuta"}
-            className={"border-b-0"}
-            subHeading="Kies de valuta voor uw werkruimte. Alle ISO 4217-valuta's worden ondersteund."
-          >
-            <InnerLabel hideLg>Valuta</InnerLabel>
-            <CurrencySelector
-              defaultValue={currency || "EUR"}
-              name={zo.fields.currency()}
-            />
-          </FormRow>
-        </div>
+        <input type="hidden" name={zo.fields.currency()} value="EUR" />
 
         <div>
           <FormRow

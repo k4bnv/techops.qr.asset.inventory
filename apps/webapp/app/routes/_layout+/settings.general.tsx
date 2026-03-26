@@ -460,7 +460,6 @@ export default function GeneralPage() {
     <div className="mb-2.5 flex flex-col justify-between">
       <WorkspaceEditForms
         name={organization.name}
-        currency={organization.currency}
         qrIdDisplayPreference={organization.qrIdDisplayPreference}
         assetIdPrefix={organization.assetIdPrefix}
       />

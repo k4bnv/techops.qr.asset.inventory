@@ -440,7 +440,6 @@ export default function WorkspaceEditPage() {
       <div className="items-top flex justify-between">
         <WorkspaceEditForms
           name={organization.name || name}
-          currency={organization.currency}
           qrIdDisplayPreference={organization.qrIdDisplayPreference}
           className="mt-4"
         />
