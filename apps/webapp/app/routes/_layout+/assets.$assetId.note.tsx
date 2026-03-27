@@ -36,33 +36,33 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
   });
 
   try {
-    const { organizationId } = await requirePermission({
-      userId,
-      request,
-      entity: PermissionEntity.asset,
-      action: PermissionAction.update,
-    });
-
-    // Validate that the asset belongs to the user's organization
-    const asset = await db.asset.findUnique({
-      where: { id: assetId, organizationId },
-      select: { id: true },
-    });
-
-    if (!asset) {
-      throw new ShelfError({
-        cause: null,
-        message: "Asset niet gevonden of toegang geweigerd",
-        additionalData: { userId, assetId },
-        label: "Assets",
-        status: 404,
-      });
-    }
-
     const method = getActionMethod(request);
 
     switch (method) {
       case "POST": {
+        const { organizationId } = await requirePermission({
+          userId,
+          request,
+          entity: PermissionEntity.note,
+          action: PermissionAction.create,
+        });
+
+        // Validate that the asset belongs to the user's organization
+        const asset = await db.asset.findUnique({
+          where: { id: assetId, organizationId },
+          select: { id: true },
+        });
+
+        if (!asset) {
+          throw new ShelfError({
+            cause: null,
+            message: "Asset niet gevonden of toegang geweigerd",
+            additionalData: { userId, assetId },
+            label: "Assets",
+            status: 404,
+          });
+        }
+
         const { content } = parseData(
           await request.formData(),
           MarkdownNoteSchema,
@@ -87,6 +87,29 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
         return payload({ note });
       }
       case "DELETE": {
+        const { organizationId } = await requirePermission({
+          userId,
+          request,
+          entity: PermissionEntity.note,
+          action: PermissionAction.delete,
+        });
+
+        // Validate asset ownership before deleting
+        const asset = await db.asset.findUnique({
+          where: { id: assetId, organizationId },
+          select: { id: true },
+        });
+
+        if (!asset) {
+          throw new ShelfError({
+            cause: null,
+            message: "Asset niet gevonden of toegang geweigerd",
+            additionalData: { userId, assetId },
+            label: "Assets",
+            status: 404,
+          });
+        }
+
         const { noteId } = parseData(
           await request.formData(),
           z.object({

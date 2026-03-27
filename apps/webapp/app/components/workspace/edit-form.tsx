@@ -31,6 +31,7 @@ interface Props {
   name?: Organization["name"];
   qrIdDisplayPreference?: Organization["qrIdDisplayPreference"];
   assetIdPrefix?: Organization["assetIdPrefix"];
+  repairsEnabled?: Organization["repairsEnabled"];
   className?: string;
 }
 
@@ -66,12 +67,17 @@ export const EditGeneralWorkspaceSettingsFormSchema = (
         const n = parseInt(val, 10);
         return isNaN(n) || n < 1 ? undefined : n;
       }),
+    repairsEnabled: z
+      .string()
+      .transform((val) => val === "on")
+      .default("false"),
   });
 
 export const WorkspaceEditForms = ({
   name,
   qrIdDisplayPreference,
   assetIdPrefix,
+  repairsEnabled,
   className,
 }: Props) => (
   <div className={tw("flex flex-col gap-3", className)}>
@@ -79,6 +85,7 @@ export const WorkspaceEditForms = ({
       name={name}
       qrIdDisplayPreference={qrIdDisplayPreference}
       assetIdPrefix={assetIdPrefix}
+      repairsEnabled={repairsEnabled}
     />
     <WorkspacePermissionsEditForm />
     <WorkspaceSSOEditForm />
@@ -89,6 +96,7 @@ const WorkspaceGeneralEditForms = ({
   name,
   qrIdDisplayPreference,
   assetIdPrefix,
+  repairsEnabled,
   className,
 }: Props) => {
   const { organization, isPersonalWorkspace } =
@@ -262,6 +270,35 @@ const WorkspaceGeneralEditForms = ({
             />
           </div>
         </FormRow>
+
+        <div>
+          <h4 className="mt-5 border-t pt-5 text-text-md">Extra Functies</h4>
+          <FormRow
+            rowLabel={`Reparaties inschakelen`}
+            subHeading={
+              <div>
+                Schakel de <b>Reparaties</b> / Onderhoud module in voor deze werkruimte.
+              </div>
+            }
+            className="border-b-0 pb-[10px]"
+            required
+          >
+            <div className="flex flex-col items-center gap-2">
+              <Switch
+                name={zo.fields.repairsEnabled()}
+                id="repairsEnabled"
+                disabled={disabled}
+                defaultChecked={repairsEnabled ?? organization.repairsEnabled}
+              />
+              <label
+                htmlFor={`repairsEnabled`}
+                className=" hidden text-gray-500"
+              >
+                Inschakelen
+              </label>
+            </div>
+          </FormRow>
+        </div>
 
         <div className="text-right">
           <Button

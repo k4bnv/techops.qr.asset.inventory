@@ -17,6 +17,7 @@ import {
   SettingsIcon,
   TagsIcon,
   UsersRoundIcon,
+  WrenchIcon,
   type LucideIcon,
 } from "lucide-react";
 import { useLoaderData } from "react-router";
@@ -160,6 +161,13 @@ export function useSidebarNavItems() {
       to: url("audits", "/audits"),
       Icon: ClipboardCheckIcon,
       hidden: !nav("audits"),
+    },
+    {
+      type: "child",
+      title: "Reparaties",
+      to: "/repairs",
+      Icon: WrenchIcon,
+      hidden: !currentOrganization?.repairsEnabled,
     },
     {
       type: "parent",

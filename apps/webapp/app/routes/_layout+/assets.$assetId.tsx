@@ -69,12 +69,13 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
   });
 
   try {
-    const { organizationId, userOrganizations } = await requirePermission({
-      userId,
-      request,
-      entity: PermissionEntity.asset,
-      action: PermissionAction.read,
-    });
+    const { organizationId, userOrganizations, canUseRepairs } =
+      await requirePermission({
+        userId,
+        request,
+        entity: PermissionEntity.asset,
+        action: PermissionAction.read,
+      });
 
     const asset = await getAsset({
       id,
@@ -95,9 +96,10 @@ export async function loader({ context, request, params }: LoaderFunctionArgs) {
     return payload({
       asset,
       header,
+      canUseRepairs,
     });
   } catch (cause) {
-    const reason = makeShelfError(cause);
+    const reason = makeShelfError(cause, { userId });
     throw data(error(reason), { status: reason.status });
   }
 }
@@ -309,13 +311,14 @@ export const links: LinksFunction = () => [
 ];
 
 export default function AssetDetailsPage() {
-  const { asset } = useLoaderData<typeof loader>();
+  const { asset, canUseRepairs } = useLoaderData<typeof loader>();
 
   const { roles } = useUserRoleHelper();
 
   const items = [
     { to: "overview", content: "Overview" },
     { to: "activity", content: "Activity" },
+    { to: "notes", content: "Notities" },
     { to: "bookings", content: "Bookings" },
     ...(userHasPermission({
       roles,
@@ -324,6 +327,7 @@ export default function AssetDetailsPage() {
     })
       ? [{ to: "reminders", content: "Reminders" }]
       : []),
+    ...(canUseRepairs ? [{ to: "repairs", content: "Reparaties" }] : []),
   ];
 
   return (

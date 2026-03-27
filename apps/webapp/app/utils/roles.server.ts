@@ -143,6 +143,7 @@ export async function requirePermission({
     canSeeAllCustody,
     canUseBarcodes,
     canUseAudits,
+    canUseRepairs: currentOrganization.repairsEnabled ?? false,
   };
 }
 

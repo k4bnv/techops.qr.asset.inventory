@@ -240,6 +240,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
           showShelfBranding,
           assetIdPrefix,
           assetIdSequenceStart,
+          repairsEnabled,
         } = payload;
 
         /** User is allowed to edit his/her current organization only not other organizations. */
@@ -295,6 +296,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
           qrIdDisplayPreference,
           showShelfBranding: nextShowShelfBranding,
           ...(assetIdPrefix && { assetIdPrefix }),
+          repairsEnabled,
         });
 
         // If a sequence start number is provided, reset the org's sequence
@@ -462,6 +464,7 @@ export default function GeneralPage() {
         name={organization.name}
         qrIdDisplayPreference={organization.qrIdDisplayPreference}
         assetIdPrefix={organization.assetIdPrefix}
+        repairsEnabled={organization.repairsEnabled}
       />
 
       <Card className={tw("mb-0")}>

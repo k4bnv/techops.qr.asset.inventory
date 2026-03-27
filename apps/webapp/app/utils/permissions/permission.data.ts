@@ -43,6 +43,7 @@ export enum PermissionEntity {
   audit = "audit",
   auditNote = "auditNote",
   emailSettings = "emailSettings",
+  repair = "repair",
   userData = "user-data", // This is for the user to load their own data.
   update = "update",
   commandPaletteSearch = "command-palette-search",
@@ -87,7 +88,11 @@ export const Role2PermissionMap: {
     [PermissionEntity.workingHours]: [PermissionAction.read],
     [PermissionEntity.subscription]: [],
     [PermissionEntity.kit]: [PermissionAction.read],
-    [PermissionEntity.note]: [],
+    [PermissionEntity.note]: [
+      PermissionAction.read,
+      PermissionAction.create,
+      PermissionAction.delete,
+    ],
     [PermissionEntity.scan]: [],
     [PermissionEntity.custody]: [],
     [PermissionEntity.assetReminders]: [],
@@ -98,6 +103,11 @@ export const Role2PermissionMap: {
     ],
     [PermissionEntity.update]: [PermissionAction.read],
     [PermissionEntity.commandPaletteSearch]: [PermissionAction.read],
+    [PermissionEntity.repair]: [
+      PermissionAction.read,
+      PermissionAction.create,
+      PermissionAction.update,
+    ],
   },
   [OrganizationRoles.SELF_SERVICE]: {
     [PermissionEntity.asset]: [PermissionAction.read, PermissionAction.custody],
@@ -139,7 +149,11 @@ export const Role2PermissionMap: {
     [PermissionEntity.workingHours]: [PermissionAction.read],
     [PermissionEntity.subscription]: [],
     [PermissionEntity.kit]: [PermissionAction.read, PermissionAction.custody],
-    [PermissionEntity.note]: [],
+    [PermissionEntity.note]: [
+      PermissionAction.read,
+      PermissionAction.create,
+      PermissionAction.delete,
+    ],
     [PermissionEntity.scan]: [],
     [PermissionEntity.custody]: [],
     [PermissionEntity.assetReminders]: [],
@@ -150,6 +164,7 @@ export const Role2PermissionMap: {
     ],
     [PermissionEntity.update]: [PermissionAction.read],
     [PermissionEntity.commandPaletteSearch]: [PermissionAction.read],
+    [PermissionEntity.repair]: [],
   },
   [OrganizationRoles.ADMIN]: {
     [PermissionEntity.asset]: [
@@ -283,6 +298,12 @@ export const Role2PermissionMap: {
     ],
     [PermissionEntity.update]: [PermissionAction.read],
     [PermissionEntity.commandPaletteSearch]: [PermissionAction.read],
+    [PermissionEntity.repair]: [
+      PermissionAction.create,
+      PermissionAction.read,
+      PermissionAction.update,
+      PermissionAction.delete,
+    ],
   },
   [OrganizationRoles.OWNER]: {
     [PermissionEntity.asset]: [
@@ -418,5 +439,11 @@ export const Role2PermissionMap: {
     ],
     [PermissionEntity.update]: [PermissionAction.read],
     [PermissionEntity.commandPaletteSearch]: [PermissionAction.read],
+    [PermissionEntity.repair]: [
+      PermissionAction.create,
+      PermissionAction.read,
+      PermissionAction.update,
+      PermissionAction.delete,
+    ],
   },
 };

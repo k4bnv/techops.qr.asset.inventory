@@ -263,6 +263,7 @@ export async function updateOrganization({
   showShelfBranding,
   customEmailFooter,
   assetIdPrefix,
+  repairsEnabled,
 }: Pick<Organization, "id"> & {
   currency?: Organization["currency"];
   name?: string;
@@ -278,6 +279,7 @@ export async function updateOrganization({
   showShelfBranding?: Organization["showShelfBranding"];
   customEmailFooter?: string | null;
   assetIdPrefix?: Organization["assetIdPrefix"];
+  repairsEnabled?: Organization["repairsEnabled"];
 }) {
   try {
     const data = {
@@ -292,6 +294,7 @@ export async function updateOrganization({
       }),
       ...(customEmailFooter !== undefined && { customEmailFooter }),
       ...(assetIdPrefix !== undefined && { assetIdPrefix }),
+      ...(repairsEnabled !== undefined && { repairsEnabled }),
       ...(ssoDetails && {
         ssoDetails: {
           update: ssoDetails,
@@ -383,6 +386,7 @@ const ORGANIZATION_SELECT_FIELDS = {
   qrIdDisplayPreference: true,
   showShelfBranding: true,
   customEmailFooter: true,
+  repairsEnabled: true,
 };
 
 export type OrganizationFromUser = Prisma.OrganizationGetPayload<{

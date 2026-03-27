@@ -82,6 +82,7 @@ model User {
   userOrganizations  UserOrganization[]
   bookings           Booking[]          @relation("creator")
   custodies          Booking[]          @relation("custodian")
+  repairsPerformed   Repair[]           @relation("repairUser")
   createdKits        Kit[]
   tierId             TierId             @default(free)
   tier               Tier               @relation(fields: [tierId], references: [id])
@@ -207,6 +208,7 @@ model Asset {
 
   custody      Custody?
   notes        Note[]
+  repairs      Repair[]
   qrCodes      Qr[]
   barcodes     Barcode[]
   reports      ReportFound[]
@@ -689,6 +691,7 @@ model Organization {
 
   members TeamMember[]
   assets  Asset[]
+  repairs Repair[]
 
   image   Image?  @relation("orgImage", fields: [imageId], references: [id])
   imageId String? @unique
@@ -720,6 +723,9 @@ model Organization {
 
   // This is used to disable the workspace for the user. It is set to true when the user leaves the workspace
   workspaceDisabled Boolean @default(false) // If true, the workspace is disabled and the user cannot access it
+
+  // Repairs add-on (per-organization)
+  repairsEnabled    Boolean @default(true) // If true, this organization can use the repairs/maintenance functionality
 
   locations         Location[]
   categories        Category[]
@@ -1680,4 +1686,43 @@ model SiteConfig {
   key       String   @unique
   value     Json     @default("{}")
   updatedAt DateTime @updatedAt
+}
+
+model Repair {
+  id             String       @id @default(cuid())
+  title          String
+  description    String?
+  status         RepairStatus @default(PLANNED)
+  cost           Decimal?
+  timeSpentHours Float?
+  partsUsed      String?
+
+  // Relationships
+  asset          Asset        @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId        String
+  
+  performedBy    User?        @relation("repairUser", fields: [performedById], references: [id], onDelete: SetNull)
+  performedById  String?
+
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+
+  // Datetime
+  startedAt      DateTime     @default(now())
+  completedAt    DateTime?
+  
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  // Indexes
+  @@index([assetId])
+  @@index([organizationId])
+  @@index([performedById])
+}
+
+enum RepairStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
 }

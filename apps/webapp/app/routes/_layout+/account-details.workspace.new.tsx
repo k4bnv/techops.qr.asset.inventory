@@ -1,5 +1,5 @@
 import type { Prisma } from "@prisma/client";
-import { Currency } from "@prisma/client";
+import { Currency, OrganizationRoles } from "@prisma/client";
 import {
   MaxFileSizeExceededError,
   parseFormData,
@@ -46,10 +46,29 @@ export async function loader({ context, request }: LoaderFunctionArgs) {
   const { userId } = authSession;
 
   try {
-    const { organizationId } = await getSelectedOrganization({
+    const { organizationId, userOrganizations } = await getSelectedOrganization({
       userId,
       request,
     });
+
+    const userOrg = userOrganizations.find(
+      (uo: any) => uo.organizationId === organizationId
+    );
+
+    if (
+      userOrg?.roles.some(
+        (role: any) =>
+          role === OrganizationRoles.BASE ||
+          role === OrganizationRoles.SELF_SERVICE
+      )
+    ) {
+      throw new ShelfError({
+        cause: null,
+        message: "You do not have permission to create a new workspace.",
+        status: 403,
+        label: "Organization",
+      });
+    }
 
     await assertUserCanCreateMoreOrganizations(userId);
 
@@ -78,6 +97,30 @@ export async function action({ context, request }: ActionFunctionArgs) {
 
   try {
     assertIsPost(request);
+
+    const { organizationId, userOrganizations } = await getSelectedOrganization({
+      userId,
+      request,
+    });
+
+    const userOrg = userOrganizations.find(
+      (uo: any) => uo.organizationId === organizationId
+    );
+
+    if (
+      userOrg?.roles.some(
+        (role: any) =>
+          role === OrganizationRoles.BASE ||
+          role === OrganizationRoles.SELF_SERVICE
+      )
+    ) {
+      throw new ShelfError({
+        cause: null,
+        message: "You do not have permission to create a new workspace.",
+        status: 403,
+        label: "Organization",
+      });
+    }
 
     await assertUserCanCreateMoreOrganizations(userId);
 

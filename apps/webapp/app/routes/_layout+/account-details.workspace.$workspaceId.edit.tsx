@@ -263,7 +263,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
           additionalData: { userId, organizationId: id },
         });
 
-        const { name, currency, qrIdDisplayPreference, showShelfBranding } =
+        const { name, currency, qrIdDisplayPreference, showShelfBranding, repairsEnabled } =
           parsedData;
 
         let nextShowShelfBranding = resolveShowShelfBranding(
@@ -312,6 +312,7 @@ export async function action({ context, request, params }: ActionFunctionArgs) {
           currency,
           qrIdDisplayPreference,
           showShelfBranding: nextShowShelfBranding,
+          repairsEnabled,
         });
 
         sendNotification({

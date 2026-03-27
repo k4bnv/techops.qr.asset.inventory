@@ -1,15 +1,21 @@
 import { useFetcher, useLoaderData } from "react-router";
 import { Button } from "~/components/shared/button";
 import { useUserData } from "~/hooks/use-user-data";
-import type { loader } from "~/routes/_layout+/assets.$assetId.activity";
 import { isFormProcessing } from "~/utils/form";
 import { ActionsDropdown } from "./actions-dropdown";
 import { NewNote } from "./new";
 import type { NoteWithUser } from "./note";
 import { Note } from "./note";
 
+/** Minimal shape expected from any loader that renders Notes */
+type AssetWithNotes = {
+  id: string;
+  title?: string;
+  notes?: NoteWithUser[];
+};
+
 export const Notes = () => {
-  const { asset } = useLoaderData<typeof loader>();
+  const { asset } = useLoaderData<{ asset: AssetWithNotes; header: unknown }>();
 
   /* Using user data here for the Note component generated for frontend only as per the optimistic UI approach */
   const user = useUserData();
