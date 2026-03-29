@@ -116,8 +116,6 @@ model User {
   roleChangesReceived  RoleChangeLog[] @relation("roleChangeTarget")
   roleChangesPerformed RoleChangeLog[] @relation("roleChangeActor")
 
-  repairsPerformed Repair[] @relation("repairUser")
-
   @@unique([email, username])
   @@index([firstName, lastName])
   // Indexes for foreign keys
@@ -220,7 +218,6 @@ model Asset {
   reminders    AssetReminder[]
   auditEntries AuditAsset[]
   auditScans   AuditScan[]
-  repairs      Repair[]
 
   // Unique constraint for organization-scoped sequential IDs
   @@unique([organizationId, sequentialId], name: "asset_org_sequential_unique")
@@ -750,7 +747,6 @@ model Organization {
 
   auditSessions      AuditSession[]
   auditImages        AuditImage[]
-  repairs            Repair[]
 
   usersWithLastSelected User[] @relation("lastSelectedOrg")
   roleChangeLogs     RoleChangeLog[]
