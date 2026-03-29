@@ -8,6 +8,7 @@ import { data, redirect, useActionData, useSearchParams } from "react-router";
 import { useZorm } from "react-zorm";
 import { z } from "zod";
 import { Form } from "~/components/custom-form";
+import DynamicSelect from "~/components/dynamic-select/dynamic-select";
 import Input from "~/components/forms/input";
 import {
   Select,
@@ -17,13 +18,12 @@ import {
   SelectValue,
 } from "~/components/forms/select";
 import { Button } from "~/components/shared/button";
-import { useDisabled } from "~/hooks/use-disabled";
 import { db } from "~/database/db.server";
+import { useDisabled } from "~/hooks/use-disabled";
 import { createRepair } from "~/modules/repair/service.server";
 import { appendToMetaTitle } from "~/utils/append-to-meta-title";
-import { ShelfError } from "~/utils/error";
 import { sendNotification } from "~/utils/emitter/send-notification.server";
-import { makeShelfError } from "~/utils/error";
+import { makeShelfError, ShelfError } from "~/utils/error";
 import { assertIsPost, payload, error, parseData } from "~/utils/http.server";
 import {
   PermissionAction,
@@ -109,7 +109,7 @@ export async function action({ context, request }: ActionFunctionArgs) {
     if (!asset) {
       throw new ShelfError({
         cause: null,
-        message: `Asset "${parsedData.assetId}" niet gevonden. Controleer het asset ID of sequentieel nummer.`,
+        message: `Asset niet gevonden. Controleer het geselecteerde asset.`,
         label: "Repair",
         status: 400,
         shouldBeCaptured: false,
@@ -166,15 +166,25 @@ export default function NewRepairPage() {
         ref={zo.ref}
       >
         <div className="flex flex-col gap-4 lg:max-w-lg">
-          <Input
-            label="Asset ID"
-            placeholder="Asset ID of sequentieel nummer (bijv. SAM-0001)"
-            name={zo.fields.assetId()}
-            defaultValue={prefillAssetId}
-            disabled={disabled}
-            error={zo.errors.assetId()?.message}
-            required={zodFieldIsRequired(NewRepairFormSchema.shape.assetId)}
-          />
+          <div className="flex flex-col gap-1.5">
+            <DynamicSelect
+              disabled={disabled}
+              defaultValue={prefillAssetId || undefined}
+              model={{ name: "asset", queryKey: "title" }}
+              fieldName={zo.fields.assetId()}
+              label="Asset"
+              contentLabel="Selecteer een asset"
+              placeholder="Zoek een asset..."
+              required={zodFieldIsRequired(NewRepairFormSchema.shape.assetId)}
+              closeOnSelect
+              selectionMode="set"
+            />
+            {zo.errors.assetId() && (
+              <p className="text-sm text-error-500">
+                {zo.errors.assetId()?.message}
+              </p>
+            )}
+          </div>
 
           <Input
             label="Titel"
