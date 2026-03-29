@@ -318,7 +318,6 @@ export default function AssetDetailsPage() {
   const items = [
     { to: "overview", content: "Overview" },
     { to: "activity", content: "Activity" },
-    { to: "notes", content: "Notities" },
     { to: "bookings", content: "Bookings" },
     ...(userHasPermission({
       roles,
