@@ -65,7 +65,7 @@ export function UserContactDetailsForm({
             error={
               validationErrors?.phone?.message || zo.errors.phone()?.message
             }
-            placeholder="+1 (555) 123-4567"
+            placeholder="+31 6 12345678"
             required={zodFieldIsRequired(
               UserContactDetailsFormSchema.shape.phone
             )}
@@ -89,7 +89,7 @@ export function UserContactDetailsForm({
               validationErrors?.street?.message || zo.errors.street()?.message
             }
             hideLabel
-            placeholder="123 Main Street"
+            placeholder="Herengracht 182"
             required={zodFieldIsRequired(
               UserContactDetailsFormSchema.shape.street
             )}
@@ -109,7 +109,7 @@ export function UserContactDetailsForm({
             name={zo.fields.city()}
             defaultValue={user?.contact?.city || undefined}
             error={validationErrors?.city?.message || zo.errors.city()?.message}
-            placeholder="San Francisco"
+            placeholder="Amsterdam"
             required={zodFieldIsRequired(
               UserContactDetailsFormSchema.shape.city
             )}
@@ -135,7 +135,7 @@ export function UserContactDetailsForm({
                 validationErrors?.stateProvince?.message ||
                 zo.errors.stateProvince()?.message
               }
-              placeholder="California"
+              placeholder="Noord-Holland"
               required={zodFieldIsRequired(
                 UserContactDetailsFormSchema.shape.stateProvince
               )}
@@ -152,7 +152,7 @@ export function UserContactDetailsForm({
                 validationErrors?.zipPostalCode?.message ||
                 zo.errors.zipPostalCode()?.message
               }
-              placeholder="94102"
+              placeholder="1016 BR"
               required={zodFieldIsRequired(
                 UserContactDetailsFormSchema.shape.zipPostalCode
               )}
@@ -179,7 +179,7 @@ export function UserContactDetailsForm({
               validationErrors?.countryRegion?.message ||
               zo.errors.countryRegion()?.message
             }
-            placeholder="United States"
+            placeholder="Nederland"
             required={zodFieldIsRequired(
               UserContactDetailsFormSchema.shape.countryRegion
             )}

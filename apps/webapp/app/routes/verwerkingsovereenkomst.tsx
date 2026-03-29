@@ -8,7 +8,7 @@ export const meta: MetaFunction = () => [
 
 export default function Verwerkingsovereenkomst() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="h-screen overflow-y-auto bg-white">
       <div className="mx-auto max-w-3xl px-6 py-12">
         <div className="mb-8">
           <Link to="/privacy-policy" className="text-sm text-primary hover:underline">
