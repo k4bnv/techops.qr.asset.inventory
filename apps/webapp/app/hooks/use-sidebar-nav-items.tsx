@@ -172,13 +172,6 @@ export function useSidebarNavItems() {
       hidden: !nav("audits"),
     },
     {
-      type: "child",
-      title: "Reparaties",
-      to: "/repairs",
-      Icon: WrenchIcon,
-      hidden: !currentOrganization?.repairsEnabled,
-    },
-    {
       type: "parent",
       title: "Reserveringen",
       Icon: CalendarRangeIcon,

@@ -18,8 +18,10 @@ import {
 } from "~/components/forms/select";
 import { Button } from "~/components/shared/button";
 import { useDisabled } from "~/hooks/use-disabled";
+import { db } from "~/database/db.server";
 import { createRepair } from "~/modules/repair/service.server";
 import { appendToMetaTitle } from "~/utils/append-to-meta-title";
+import { ShelfError } from "~/utils/error";
 import { sendNotification } from "~/utils/emitter/send-notification.server";
 import { makeShelfError } from "~/utils/error";
 import { assertIsPost, payload, error, parseData } from "~/utils/http.server";
@@ -87,10 +89,37 @@ export async function action({ context, request }: ActionFunctionArgs) {
       { additionalData: { userId, organizationId } }
     );
 
+    // Resolve asset: accept UUID or sequential ID (e.g. SAM-0001)
+    const asset = await db.asset.findFirst({
+      where: {
+        organizationId,
+        OR: [
+          { id: parsedData.assetId },
+          {
+            sequentialId: {
+              equals: parsedData.assetId,
+              mode: "insensitive",
+            },
+          },
+        ],
+      },
+      select: { id: true },
+    });
+
+    if (!asset) {
+      throw new ShelfError({
+        cause: null,
+        message: `Asset "${parsedData.assetId}" niet gevonden. Controleer het asset ID of sequentieel nummer.`,
+        label: "Repair",
+        status: 400,
+        shouldBeCaptured: false,
+      });
+    }
+
     await createRepair({
       title: parsedData.title,
       description: parsedData.description ?? null,
-      assetId: parsedData.assetId,
+      assetId: asset.id,
       organizationId,
       performedById: null,
       status: parsedData.status,
