@@ -116,6 +116,8 @@ model User {
   roleChangesReceived  RoleChangeLog[] @relation("roleChangeTarget")
   roleChangesPerformed RoleChangeLog[] @relation("roleChangeActor")
 
+  repairsPerformed Repair[] @relation("repairUser")
+
   @@unique([email, username])
   @@index([firstName, lastName])
   // Indexes for foreign keys
@@ -218,6 +220,7 @@ model Asset {
   reminders    AssetReminder[]
   auditEntries AuditAsset[]
   auditScans   AuditScan[]
+  repairs      Repair[]
 
   // Unique constraint for organization-scoped sequential IDs
   @@unique([organizationId, sequentialId], name: "asset_org_sequential_unique")
@@ -747,6 +750,7 @@ model Organization {
 
   auditSessions      AuditSession[]
   auditImages        AuditImage[]
+  repairs            Repair[]
 
   usersWithLastSelected User[] @relation("lastSelectedOrg")
   roleChangeLogs     RoleChangeLog[]
@@ -1688,6 +1692,13 @@ model SiteConfig {
   updatedAt DateTime @updatedAt
 }
 
+enum RepairStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
 model Repair {
   id             String       @id @default(cuid())
   title          String
@@ -1700,7 +1711,7 @@ model Repair {
   // Relationships
   asset          Asset        @relation(fields: [assetId], references: [id], onDelete: Cascade)
   assetId        String
-  
+
   performedBy    User?        @relation("repairUser", fields: [performedById], references: [id], onDelete: SetNull)
   performedById  String?
 
@@ -1710,7 +1721,7 @@ model Repair {
   // Datetime
   startedAt      DateTime     @default(now())
   completedAt    DateTime?
-  
+
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 
@@ -1718,11 +1729,4 @@ model Repair {
   @@index([assetId])
   @@index([organizationId])
   @@index([performedById])
-}
-
-enum RepairStatus {
-  PLANNED
-  IN_PROGRESS
-  COMPLETED
-  CANCELLED
 }

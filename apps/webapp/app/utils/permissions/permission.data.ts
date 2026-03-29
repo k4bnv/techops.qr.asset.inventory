@@ -103,11 +103,15 @@ export const Role2PermissionMap: {
     ],
     [PermissionEntity.update]: [PermissionAction.read],
     [PermissionEntity.commandPaletteSearch]: [PermissionAction.read],
+<<<<<<< HEAD
     [PermissionEntity.repair]: [
       PermissionAction.read,
       PermissionAction.create,
       PermissionAction.update,
     ],
+=======
+    [PermissionEntity.repair]: [],
+>>>>>>> 0b69ea120 (feat: add Reparaties module with list and new repair form)
   },
   [OrganizationRoles.SELF_SERVICE]: {
     [PermissionEntity.asset]: [PermissionAction.read, PermissionAction.custody],

@@ -10,6 +10,7 @@ export type NavItemKey =
   | "reminders"
   | "team"
   | "workspaceSettings"
+  | "repairs"
   | "scanner"
   | "feedback"
   | "support";
@@ -33,6 +34,7 @@ export const NAV_ITEM_LABELS: Record<NavItemKey, string> = {
   reminders: "Herinneringen",
   team: "Team",
   workspaceSettings: "Werkruimte-instellingen",
+  repairs: "Reparaties",
   scanner: "QR Scanner",
   feedback: "Vragen/Feedback",
   support: "Support",
@@ -50,8 +52,8 @@ export const NAV_ITEM_KEYS: NavItemKey[] = [
   "reminders",
   "team",
   "workspaceSettings",
+  "repairs",
   "scanner",
   "feedback",
   "support",
 ];
-

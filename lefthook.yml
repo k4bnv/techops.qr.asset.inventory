@@ -4,7 +4,7 @@ pre-commit:
     prisma-generate:
       priority: 1
       glob: "packages/database/prisma/schema.prisma"
-      run: pnpm db:generate
+      run: cd packages/database && npx prisma generate
       skip:
         - merge
         - rebase

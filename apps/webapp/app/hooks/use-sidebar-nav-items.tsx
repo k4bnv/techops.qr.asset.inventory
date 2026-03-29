@@ -66,8 +66,13 @@ export type NavItem =
   | ButtonNavItem;
 
 export function useSidebarNavItems() {
-  const { isAdmin, canUseBookings, subscription, unreadUpdatesCount, navSettings } =
-    useLoaderData<typeof loader>();
+  const {
+    isAdmin,
+    canUseBookings,
+    subscription,
+    unreadUpdatesCount,
+    navSettings,
+  } = useLoaderData<typeof loader>();
   const { isBaseOrSelfService } = useUserRoleHelper();
   const currentOrganization = useCurrentOrganization();
   const isPersonalOrganization = isPersonalOrg(currentOrganization);
@@ -90,11 +95,15 @@ export function useSidebarNavItems() {
         <div>
           <h5>Uitgeschakeld</h5>
           <p>
-            Reserveren is een premium functie die alleen beschikbaar is voor Team-werkruimtes.
+            Reserveren is een premium functie die alleen beschikbaar is voor
+            Team-werkruimtes.
           </p>
 
           <When truthy={!!subscription} fallback={<UpgradeMessage />}>
-            <p>Schakel over naar uw team-werkruimte om toegang te krijgen tot deze functie.</p>
+            <p>
+              Schakel over naar uw team-werkruimte om toegang te krijgen tot
+              deze functie.
+            </p>
           </When>
         </div>
       ),
@@ -194,6 +203,13 @@ export function useSidebarNavItems() {
       Icon: AlarmClockIcon,
       hidden: !nav("reminders") || isBaseOrSelfService,
       to: url("reminders", "/reminders"),
+    },
+    {
+      type: "child",
+      title: "Reparaties",
+      Icon: WrenchIcon,
+      hidden: !nav("repairs") || isBaseOrSelfService,
+      to: url("repairs", "/repairs"),
     },
     {
       type: "label",

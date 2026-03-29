@@ -1,9 +1,5 @@
 import { db } from "~/database/db.server";
-import {
-  NAV_ITEM_KEYS,
-  type NavItemKey,
-  type NavSettings,
-} from "./constants";
+import { NAV_ITEM_KEYS, type NavItemKey, type NavSettings } from "./constants";
 
 export type { NavItemKey, NavSettings } from "./constants";
 
@@ -19,6 +15,7 @@ const defaultNavSettings: NavSettings = {
   reminders: { visible: true, customUrl: null },
   team: { visible: true, customUrl: null },
   workspaceSettings: { visible: true, customUrl: null },
+  repairs: { visible: true, customUrl: null },
   scanner: { visible: true, customUrl: null },
   feedback: { visible: true, customUrl: null },
   support: { visible: false, customUrl: null },
