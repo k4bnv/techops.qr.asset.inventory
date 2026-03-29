@@ -27,6 +27,7 @@ import globalStylesheetUrl from "./styles/global.css?url";
 import nProgressCustomStyles from "./styles/nprogress.css?url";
 import pmDocStylesheetUrl from "./styles/pm-doc.css?url";
 import styles from "./tailwind.css?url";
+import { CookieConsentBanner } from "./components/cookie-consent/cookie-consent-banner";
 import { ClientHintCheck, getClientHint } from "./utils/client-hints";
 import { getBrowserEnv } from "./utils/env";
 import { payload } from "./utils/http.server";
@@ -112,6 +113,7 @@ export function Layout({ children }: { children: ReactNode }) {
           />
         )}
 
+        <CookieConsentBanner />
         <ScrollRestoration />
         <script
           dangerouslySetInnerHTML={{

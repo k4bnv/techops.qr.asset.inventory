@@ -554,6 +554,20 @@ export default function UserPage() {
     <div className="mb-2.5 flex flex-col justify-between gap-3">
       <UserDetailsForm user={user} />
       <UserContactDetailsForm user={user} />
+      <Card className="my-0">
+        <h3 className="text-text-lg font-semibold">Mijn gegevens exporteren</h3>
+        <p className="text-sm text-gray-600">
+          Download een kopie van al uw gegevens (AVG-recht op dataportabiliteit).
+        </p>
+        <a
+          href="/account-details/export-data"
+          download
+          className="mt-3 inline-flex items-center rounded border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+        >
+          Exporteer mijn gegevens (.json)
+        </a>
+      </Card>
+
       {!user.sso && (
         <>
           <Card className="my-0">

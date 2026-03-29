@@ -123,6 +123,18 @@ export default function PrivacyPolicy() {
             </ul>
             <p className="mt-3">
               Met alle verwerkers hebben wij een verwerkersovereenkomst (DPA) gesloten.
+              Bent u een zakelijke klant en wilt u onze{" "}
+              <Link
+                to="/verwerkingsovereenkomst"
+                className="text-primary hover:underline"
+              >
+                verwerkersovereenkomst
+              </Link>{" "}
+              inzien? Kijk dan op de bijbehorende pagina of neem contact op via{" "}
+              <a href="mailto:privacy@techops.nl" className="text-primary hover:underline">
+                privacy@techops.nl
+              </a>
+              .
             </p>
           </section>
 
@@ -134,7 +146,7 @@ export default function PrivacyPolicy() {
               <li><strong>Recht op rectificatie</strong> — u kunt onjuiste gegevens laten corrigeren</li>
               <li><strong>Recht op verwijdering</strong> — u kunt uw account en gegevens laten verwijderen (zie hieronder)</li>
               <li><strong>Recht op beperking</strong> — u kunt de verwerking laten beperken</li>
-              <li><strong>Recht op dataportabiliteit</strong> — u kunt uw gegevens exporteren (CSV-export beschikbaar in het platform)</li>
+              <li><strong>Recht op dataportabiliteit</strong> — u kunt uw gegevens exporteren via <Link to="/account-details/general" className="text-primary hover:underline">Accountinstellingen → Exporteer mijn gegevens</Link></li>
               <li><strong>Recht van bezwaar</strong> — u kunt bezwaar maken tegen de verwerking</li>
             </ul>
             <p className="mt-3">
@@ -173,11 +185,27 @@ export default function PrivacyPolicy() {
 
           <section>
             <h2 className="text-xl font-semibold text-gray-900">8. Cookies</h2>
-            <p className="mt-2">
-              Wij gebruiken uitsluitend functionele cookies die noodzakelijk zijn
-              voor het functioneren van het platform (sessiecookies). Wij gebruiken
-              geen tracking- of advertentiecookies. Er is daarom geen cookiebanner
-              vereist voor het gebruik van het platform.
+            <p className="mt-2">Wij gebruiken de volgende categorieën cookies:</p>
+            <ul className="mt-2 list-disc pl-6 space-y-2">
+              <li>
+                <strong>Noodzakelijke cookies</strong> — vereist voor het functioneren
+                van het platform (sessie, authenticatie, voorkeuren). Deze cookies
+                vereisen geen toestemming.
+              </li>
+              <li>
+                <strong>Analytische cookies</strong> — helpen ons te begrijpen hoe
+                het platform gebruikt wordt, zodat wij de dienst kunnen verbeteren.
+                Wij vragen hiervoor uw toestemming via de cookiebanner.
+              </li>
+            </ul>
+            <p className="mt-3">
+              U kunt uw cookievoorkeur op elk moment wijzigen door de
+              cookiebanner opnieuw te tonen (wis uw browsergeschiedenis of neem
+              contact op via{" "}
+              <a href="mailto:privacy@techops.nl" className="text-primary hover:underline">
+                privacy@techops.nl
+              </a>
+              ).
             </p>
           </section>
 
@@ -228,6 +256,10 @@ export default function PrivacyPolicy() {
           <a href="mailto:privacy@techops.nl" className="hover:underline">
             privacy@techops.nl
           </a>
+          {" · "}
+          <Link to="/verwerkingsovereenkomst" className="hover:underline">
+            Verwerkersovereenkomst (DPA)
+          </Link>
         </div>
       </div>
     </div>
