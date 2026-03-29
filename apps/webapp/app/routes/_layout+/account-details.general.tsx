@@ -4,7 +4,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "react-router";
-import { data, redirect, useLoaderData } from "react-router";
+import { createCookie, data, redirect, useLoaderData } from "react-router";
 
 import { z } from "zod";
 import { Card } from "~/components/shared/card";
@@ -39,9 +39,14 @@ import type { UpdateUserContactPayload } from "~/modules/user-contact/service.se
 import { updateUserContact } from "~/modules/user-contact/service.server";
 import { appendToMetaTitle } from "~/utils/append-to-meta-title";
 import { checkExhaustiveSwitch } from "~/utils/check-exhaustive-switch";
+import {
+  destroyCookie,
+  parseCookie,
+  setCookie,
+} from "~/utils/cookies.server";
 import { delay } from "~/utils/delay";
 import { sendNotification } from "~/utils/emitter/send-notification.server";
-import { ADMIN_EMAIL, SERVER_URL } from "~/utils/env";
+import { ADMIN_EMAIL, SERVER_URL, SESSION_SECRET } from "~/utils/env";
 import { makeShelfError, ShelfError } from "~/utils/error";
 import { payload, error, parseData } from "~/utils/http.server";
 import {
@@ -50,6 +55,17 @@ import {
 } from "~/utils/permissions/permission.data";
 import { requirePermission } from "~/utils/roles.server";
 import { getConfiguredSSODomains } from "~/utils/sso.server";
+
+const deleteAccountVerificationCookie = createCookie(
+  "delete-account-verification",
+  {
+    httpOnly: true,
+    sameSite: "lax" as const,
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 60 * 10, // 10 minutes
+    secrets: [SESSION_SECRET],
+  }
+);
 
 // First we define our intent schema
 const IntentSchema = z.object({
@@ -60,6 +76,8 @@ const IntentSchema = z.object({
     "initiateEmailChange",
     "verifyEmailChange",
     "updateUserContact",
+    "initiateDeleteAccount",
+    "verifyDeleteAccount",
   ]),
 });
 
@@ -92,6 +110,18 @@ const ActionSchemas = {
     email: z.string().email(),
     type: z.literal("verifyEmailChange"),
     otp: z.string().min(6).max(6),
+  }),
+
+  initiateDeleteAccount: z.object({
+    type: z.literal("initiateDeleteAccount"),
+    email: z.string().email(),
+    reason: z.string().min(3, "Reden is een verplicht veld"),
+  }),
+
+  verifyDeleteAccount: z.object({
+    type: z.literal("verifyDeleteAccount"),
+    email: z.string().email(),
+    code: z.string().length(6, "Code moet 6 cijfers zijn"),
   }),
 } as const;
 
@@ -364,6 +394,119 @@ export async function action({ context, request }: ActionFunctionArgs) {
           emailChanged: true,
         });
       }
+      case "initiateDeleteAccount": {
+        if (parsedData.type !== "initiateDeleteAccount")
+          throw new Error("Invalid payload type");
+
+        const { email: userEmail, reason } = parsedData;
+
+        const code = String(Math.floor(100000 + Math.random() * 900000));
+        const expiresAt = Date.now() + 10 * 60 * 1000;
+
+        const cookieHeader = await deleteAccountVerificationCookie.serialize({
+          code,
+          userId,
+          reason,
+          expiresAt,
+        });
+
+        sendEmail({
+          to: userEmail,
+          subject: "TechOps - Bevestigingscode voor accountverwijdering",
+          text: `Uw bevestigingscode voor accountverwijdering is: ${code}\n\nDeze code is 10 minuten geldig.\n\nAls u dit niet heeft aangevraagd, kunt u deze e-mail negeren.\n\nMet vriendelijke groet,\nhet TechOps team`,
+        });
+
+        sendNotification({
+          title: "Bevestigingscode verzonden",
+          message: "Controleer uw e-mail voor de bevestigingscode",
+          icon: { name: "success", variant: "success" },
+          senderId: userId,
+        });
+
+        return data(payload({ codeSent: true }), {
+          headers: [setCookie(cookieHeader)],
+        });
+      }
+
+      case "verifyDeleteAccount": {
+        if (parsedData.type !== "verifyDeleteAccount")
+          throw new Error("Invalid payload type");
+
+        const { email: userEmail, code } = parsedData;
+
+        const cookieData = await parseCookie<{
+          code: string;
+          userId: string;
+          reason: string;
+          expiresAt: number;
+        }>(deleteAccountVerificationCookie, request);
+
+        if (!cookieData) {
+          throw new ShelfError({
+            cause: null,
+            message:
+              "Bevestigingscode niet gevonden of verlopen. Probeer opnieuw.",
+            label: "User",
+          });
+        }
+
+        if (cookieData.userId !== userId) {
+          throw new ShelfError({
+            cause: null,
+            message: "Ongeldig verzoek",
+            label: "User",
+          });
+        }
+
+        if (Date.now() > cookieData.expiresAt) {
+          throw new ShelfError({
+            cause: null,
+            message:
+              "De bevestigingscode is verlopen. Probeer opnieuw.",
+            label: "User",
+          });
+        }
+
+        if (cookieData.code !== code) {
+          throw new ShelfError({
+            cause: null,
+            message:
+              "Onjuiste bevestigingscode. Controleer uw e-mail en probeer opnieuw.",
+            label: "User",
+          });
+        }
+
+        const reason = cookieData.reason || "Geen reden opgegeven";
+
+        sendEmail({
+          to: ADMIN_EMAIL || `"TechOps" <updates@emails.techops.nl>`,
+          subject: "Verzoek tot accountverwijdering",
+          text: `User with id ${userId} and email ${userEmail} has requested to delete their account. \n User: ${SERVER_URL}/admin-dashboard/${userId} \n\n Reason: ${reason}\n\n`,
+        });
+
+        sendEmail({
+          to: userEmail,
+          subject: "Verzoek tot accountverwijdering ontvangen",
+          text: `We have received your request to delete your account. It will be processed within 72 hours.\n\n Kind regards,\nthe TechOps team \n\n`,
+        });
+
+        sendNotification({
+          title: "Verzoek om accountverwijdering",
+          message:
+            "Uw verzoek is verzonden naar de beheerder en wordt binnen 24 uur verwerkt. U ontvangt een e-mailbevestiging.",
+          icon: { name: "success", variant: "success" },
+          senderId: userId,
+        });
+
+        const destroyHeader = await destroyCookie(
+          deleteAccountVerificationCookie
+        );
+
+        return data(payload({ deleteRequestSent: true }), {
+          headers: [setCookie(destroyHeader)],
+        });
+      }
+
       default: {
         checkExhaustiveSwitch(intent);
         return payload(null);
